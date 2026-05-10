@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict 2WkbU1fa7cy6RjLnN00Ua29FQ8Qd9C4FzzimOHvHm2tP0fRxm462a0uh9R4jEnG
+\restrict QvhkoISEhAUFe0WvKhOKPLByo8vJO3p0f2M6B2NYcIpQXbzvXPFBIZjYTm03ysC
 
 -- Dumped from database version 16.13
 -- Dumped by pg_dump version 16.13
 
--- Started on 2026-05-08 12:43:25
+-- Started on 2026-05-08 14:14:50
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -20,18 +20,19 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+DROP DATABASE "lab3 database";
 --
--- TOC entry 5006 (class 1262 OID 16394)
+-- TOC entry 5021 (class 1262 OID 16394)
 -- Name: lab3 database; Type: DATABASE; Schema: -; Owner: -
 --
 
 CREATE DATABASE "lab3 database" WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'English_United States.1251';
 
 
-\unrestrict 2WkbU1fa7cy6RjLnN00Ua29FQ8Qd9C4FzzimOHvHm2tP0fRxm462a0uh9R4jEnG
+\unrestrict QvhkoISEhAUFe0WvKhOKPLByo8vJO3p0f2M6B2NYcIpQXbzvXPFBIZjYTm03ysC
 \encoding SQL_ASCII
 \connect -reuse-previous=on "dbname='lab3 database'"
-\restrict 2WkbU1fa7cy6RjLnN00Ua29FQ8Qd9C4FzzimOHvHm2tP0fRxm462a0uh9R4jEnG
+\restrict QvhkoISEhAUFe0WvKhOKPLByo8vJO3p0f2M6B2NYcIpQXbzvXPFBIZjYTm03ysC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -45,7 +46,24 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 2 (class 3079 OID 24755)
+-- TOC entry 6 (class 2615 OID 24925)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+--
+-- TOC entry 5022 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON SCHEMA public IS '';
+
+
+--
+-- TOC entry 2 (class 3079 OID 24926)
 -- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -53,7 +71,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
 
 --
--- TOC entry 5007 (class 0 OID 0)
+-- TOC entry 5023 (class 0 OID 0)
 -- Dependencies: 2
 -- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
 --
@@ -66,64 +84,71 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 216 (class 1259 OID 24766)
+-- TOC entry 221 (class 1259 OID 25010)
 -- Name: availability_slots; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.availability_slots (
     slot_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     profile_id uuid NOT NULL,
-    start_datetime timestamp without time zone,
-    end_datetime timestamp without time zone,
-    status character varying(20)
+    start_datetime timestamp without time zone NOT NULL,
+    end_datetime timestamp without time zone NOT NULL,
+    status character varying(20) NOT NULL,
+    CONSTRAINT chk_slot_dates CHECK ((end_datetime > start_datetime)),
+    CONSTRAINT chk_slot_status CHECK (((status)::text = ANY ((ARRAY['свободен'::character varying, 'забронирован'::character varying, 'недоступен'::character varying])::text[])))
 );
 
 
 --
--- TOC entry 217 (class 1259 OID 24770)
+-- TOC entry 218 (class 1259 OID 24971)
 -- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.categories (
     category_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    name character varying(50) NOT NULL
+    name character varying(50) NOT NULL,
+    CONSTRAINT chk_category_name_len CHECK ((length((name)::text) <= 50))
 );
 
 
 --
--- TOC entry 218 (class 1259 OID 24774)
+-- TOC entry 226 (class 1259 OID 25093)
 -- Name: course_reviews; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.course_reviews (
     review_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    rating integer,
-    comment text,
-    created_date date DEFAULT CURRENT_DATE,
     purchased_course_id uuid NOT NULL,
-    CONSTRAINT course_reviews_rating_check CHECK (((rating >= 1) AND (rating <= 5)))
+    rating integer NOT NULL,
+    comment text,
+    created_date date DEFAULT CURRENT_DATE NOT NULL,
+    CONSTRAINT chk_crs_review_date CHECK ((created_date <= CURRENT_DATE)),
+    CONSTRAINT chk_crs_review_rating CHECK (((rating >= 1) AND (rating <= 5)))
 );
 
 
 --
--- TOC entry 219 (class 1259 OID 24782)
+-- TOC entry 224 (class 1259 OID 25057)
 -- Name: courses; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.courses (
     course_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    title character varying(100) NOT NULL,
-    description text,
-    price numeric(10,2),
-    created_date date DEFAULT CURRENT_DATE,
-    updated_date date,
     profile_id uuid NOT NULL,
-    status character varying(20)
+    title character varying(100) NOT NULL,
+    description text NOT NULL,
+    price numeric(10,2) NOT NULL,
+    created_date date DEFAULT CURRENT_DATE NOT NULL,
+    updated_date date,
+    status character varying(20),
+    CONSTRAINT chk_course_created_date CHECK ((created_date <= CURRENT_DATE)),
+    CONSTRAINT chk_course_price CHECK ((price >= (0)::numeric)),
+    CONSTRAINT chk_course_updated_date CHECK ((updated_date >= created_date))
 );
 
 
 --
--- TOC entry 220 (class 1259 OID 24789)
+-- TOC entry 225 (class 1259 OID 25074)
 -- Name: purchased_courses; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -131,14 +156,16 @@ CREATE TABLE public.purchased_courses (
     purchased_course_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
     course_id uuid NOT NULL,
-    purchase_date date DEFAULT CURRENT_DATE,
+    purchase_date date DEFAULT CURRENT_DATE NOT NULL,
     access_expires date,
-    status character varying(20)
+    status character varying(20) NOT NULL,
+    CONSTRAINT chk_access_expires CHECK ((access_expires >= purchase_date)),
+    CONSTRAINT chk_purchased_date CHECK ((purchase_date <= CURRENT_DATE))
 );
 
 
 --
--- TOC entry 221 (class 1259 OID 24794)
+-- TOC entry 222 (class 1259 OID 25023)
 -- Name: service_bookings; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -146,44 +173,49 @@ CREATE TABLE public.service_bookings (
     booking_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     service_id uuid NOT NULL,
     user_id uuid NOT NULL,
-    scheduled_start timestamp without time zone,
-    scheduled_end timestamp without time zone,
-    status character varying(20)
+    scheduled_start timestamp without time zone NOT NULL,
+    scheduled_end timestamp without time zone NOT NULL,
+    status character varying(20) NOT NULL,
+    CONSTRAINT chk_booking_dates CHECK ((scheduled_end > scheduled_start)),
+    CONSTRAINT chk_booking_status CHECK (((status)::text = ANY ((ARRAY['создано'::character varying, 'подтверждено'::character varying, 'отменено'::character varying, 'завершено'::character varying])::text[])))
 );
 
 
 --
--- TOC entry 222 (class 1259 OID 24798)
+-- TOC entry 223 (class 1259 OID 25041)
 -- Name: service_reviews; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.service_reviews (
     review_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    rating integer,
-    comment text,
-    created_date date DEFAULT CURRENT_DATE,
     booking_id uuid NOT NULL,
-    CONSTRAINT service_reviews_rating_check CHECK (((rating >= 1) AND (rating <= 5)))
+    rating integer NOT NULL,
+    comment text,
+    created_date date DEFAULT CURRENT_DATE NOT NULL,
+    CONSTRAINT chk_srv_review_date CHECK ((created_date <= CURRENT_DATE)),
+    CONSTRAINT chk_srv_review_rating CHECK (((rating >= 1) AND (rating <= 5)))
 );
 
 
 --
--- TOC entry 223 (class 1259 OID 24806)
+-- TOC entry 220 (class 1259 OID 24995)
 -- Name: services; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.services (
     service_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     profile_id uuid NOT NULL,
-    title character varying(100),
-    description text,
-    duration integer,
-    price numeric(10,2)
+    title character varying(100) NOT NULL,
+    description text NOT NULL,
+    duration integer NOT NULL,
+    price numeric(10,2) NOT NULL,
+    CONSTRAINT chk_service_duration CHECK ((duration > 0)),
+    CONSTRAINT chk_service_price CHECK ((price > (0)::numeric))
 );
 
 
 --
--- TOC entry 224 (class 1259 OID 24812)
+-- TOC entry 219 (class 1259 OID 24978)
 -- Name: specialist_categories; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -195,22 +227,24 @@ CREATE TABLE public.specialist_categories (
 
 
 --
--- TOC entry 225 (class 1259 OID 24817)
+-- TOC entry 217 (class 1259 OID 24955)
 -- Name: specialist_profiles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.specialist_profiles (
     profile_id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
-    bio text,
-    experience_years integer,
-    created_date date DEFAULT CURRENT_DATE,
-    status character varying(20)
+    bio text NOT NULL,
+    experience_years integer NOT NULL,
+    created_date date DEFAULT CURRENT_DATE NOT NULL,
+    status character varying(20),
+    CONSTRAINT chk_experience_years CHECK (((experience_years >= 0) AND (experience_years < 100))),
+    CONSTRAINT chk_profile_created_date CHECK ((created_date <= CURRENT_DATE))
 );
 
 
 --
--- TOC entry 226 (class 1259 OID 24824)
+-- TOC entry 216 (class 1259 OID 24937)
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -219,838 +253,825 @@ CREATE TABLE public.users (
     email character varying(254) NOT NULL,
     login character varying(50) NOT NULL,
     password character varying(255) NOT NULL,
-    name character varying(50),
-    surname character varying(50),
-    phone_number character varying(11),
-    registration_date date DEFAULT CURRENT_DATE,
-    role character varying(20)
+    name character varying(50) NOT NULL,
+    surname character varying(50) NOT NULL,
+    phone_number character varying(15),
+    registration_date date DEFAULT CURRENT_DATE NOT NULL,
+    role character varying(20),
+    CONSTRAINT chk_users_email_format CHECK (((email)::text ~* '^[A-Za-z0-9._+%\-]+@[A-Za-z0-9.\-]+[.][A-Za-z]+$'::text)),
+    CONSTRAINT chk_users_name_cyrillic CHECK (((name)::text ~ '^[А-Яа-яЁё\s\-]+$'::text)),
+    CONSTRAINT chk_users_password_len CHECK ((length((password)::text) > 5)),
+    CONSTRAINT chk_users_reg_date CHECK ((registration_date <= CURRENT_DATE)),
+    CONSTRAINT chk_users_surname_cyrillic CHECK (((surname)::text ~ '^[А-Яа-яЁё\s\-]+$'::text))
 );
 
 
 --
--- TOC entry 4990 (class 0 OID 24766)
--- Dependencies: 216
+-- TOC entry 5010 (class 0 OID 25010)
+-- Dependencies: 221
 -- Data for Name: availability_slots; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.availability_slots VALUES ('7f9a5b98-4ef8-4b7b-8305-1e31c8c67af2', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-07-03 12:00:00', '2026-07-03 13:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('68a54576-69f4-46a5-886c-c703b71297e9', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-02-23 18:00:00', '2026-02-23 19:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('a5284cc4-102d-4410-ac88-ccaa1675e089', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-03-25 09:00:00', '2026-03-25 10:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('9c39f96f-6340-403f-b50b-93eca6010826', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-02-27 15:00:00', '2026-02-27 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('8c178989-5273-471f-a27a-acbd844e3710', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-05-03 09:00:00', '2026-05-03 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('cd1d60b5-4cdc-4bb0-a5bb-b904a17bd39c', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-02-25 13:00:00', '2026-02-25 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('fa9f1d5a-373c-48ce-9ea4-dd42e82e18e6', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-06-14 11:00:00', '2026-06-14 12:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('64125ec6-ed0d-4c5f-b37e-8039cf21cd27', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-02-16 09:00:00', '2026-02-16 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('c18580e5-7ee0-40c4-a224-bfa78eba433b', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-02-27 11:00:00', '2026-02-27 12:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('fe0bfa47-3ff6-4bb7-9be0-482ed556d036', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-02-14 09:00:00', '2026-02-14 10:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('1a633a42-2c81-40ca-b9ed-05c5ddd3a1e3', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-03-16 18:00:00', '2026-03-16 19:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('75e605ed-afeb-4135-8933-b5af5714c4dc', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-03-26 11:00:00', '2026-03-26 12:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('44ef61c0-6aa4-47cf-9adf-e4c2814a56d9', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-04-13 16:00:00', '2026-04-13 17:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('99a4cdc8-9aac-448f-9622-81bd34207474', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-06-16 12:00:00', '2026-06-16 13:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('fdb71676-c293-437c-8003-48b909b1d3fa', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-03-25 15:00:00', '2026-03-25 16:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('865d7042-5fc2-44e1-82b3-37a9d7ee69b5', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-04-22 09:00:00', '2026-04-22 10:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('ce2d487b-1b07-4115-aa0a-c39292b6e040', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '2026-03-28 16:00:00', '2026-03-28 17:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('43e76dbd-1619-441f-bf07-16c66b090eea', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-06-29 17:00:00', '2026-06-29 18:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('716de168-8f32-40c9-80c8-7a71951967a3', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-03-30 10:00:00', '2026-03-30 11:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('96504f72-dfb8-485f-b6cd-0356d841bc67', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-06-22 13:00:00', '2026-06-22 14:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('8d65416a-ceee-4958-a3bc-4a1ab569087f', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-04-15 13:00:00', '2026-04-15 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('75a77395-a5c4-4629-ab9b-ea038ff9a245', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-05-26 09:00:00', '2026-05-26 10:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('ba58cdb2-9a99-4690-a78a-c70685bbe98c', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-03-15 15:00:00', '2026-03-15 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('a6a85dfc-64ee-40df-a24e-6945c71c30e4', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-06-07 15:00:00', '2026-06-07 16:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('50b58f2b-bf40-405d-bf8e-fad8a07a2e70', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-05-18 16:00:00', '2026-05-18 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('c8b94d18-bdf6-4949-9131-50accb49729a', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-07-05 10:00:00', '2026-07-05 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('09726399-d21a-4329-b020-27a0899a8ca9', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-03-01 12:00:00', '2026-03-01 13:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('e357fb1e-ca9d-4f31-aac7-3717414da0e8', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-03-12 17:00:00', '2026-03-12 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('36bc523f-6130-4128-a3d4-4d8eacc281a1', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-03-19 18:00:00', '2026-03-19 19:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('35d2440e-837e-4e5b-86fb-de7bae9bfbe4', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-05-14 16:00:00', '2026-05-14 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('8727c39b-0552-48b1-a789-b8a00a17606d', 'b407ec89-876f-43ed-ba50-289e55fbd869', '2026-05-12 10:00:00', '2026-05-12 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('b3791f40-ae56-41bf-8cb9-9b6020c75470', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-02-17 09:00:00', '2026-02-17 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('803cb9f3-2d4d-469d-8fe8-4c9f8c6ea2ed', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-05-30 12:00:00', '2026-05-30 13:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('50f465f6-863b-412f-8df9-015737321943', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-03-29 14:00:00', '2026-03-29 15:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('1a64b54d-76a4-4e53-84d9-75f8282db8d1', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-03-11 13:00:00', '2026-03-11 14:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('c68ca699-5dc9-4b8c-8034-b2aba06b469f', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-07-07 13:00:00', '2026-07-07 14:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('e0ee8342-b31c-43cc-9ec2-5f15700dca92', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-04-26 17:00:00', '2026-04-26 18:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('ec028e44-02d4-4b2f-a7cd-c3576d95ca75', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-02-25 17:00:00', '2026-02-25 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('07669686-5ff1-4b1a-8fbb-9768feabbc47', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-04-03 12:00:00', '2026-04-03 13:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('c064b5a1-2eb0-40ab-b13d-182018fdfd76', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-06-07 17:00:00', '2026-06-07 18:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('c87e593d-4fde-46c7-8fc3-f1e5ff0aadb1', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-05-04 15:00:00', '2026-05-04 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('bcd32c4a-92c9-47a8-9047-4d6d10113c37', '07beb9d4-b4e3-407d-b017-c892dc1f769a', '2026-03-08 13:00:00', '2026-03-08 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('0fb6acc2-c7c3-4573-97c2-fba105af0406', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-05-03 12:00:00', '2026-05-03 13:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('11172841-5ee0-471f-bf3f-f8a30e0229bb', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-03-07 11:00:00', '2026-03-07 12:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('7f7dbfc2-6747-423e-8b44-82dfb503d4b4', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-06-02 15:00:00', '2026-06-02 16:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('742298a7-53d8-4a3c-8a88-80e1f2bf7d4b', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-03-12 16:00:00', '2026-03-12 17:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('13c85352-ff93-44ab-95f5-37bc557d27a0', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-04-09 10:00:00', '2026-04-09 11:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('5556827b-7fc6-42cd-aa5d-dfa7879b70e9', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-05-01 10:00:00', '2026-05-01 11:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('d8a602ce-ab58-45e1-8431-408002e781d0', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-03-15 13:00:00', '2026-03-15 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('33df51ae-1708-420d-9e7f-9412d2583092', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-05-09 10:00:00', '2026-05-09 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('4fa54a3c-8947-4561-80a1-166e1956b7ed', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-05-27 13:00:00', '2026-05-27 14:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('80d35ad4-4952-4444-a439-cfff5058d20b', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-04-02 17:00:00', '2026-04-02 18:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('2a4a1d6b-fcb5-4807-a6fa-6438750a94c6', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-06-05 16:00:00', '2026-06-05 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('62b05f33-9431-4789-8634-e50589bf79a0', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-02-10 15:00:00', '2026-02-10 16:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('765e5e98-1399-4d57-8b40-8925c9a527b0', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-05-07 13:00:00', '2026-05-07 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('05b9b58d-cb4e-4f00-8b05-f0df25161e99', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-07-06 17:00:00', '2026-07-06 18:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('b9c907f9-51da-4754-8e74-bdebba6d8a06', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-03-04 18:00:00', '2026-03-04 19:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('8c4c7733-b9d9-455e-a851-b9a97b4d9608', '174f4d28-2b01-4a54-b27a-76a50b600e50', '2026-03-27 13:00:00', '2026-03-27 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('17417110-b868-44ba-a017-9de951e34014', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-04-08 09:00:00', '2026-04-08 10:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('489d037d-4e80-46b1-874d-14dba253afa8', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-02-11 13:00:00', '2026-02-11 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('bdfbe686-ca6a-4e04-b274-9dc94e6155e6', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-06-27 10:00:00', '2026-06-27 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('1ecbff87-24a8-4a7e-af1f-3c9281d9a8e5', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-04-03 13:00:00', '2026-04-03 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('e470f51a-d0eb-4076-8c12-baf5c86c80ae', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-04-30 09:00:00', '2026-04-30 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('121858ca-20e8-4527-b23f-cb7e7aa241f4', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-05-11 14:00:00', '2026-05-11 15:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('cb1ab417-2aec-4d41-816c-59941ba51827', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-06-29 09:00:00', '2026-06-29 10:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('42e31563-156c-4a1a-aff9-d8c12cdb58bb', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-03-17 17:00:00', '2026-03-17 18:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('56ea2f8e-cf31-4543-97b4-062577e22232', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-04-18 16:00:00', '2026-04-18 17:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('a2127c64-b225-43f4-8b0d-4e3efb46c5a1', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-06-04 16:00:00', '2026-06-04 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('33c4897d-a4fd-4da4-8c73-97ad0b202a9f', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-02-27 17:00:00', '2026-02-27 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('b6dbef80-d859-4603-921e-e4342838cc40', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-04-25 15:00:00', '2026-04-25 16:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('8a5017a1-153d-4dc4-a61f-f184f1d8fd55', 'a50c19d0-a789-473b-994d-52b9212cee87', '2026-03-17 16:00:00', '2026-03-17 17:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('91b62879-7d10-4c28-98f0-bffd43e06998', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-02-22 15:00:00', '2026-02-22 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('17dfc93d-af62-480f-811f-22de7846a2a0', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-03-08 14:00:00', '2026-03-08 15:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('bd8b7428-e8ea-4437-ad4a-10acc3943f51', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-03-17 18:00:00', '2026-03-17 19:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('6d2707b6-0619-4834-918a-871dd7c8bb85', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-04-20 09:00:00', '2026-04-20 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('e240f1a0-5e37-40c6-9ca2-805f6eca4cb2', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-06-04 18:00:00', '2026-06-04 19:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('c6279627-c4f3-4c3e-b908-a6ab475f15cd', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-02-13 15:00:00', '2026-02-13 16:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('e6ea2958-3929-4bb6-a09c-27e6be8368c2', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-05-14 13:00:00', '2026-05-14 14:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('7222f543-8229-43b5-8433-344c7e1dbf51', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-03-19 09:00:00', '2026-03-19 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('bb1a554d-1046-4323-b038-15576187d1bc', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-04-12 15:00:00', '2026-04-12 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('31cb897c-6a62-4c21-8b0f-7dce081b9987', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-05-26 12:00:00', '2026-05-26 13:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('a3926972-6092-488b-8643-2e0835e30297', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-07-06 13:00:00', '2026-07-06 14:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('825947c8-eac3-48b8-8945-f60efb12815e', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-05-28 14:00:00', '2026-05-28 15:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('e5e8cd78-4092-4201-8b0d-7741fc49ba15', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-02-17 15:00:00', '2026-02-17 16:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('d4d149a4-bceb-4eee-9a1b-d59534dedd32', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-07-05 17:00:00', '2026-07-05 18:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('c3e6cbcc-492d-4387-9ea2-90cdfc13bc4f', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-04-25 13:00:00', '2026-04-25 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('f2ccdaad-ba8b-4c7a-8c89-ccd6e13cb48c', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-04-14 17:00:00', '2026-04-14 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('2574b7c5-6b3e-4a22-b396-4f677d8c35bd', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-03-02 13:00:00', '2026-03-02 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('2350cba3-4bc9-4374-867b-4db2be1237d9', '5089dd27-b02f-469d-910c-34dfb52642c2', '2026-02-19 11:00:00', '2026-02-19 12:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('ea2da53e-5ec6-472e-9b0a-f41c1fa2c2e2', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-06-20 16:00:00', '2026-06-20 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('a3ac17c8-6d37-42f6-bf3f-f7e61926fd75', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-04-28 16:00:00', '2026-04-28 17:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('d3daf0bb-e735-4fa2-9c4e-9508271e93ed', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-03-04 13:00:00', '2026-03-04 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('cb7e5972-992d-42e9-9f70-fb8ea0f97796', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-03-18 09:00:00', '2026-03-18 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('cf5803aa-3ab3-4f0c-b554-958e94a778cd', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-03-10 09:00:00', '2026-03-10 10:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('2995c546-5c04-47ee-8580-3ced98c40f29', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-02-25 18:00:00', '2026-02-25 19:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('315ad541-690b-459d-8a53-d02c20869231', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-06-26 17:00:00', '2026-06-26 18:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('8f0aa155-4a4c-4758-a81f-c5fd506709fd', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-04-25 13:00:00', '2026-04-25 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('bb04e712-310a-4ad9-a90d-2596906c753a', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-04-10 14:00:00', '2026-04-10 15:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('61361862-12ba-456f-926b-4ac078f0c906', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-03-02 14:00:00', '2026-03-02 15:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('600ce367-5c0f-4d1c-84da-f8041c8f7b0b', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-03-24 16:00:00', '2026-03-24 17:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('efcac2ac-5c83-41fa-a5e3-a4589a6e3331', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-04-30 10:00:00', '2026-04-30 11:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('36ba5a3b-17ca-4734-82f5-c9ef39b04e04', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-03-11 17:00:00', '2026-03-11 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('0d9793b1-c00b-4de7-8232-cd5ea31b79ed', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-03-21 09:00:00', '2026-03-21 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('f7e45ef0-6791-429c-aef4-8b69de89642b', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-04-23 09:00:00', '2026-04-23 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('bb2469f3-573b-4e37-9271-874308e0ebd2', 'e69deca2-7193-49e0-8e9f-daee0420a875', '2026-07-05 10:00:00', '2026-07-05 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('87a5d3b2-fe37-4b44-9b81-402ed4cbc092', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-04-03 13:00:00', '2026-04-03 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('8916a54f-df96-4e33-9d1f-7d51cd1c0747', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-05-17 14:00:00', '2026-05-17 15:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('e1d00dec-b629-4685-9dcd-5af57e91b2c9', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-04-13 11:00:00', '2026-04-13 12:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('fdc4af27-f2d8-4986-9033-3288be5a2da1', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-04-23 15:00:00', '2026-04-23 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('962e451a-a238-41e6-94be-625643b286b9', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-03-28 16:00:00', '2026-03-28 17:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('6639f963-c1e7-4478-ab72-9454796f0e08', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-06-19 11:00:00', '2026-06-19 12:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('203692de-fa52-491a-8beb-3f795ff0d60c', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-06-04 16:00:00', '2026-06-04 17:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('02b6bbd8-8868-4787-b340-b60bc736ce94', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-04-05 10:00:00', '2026-04-05 11:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('ddb17805-9e1c-4461-974d-a189e0966ef2', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-05-05 12:00:00', '2026-05-05 13:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('3ce2a754-bcee-45a9-ac3f-b15b8568d693', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-02-21 16:00:00', '2026-02-21 17:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('7ca499e7-a049-47f9-8a51-87c5c12663c5', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-05-18 10:00:00', '2026-05-18 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('a216410e-6886-481f-af2e-69ebf8736e90', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-03-16 14:00:00', '2026-03-16 15:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('e657179c-e691-4607-b557-ba2ced3a6428', '70b799ac-1620-4271-bc9d-ce54a41c3682', '2026-02-13 17:00:00', '2026-02-13 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('97dfd872-423a-4bcd-a8bd-df4d87177299', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-03-09 11:00:00', '2026-03-09 12:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('768bf5b7-0fe9-4c4e-9c9b-6ceebbb25341', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-06-08 16:00:00', '2026-06-08 17:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('e114510e-25f3-405d-8cfa-6da4a6a76a8c', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-02-13 15:00:00', '2026-02-13 16:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('35c67bf3-34d7-4596-80b5-e21de01ccdc9', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-04-16 10:00:00', '2026-04-16 11:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('c20d35e7-c4e7-4995-bbf2-91d82553ddf0', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-06-06 17:00:00', '2026-06-06 18:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('64bcb423-4cd1-4309-8385-8e11db715333', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-04-30 09:00:00', '2026-04-30 10:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('f98d8759-8bd5-4080-a438-ea502a30e6c4', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-07-06 17:00:00', '2026-07-06 18:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('9643987a-819e-4edb-a11d-5bd805bd9748', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-03-15 13:00:00', '2026-03-15 14:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('1c35a09e-cf75-4386-9171-2ae1d43bf681', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-07-05 11:00:00', '2026-07-05 12:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('ad42a8ab-485e-4742-b2d4-6803b9a81ab0', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-05-07 15:00:00', '2026-05-07 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('f46fa5d5-f8c7-4229-a2ce-7febbcc8275b', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-04-20 12:00:00', '2026-04-20 13:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('719217ea-17f3-454c-8305-99ff90d55270', '86d6b656-583a-4227-9f10-7b763b3f3ea1', '2026-03-05 10:00:00', '2026-03-05 11:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('6f5b8d36-1231-416e-89eb-bee9187f76a4', '582ada26-484e-4377-a94d-2761381c578b', '2026-02-10 13:00:00', '2026-02-10 14:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('65bb5e5a-841a-4395-bdc1-3c7ebd22b9a3', '582ada26-484e-4377-a94d-2761381c578b', '2026-06-21 16:00:00', '2026-06-21 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('8b3c6134-6bf4-47d4-bfe3-c33c82952e50', '582ada26-484e-4377-a94d-2761381c578b', '2026-03-19 15:00:00', '2026-03-19 16:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('f6006965-3362-4c95-80f3-36c6779a33bf', '582ada26-484e-4377-a94d-2761381c578b', '2026-03-13 15:00:00', '2026-03-13 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('b31b40df-3e82-4e0c-a1e5-f6c4c0389578', '582ada26-484e-4377-a94d-2761381c578b', '2026-04-28 17:00:00', '2026-04-28 18:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('e22b1884-28b0-47d8-afae-d1f1e254e475', '582ada26-484e-4377-a94d-2761381c578b', '2026-04-18 11:00:00', '2026-04-18 12:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('3c5dedd0-8a03-44a9-9db9-a10eede2de30', '582ada26-484e-4377-a94d-2761381c578b', '2026-03-12 10:00:00', '2026-03-12 11:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('21f5cd48-f419-49e1-b2fd-dc20af2c3ee2', '582ada26-484e-4377-a94d-2761381c578b', '2026-05-08 13:00:00', '2026-05-08 14:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('c06987c7-2533-40d4-8356-4593bd22d7c0', '582ada26-484e-4377-a94d-2761381c578b', '2026-04-20 11:00:00', '2026-04-20 12:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('5fd37625-915c-4b2c-9087-1cd416f7e57d', '582ada26-484e-4377-a94d-2761381c578b', '2026-03-15 12:00:00', '2026-03-15 13:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('3d515446-e7e5-41b4-8fc3-572d5ea6abb1', '582ada26-484e-4377-a94d-2761381c578b', '2026-02-25 18:00:00', '2026-02-25 19:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('13d2b6c1-23e3-4d99-84b7-410cf0e767fe', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-05-14 11:00:00', '2026-05-14 12:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('66b46f9e-df25-456d-8200-8a585ac68272', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-04-29 17:00:00', '2026-04-29 18:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('4fc8221d-b546-486c-b9ce-352191d6700f', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-06-13 15:00:00', '2026-06-13 16:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('2f520a3f-c9c0-42ff-91f5-891c9d2e4615', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-06-26 13:00:00', '2026-06-26 14:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('163caeba-d49f-41b0-b118-fc4fdef2aa11', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-06-06 14:00:00', '2026-06-06 15:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('6614826b-918b-4749-b566-a39e24c695ff', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-03-08 11:00:00', '2026-03-08 12:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('2616fb73-5d68-4875-9c2f-aa204a3bcf7d', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-04-09 17:00:00', '2026-04-09 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('237b35dc-a705-4cf9-a57f-a47c63beff8d', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-02-28 10:00:00', '2026-02-28 11:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('365c7bf3-7aec-4f0c-8986-c450b41c2fb7', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-05-01 13:00:00', '2026-05-01 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('477e5c52-645f-4ad3-b5b4-a5acdf89c7b0', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-04-11 16:00:00', '2026-04-11 17:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('6799be6b-0f22-4d1b-a7da-9eb3f176a19d', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-02-26 11:00:00', '2026-02-26 12:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('b5fa51c2-15f2-4089-9bff-fc071af83643', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-05-16 15:00:00', '2026-05-16 16:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('0d212a53-3545-49b8-ad04-221af7a453e0', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-04-17 17:00:00', '2026-04-17 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('b601c8e8-bc3a-458f-8c8c-4b03a61dee1d', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', '2026-03-06 13:00:00', '2026-03-06 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('b8cfbcde-dd52-4b35-90d8-39a6f2733173', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-06-28 18:00:00', '2026-06-28 19:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('5dd8b802-8c19-4543-a84c-4231a0d3480e', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-06-07 18:00:00', '2026-06-07 19:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('9a9dbd27-3c68-47ba-8683-cd3031b23b5e', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-05-03 16:00:00', '2026-05-03 17:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('da9ad0d8-bbc5-4325-b9d5-febe29db7c1f', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-06-14 18:00:00', '2026-06-14 19:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('d20dae15-4f83-454a-8eee-07aa857cd188', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-03-24 10:00:00', '2026-03-24 11:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('61fe7145-b460-4e54-834a-48277b775cf9', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-05-16 12:00:00', '2026-05-16 13:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('11380b21-2a48-4890-9d34-139c8b17373a', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-03-17 10:00:00', '2026-03-17 11:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('e0fb415f-53a2-4cae-9d96-1df88eb1dddb', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-07-07 10:00:00', '2026-07-07 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('34e01308-0074-410e-895b-2fb426aa77bb', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-07-05 09:00:00', '2026-07-05 10:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('b4dcf4ed-d79b-4b89-9fe5-5cee80cec8c8', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-02-22 11:00:00', '2026-02-22 12:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('85f95e05-b486-4a3a-b803-70f152ff0de5', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-05-22 18:00:00', '2026-05-22 19:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('0805b648-33d5-46bf-b5e7-b331b4559643', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-03-29 18:00:00', '2026-03-29 19:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('e029fa13-d216-4db2-a2c1-9e349fa32753', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-02-16 14:00:00', '2026-02-16 15:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('49a1cf06-558e-4c69-b248-af1b89ca6da6', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '2026-06-16 14:00:00', '2026-06-16 15:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('f8491989-001a-40d4-8346-a5deda532c73', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-06-29 13:00:00', '2026-06-29 14:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('77b3c7a5-8081-4e28-99f4-8c9937cfeee0', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-04-17 12:00:00', '2026-04-17 13:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('a03c8bf9-4178-42ac-8fc5-84765528b8b0', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-05-21 18:00:00', '2026-05-21 19:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('3aba4d28-9781-4393-9ae9-e8d424054f6b', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-02-13 14:00:00', '2026-02-13 15:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('ff4162e3-4a15-4c20-8ba4-61be6946af38', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-04-30 11:00:00', '2026-04-30 12:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('ae4a0c71-a489-488c-84ae-edd588877667', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-02-08 14:00:00', '2026-02-08 15:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('139feef2-5fd2-4424-badc-7a7a3663afdb', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-04-19 14:00:00', '2026-04-19 15:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('ffcd8fe3-14da-4b02-8d42-5efde365af03', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-05-26 11:00:00', '2026-05-26 12:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('a9519db5-c625-4ab5-94e1-9d59a583b94e', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-04-02 14:00:00', '2026-04-02 15:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('9b742a0c-5eb3-41b4-a909-b77903d7c589', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-03-18 11:00:00', '2026-03-18 12:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('0b848846-12b2-4821-a98d-4758f76bb542', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-04-19 15:00:00', '2026-04-19 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('fd9325ec-e4a7-48b6-8767-457282058f1d', '6c7c202c-6e67-4771-8e6d-cea923775928', '2026-06-23 09:00:00', '2026-06-23 10:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('35c9a286-87ce-4478-a6d0-340321e706c9', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-05-31 11:00:00', '2026-05-31 12:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('eef9ddc4-b125-45ce-8b60-72dfa74942a9', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-05-05 16:00:00', '2026-05-05 17:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('8970b7d6-5ae0-4322-993e-69dbbe6af601', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-04-22 15:00:00', '2026-04-22 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('c0fe2e80-6b08-4137-84b2-fef3ad972a33', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-05-21 13:00:00', '2026-05-21 14:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('897223c8-2e65-4058-badf-f989d34d60c7', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-05-12 09:00:00', '2026-05-12 10:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('773836e3-159d-4373-b840-a751d680f5e8', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-06-01 11:00:00', '2026-06-01 12:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('991a6bac-2455-4005-8bbf-21aec0f0cb69', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-02-16 18:00:00', '2026-02-16 19:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('decf4d97-4b9f-445d-8bb4-c0f6dddd6c52', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-03-21 13:00:00', '2026-03-21 14:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('4ee40cf9-ddfe-49c0-91ab-4865a23dbdc4', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-04-21 12:00:00', '2026-04-21 13:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('3e840938-99ca-4755-89f6-0989b38c3a4e', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-02-11 10:00:00', '2026-02-11 11:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('49bbb146-e4cf-4b37-a279-cbaf7fa68b60', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-07-02 10:00:00', '2026-07-02 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('8b53216e-3379-4995-b8fd-5be12a45d034', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-03-18 16:00:00', '2026-03-18 17:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('e0f86003-601e-46de-8921-276fee3c3829', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', '2026-06-15 11:00:00', '2026-06-15 12:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('48ce8c8a-0166-4a15-99e9-a79d3c1fa7ee', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-02-22 11:00:00', '2026-02-22 12:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('674ce6a1-b8b9-4bbb-9f56-e20d69586676', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-02-16 15:00:00', '2026-02-16 16:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('9316f954-0219-482a-9ca7-a41de332a7ea', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-04-26 15:00:00', '2026-04-26 16:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('effaf5e1-273f-4b0f-8dc3-7a5e8fea4703', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-06-12 17:00:00', '2026-06-12 18:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('665f7af1-c375-4401-8ad2-ff545b772dbe', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-05-07 15:00:00', '2026-05-07 16:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('f72f747e-3bbb-417c-841e-64afe68d99bb', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-05-20 11:00:00', '2026-05-20 12:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('17f092ba-33f8-4fc8-98bb-2b3d689fa903', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-03-12 12:00:00', '2026-03-12 13:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('81a44069-3aa2-4f98-a00b-40f5cc2b6663', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-02-11 13:00:00', '2026-02-11 14:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('bc34535e-ff78-4e17-a025-809be64f7b70', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-03-15 17:00:00', '2026-03-15 18:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('b2a2164c-92ff-4e42-b85d-9e2b9d144686', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-06-22 15:00:00', '2026-06-22 16:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('b94d9a53-55e2-42e6-beea-e712ff580dd8', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-06-11 10:00:00', '2026-06-11 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('5ed2c04d-d52d-4bca-a940-200cebd9be98', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', '2026-06-11 10:00:00', '2026-06-11 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('b18c8327-6744-44f6-8f76-2c8c239570f4', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-06-30 14:00:00', '2026-06-30 15:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('f733cd78-7e20-4762-8065-2c1c6ba9d2fd', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-02-10 14:00:00', '2026-02-10 15:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('25d7fd97-6c62-440f-bafc-fc23a96c798e', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-05-15 17:00:00', '2026-05-15 18:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('a8d0f591-86dc-41fd-b037-cc3c57997c35', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-06-05 11:00:00', '2026-06-05 12:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('9431f4b0-d844-45d9-9bfc-4f9f1735e04d', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-05-22 13:00:00', '2026-05-22 14:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('880b4785-6874-4f1f-832f-1b5752ee6ec2', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-04-10 13:00:00', '2026-04-10 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('be8b51dc-4569-45e8-89d9-5552967e7406', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-06-01 18:00:00', '2026-06-01 19:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('16e1dc1c-b774-4b06-973e-f68e55756c19', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-06-09 16:00:00', '2026-06-09 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('88863b8e-9557-4e92-92cb-5a27b884cf98', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-05-04 17:00:00', '2026-05-04 18:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('b1bf6d47-e059-4a33-a8ba-d432ca92e9eb', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-07-05 16:00:00', '2026-07-05 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('edf8e06a-fd35-47b8-ad7e-47cb8b9b26e5', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-04-21 09:00:00', '2026-04-21 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('180098c3-7e6d-43cf-9958-31bf3725736e', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-07-01 14:00:00', '2026-07-01 15:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('74bbbc60-8b3c-4594-8397-2bfb33dbda42', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-05-14 18:00:00', '2026-05-14 19:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('aed92f7f-a1be-451c-970f-cbb7cf12bf20', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-02-19 09:00:00', '2026-02-19 10:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('0282ea77-8707-496a-b7f2-7b75d9c8090b', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-03-19 14:00:00', '2026-03-19 15:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('b2ea30e9-c960-4cf3-bb1c-7256c43f3d9c', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-05-06 12:00:00', '2026-05-06 13:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('2631686b-7571-45cf-b98a-a78e8021cb3b', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-06-25 12:00:00', '2026-06-25 13:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('9040701e-a98e-4a3a-ad8f-fa0bd3a7f54d', 'e0599544-24eb-416b-b10b-306d34f3f419', '2026-06-10 09:00:00', '2026-06-10 10:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('286ab7b6-3cae-4b86-8457-81a77352c451', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-06-27 16:00:00', '2026-06-27 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('6e41f1bf-1fbf-4e38-8286-ffb689fc535d', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-03-23 10:00:00', '2026-03-23 11:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('c78bae02-4a6b-403f-9814-0d990a436fa7', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-04-17 11:00:00', '2026-04-17 12:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('f78d324c-a46b-4a77-8828-9405bee20600', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-06-14 17:00:00', '2026-06-14 18:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('94e3f92c-8bac-4de3-b520-779981dbc336', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-03-06 10:00:00', '2026-03-06 11:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('096c52f9-22d9-4fe5-97c3-7bfe048cfb7f', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-06-09 12:00:00', '2026-06-09 13:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('04037261-a136-46a6-a059-06d2e5997bc0', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-04-16 09:00:00', '2026-04-16 10:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('01e1029a-c99f-45d4-b3a6-6d251718bc87', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-05-23 18:00:00', '2026-05-23 19:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('9108a87b-62c9-4589-a368-96d763e20179', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-03-26 12:00:00', '2026-03-26 13:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('2b9f0258-e3bb-4608-bc75-5a2793b9c47d', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-04-18 09:00:00', '2026-04-18 10:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('ec59bc09-4012-48c4-b9dc-abd0ac5788ba', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-04-03 10:00:00', '2026-04-03 11:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('2704bc32-a6c4-409d-845e-d07425ef564d', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-04-10 14:00:00', '2026-04-10 15:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('12e3012f-284f-4b13-8f7a-5d2777a01c53', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-02-08 12:00:00', '2026-02-08 13:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('d975dae7-2dff-4f9d-8ee5-467fb24633a4', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-04-29 15:00:00', '2026-04-29 16:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('2638c40a-c4f0-4cde-ae23-25d126e67022', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', '2026-04-03 10:00:00', '2026-04-03 11:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('4fe3cea5-63e8-4b82-9c8a-fbee5af29f48', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-03-30 13:00:00', '2026-03-30 14:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('235bf97d-5ce7-4771-9b69-bb07aadbae34', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-05-22 14:00:00', '2026-05-22 15:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('87a85199-d4e1-46c3-ac0d-5a3bf0da9df5', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-04-16 13:00:00', '2026-04-16 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('a11b3d41-7769-4f1e-b801-8649275f7abd', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-06-23 18:00:00', '2026-06-23 19:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('ee9e6900-2c83-43d8-88cc-5e10aaa8625a', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-04-27 11:00:00', '2026-04-27 12:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('6ef140a6-440b-4e49-b5a6-58c7a2b1a54b', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-04-07 15:00:00', '2026-04-07 16:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('b6ba1daf-0102-40a7-b12d-28bf135e7eea', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-05-06 10:00:00', '2026-05-06 11:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('b7f9b355-d126-43e9-87da-742f43c533a5', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-04-10 17:00:00', '2026-04-10 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('96d6dc6f-eff5-455d-8eae-bf699206e61e', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-02-26 15:00:00', '2026-02-26 16:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('ff993b2f-824a-4e1e-99cc-7917cc94a1cc', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-03-30 12:00:00', '2026-03-30 13:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('e4c6f150-aff6-4867-9087-59eae46b68f3', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '2026-04-22 18:00:00', '2026-04-22 19:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('f227c657-f942-4b10-8872-3631c711002d', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-05-30 13:00:00', '2026-05-30 14:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('6bbe5766-5418-45af-aa56-6f6b2a4fb589', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-05-10 10:00:00', '2026-05-10 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('fdaf5807-7db1-409a-9bb4-930e01abbb98', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-04-19 18:00:00', '2026-04-19 19:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('ad65bf37-b1f6-40de-9cc7-cbcdb83284ed', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-03-09 13:00:00', '2026-03-09 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('fddce31f-0ef2-44e5-8c7e-09edd3bad03d', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-05-15 10:00:00', '2026-05-15 11:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('f0f3e62e-8961-4ffc-a200-ad836a3cdf21', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-06-08 18:00:00', '2026-06-08 19:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('a9f620bf-1a5e-4586-b141-c8cdf8c91fd0', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-04-23 11:00:00', '2026-04-23 12:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('f6551845-cdaf-4044-8ef8-896f1fdac1aa', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-03-01 18:00:00', '2026-03-01 19:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('86b76544-314b-4131-ad8f-269b6bc71cac', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-02-13 11:00:00', '2026-02-13 12:00:00', 'отменен');
-INSERT INTO public.availability_slots VALUES ('c079c260-e7ed-4a3b-919f-9c1e2c249499', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-05-14 12:00:00', '2026-05-14 13:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('609c0c74-0c39-45e9-bee3-7d3d041c8b59', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-05-30 12:00:00', '2026-05-30 13:00:00', 'забронирован');
-INSERT INTO public.availability_slots VALUES ('6731f937-e26c-4f6f-a004-8368d1806d72', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-04-26 13:00:00', '2026-04-26 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('a5748da2-f25f-46b8-9b85-d8767074c4d8', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-06-13 14:00:00', '2026-06-13 15:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('0e8336e5-a07e-4895-b0db-01b75dc12b9d', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '2026-06-07 12:00:00', '2026-06-07 13:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('d9b4f240-adf0-453f-9ecf-c13af9d8378b', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-03-30 17:00:00', '2026-03-30 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('e1059459-56ed-487f-9ea3-09c7d28d1ded', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-02-23 13:00:00', '2026-02-23 14:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('64607990-8eae-40b8-8a3e-1090a67c8458', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-05-17 16:00:00', '2026-05-17 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('9a7cbfb4-6fac-4369-aee5-163fbe161048', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-04-05 17:00:00', '2026-04-05 18:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('cb3c8d8b-9890-48a1-a142-02c07ec90ded', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-04-14 11:00:00', '2026-04-14 12:00:00', 'недоступен');
-INSERT INTO public.availability_slots VALUES ('4efc6130-0aee-4a1c-9078-b3e2e1e9ec08', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-03-25 17:00:00', '2026-03-25 18:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('7c15ae1a-85a7-4240-83a1-d1817c33aef8', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-04-03 10:00:00', '2026-04-03 11:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('1822d029-7298-4d71-b931-806fc76f52ed', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-02-16 12:00:00', '2026-02-16 13:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('b2394676-58d5-49de-866d-db336607a465', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-05-24 18:00:00', '2026-05-24 19:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('1de22ba9-0ea6-40dd-a66b-2fa92b904333', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-06-23 16:00:00', '2026-06-23 17:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('fe7062f1-9c5a-4d04-8d95-575c0f58ef14', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-05-15 11:00:00', '2026-05-15 12:00:00', 'свободен');
-INSERT INTO public.availability_slots VALUES ('45f03d84-5f59-4523-a14d-3baea08770de', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-02-10 10:00:00', '2026-02-10 11:00:00', 'проведен');
-INSERT INTO public.availability_slots VALUES ('b89654f7-83af-45c7-bc9d-6dc24ae63403', '88d891ed-928c-4a23-a572-6855b60c50b7', '2026-06-29 18:00:00', '2026-06-29 19:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('163e8c08-6d09-4d5a-8c82-df4b6d9ef207', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-03-23 12:00:00', '2026-03-23 13:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('faa82b1d-1d55-4845-997e-0ee1c60e575b', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-06-11 12:00:00', '2026-06-11 13:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('76c077cf-dfd1-4970-a76f-6b6541719050', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-05-22 17:00:00', '2026-05-22 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('e2f08237-9113-4ce7-b95b-5c4ab639fd79', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-06-10 14:00:00', '2026-06-10 15:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('42828800-c8bf-4d6e-8388-36599f1a2863', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-03-10 16:00:00', '2026-03-10 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('183d5fa7-bd40-4ecc-94fe-1f3af77ab5ed', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-06-23 12:00:00', '2026-06-23 13:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('0075b417-3cc8-4c81-b65a-b67705b7775b', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-05-05 10:00:00', '2026-05-05 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('9f0a41a4-10b7-442a-908c-a2b3691483f4', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-02-19 18:00:00', '2026-02-19 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('6d5de135-758a-4a1b-8521-0ce5c10743ad', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-05-28 11:00:00', '2026-05-28 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('fdbc1439-24a3-4b23-859b-d56b8a0fecdf', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-06-16 16:00:00', '2026-06-16 17:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('61b7d8d0-d437-445f-adb5-37361a8b008a', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-04-08 18:00:00', '2026-04-08 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('50e96e61-4f48-4d24-b17b-e4392c202ff2', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-04-11 14:00:00', '2026-04-11 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('f35a7d80-303b-49e8-bdc1-25a68446ab43', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-07-05 14:00:00', '2026-07-05 15:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('44d49c21-b9c6-4039-aabf-33889deadc5b', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-04-28 11:00:00', '2026-04-28 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('a8bd69aa-dcf2-4ae5-ac40-ba08be196d2e', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-06-14 13:00:00', '2026-06-14 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('5f6d558a-b6f2-4052-bc20-0f101e6b86a7', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2026-03-03 13:00:00', '2026-03-03 14:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('e3f600a8-18c9-43f0-b2fa-715a57836420', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-06-21 15:00:00', '2026-06-21 16:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('3f74289f-4f6c-47b3-bad4-d93cf3f5c63b', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-05-21 13:00:00', '2026-05-21 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('8a46a18d-2ac1-4da0-991e-875276c99f3e', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-05-26 17:00:00', '2026-05-26 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('71b4e88e-6872-4aed-802d-cd95567b7840', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-05-18 11:00:00', '2026-05-18 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('61f9e110-731d-47bf-8710-38715907cc6c', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-06-23 13:00:00', '2026-06-23 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('32612f58-ca62-4254-9ba4-e86fc47deab5', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-03-17 13:00:00', '2026-03-17 14:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('2d9faa47-51bd-4b06-b3e3-6755ad486618', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-05-21 13:00:00', '2026-05-21 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('3d261049-7e1f-46a5-ab6b-2b2f1d19849d', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-03-27 15:00:00', '2026-03-27 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('73d9593a-39bb-459c-b4f8-6a1a338d663c', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-04-04 18:00:00', '2026-04-04 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('07af336f-046e-4515-ae53-9d61aef31191', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-06-20 16:00:00', '2026-06-20 17:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('320390a5-2af4-4dd6-a1ce-f8e5135cb287', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-02-19 17:00:00', '2026-02-19 18:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('df65d9c4-cbc9-4a9f-a3d4-d6157f6fd4d3', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-03-19 15:00:00', '2026-03-19 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('563081d0-92e6-4310-8e06-5d43ac40461d', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-05-27 09:00:00', '2026-05-27 10:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('bec30f22-fce6-497f-b639-59846e813a1d', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-07-06 15:00:00', '2026-07-06 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('fbdcef20-5b18-4daf-afed-17c1a85e7536', '2b122c6b-e3d8-4b39-b165-aa8b61834322', '2026-04-27 16:00:00', '2026-04-27 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('efb35fc5-5015-45df-8695-b59b03b93469', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-06-28 16:00:00', '2026-06-28 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('1114be61-2147-4571-bd27-8b71e59cc094', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-05-16 13:00:00', '2026-05-16 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('36440b85-9d1f-4272-9756-8fe19c14185c', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-06-13 15:00:00', '2026-06-13 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('b5cf6cf3-1e1b-436d-b923-b0a86626007b', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-05-15 14:00:00', '2026-05-15 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('2ef0c9cb-d516-45b4-970a-942daaaae092', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-02-14 18:00:00', '2026-02-14 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('30f689f5-5c0d-4167-b5b6-79dff8cff6ab', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-03-20 09:00:00', '2026-03-20 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('d599802a-a353-4413-8c88-0cf29c85924d', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-07-03 14:00:00', '2026-07-03 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('248758c6-e15b-4f89-8a13-f91c8b7fa716', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-04-29 11:00:00', '2026-04-29 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('6c221a57-3277-4999-8c70-bc0cf030bfef', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-02-25 15:00:00', '2026-02-25 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('5b81020a-6729-411f-8ed3-191ba9569349', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-03-25 15:00:00', '2026-03-25 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('7d05fdbd-2cec-4a27-885a-57fee63f35fa', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-04-26 09:00:00', '2026-04-26 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('10b2c24d-be6b-4e36-8ad8-d71d09ebce2f', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-02-21 17:00:00', '2026-02-21 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('fffeef2c-7013-484a-a0fc-6dfe4301b378', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', '2026-06-18 13:00:00', '2026-06-18 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('36d2ab46-8aaa-4709-af68-f293a14a77d6', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-06-29 09:00:00', '2026-06-29 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('02a3e468-1593-4b3a-9ffa-4ef4ffc4ed6a', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-02-18 09:00:00', '2026-02-18 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('bfcf0c50-0bd5-4b2f-92ad-218f30585766', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-03-23 14:00:00', '2026-03-23 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('36f29ad8-bf10-4033-bba2-109425fa3a93', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-03-28 10:00:00', '2026-03-28 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('4f32d1c5-b9c3-4895-8ad9-e56ad5d4ecf9', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-05-26 13:00:00', '2026-05-26 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('f14bea7a-d89a-4860-8567-3dd6b7b60b6d', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-07-05 15:00:00', '2026-07-05 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('4fb52b59-15da-4cbd-b45b-66ac35cfb178', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-04-15 14:00:00', '2026-04-15 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('53d2a603-9c57-4192-a02c-4ab9fb528dcc', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-04-21 09:00:00', '2026-04-21 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('04c58932-e0e2-4cc8-9306-5a9b0d7b048d', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-02-18 12:00:00', '2026-02-18 13:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('855d6c20-0e69-4493-b85b-7fd85aed2863', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-07-02 10:00:00', '2026-07-02 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('ee41d220-eab8-4c57-bd10-8a87a08ab519', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-05-24 13:00:00', '2026-05-24 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('831f5f3d-18bd-4163-852e-fa259ab3c945', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '2026-05-24 10:00:00', '2026-05-24 11:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('f9674236-40b4-4ddb-b0ba-6364fc41670b', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-02-19 17:00:00', '2026-02-19 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('3f68b50f-6b9b-48be-bcc0-2e895c858848', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-03-23 10:00:00', '2026-03-23 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('02aa93e8-4143-4911-9ddd-b09df30ef4d1', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-03-23 14:00:00', '2026-03-23 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('cde8c29a-65d4-4202-87ca-cd7614f02252', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-02-11 16:00:00', '2026-02-11 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('ad74ba97-eeb5-45f7-ba4f-592df2cc893b', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-04-10 13:00:00', '2026-04-10 14:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('c34321dc-0d6b-4216-9421-db922c55256f', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-02-19 18:00:00', '2026-02-19 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('5c8cbaa8-9c38-4433-8525-06dc1c729a25', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-03-14 16:00:00', '2026-03-14 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('494f042d-63b9-43c2-9073-de7cb110bdfc', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-05-12 17:00:00', '2026-05-12 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('6c0c8818-3fad-4173-976c-d4e0cbbe2d98', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-04-14 14:00:00', '2026-04-14 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('fde7d1a8-3d77-4c63-aa5e-615ab49dd794', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-03-09 12:00:00', '2026-03-09 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('448e0b18-2ab1-4416-bfb8-50ef2fc177e8', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-06-06 17:00:00', '2026-06-06 18:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('bb942412-db57-4b8d-b540-502e0b611fdc', '8bdb45be-5e06-4224-904e-ca10724599f0', '2026-02-23 17:00:00', '2026-02-23 18:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('03212a76-bd7d-4110-be6a-f1f8e3bd4fd1', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-06-21 13:00:00', '2026-06-21 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('ba0c7b3e-af7e-486c-9f1b-b5ebcaa12ba4', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-04-11 18:00:00', '2026-04-11 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('2e02065d-f3e7-4c13-b8ff-69f04dbf1560', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-03-14 10:00:00', '2026-03-14 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('b8d137d5-81e3-47a6-84a2-01846c759cf4', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-05-26 16:00:00', '2026-05-26 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('9ce8bd3a-a9c0-4ddd-af40-cdc7d1fa50bc', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-02-15 09:00:00', '2026-02-15 10:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('ea18829e-985a-4642-960e-a7a651961fe4', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-05-17 10:00:00', '2026-05-17 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('3e7b07ee-9870-4f9a-a46b-a71ff83e71bd', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-04-15 18:00:00', '2026-04-15 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('978482ba-8ff7-41c4-a575-1f8f538ff57c', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-05-05 16:00:00', '2026-05-05 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('03a99acb-c63f-4a8d-8a8a-12ee37c4f1df', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-05-28 09:00:00', '2026-05-28 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('98e01f48-b245-4256-93f1-b719c641db22', '2521227e-be29-4c74-b38b-29c6a5741457', '2026-02-27 17:00:00', '2026-02-27 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('e1e8cdb9-0419-4ca6-9c9c-a9f17093f4d4', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-03-05 12:00:00', '2026-03-05 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('f39fa0de-023f-4709-9e36-8d6678ef32f7', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-04-19 15:00:00', '2026-04-19 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('9d985e98-7ab8-40a6-9b70-42f5e04745c4', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-05-03 17:00:00', '2026-05-03 18:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('3a117832-dfdc-40ad-a0cf-bd1ff6194edb', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-03-30 12:00:00', '2026-03-30 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('7ba4bdbc-52f4-4bfe-9871-5fda5e3faf7e', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-04-11 14:00:00', '2026-04-11 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('4c0b9987-e0bc-4a1e-a34f-545323bc9555', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-06-14 17:00:00', '2026-06-14 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('b6745785-b0e0-4565-979f-301717376ecf', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-02-09 16:00:00', '2026-02-09 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('75cc5f53-2f71-4355-a518-c9e943a397d8', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-02-22 17:00:00', '2026-02-22 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('013dd1ce-d472-4d48-b751-f2ab63f56f90', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-05-20 11:00:00', '2026-05-20 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('1546fc37-43e6-4081-94cd-bdf05dcd43fe', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-05-08 09:00:00', '2026-05-08 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('90bb2338-7f3b-405e-ba99-b1430de0b8d0', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-06-13 15:00:00', '2026-06-13 16:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('9ef88419-25eb-438e-9947-c0eff3bc5d7c', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-06-15 09:00:00', '2026-06-15 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('34b6c37c-2117-41c7-b0c0-14cdc06c2834', 'd9b6402e-b747-4701-86a2-4e70537eaeec', '2026-04-18 12:00:00', '2026-04-18 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('89755f11-e85b-4849-999a-6a7f9ce2f35d', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-04-04 14:00:00', '2026-04-04 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('64d4d554-6309-4399-bb22-b7553d47531a', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-06-05 15:00:00', '2026-06-05 16:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('9322c659-7663-46ed-a1f2-a0e037fb3658', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-02-09 16:00:00', '2026-02-09 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('c1c1170b-0040-4577-9c07-9ad126546749', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-03-09 11:00:00', '2026-03-09 12:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('dff88b13-93de-4df3-97c5-f66c5ecbf6c8', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-07-03 13:00:00', '2026-07-03 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('f3c05c96-dfbf-484f-91d4-8a4f745c17d9', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-03-03 11:00:00', '2026-03-03 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('2f00ca03-2314-40fb-a81d-1ff0afc44ad2', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-05-23 09:00:00', '2026-05-23 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('340c0a97-ca8d-4321-8627-bfab6cdfd6c6', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-06-13 11:00:00', '2026-06-13 12:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('f379f502-4934-4eba-9c40-aa00265c21d4', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-04-12 15:00:00', '2026-04-12 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('ab7c0e74-e4ce-4d15-bb44-ad825ae749ec', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-04-30 11:00:00', '2026-04-30 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('67686b13-cab7-4270-866e-e62b77bbcb6b', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-05-02 11:00:00', '2026-05-02 12:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('2376fafb-b4e4-4c08-ae3b-24d758ee425c', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-02-23 15:00:00', '2026-02-23 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('8e99602c-7a30-4d9e-b246-69845832490d', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-03-02 14:00:00', '2026-03-02 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('0887d50f-df16-4388-8c1e-7de34176628f', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-02-13 15:00:00', '2026-02-13 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('f128ec1e-428a-4092-92f7-f6bfce235118', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-03-30 17:00:00', '2026-03-30 18:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('ba89e1e0-0278-4c2b-9b73-c5c9f6d36339', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '2026-05-04 09:00:00', '2026-05-04 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('1e27c24b-45d7-4512-b460-5471ac3fc76d', '43326f8a-d949-430c-aea3-735d47979c13', '2026-05-21 14:00:00', '2026-05-21 15:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('9895870b-d146-409f-935a-fa46d173cae5', '43326f8a-d949-430c-aea3-735d47979c13', '2026-07-02 18:00:00', '2026-07-02 19:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('08952b0b-04cd-4d88-a7e7-83ac1fce3467', '43326f8a-d949-430c-aea3-735d47979c13', '2026-05-22 11:00:00', '2026-05-22 12:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('bf02508f-a61b-4384-9567-c33924b83f42', '43326f8a-d949-430c-aea3-735d47979c13', '2026-04-04 12:00:00', '2026-04-04 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('c09f4159-df63-4446-a5bd-dd78e348e944', '43326f8a-d949-430c-aea3-735d47979c13', '2026-03-27 12:00:00', '2026-03-27 13:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('7a75b964-aea4-4522-ba8d-ce0d3ecfb678', '43326f8a-d949-430c-aea3-735d47979c13', '2026-04-11 14:00:00', '2026-04-11 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('0ad4ba86-f2e9-4982-9719-e1d2a4f56764', '43326f8a-d949-430c-aea3-735d47979c13', '2026-02-19 15:00:00', '2026-02-19 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('f264faee-6572-4657-983a-179851194fab', '43326f8a-d949-430c-aea3-735d47979c13', '2026-05-25 12:00:00', '2026-05-25 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('9639eff6-41d2-4116-ad6d-20512e82df21', '43326f8a-d949-430c-aea3-735d47979c13', '2026-02-11 18:00:00', '2026-02-11 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('2bc44170-a0f8-41b1-a760-6d68403c28b5', '43326f8a-d949-430c-aea3-735d47979c13', '2026-04-17 17:00:00', '2026-04-17 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('475ff98e-1b6a-48a7-a424-fc42e28f4b55', '43326f8a-d949-430c-aea3-735d47979c13', '2026-04-12 17:00:00', '2026-04-12 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('67a31b72-2fad-48d2-94e2-49b0a6512eab', '43326f8a-d949-430c-aea3-735d47979c13', '2026-02-27 14:00:00', '2026-02-27 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('a3d3e6c1-3657-4022-ba87-6ee0ab9b19fd', '43326f8a-d949-430c-aea3-735d47979c13', '2026-02-09 13:00:00', '2026-02-09 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('c5aebb9d-238a-4736-99b0-9b271181e306', '43326f8a-d949-430c-aea3-735d47979c13', '2026-05-20 15:00:00', '2026-05-20 16:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('74de428d-8d65-4f0e-be73-7cb8e66627f1', '43326f8a-d949-430c-aea3-735d47979c13', '2026-06-15 09:00:00', '2026-06-15 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('e39e48d7-a1bb-41d2-8d85-fa7af69768ae', '43326f8a-d949-430c-aea3-735d47979c13', '2026-03-10 12:00:00', '2026-03-10 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('a23bbb78-f699-455d-8b9c-594ab01599b3', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-06-24 14:00:00', '2026-06-24 15:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('7ba8a7d8-478a-4340-a680-226905e345af', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-03-04 15:00:00', '2026-03-04 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('cf5644db-615f-491f-9407-50d0b0464b86', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-03-01 16:00:00', '2026-03-01 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('ce1599f2-7e8c-4c2b-9849-d6ebe498d37d', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-04-16 18:00:00', '2026-04-16 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('3e499c42-75c8-47a8-afc6-87c9c68f0634', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-02-16 10:00:00', '2026-02-16 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('45fc9440-7a04-4d4a-ae2e-d34ea295eff8', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-05-25 13:00:00', '2026-05-25 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('bda39c29-ecb8-4cde-adbc-6aeee1c6c2e1', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-02-14 18:00:00', '2026-02-14 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('989715d6-679a-4f0d-b418-193d221e8a3e', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-02-13 09:00:00', '2026-02-13 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('b231177b-55d4-4c29-a80b-c9a176d82a44', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-06-24 17:00:00', '2026-06-24 18:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('43bfc0a6-bfbc-4bae-9e3c-f2726797a7fc', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-02-24 14:00:00', '2026-02-24 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('7fda3e04-8ff2-4449-b659-9337217db066', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-04-13 11:00:00', '2026-04-13 12:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('ab2a357c-ff5b-418a-94c9-867f3265891d', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-05-15 12:00:00', '2026-05-15 13:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('625ec456-c361-4a51-bdfc-ecc1f86f3107', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-03-20 18:00:00', '2026-03-20 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('fd20462f-86e3-4faf-80d8-683b222570f5', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-07-01 13:00:00', '2026-07-01 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('d1bd9883-ceb4-4f42-bb62-b344f9aecc04', '9e2538b1-105a-41e5-93b5-958545f78e43', '2026-02-13 15:00:00', '2026-02-13 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('7de0f32a-7507-4a66-b987-db9dce020edf', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-05-17 12:00:00', '2026-05-17 13:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('34cd5674-8043-4a2a-bc69-60d75d54d8cc', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-06-30 10:00:00', '2026-06-30 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('8bc4dd2f-c15e-41eb-bb86-ecbb46504247', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-05-13 10:00:00', '2026-05-13 11:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('6bd75e5c-6b0f-4c3a-af69-301f8b4e0127', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-02-11 15:00:00', '2026-02-11 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('e7a3058d-0dce-4ecd-9679-250dc281ef08', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-04-13 18:00:00', '2026-04-13 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('e0cb3ca6-7044-4033-ae25-bd76812ea595', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-04-11 12:00:00', '2026-04-11 13:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('f0f2cca2-74d4-4425-8bf6-89cc3f7c74c9', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-03-14 10:00:00', '2026-03-14 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('378318e1-0eb0-4827-b050-44db2821ef6c', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-05-07 12:00:00', '2026-05-07 13:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('a0dbefb6-e974-4068-81fe-a9b33a43ad14', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-03-25 15:00:00', '2026-03-25 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('5e4d0f32-48d6-489a-a656-e96d95766d81', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-04-04 09:00:00', '2026-04-04 10:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('9fadebf7-1bc1-4468-b101-77ebbf820836', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-03-27 14:00:00', '2026-03-27 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('c5529604-d6ec-48e5-858b-0458d19d9623', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-06-29 18:00:00', '2026-06-29 19:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('305d041b-e963-419e-8d9b-c4b5e1adfcd2', '035c6559-1715-4f72-91a1-9b8ec53abb80', '2026-02-16 11:00:00', '2026-02-16 12:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('1ba032d1-1d30-429e-8320-047a79e7118d', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-03-12 09:00:00', '2026-03-12 10:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('a840f43f-5694-43b3-b1b2-f7ce0d398f98', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-03-02 10:00:00', '2026-03-02 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('8be5f670-fa3f-41ac-a007-70b6ab50c6b9', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-07-04 11:00:00', '2026-07-04 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('aa013705-907e-4b6e-826d-cea1c1ecc67b', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-03-23 09:00:00', '2026-03-23 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('b914249d-8994-421b-b11a-d85978b0f771', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-03-15 15:00:00', '2026-03-15 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('350c97ca-26fa-4069-a989-ba632bb51bcc', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-04-05 16:00:00', '2026-04-05 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('7be9ce44-c6f1-46ef-ab5d-63290bbc2a86', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-05-03 12:00:00', '2026-05-03 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('622c0a53-ed45-4ed8-be31-93e739168636', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-03-04 15:00:00', '2026-03-04 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('62387849-4d03-4628-948e-c7a2507112b3', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-02-09 11:00:00', '2026-02-09 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('ebe977c1-3a1d-4424-9186-11685be67513', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-02-13 16:00:00', '2026-02-13 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('942cd7e4-00bc-467f-b182-b14382a8c339', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-04-12 09:00:00', '2026-04-12 10:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('34a3957b-54e9-40fd-b1cf-8db067d64b0e', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-07-06 14:00:00', '2026-07-06 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('f0e4dd26-90b2-41f4-8ee6-ef032f0a63a2', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-05-08 18:00:00', '2026-05-08 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('c9e2144f-89a4-4830-9e33-e7dd67180322', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '2026-03-14 10:00:00', '2026-03-14 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('a8dc1c47-d02b-465a-b825-8f61068f5fb3', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-04-21 15:00:00', '2026-04-21 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('7b34b45f-421b-410e-972b-7266e6c22dca', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-03-11 12:00:00', '2026-03-11 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('4867d952-791e-4d12-a23b-b69ae8e71af7', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-06-22 17:00:00', '2026-06-22 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('44d16e0e-08a1-4392-b559-6f2a7fbf2a77', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-02-27 13:00:00', '2026-02-27 14:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('0b58eab7-c72f-40c2-9ff9-2130898de7d4', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-04-25 09:00:00', '2026-04-25 10:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('2514fbaa-2750-40e6-92d5-46a58a4fc78b', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-06-18 11:00:00', '2026-06-18 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('347238de-067f-402b-8589-6ecb6cb54011', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-06-05 11:00:00', '2026-06-05 12:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('5ad46af6-1d7f-4ff7-9e0f-cbb63bf15deb', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-03-10 17:00:00', '2026-03-10 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('06004544-9017-45d8-befb-aae3ee2ddf1f', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-04-16 17:00:00', '2026-04-16 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('48eba622-9501-4644-8e72-defec6a514be', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-04-29 14:00:00', '2026-04-29 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('7976fc8a-65cd-4d06-b954-7a15e4c6e120', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-06-09 16:00:00', '2026-06-09 17:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('52a6682f-f35c-4a6e-aa4f-15d2e4ae3ba7', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-06-18 11:00:00', '2026-06-18 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('ab8115ec-69bf-462f-8424-5fffaf1e2a3b', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-04-09 09:00:00', '2026-04-09 10:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('4a702611-9a5f-44a4-a461-b64cbc54f2a6', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-04-23 15:00:00', '2026-04-23 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('dce2454e-bc72-4961-b488-ee5871b20888', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '2026-06-09 11:00:00', '2026-06-09 12:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('376b6aec-378c-4e06-9729-57cbace4d9bd', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-02-18 15:00:00', '2026-02-18 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('f6ee920f-26a8-41d2-b2e9-b9ce8db02998', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-03-08 12:00:00', '2026-03-08 13:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('cb5f3734-e424-48e0-863d-29da0f6f5dbd', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-05-29 11:00:00', '2026-05-29 12:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('a3a5c2d1-eabe-4b31-9ca4-7cb3f114867e', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-06-27 14:00:00', '2026-06-27 15:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('c13e1138-7982-42f4-9474-5c02875b9b9f', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-04-24 16:00:00', '2026-04-24 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('afbc23d8-11f7-4717-859f-0a750b912157', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-05-11 17:00:00', '2026-05-11 18:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('c2064e4e-12cd-4cec-bbae-8cf6362f44a6', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-02-17 11:00:00', '2026-02-17 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('92c47e5d-6793-4652-b359-e8f43fa77350', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-05-08 15:00:00', '2026-05-08 16:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('4011f4df-dcde-4d5e-8d27-5cd8c3e986eb', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-06-14 15:00:00', '2026-06-14 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('36aea5a1-9801-4772-890b-ad92b508e136', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-06-16 13:00:00', '2026-06-16 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('b8376567-3aad-4c1b-bbcd-84d5350e3993', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-03-23 12:00:00', '2026-03-23 13:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('567f1433-1f74-46e3-a036-cffbbcea98f8', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-03-10 12:00:00', '2026-03-10 13:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('73e34136-e450-4d9a-9f15-d2e168c64b7f', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-03-13 18:00:00', '2026-03-13 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('89a3c4ef-fc35-469e-9260-c8a833b85d29', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-06-23 12:00:00', '2026-06-23 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('3c16cc8d-8cae-4d83-8b7b-4d98d33acbba', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-02-13 16:00:00', '2026-02-13 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('6bbbba6c-0fa3-4a92-9d43-aa9620057165', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', '2026-04-09 09:00:00', '2026-04-09 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('43bcea98-8e80-413d-8b50-cc435a73e40b', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-06-04 12:00:00', '2026-06-04 13:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('94b0d5d5-2745-4216-977e-ba09ec95aad8', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-02-16 11:00:00', '2026-02-16 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('6bd3bee6-99b2-4232-9d90-b9104000604d', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-03-31 17:00:00', '2026-03-31 18:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('41846040-824c-40f9-8197-4166995fbaae', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-04-19 15:00:00', '2026-04-19 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('26a0bed4-a01e-4557-a32a-56baaf07d44a', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-04-07 15:00:00', '2026-04-07 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('977f8136-1f42-4531-a0cb-8b53daff4890', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-07-01 15:00:00', '2026-07-01 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('c10dc9e6-2fdb-4211-a031-d2c90c104eb6', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-02-18 12:00:00', '2026-02-18 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('d312bc31-dca0-464f-a960-70494e97bfa6', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-03-19 10:00:00', '2026-03-19 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('ec3cad52-5bbf-4219-af1e-512943baa9c4', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-02-13 17:00:00', '2026-02-13 18:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('9230d358-877d-41e4-a1be-ed6e9a0e1a7b', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-04-15 11:00:00', '2026-04-15 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('a5f3b153-19ed-4c50-882a-8fb56077c732', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-02-25 17:00:00', '2026-02-25 18:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('2fe9d23b-77b9-4ef6-860d-155b73aef119', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-04-21 16:00:00', '2026-04-21 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('c93b0a2d-0b5c-4e62-9e1a-6f665c69ff8c', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-02-14 17:00:00', '2026-02-14 18:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('69994be4-605b-4cba-996e-d8e12cb6d006', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-04-09 16:00:00', '2026-04-09 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('3dbe73fd-0c91-4f08-a580-94827faa684b', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-04-01 11:00:00', '2026-04-01 12:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('ed56f44d-b9ac-48f0-bce6-b1c8406f14ba', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', '2026-05-13 17:00:00', '2026-05-13 18:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('a969fa92-4b5c-46f4-bf39-a7dae578c4b9', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-03-15 15:00:00', '2026-03-15 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('fce2f784-1ad3-454e-a3c4-48226e819e0b', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-04-24 10:00:00', '2026-04-24 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('2263ec44-6db6-4cc6-9283-a2444e862b68', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-03-12 15:00:00', '2026-03-12 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('4037973d-e8fa-47a7-a516-839b9fead88f', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-06-16 18:00:00', '2026-06-16 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('3501e5b4-a0ba-4a29-80fb-d25f5521b816', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-04-01 10:00:00', '2026-04-01 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('6d665fab-65b6-4b24-ae91-d083425a96c3', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-04-12 09:00:00', '2026-04-12 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('60137c1d-8f8b-4260-b4de-b69604c03399', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-03-24 09:00:00', '2026-03-24 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('1eaac23b-15b3-45cc-b627-5322461bc2fb', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-05-03 10:00:00', '2026-05-03 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('278456ee-e966-4137-8abe-eface38027ba', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-03-22 16:00:00', '2026-03-22 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('6c078a54-4e92-4368-a644-d45204742145', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-03-18 12:00:00', '2026-03-18 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('6a875c45-e62f-4f1b-a4a5-de9e35b85ca4', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-05-08 12:00:00', '2026-05-08 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('d0d4f085-fa46-4c38-aa14-31792326aeb9', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-05-10 14:00:00', '2026-05-10 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('33b7e4ef-d043-4a74-ad6c-18f37bcc4ae3', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-04-10 13:00:00', '2026-04-10 14:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('eeba7937-a6cc-4801-b1da-8d7ef7a67c2f', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-06-26 18:00:00', '2026-06-26 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('17243db7-c67b-4e8f-a453-8c6ee8270329', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', '2026-03-24 13:00:00', '2026-03-24 14:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('858633a6-f414-4d0f-bd0f-eaa97240ed00', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-04-19 13:00:00', '2026-04-19 14:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('dbc82ee0-bb95-4550-96b4-65595af79895', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-04-20 14:00:00', '2026-04-20 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('236e4580-6018-448a-944f-bab6463ff263', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-03-24 09:00:00', '2026-03-24 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('39e416b8-f0c9-4573-89f9-840ace48ce82', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-04-23 12:00:00', '2026-04-23 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('028ecb6d-4011-4841-81a0-4c4aef76c370', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-04-28 13:00:00', '2026-04-28 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('eaaedb64-aca7-479f-996e-0ccf90be8c4a', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-05-17 14:00:00', '2026-05-17 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('9f224ff2-5a70-4996-b547-946f2516c009', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-06-03 13:00:00', '2026-06-03 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('b5328d6b-3d5b-4e82-b5ce-23d4f1395c2a', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-03-15 10:00:00', '2026-03-15 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('8d79e771-e155-41b1-93c1-b1fd6fd1340b', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-06-07 17:00:00', '2026-06-07 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('143731f4-fa3b-4f58-9306-b8479f0b77c4', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-07-01 13:00:00', '2026-07-01 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('cb254d93-5b01-4885-b2f9-40b1bf586a70', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-06-02 13:00:00', '2026-06-02 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('f924509f-d6a5-4fd9-9c63-a95484818663', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-03-11 12:00:00', '2026-03-11 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('75240de9-e5eb-4e34-a3a5-d6ad9111e6bc', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-02-24 18:00:00', '2026-02-24 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('f04f3148-fc65-4b62-9360-9c624c6fc825', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-04-23 16:00:00', '2026-04-23 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('b12343e7-fb8e-4794-be09-d26d88ac1286', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '2026-02-17 13:00:00', '2026-02-17 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('38b41f17-e220-4bc6-bbf0-306b355a862a', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-06-04 12:00:00', '2026-06-04 13:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('ba27a1bc-e8c9-4bae-a51a-acf15989f04b', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-03-08 18:00:00', '2026-03-08 19:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('1f98c692-2459-42a0-a59d-9ec927a90d0b', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-05-06 15:00:00', '2026-05-06 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('18c346d9-b4df-4d57-9c5c-980adddb2809', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-03-04 09:00:00', '2026-03-04 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('c6579913-0bb6-448a-abde-48831ff59afb', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-05-01 11:00:00', '2026-05-01 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('3837a023-8a05-4931-b4d1-738300658bf5', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-05-09 11:00:00', '2026-05-09 12:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('71038725-3e1e-4f34-a2c6-c4bc7bd8b829', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-04-05 11:00:00', '2026-04-05 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('cc9a1943-16ef-4df8-8d0f-57e6ead39075', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-04-21 17:00:00', '2026-04-21 18:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('1035808f-6354-44fd-a5eb-ab3dd42464bd', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-03-10 10:00:00', '2026-03-10 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('dfe312f3-4037-4a31-97af-ddbc5e6e05a0', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-05-21 11:00:00', '2026-05-21 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('bb08ad65-f327-4494-a197-1f2b4e9c6f8c', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-05-08 16:00:00', '2026-05-08 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('18373946-aa9a-4b66-a7e1-fc5a96e877fb', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-04-03 16:00:00', '2026-04-03 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('ea5310c7-b9cf-4175-abf3-4e275d5c80bb', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-06-02 13:00:00', '2026-06-02 14:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('a5259614-f3d1-4a06-b35e-1019fc7268cc', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-07-01 16:00:00', '2026-07-01 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('b7a48b3c-b077-4a3b-984e-b82a15ba43a2', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-04-07 11:00:00', '2026-04-07 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('51b7eab8-821a-4a25-b580-7d288ada7f30', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-05-29 17:00:00', '2026-05-29 18:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('fc0e0ca7-4aeb-4e6f-b76c-686826a4e8a5', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '2026-06-08 18:00:00', '2026-06-08 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('ca3144a3-df9b-4238-ba73-1a00398ee8f1', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-05-25 14:00:00', '2026-05-25 15:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('249c7375-871f-4735-ae10-136e239c73da', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-02-13 09:00:00', '2026-02-13 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('b2b47948-bb51-443f-8535-b95078c6f573', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-04-06 12:00:00', '2026-04-06 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('fac0e4ac-de68-419d-a7ed-dd14750804ad', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-02-22 16:00:00', '2026-02-22 17:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('a7f14c67-2e08-4b75-b6c3-ec07786f8dd1', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-05-05 10:00:00', '2026-05-05 11:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('72968f06-c287-4cb8-8694-f2b9b097d1af', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-04-26 14:00:00', '2026-04-26 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('1222004b-77c2-4a42-b638-00979a7fc8c8', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-03-16 15:00:00', '2026-03-16 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('39e09023-df72-463d-b252-d60ead109a79', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-03-17 18:00:00', '2026-03-17 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('7648caff-9695-44f0-88ac-992a3cbde9c0', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-04-12 16:00:00', '2026-04-12 17:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('88dd08be-a5e6-4ee5-89a6-4cec6636aafa', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-04-20 15:00:00', '2026-04-20 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('1bfd44b4-9952-4a13-9634-346695ec528f', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-02-10 15:00:00', '2026-02-10 16:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('3f1ade43-3b22-4792-910f-a652fd036254', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-06-10 10:00:00', '2026-06-10 11:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('38638880-4f01-49e3-a0f0-c01dbba2d9ba', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-05-21 18:00:00', '2026-05-21 19:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('0778fad2-ce7d-40e1-ab0e-c0d241527cd6', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-05-24 11:00:00', '2026-05-24 12:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('3d84809f-42a3-4727-8ec8-905a0a46e9df', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-06-18 13:00:00', '2026-06-18 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('15af4025-7146-407b-ae4f-06f60cc73c60', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-03-23 18:00:00', '2026-03-23 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('15972bf1-bebf-4abc-b84e-a1958828dc2a', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-05-22 15:00:00', '2026-05-22 16:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('372a847e-5883-426f-807e-866d66a65071', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-06-18 13:00:00', '2026-06-18 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('6f5b4880-2dc2-4c88-affe-9d9c0c1208d0', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2026-05-07 18:00:00', '2026-05-07 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('d90f682c-7683-4d3e-bbba-b94f20eaae2a', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-06-20 11:00:00', '2026-06-20 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('ddaa0c3f-6b11-4a89-8791-3b0f8f3146d4', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-03-12 09:00:00', '2026-03-12 10:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('f322bb3d-258e-41ef-82a3-8ce473cb8cc4', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-04-25 10:00:00', '2026-04-25 11:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('fd3fc250-c816-448d-b27e-f8c86fd34f71', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-06-12 11:00:00', '2026-06-12 12:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('2baa8f94-2e44-487f-b1b6-b53415d0d08b', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-04-08 18:00:00', '2026-04-08 19:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('71f7dfbd-25f7-4786-9fcb-bfe47c134e5f', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-03-06 14:00:00', '2026-03-06 15:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('a83ebc78-4ff6-4954-8081-324584b9d466', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-05-11 13:00:00', '2026-05-11 14:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('7b6d2ffd-57d6-4dfe-8cfd-6bccdf6253ef', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-06-10 14:00:00', '2026-06-10 15:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('2c50fd85-361b-4745-8a8a-dbb3107d079d', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-04-03 12:00:00', '2026-04-03 13:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('ca419dfd-a23a-472a-a6e0-e962a19e2d78', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-06-28 11:00:00', '2026-06-28 12:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('ceca616d-f5b2-4136-a292-edf954c73ff2', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-05-11 09:00:00', '2026-05-11 10:00:00', 'забронирован');
+INSERT INTO public.availability_slots VALUES ('1c1ea002-32d8-4258-bf30-e2b4b3988eea', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-04-02 11:00:00', '2026-04-02 12:00:00', 'недоступен');
+INSERT INTO public.availability_slots VALUES ('3067e536-ea6f-434a-bab0-86ac7247d6d3', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-06-25 12:00:00', '2026-06-25 13:00:00', 'свободен');
+INSERT INTO public.availability_slots VALUES ('8ccd16bd-6aba-4b63-b381-12949cf0838d', '09697d5c-94af-460c-a1bb-de10bc92f737', '2026-03-17 16:00:00', '2026-03-17 17:00:00', 'недоступен');
 
 
 --
--- TOC entry 4991 (class 0 OID 24770)
--- Dependencies: 217
+-- TOC entry 5007 (class 0 OID 24971)
+-- Dependencies: 218
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.categories VALUES ('6777ef7c-3af1-4264-8ed7-f22951191744', 'Маркетинг');
-INSERT INTO public.categories VALUES ('a7e9fadf-3921-466b-8bda-b68c904f855a', 'Финансы');
-INSERT INTO public.categories VALUES ('132651b5-507d-41b0-b5b6-0e8cfca64368', 'Логистика');
-INSERT INTO public.categories VALUES ('7f89048c-c357-4f73-89f4-bc0136aa56f1', 'IT и Разработка');
-INSERT INTO public.categories VALUES ('f8b6dcd4-b85a-470d-9cbb-5387a0ce9d0a', 'Менеджмент');
-INSERT INTO public.categories VALUES ('a4257156-4c00-456b-bd0b-6af4aabffdd2', 'Дизайн');
-INSERT INTO public.categories VALUES ('632f2903-c1a9-4cc8-aef7-9e7012348677', 'Юриспруденция');
-INSERT INTO public.categories VALUES ('52dddffe-6633-45c8-8eb9-49dc8143c6ed', 'HR');
+INSERT INTO public.categories VALUES ('603cc426-250e-4dce-ba28-5fc6c575363a', 'Маркетинг');
+INSERT INTO public.categories VALUES ('b288d33d-10e4-4185-9e90-a9251f14d584', 'Финансы');
+INSERT INTO public.categories VALUES ('0bc40aae-f266-4c5f-af6a-3127f26c7257', 'Логистика');
+INSERT INTO public.categories VALUES ('2971d7fd-2f27-4e7a-8b8d-2dbf8bf8c3d8', 'IT и Разработка');
+INSERT INTO public.categories VALUES ('c6988c7c-3d75-4631-a4d8-b721558b3cf1', 'Менеджмент');
+INSERT INTO public.categories VALUES ('7a45023d-107d-4c63-8aeb-173fbf9e1244', 'Дизайн');
+INSERT INTO public.categories VALUES ('76fecc11-c995-420a-a666-ba17ea0e30ff', 'Юриспруденция');
+INSERT INTO public.categories VALUES ('298f0067-0647-45e9-a10e-27ff78711092', 'HR');
 
 
 --
--- TOC entry 4992 (class 0 OID 24774)
--- Dependencies: 218
+-- TOC entry 5015 (class 0 OID 25093)
+-- Dependencies: 226
 -- Data for Name: course_reviews; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.course_reviews VALUES ('f884dc2f-024f-423a-99c1-38182216f011', 5, 'Спасибо, всё четко и по делу.', '2024-12-24', '34584fe4-0fe8-4f7f-ac1c-c0117cfd13b8');
-INSERT INTO public.course_reviews VALUES ('bd00dafe-2bbe-436a-92e3-568d6df8ffd0', 4, 'Лучшая инвестиция в мой бизнес за этот год!', '2025-04-27', '0ffe63f2-7c11-4d05-828e-b2691803a858');
-INSERT INTO public.course_reviews VALUES ('35ead291-2ab7-44cb-aaf2-d8a7a5948197', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-02-20', 'a5f6fb60-1f01-48a0-8aec-01ba08ecec97');
-INSERT INTO public.course_reviews VALUES ('3fa253a1-07cd-4ff7-91b0-f6a64c15deac', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2026-02-21', '3e9cd510-3253-4374-9e33-b1b7013c1359');
-INSERT INTO public.course_reviews VALUES ('a0b8afc5-35db-4226-93e9-c09f40e87a4d', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2026-03-15', '72704e82-9b0d-46ff-ac3a-cfab194fe7ac');
-INSERT INTO public.course_reviews VALUES ('cc0d41bb-ced8-46e9-91d0-b860a2e9c821', 5, 'Специалист — профессионал своего дела, рекомендую.', '2026-01-20', 'b5e340ce-0b84-4ca9-9ff7-ff5af704921d');
-INSERT INTO public.course_reviews VALUES ('3c9cc901-b521-4dfd-82cd-eb58c88a22f9', 2, 'Много воды, хотелось бы больше практики.', '2025-11-25', 'ef1bfd64-da91-4092-8c44-15e179d03c6c');
-INSERT INTO public.course_reviews VALUES ('4b31e9ad-7524-4cbd-8c66-392f5aad10a5', 2, 'Много воды, хотелось бы больше практики.', '2024-08-24', '22d5a70e-2130-4e9c-ae2a-3d7a05e691ff');
-INSERT INTO public.course_reviews VALUES ('7a937183-5c73-40d9-8443-c1d9558d5161', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2026-05-01', 'dafeb51e-b0e1-4b76-8ac0-3bdfa2132fac');
-INSERT INTO public.course_reviews VALUES ('39e38002-09fc-434d-83cd-ad3b6ee47be5', 3, 'Материал хороший, но подача немного сухая.', '2026-04-11', 'a11a5926-f58d-487a-8a90-db6dec97e127');
-INSERT INTO public.course_reviews VALUES ('92c25333-376b-42bd-b9c1-aaaf68e40d24', 3, 'Цена полностью оправдывает качество.', '2026-04-11', '9c3d13e2-7518-49e3-872a-b2349d66b8e1');
-INSERT INTO public.course_reviews VALUES ('b07c5802-ddb3-4b77-b145-0f5e5ca2dd3e', 1, 'Зря потратил время и деньги.', '2025-09-04', '9143101a-794b-4297-81ec-4142a70bb147');
-INSERT INTO public.course_reviews VALUES ('c1e8f2e8-52d6-48db-9cd1-2226508c0f90', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2026-01-01', '9e0b9852-d5e0-4a2d-b97a-5d0e05a1458e');
-INSERT INTO public.course_reviews VALUES ('dac62ab6-a347-4f9c-8b8b-d1bc8fbb1359', 2, 'Зря потратил время и деньги.', '2025-10-02', 'dd1f5ffe-94cc-4226-a106-0ccf834298ba');
-INSERT INTO public.course_reviews VALUES ('a8f0f538-661b-4e0e-bd90-83f3721dabc7', 1, 'Зря потратил время и деньги.', '2026-03-16', '0c00eafe-45f6-40de-b86b-e650d1f020c2');
-INSERT INTO public.course_reviews VALUES ('cba38477-c156-42a6-9876-415c2357eae4', 5, 'Лучшая инвестиция в мой бизнес за этот год!', '2025-08-19', 'a1edbb67-2968-460e-956d-9c7090869cd8');
-INSERT INTO public.course_reviews VALUES ('a8caaea3-3301-4b5f-af68-f44c5aaf8282', 2, 'Не узнал ничего нового, всё есть в открытом доступе.', '2026-04-15', 'f02708fc-9659-418f-85b3-288c338f7d68');
-INSERT INTO public.course_reviews VALUES ('7f7d76a0-0e09-4b0f-8136-4297bdfee19b', 4, 'Отличный материал, очень помогло!', '2026-04-11', '561689ce-258e-41d4-83d4-7a58776adb0b');
-INSERT INTO public.course_reviews VALUES ('9ff35a1f-f3fe-4c67-b24c-7242dbb86dc7', 3, 'Цена полностью оправдывает качество.', '2026-03-16', 'b5c64190-e7c5-479f-a413-19aa1f19e8bb');
-INSERT INTO public.course_reviews VALUES ('11bec8bd-90a8-4bc1-9aa8-bc029005f331', 3, 'Цена полностью оправдывает качество.', '2026-03-18', 'e5a867a2-b4ec-4207-8695-aeb47d908d9e');
-INSERT INTO public.course_reviews VALUES ('d462beb4-9e2e-424f-9bee-75e1c2b5470d', 2, 'Зря потратил время и деньги.', '2025-12-17', 'f82f10e7-5207-436b-956e-bd2fa6caeb08');
-INSERT INTO public.course_reviews VALUES ('ce0fe61c-c591-4368-b46e-247deda96d45', 5, 'Специалист — профессионал своего дела, рекомендую.', '2026-04-05', '446028a9-0792-4e3a-8d7a-65cac06f137d');
-INSERT INTO public.course_reviews VALUES ('a55a81aa-1098-43f2-9c59-f8ea073b0821', 5, 'Спасибо, всё четко и по делу.', '2026-04-12', '6ac891be-ea9b-4af8-affd-64acf9a82f8d');
-INSERT INTO public.course_reviews VALUES ('d7324b09-e8e6-4536-81e3-43e30f31a06d', 3, 'Цена полностью оправдывает качество.', '2026-02-02', '368acc1c-67c5-41bf-b544-cf859748694d');
-INSERT INTO public.course_reviews VALUES ('2af73e50-e476-4cb2-ade3-1d6393c95837', 1, 'Зря потратил время и деньги.', '2025-08-09', '0de87fb1-b888-41c2-b20a-469e73d8e587');
-INSERT INTO public.course_reviews VALUES ('e782a3ce-0dd1-45b0-af3a-66dec2ace7a2', 5, 'Лучшая инвестиция в мой бизнес за этот год!', '2026-01-25', '7be4277a-b2c8-4209-9f90-c2c42bdb8677');
-INSERT INTO public.course_reviews VALUES ('e1069a04-b569-44d2-9889-293c23b38c67', 2, 'Много воды, хотелось бы больше практики.', '2026-04-17', '89f4cb9a-3a92-4528-b73c-3781f7d82f68');
-INSERT INTO public.course_reviews VALUES ('c4f4acfc-66be-4424-90e7-ada6c1ffd38d', 2, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-04-03', '86b8c6a8-413d-433e-92e4-6ed67401e015');
-INSERT INTO public.course_reviews VALUES ('13ba229d-ad5a-491f-ad9e-b20e604fdf78', 5, 'Лучшая инвестиция в мой бизнес за этот год!', '2025-05-12', '20c74f20-48bb-400a-b4e5-0f0bb92f3f24');
-INSERT INTO public.course_reviews VALUES ('81e7e4ac-529d-40e8-8bd0-caeaf1402327', 4, 'Спасибо, всё четко и по делу.', '2026-02-27', 'eb4a5137-9a19-4eb6-bca3-62cb20e06e69');
-INSERT INTO public.course_reviews VALUES ('1eb7638f-2192-4929-beae-5cffa2e259de', 4, 'Спасибо, всё четко и по делу.', '2025-12-10', '664388db-0765-4423-b8c4-b0826328dee7');
-INSERT INTO public.course_reviews VALUES ('44fef860-470d-4cb5-b9b8-0a3cc4c77f29', 5, 'Спасибо, всё четко и по делу.', '2025-11-21', '2c89fbc4-1339-4af5-ab7e-5a8e80567308');
-INSERT INTO public.course_reviews VALUES ('36435d43-bc22-45d9-9ae1-3b132c0fe007', 4, 'Отличный материал, очень помогло!', '2026-04-18', '25da4773-91c0-40ca-8504-c8dbb32e2582');
-INSERT INTO public.course_reviews VALUES ('1d84cfc9-d230-4e7b-9aa5-5166a1400847', 5, 'Спасибо, всё четко и по делу.', '2026-03-24', '3bd60fc7-39ad-4c24-a5b9-080c8f139ee2');
-INSERT INTO public.course_reviews VALUES ('d21f2702-fa6f-4420-8e77-daf399eb93e9', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2026-02-02', 'a43c1611-e2cd-476c-95b2-45c752871002');
-INSERT INTO public.course_reviews VALUES ('1ed54b7d-dde6-465a-9bd6-711509130ebe', 1, 'Зря потратил время и деньги.', '2025-10-02', '489b7196-a400-47a7-8b6f-50a95064241c');
-INSERT INTO public.course_reviews VALUES ('a44c4713-1ff0-41ed-99b8-dce7a9411ec5', 2, 'Много воды, хотелось бы больше практики.', '2026-03-30', '8ea4c5b7-f7af-40c9-8a43-88bde3ab341a');
-INSERT INTO public.course_reviews VALUES ('6cda2af1-a155-4116-9192-ed54db54e29f', 3, 'Цена полностью оправдывает качество.', '2026-03-30', '03bc9fb0-1e3a-48db-839d-2e0ba096adab');
-INSERT INTO public.course_reviews VALUES ('7d86fc01-b6f9-4f7f-97ad-2685073c398d', 3, 'Цена полностью оправдывает качество.', '2026-04-01', 'b98285b9-f47c-4c14-86d8-d0a3360da09c');
-INSERT INTO public.course_reviews VALUES ('acf0dba3-2647-4dce-9317-3bba829bbeea', 2, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-08-13', 'd3d3ba0f-46f6-4220-8525-c7c0528c4d0a');
+INSERT INTO public.course_reviews VALUES ('76a8ed3f-5844-42f6-a96c-27ce2925ffd6', '85ced628-d46e-416e-88ee-a71d2f6c74f2', 1, 'Много воды, хотелось бы больше практики.', '2026-05-06');
+INSERT INTO public.course_reviews VALUES ('d742df09-684a-4d51-a6da-03aecc479334', 'b5e87f77-5540-4bfa-8f20-d3428827cba6', 3, 'Материал хороший, но подача немного сухая.', '2026-04-16');
+INSERT INTO public.course_reviews VALUES ('416b55c3-89fd-44a2-af3b-a5d3cd844e71', '3f6787c7-5a5d-4ae0-81d1-6c8f9d333b85', 5, 'Спасибо, всё четко и по делу.', '2026-03-04');
+INSERT INTO public.course_reviews VALUES ('2357d6ae-a9f7-4d8b-88ba-1498a2c861e5', '4d0401f5-de03-437f-b8ce-6aa6c73e40e2', 5, 'Лучшая инвестиция в мой бизнес!', '2026-04-11');
+INSERT INTO public.course_reviews VALUES ('3a7f5855-dd2d-40b8-abec-4f52e3e7e27e', 'fd6043c9-4920-4fb1-ab2f-f83537c2547d', 3, 'Материал хороший, но подача немного сухая.', '2025-12-06');
+INSERT INTO public.course_reviews VALUES ('6a7f358d-bf79-409a-a9c7-503893eb4b0a', '4de6a1b4-0cca-4b61-a3eb-a1fb4f3c3aaa', 2, 'Много воды, хотелось бы больше практики.', '2026-04-02');
+INSERT INTO public.course_reviews VALUES ('901073db-32d7-42eb-a380-1c96abcc27ca', '5afc479f-e4fe-47ab-93a4-af1e7278adb9', 1, 'Зря потратил время и деньги.', '2025-09-03');
+INSERT INTO public.course_reviews VALUES ('4c608d18-0e3b-4c35-b904-be52d455d5fc', '3322de6f-3fe8-406d-9a16-a5008d364361', 4, 'Лучшая инвестиция в мой бизнес!', '2026-04-30');
+INSERT INTO public.course_reviews VALUES ('e79733ba-9e37-43f1-a6e6-a479c660ab83', 'eff71e10-5a68-4a79-a300-fbbbb261e28a', 1, 'Зря потратил время и деньги.', '2025-06-09');
+INSERT INTO public.course_reviews VALUES ('893ae274-5e89-4486-ada6-25cc11b89f72', '613415c4-eb18-4725-b300-ad062fc83bbc', 2, 'Зря потратил время и деньги.', '2025-12-25');
+INSERT INTO public.course_reviews VALUES ('7c17668a-c54c-4079-885e-d9a92469a530', 'e51d33fa-3727-4da7-a225-b9618366df19', 2, 'Зря потратил время и деньги.', '2025-10-29');
+INSERT INTO public.course_reviews VALUES ('1cf973a4-3db8-483e-b7ef-993c07f64cb9', '90b38d09-713d-4c17-bcb6-e0bc5d1d9680', 1, 'Зря потратил время и деньги.', '2024-12-22');
+INSERT INTO public.course_reviews VALUES ('ad7e7eae-8fbd-482f-92a4-ade5032366cd', 'a8062dee-14a2-4d13-99e2-c49962f0d10c', 1, 'Зря потратил время и деньги.', '2024-12-06');
+INSERT INTO public.course_reviews VALUES ('5e7f7fe9-5793-4fce-b72b-c9a6ad0e09a1', '1aa5c578-e0e9-4519-9b17-a5dd0ac8b238', 5, 'Полный восторг, превзошло все ожидания!', '2025-09-04');
+INSERT INTO public.course_reviews VALUES ('c8a855f6-bbae-4051-b804-555f56f9abd5', '37614b93-a016-467d-bd45-5ccaa54d02ee', 1, 'Зря потратил время и деньги.', '2026-02-24');
+INSERT INTO public.course_reviews VALUES ('84a594f9-7429-4994-9c37-59f3f609460b', '55b55f9d-d068-4144-ad7e-2e68f8320cb3', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-12-14');
+INSERT INTO public.course_reviews VALUES ('92ec5ff5-971e-4d93-92df-ad82767438a9', 'da8a6074-cd03-450b-80aa-2b74a816de01', 2, 'Зря потратил время и деньги.', '2026-01-29');
+INSERT INTO public.course_reviews VALUES ('a86ebeed-f8e7-420b-b391-5834b4170310', '85c08abb-c693-4ba0-9d31-26b59ddf9a99', 1, 'Зря потратил время и деньги.', '2025-07-26');
+INSERT INTO public.course_reviews VALUES ('384c9a86-6e7e-4921-a3ba-b3069b59f8cb', '7ece4690-2efa-4880-9612-8cecdc942aac', 3, 'Цена полностью оправдывает качество.', '2025-11-26');
+INSERT INTO public.course_reviews VALUES ('29484e52-4b5a-46a6-b6c7-d42d70833cf5', '8cdeca98-3659-4de7-b314-48e95893df46', 2, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-12-18');
+INSERT INTO public.course_reviews VALUES ('8e4c0a77-0098-478e-a9dd-add511803bc5', '77ed399a-fe57-4108-b9a8-8701a683bdef', 3, 'Цена полностью оправдывает качество.', '2025-12-29');
+INSERT INTO public.course_reviews VALUES ('da3fb088-b0c5-4706-a395-43c98a2038fc', 'c6a145d9-46da-44c9-849f-71a0cda698ff', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-07-08');
+INSERT INTO public.course_reviews VALUES ('d9696958-14bb-4767-b02a-aaef02d4bda3', '4eccc7d4-39ae-4bf3-acbc-d73bda7c4667', 1, 'Зря потратил время и деньги.', '2024-09-21');
+INSERT INTO public.course_reviews VALUES ('87c3f581-ecaa-497c-8e46-85e746324511', 'eb16013b-5d3c-41b6-98f4-2932e4433fb5', 4, 'Полный восторг, превзошло все ожидания!', '2026-02-03');
+INSERT INTO public.course_reviews VALUES ('ab3f8755-13f5-40bd-9851-84882da280cd', '33cee59c-db75-47ac-8c27-c2321a3f20aa', 4, 'Профессионал своего дела, рекомендую.', '2026-02-22');
+INSERT INTO public.course_reviews VALUES ('9afe7622-58a8-4347-9ef2-cc20dce57a9a', '1bbbcc2d-62ec-4007-a46c-18231123d9c9', 1, 'Много воды, хотелось бы больше практики.', '2025-07-30');
+INSERT INTO public.course_reviews VALUES ('51d5d801-eba1-488e-8a58-cafbb31510e6', 'e2d99d9f-3042-4796-aeba-b0c90a70cbe0', 5, 'Спасибо, всё четко и по делу.', '2025-04-08');
+INSERT INTO public.course_reviews VALUES ('9580b61b-c01a-4516-aa45-7fed5965a670', 'b82e84ee-f3c5-40e3-a4fc-caa5e6365a49', 2, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-04-02');
+INSERT INTO public.course_reviews VALUES ('ec468dc7-23ed-4d89-aa69-8a09263d4166', '7b1d0a27-769c-4fc4-a138-05983a950e41', 4, 'Профессионал своего дела, рекомендую.', '2026-04-16');
+INSERT INTO public.course_reviews VALUES ('690cebbf-aeee-4ad8-98e9-1c13c73d2e17', '7074f20c-2072-423b-a6de-ab6a97c9dcf9', 4, 'Профессионал своего дела, рекомендую.', '2026-04-27');
+INSERT INTO public.course_reviews VALUES ('8f687c42-9771-44d7-8947-6ef8d0a1df38', '3e14a9b3-2531-4761-b52a-982d1e6db334', 3, 'Цена полностью оправдывает качество.', '2026-03-13');
+INSERT INTO public.course_reviews VALUES ('824c28a8-53fe-41fe-8efe-96e6d9711a0b', '46438033-17c0-4bef-b15d-ef0ca2091178', 5, 'Профессионал своего дела, рекомендую.', '2025-02-13');
+INSERT INTO public.course_reviews VALUES ('1e5d1028-5432-4fd2-b896-5e58735b5024', '8fc23ccc-90a8-4fe0-8d6e-cdb57f3daf99', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2025-04-11');
+INSERT INTO public.course_reviews VALUES ('9fabb280-cd49-4534-8f49-01bb228b214f', 'bd4cb567-25f4-4ee0-945e-7767d1afb2b4', 3, 'Цена полностью оправдывает качество.', '2025-07-13');
+INSERT INTO public.course_reviews VALUES ('fbf3d8a2-1380-4d1f-b923-e203aedca76e', 'd7a4006b-ae07-4b54-9a1e-0e259281b044', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2024-12-28');
+INSERT INTO public.course_reviews VALUES ('d566ba30-8977-4def-9474-1e1c55290309', 'ba23a387-3594-444a-a770-d5dcac49f3ef', 4, 'Отличный материал, очень помогло!', '2025-10-28');
+INSERT INTO public.course_reviews VALUES ('ac4d81c1-d013-482b-b54d-a7f06c619c7b', '9482dcbb-2820-4595-8acc-109fbc5c3992', 2, 'Много воды, хотелось бы больше практики.', '2026-04-03');
+INSERT INTO public.course_reviews VALUES ('93cb2418-5eec-4600-a6db-0aae7f6fbeba', '67da5ff2-8982-4c71-a9e6-18fbc598ab4a', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2026-03-14');
+INSERT INTO public.course_reviews VALUES ('c9119a9f-01ae-49fc-a39f-203d5b132da3', '8b2da6ac-8786-476f-afdc-ed35b1bbcc86', 2, 'Много воды, хотелось бы больше практики.', '2026-05-07');
+INSERT INTO public.course_reviews VALUES ('4a05779b-8a9e-4649-949b-e7215da17b24', '6f5bb3c7-2b9d-4f95-aef3-09412bea97d8', 2, 'Зря потратил время и деньги.', '2026-04-30');
+INSERT INTO public.course_reviews VALUES ('080c13b6-7774-4d82-8f9c-21b0b0ce513c', 'e106ceeb-8990-4305-a55c-3068a8ed14ce', 1, 'Зря потратил время и деньги.', '2026-05-05');
 
 
 --
--- TOC entry 4993 (class 0 OID 24782)
--- Dependencies: 219
+-- TOC entry 5013 (class 0 OID 25057)
+-- Dependencies: 224
 -- Data for Name: courses; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.courses VALUES ('3a8fd589-134b-4879-84e7-9ba7a75ceebb', 'Юридическая безопасность бизнеса', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 34917.61, '2025-05-17', NULL, '88d891ed-928c-4a23-a572-6855b60c50b7', 'published');
-INSERT INTO public.courses VALUES ('f1da1b58-c492-46b9-b986-97d2b8a79b3e', 'SMM для бизнеса 2024', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 9959.01, '2026-02-19', NULL, 'bb90ff09-cafb-4403-92a2-07d928d8daa9', 'published');
-INSERT INTO public.courses VALUES ('a8f76da3-cb1d-4c8c-ab4e-4da9ed955a56', 'Excel для финансиста', 'Интенсивный курс для начинающих предпринимателей. Вы узнаете, как правильно считать юнит-экономику, составлять P&L отчеты и не прогореть в первый год.', 8433.97, '2025-07-26', NULL, '86d6b656-583a-4227-9f10-7b763b3f3ea1', 'archived');
-INSERT INTO public.courses VALUES ('bc79b86f-c88a-4d1f-a3b0-26adfb63334f', 'SMM для бизнеса 2024', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов и частых ошибок новичков.', 36321.82, '2025-04-22', NULL, '174f4d28-2b01-4a54-b27a-76a50b600e50', 'published');
-INSERT INTO public.courses VALUES ('8618c102-115b-4f80-b0eb-5f89109d1864', 'Мастер-класс: B2B продажи', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 30118.91, '2025-04-27', NULL, '88d891ed-928c-4a23-a572-6855b60c50b7', 'published');
-INSERT INTO public.courses VALUES ('d69e936a-15b2-4506-ad7b-a103094a743f', 'SMM для бизнеса 2024', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов и частых ошибок новичков.', 30932.79, '2025-08-29', NULL, '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', 'archived');
-INSERT INTO public.courses VALUES ('4c7fc281-d61d-44e6-8407-3f80ef617d13', 'Управление командой в кризис', 'Интенсивный курс для начинающих предпринимателей. Вы узнаете, как правильно считать юнит-экономику, составлять P&L отчеты и не прогореть в первый год.', 25176.34, '2025-11-03', NULL, '6c7c202c-6e67-4771-8e6d-cea923775928', 'published');
-INSERT INTO public.courses VALUES ('a89be45e-197f-4219-8029-bc8d908e27e5', 'Управление командой в кризис', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 43726.23, '2026-01-28', NULL, 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', 'published');
-INSERT INTO public.courses VALUES ('d81d5644-eb25-4405-8cdb-b7783daeae7e', 'Мастер-класс: B2B продажи', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 16341.47, '2025-12-15', NULL, '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', 'published');
-INSERT INTO public.courses VALUES ('9c854e77-244f-4f39-af0d-0ac4365b2bdf', 'Основы фин. грамотности для бизнеса', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 22925.93, '2026-03-16', NULL, '5089dd27-b02f-469d-910c-34dfb52642c2', 'published');
-INSERT INTO public.courses VALUES ('f7fc7b6d-d415-4b3f-a8f4-136268b28e02', 'Мастер-класс: B2B продажи', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 26910.89, '2026-01-16', NULL, 'b3df3dff-3594-4c43-b9da-4b936d7f1282', 'published');
-INSERT INTO public.courses VALUES ('8b3d08dd-b510-400c-ad34-252fec1e29e8', 'Excel для финансиста', 'Интенсивный курс для начинающих предпринимателей. Вы узнаете, как правильно считать юнит-экономику, составлять P&L отчеты и не прогореть в первый год.', 23246.77, '2024-08-06', NULL, 'b407ec89-876f-43ed-ba50-289e55fbd869', 'published');
-INSERT INTO public.courses VALUES ('18eb8272-e0aa-4dbd-beee-ef44e49604e4', 'Excel для финансиста', 'Интенсивный курс для начинающих предпринимателей. Вы узнаете, как правильно считать юнит-экономику, составлять P&L отчеты и не прогореть в первый год.', 29926.37, '2024-07-25', NULL, 'e69deca2-7193-49e0-8e9f-daee0420a875', 'published');
-INSERT INTO public.courses VALUES ('d3070012-3ecb-479f-92f8-5831cc285a3f', 'Основы фин. грамотности для бизнеса', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 5516.31, '2025-10-25', NULL, '582ada26-484e-4377-a94d-2761381c578b', 'published');
-INSERT INTO public.courses VALUES ('7290d0d9-8713-480c-9b06-c5a67ba2a346', 'Тайм-менеджмент руководителя', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов и частых ошибок новичков.', 43145.71, '2025-07-25', NULL, '70b799ac-1620-4271-bc9d-ce54a41c3682', 'published');
-INSERT INTO public.courses VALUES ('a1463c38-87f1-4087-b875-22d81d083f8c', 'SMM для бизнеса 2024', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов и частых ошибок новичков.', 14981.66, '2025-09-29', NULL, 'b3df3dff-3594-4c43-b9da-4b936d7f1282', 'published');
-INSERT INTO public.courses VALUES ('f2e090e4-7489-4797-905a-78ada21207ba', 'Мастер-класс: B2B продажи', 'Интенсивный курс для начинающих предпринимателей. Вы узнаете, как правильно считать юнит-экономику, составлять P&L отчеты и не прогореть в первый год.', 35939.31, '2026-01-28', NULL, 'b3df3dff-3594-4c43-b9da-4b936d7f1282', 'published');
-INSERT INTO public.courses VALUES ('9ae65e9e-9f59-47a5-ae14-90bfadbde12a', 'Основы фин. грамотности для бизнеса', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 45784.21, '2024-07-07', NULL, '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', 'published');
-INSERT INTO public.courses VALUES ('ec8d8bbd-8eb3-4e4c-8841-bf2a6452148e', 'Основы фин. грамотности для бизнеса', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов и частых ошибок новичков.', 10357.87, '2026-01-24', NULL, '86d6b656-583a-4227-9f10-7b763b3f3ea1', 'published');
-INSERT INTO public.courses VALUES ('62f61fe7-d45a-42d8-aa73-8a276ae7abce', 'Юридическая безопасность бизнеса', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 35088.41, '2025-04-14', NULL, 'e69deca2-7193-49e0-8e9f-daee0420a875', 'published');
-INSERT INTO public.courses VALUES ('03e174de-2023-4068-8b4e-42376a5941f2', 'Тайм-менеджмент руководителя', 'Интенсивный курс для начинающих предпринимателей. Вы узнаете, как правильно считать юнит-экономику, составлять P&L отчеты и не прогореть в первый год.', 16475.86, '2025-08-14', NULL, 'bb90ff09-cafb-4403-92a2-07d928d8daa9', 'published');
-INSERT INTO public.courses VALUES ('4a11bc4d-a02d-4380-955f-df330418d5d7', 'Основы фин. грамотности для бизнеса', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 7059.35, '2025-03-24', NULL, '6c7c202c-6e67-4771-8e6d-cea923775928', 'published');
-INSERT INTO public.courses VALUES ('c264d088-f827-4459-8184-3b0cf298d98a', 'Основы фин. грамотности для бизнеса', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов и частых ошибок новичков.', 26510.73, '2025-09-02', NULL, 'e0599544-24eb-416b-b10b-306d34f3f419', 'published');
-INSERT INTO public.courses VALUES ('36123d5d-999b-4edf-baec-b02a9832463a', 'Юридическая безопасность бизнеса', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 11703.01, '2026-03-18', NULL, 'e0599544-24eb-416b-b10b-306d34f3f419', 'published');
-INSERT INTO public.courses VALUES ('8c6f5b84-09f7-4ea2-91cc-9fcfc337e29f', 'Юридическая безопасность бизнеса', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 12257.11, '2025-10-28', NULL, '86d6b656-583a-4227-9f10-7b763b3f3ea1', 'archived');
-INSERT INTO public.courses VALUES ('1a8851a7-3606-4260-b9af-9a9548e0c329', 'Управление командой в кризис', 'Интенсивный курс для начинающих предпринимателей. Вы узнаете, как правильно считать юнит-экономику, составлять P&L отчеты и не прогореть в первый год.', 39414.93, '2024-11-09', NULL, 'e69deca2-7193-49e0-8e9f-daee0420a875', 'published');
-INSERT INTO public.courses VALUES ('5ec4852e-6244-4d67-938f-24350d31d7d8', 'Мастер-класс: B2B продажи', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 16509.23, '2025-06-09', NULL, 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', 'published');
-INSERT INTO public.courses VALUES ('6dbcf88f-503d-4baf-9fcd-f782f24cb26c', 'Основы фин. грамотности для бизнеса', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 34394.88, '2025-09-26', NULL, 'b3df3dff-3594-4c43-b9da-4b936d7f1282', 'published');
-INSERT INTO public.courses VALUES ('119bf936-d0ee-4696-a96e-16564396dc7b', 'Юридическая безопасность бизнеса', 'Практический видеокурс по современным методам продвижения и управления. Только рабочие инструменты без ''воды''. Доступ к материалам навсегда.', 7754.22, '2025-11-02', NULL, '70b799ac-1620-4271-bc9d-ce54a41c3682', 'published');
-INSERT INTO public.courses VALUES ('a33cde47-9fb5-414a-90f0-d83af5ff79a7', 'Управление командой в кризис', 'Интенсивный курс для начинающих предпринимателей. Вы узнаете, как правильно считать юнит-экономику, составлять P&L отчеты и не прогореть в первый год.', 30899.46, '2025-07-17', NULL, 'e0599544-24eb-416b-b10b-306d34f3f419', 'published');
+INSERT INTO public.courses VALUES ('c17c7717-5766-4873-91f2-ff097b60167c', '035c6559-1715-4f72-91a1-9b8ec53abb80', 'Основы фин. грамотности', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 29241.82, '2024-11-20', NULL, 'published');
+INSERT INTO public.courses VALUES ('1b906bc2-ae85-4091-a7e7-22615ebe7c5e', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', 'Мастер-класс: B2B продажи', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 43185.59, '2026-01-06', NULL, 'published');
+INSERT INTO public.courses VALUES ('63eed6eb-74da-4fe8-a7ad-ac01a69bab9c', '035c6559-1715-4f72-91a1-9b8ec53abb80', 'Тайм-менеджмент', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 46759.46, '2024-12-27', NULL, 'published');
+INSERT INTO public.courses VALUES ('2ee9e287-795c-4b62-bbad-70cb4d0ff748', '035c6559-1715-4f72-91a1-9b8ec53abb80', 'Основы фин. грамотности', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 13075.03, '2025-12-09', NULL, 'published');
+INSERT INTO public.courses VALUES ('52a60d7d-9df4-4266-82e2-371213b8c5c0', '2b122c6b-e3d8-4b39-b165-aa8b61834322', 'Excel для финансиста', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 29569.92, '2026-04-10', NULL, 'published');
+INSERT INTO public.courses VALUES ('4496ee09-31dc-43a6-a587-7b2e3d42dad8', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', 'Основы фин. грамотности', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 40038.10, '2025-12-28', NULL, 'published');
+INSERT INTO public.courses VALUES ('59d11679-2a48-4372-a15a-13154cd3557d', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', 'Тайм-менеджмент', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 36051.31, '2026-01-08', NULL, 'published');
+INSERT INTO public.courses VALUES ('502bd0fa-6477-4259-a5a4-fe8da3a4d8c6', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Управление командой', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 43338.38, '2025-03-23', NULL, 'published');
+INSERT INTO public.courses VALUES ('bac90a60-c4fd-4814-adfd-a561386ae7f9', '43326f8a-d949-430c-aea3-735d47979c13', 'Excel для финансиста', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 26611.60, '2025-09-29', NULL, 'archived');
+INSERT INTO public.courses VALUES ('3f8a1462-322e-4aa3-a466-68fa16bdf47a', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Тайм-менеджмент', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 12249.03, '2025-11-12', NULL, 'published');
+INSERT INTO public.courses VALUES ('65d9571a-365b-41a5-b3b7-efc625a01e37', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', 'Мастер-класс: B2B продажи', 'Интенсивный курс для начинающих. Вы узнаете, как правильно считать юнит-экономику и составлять P&L отчеты.', 19177.11, '2025-06-27', NULL, 'published');
+INSERT INTO public.courses VALUES ('ffece5ef-9d37-4a84-93b9-a17a4e4ba2c2', '8bdb45be-5e06-4224-904e-ca10724599f0', 'Мастер-класс: B2B продажи', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 30414.49, '2025-07-01', NULL, 'published');
+INSERT INTO public.courses VALUES ('7a30fcb1-fad3-492c-899f-dc2abb339635', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', 'Управление командой', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 10414.49, '2026-03-19', NULL, 'published');
+INSERT INTO public.courses VALUES ('1c3a0c9c-0c16-43c7-ae3b-b702ded59709', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Мастер-класс: B2B продажи', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 40850.84, '2025-05-12', NULL, 'published');
+INSERT INTO public.courses VALUES ('0909ea3b-f59e-4297-9b33-5b37130bb152', '035c6559-1715-4f72-91a1-9b8ec53abb80', 'Безопасность бизнеса', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 9461.00, '2025-11-29', NULL, 'published');
+INSERT INTO public.courses VALUES ('19bd6c99-2cfd-4986-9986-4935b90c17fa', '8bdb45be-5e06-4224-904e-ca10724599f0', 'Автоматизация склада', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 28127.10, '2025-07-08', NULL, 'published');
+INSERT INTO public.courses VALUES ('940c2c75-ef20-4875-96ff-2241ef5882ba', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', 'SMM для бизнеса 2024', 'Интенсивный курс для начинающих. Вы узнаете, как правильно считать юнит-экономику и составлять P&L отчеты.', 32537.43, '2025-11-08', NULL, 'published');
+INSERT INTO public.courses VALUES ('f49ceefc-95d1-493d-8eb4-e5384641c09c', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', 'SMM для бизнеса 2024', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 13880.19, '2025-10-16', NULL, 'published');
+INSERT INTO public.courses VALUES ('9a65d469-d61c-4059-be28-56d91345973d', '2b122c6b-e3d8-4b39-b165-aa8b61834322', 'Тайм-менеджмент', 'Интенсивный курс для начинающих. Вы узнаете, как правильно считать юнит-экономику и составлять P&L отчеты.', 24596.04, '2026-01-11', NULL, 'published');
+INSERT INTO public.courses VALUES ('bd935bd4-bcc2-4322-a727-deb2ad6262ef', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', 'Мастер-класс: B2B продажи', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 48204.18, '2025-05-19', NULL, 'published');
+INSERT INTO public.courses VALUES ('f3daa59f-3ea2-4cd4-a3f8-c574868d257b', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', 'Мастер-класс: B2B продажи', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 21226.60, '2025-11-29', NULL, 'published');
+INSERT INTO public.courses VALUES ('5b7b495a-0c06-4f90-8635-c6958511d829', '8bdb45be-5e06-4224-904e-ca10724599f0', 'Безопасность бизнеса', 'Интенсивный курс для начинающих. Вы узнаете, как правильно считать юнит-экономику и составлять P&L отчеты.', 49478.95, '2025-06-09', NULL, 'published');
+INSERT INTO public.courses VALUES ('0dcee391-2bc9-4439-8e8b-d7afb7c8e53e', '035c6559-1715-4f72-91a1-9b8ec53abb80', 'Основы фин. грамотности', 'Интенсивный курс для начинающих. Вы узнаете, как правильно считать юнит-экономику и составлять P&L отчеты.', 16360.08, '2025-07-04', NULL, 'published');
+INSERT INTO public.courses VALUES ('46b29ac9-92c1-4d60-a863-789dbdd0b757', '9e2538b1-105a-41e5-93b5-958545f78e43', 'SMM для бизнеса 2024', 'Интенсивный курс для начинающих. Вы узнаете, как правильно считать юнит-экономику и составлять P&L отчеты.', 26300.98, '2026-01-17', NULL, 'published');
+INSERT INTO public.courses VALUES ('d9d4b197-9d22-404a-8f3e-c1ec2a5e91f1', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', 'Тайм-менеджмент', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 34054.51, '2025-12-23', NULL, 'published');
+INSERT INTO public.courses VALUES ('a092b310-c25c-4ff9-9620-a966924916eb', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', 'SMM для бизнеса 2024', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 23291.45, '2025-10-26', NULL, 'published');
+INSERT INTO public.courses VALUES ('7eeec75d-9957-4d36-a8ac-006b9d4ffb39', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', 'Управление командой', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 17206.58, '2025-09-05', NULL, 'published');
+INSERT INTO public.courses VALUES ('eaf11106-bbf1-4b5a-8fc0-8b625ad6254c', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', 'SMM для бизнеса 2024', 'Набор готовых шаблонов и видеоинструкций для самостоятельного внедрения в свой бизнес.', 44066.18, '2026-01-24', NULL, 'published');
+INSERT INTO public.courses VALUES ('2d3829b6-a24c-4d94-8b1b-9a3eb7c3a631', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', 'Управление командой', 'Практический курс по современным методам управления. Только рабочие инструменты. Доступ навсегда.', 24661.14, '2025-06-03', NULL, 'published');
+INSERT INTO public.courses VALUES ('ee1a7c0c-7565-49ba-89ef-1cd66c87123e', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', 'Управление командой', 'Пошаговое руководство: от регистрации ИП до найма первого сотрудника. Разбор реальных кейсов.', 20011.43, '2025-06-14', NULL, 'archived');
 
 
 --
--- TOC entry 4994 (class 0 OID 24789)
--- Dependencies: 220
+-- TOC entry 5014 (class 0 OID 25074)
+-- Dependencies: 225
 -- Data for Name: purchased_courses; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.purchased_courses VALUES ('34584fe4-0fe8-4f7f-ac1c-c0117cfd13b8', '7af5d1fb-0939-4871-9e0c-c3ce1d9673d6', '9ae65e9e-9f59-47a5-ae14-90bfadbde12a', '2024-12-06', '2025-12-06', 'expired');
-INSERT INTO public.purchased_courses VALUES ('f487bab1-df97-4c7f-a9c7-49d4b709bc09', '7af5d1fb-0939-4871-9e0c-c3ce1d9673d6', '6dbcf88f-503d-4baf-9fcd-f782f24cb26c', '2025-09-09', '2026-09-09', 'active');
-INSERT INTO public.purchased_courses VALUES ('ed08dd88-f8f0-4bdc-8787-4d1a3e200bda', '7af5d1fb-0939-4871-9e0c-c3ce1d9673d6', 'c264d088-f827-4459-8184-3b0cf298d98a', '2025-08-11', '2026-08-11', 'active');
-INSERT INTO public.purchased_courses VALUES ('0ffe63f2-7c11-4d05-828e-b2691803a858', 'dcb7e75a-c89f-4b0b-a55f-f93b164652aa', '119bf936-d0ee-4696-a96e-16564396dc7b', '2025-04-14', '2026-04-14', 'expired');
-INSERT INTO public.purchased_courses VALUES ('a5f6fb60-1f01-48a0-8aec-01ba08ecec97', 'dcb7e75a-c89f-4b0b-a55f-f93b164652aa', 'a1463c38-87f1-4087-b875-22d81d083f8c', '2025-02-18', '2026-02-18', 'expired');
-INSERT INTO public.purchased_courses VALUES ('3e9cd510-3253-4374-9e33-b1b7013c1359', 'd5446445-74a8-49e9-9de0-529ecc7793a3', 'f2e090e4-7489-4797-905a-78ada21207ba', '2026-02-12', '2027-02-12', 'active');
-INSERT INTO public.purchased_courses VALUES ('ec9fb320-d6ad-4b66-965f-996c15215717', 'd5446445-74a8-49e9-9de0-529ecc7793a3', 'a1463c38-87f1-4087-b875-22d81d083f8c', '2026-04-10', '2027-04-10', 'active');
-INSERT INTO public.purchased_courses VALUES ('72704e82-9b0d-46ff-ac3a-cfab194fe7ac', 'd5446445-74a8-49e9-9de0-529ecc7793a3', '7290d0d9-8713-480c-9b06-c5a67ba2a346', '2026-02-27', '2027-02-27', 'active');
-INSERT INTO public.purchased_courses VALUES ('b5e340ce-0b84-4ca9-9ff7-ff5af704921d', 'd5446445-74a8-49e9-9de0-529ecc7793a3', '119bf936-d0ee-4696-a96e-16564396dc7b', '2026-01-06', '2027-01-06', 'active');
-INSERT INTO public.purchased_courses VALUES ('ef1bfd64-da91-4092-8c44-15e179d03c6c', '8b0275c9-9acb-4c08-93d0-d39d25b09094', 'a33cde47-9fb5-414a-90f0-d83af5ff79a7', '2025-11-13', '2026-11-13', 'active');
-INSERT INTO public.purchased_courses VALUES ('22d5a70e-2130-4e9c-ae2a-3d7a05e691ff', '8b0275c9-9acb-4c08-93d0-d39d25b09094', '9c854e77-244f-4f39-af0d-0ac4365b2bdf', '2024-08-14', '2025-08-14', 'expired');
-INSERT INTO public.purchased_courses VALUES ('e39928ae-04b9-4781-9802-82063b0c56ed', '8b0275c9-9acb-4c08-93d0-d39d25b09094', '4c7fc281-d61d-44e6-8407-3f80ef617d13', '2025-03-25', '2026-03-25', 'expired');
-INSERT INTO public.purchased_courses VALUES ('dafeb51e-b0e1-4b76-8ac0-3bdfa2132fac', 'f0132695-2dd2-4cc3-b054-555903de6d7d', '4c7fc281-d61d-44e6-8407-3f80ef617d13', '2026-04-24', '2027-04-24', 'active');
-INSERT INTO public.purchased_courses VALUES ('a11a5926-f58d-487a-8a90-db6dec97e127', 'a7a54bc0-d838-4016-8864-8c15cc32b2d9', '9c854e77-244f-4f39-af0d-0ac4365b2bdf', '2026-04-07', '2027-04-07', 'active');
-INSERT INTO public.purchased_courses VALUES ('9c3d13e2-7518-49e3-872a-b2349d66b8e1', 'c470d455-cc38-4c0b-b6d3-1ddaf0695f16', '8c6f5b84-09f7-4ea2-91cc-9fcfc337e29f', '2026-03-29', '2027-03-29', 'active');
-INSERT INTO public.purchased_courses VALUES ('9143101a-794b-4297-81ec-4142a70bb147', 'd28e35fb-58ae-4bbc-b419-b12ebe3118bd', 'd3070012-3ecb-479f-92f8-5831cc285a3f', '2025-08-22', '2026-08-22', 'active');
-INSERT INTO public.purchased_courses VALUES ('b3b48bf5-ebb2-4a0b-b25d-7072f3b1dc6f', '3eac485f-02da-45fc-a87c-bdef8198c18c', 'c264d088-f827-4459-8184-3b0cf298d98a', '2026-01-04', '2027-01-04', 'active');
-INSERT INTO public.purchased_courses VALUES ('cf5d33a5-21ec-497e-b2b5-9b5d40f26d74', '3eac485f-02da-45fc-a87c-bdef8198c18c', '119bf936-d0ee-4696-a96e-16564396dc7b', '2024-12-11', '2025-12-11', 'expired');
-INSERT INTO public.purchased_courses VALUES ('9e0b9852-d5e0-4a2d-b97a-5d0e05a1458e', '5aad6155-d3fe-48f3-be60-ec1037050390', '4c7fc281-d61d-44e6-8407-3f80ef617d13', '2025-12-13', '2026-12-13', 'active');
-INSERT INTO public.purchased_courses VALUES ('80462f67-78fc-4a8a-8608-79c0a142300f', '5aad6155-d3fe-48f3-be60-ec1037050390', '03e174de-2023-4068-8b4e-42376a5941f2', '2025-11-20', '2026-11-20', 'active');
-INSERT INTO public.purchased_courses VALUES ('2b6d165e-3ca9-4719-b157-ccd76684ba8a', 'd760a6ae-9aeb-49b9-b6aa-eec5ffe9531e', '9c854e77-244f-4f39-af0d-0ac4365b2bdf', '2026-01-27', '2027-01-27', 'active');
-INSERT INTO public.purchased_courses VALUES ('22e51a70-d8c9-435a-b196-5ddbb146aa4b', '617e7367-3e5c-4767-9edf-79c90c5ad0ff', '4c7fc281-d61d-44e6-8407-3f80ef617d13', '2025-05-26', '2026-05-26', 'active');
-INSERT INTO public.purchased_courses VALUES ('dd1f5ffe-94cc-4226-a106-0ccf834298ba', 'd77a2d11-6001-415e-858f-c6b482f08ed2', '03e174de-2023-4068-8b4e-42376a5941f2', '2025-09-23', '2026-09-23', 'active');
-INSERT INTO public.purchased_courses VALUES ('0c00eafe-45f6-40de-b86b-e650d1f020c2', 'ec73ed14-18fa-47c4-952b-36011af06896', 'a8f76da3-cb1d-4c8c-ab4e-4da9ed955a56', '2026-03-11', '2027-03-11', 'active');
-INSERT INTO public.purchased_courses VALUES ('a1edbb67-2968-460e-956d-9c7090869cd8', 'ec73ed14-18fa-47c4-952b-36011af06896', 'a33cde47-9fb5-414a-90f0-d83af5ff79a7', '2025-08-02', '2026-08-02', 'active');
-INSERT INTO public.purchased_courses VALUES ('f02708fc-9659-418f-85b3-288c338f7d68', '71543d46-b102-4b40-82aa-2d78c23e9542', '6dbcf88f-503d-4baf-9fcd-f782f24cb26c', '2026-03-29', '2027-03-29', 'active');
-INSERT INTO public.purchased_courses VALUES ('561689ce-258e-41d4-83d4-7a58776adb0b', '71543d46-b102-4b40-82aa-2d78c23e9542', 'ec8d8bbd-8eb3-4e4c-8841-bf2a6452148e', '2026-03-31', '2027-03-31', 'active');
-INSERT INTO public.purchased_courses VALUES ('f8f3f887-db9e-495a-b117-5c402f7940fb', 'ee265a4d-9c7b-46f8-b25b-9d4ac0a5c6df', '8b3d08dd-b510-400c-ad34-252fec1e29e8', '2026-03-09', '2027-03-09', 'active');
-INSERT INTO public.purchased_courses VALUES ('5f49cc00-9ba3-4bbf-b6de-709694a40dfc', 'ee265a4d-9c7b-46f8-b25b-9d4ac0a5c6df', '36123d5d-999b-4edf-baec-b02a9832463a', '2026-05-06', '2027-05-06', 'active');
-INSERT INTO public.purchased_courses VALUES ('b5c64190-e7c5-479f-a413-19aa1f19e8bb', 'db91092a-69aa-46f1-a4c5-69f7be4a9a90', 'c264d088-f827-4459-8184-3b0cf298d98a', '2026-02-25', '2027-02-25', 'active');
-INSERT INTO public.purchased_courses VALUES ('e5a867a2-b4ec-4207-8695-aeb47d908d9e', 'db91092a-69aa-46f1-a4c5-69f7be4a9a90', 'a89be45e-197f-4219-8029-bc8d908e27e5', '2026-03-06', '2027-03-06', 'active');
-INSERT INTO public.purchased_courses VALUES ('f82f10e7-5207-436b-956e-bd2fa6caeb08', 'db91092a-69aa-46f1-a4c5-69f7be4a9a90', 'f2e090e4-7489-4797-905a-78ada21207ba', '2025-12-04', '2026-12-04', 'active');
-INSERT INTO public.purchased_courses VALUES ('39d16751-4bb8-459a-a1af-359078ea4a90', 'ce5ca999-f1eb-4c19-a50a-accb201681bb', '18eb8272-e0aa-4dbd-beee-ef44e49604e4', '2026-04-23', '2027-04-23', 'active');
-INSERT INTO public.purchased_courses VALUES ('5c69a53a-3314-4e22-953b-fbbbb248bab5', '80fa2d37-dda0-4008-a947-32d4b28ff102', '5ec4852e-6244-4d67-938f-24350d31d7d8', '2026-02-08', '2027-02-08', 'active');
-INSERT INTO public.purchased_courses VALUES ('7e419359-03a6-4ae5-b331-5255e5474ac3', '80fa2d37-dda0-4008-a947-32d4b28ff102', 'd81d5644-eb25-4405-8cdb-b7783daeae7e', '2026-04-04', '2027-04-04', 'active');
-INSERT INTO public.purchased_courses VALUES ('446028a9-0792-4e3a-8d7a-65cac06f137d', '2f22b8d4-566e-4615-a4cf-08d80c4f5967', 'c264d088-f827-4459-8184-3b0cf298d98a', '2026-03-18', '2027-03-18', 'active');
-INSERT INTO public.purchased_courses VALUES ('3793ade4-c90d-4d10-8222-90382d4a5ae1', '2f22b8d4-566e-4615-a4cf-08d80c4f5967', 'f1da1b58-c492-46b9-b986-97d2b8a79b3e', '2026-02-28', '2027-02-28', 'active');
-INSERT INTO public.purchased_courses VALUES ('6ac891be-ea9b-4af8-affd-64acf9a82f8d', '2f22b8d4-566e-4615-a4cf-08d80c4f5967', '9ae65e9e-9f59-47a5-ae14-90bfadbde12a', '2026-04-07', '2027-04-07', 'active');
-INSERT INTO public.purchased_courses VALUES ('368acc1c-67c5-41bf-b544-cf859748694d', 'f11f2cd3-d75b-4cef-a055-db2c931885e2', '6dbcf88f-503d-4baf-9fcd-f782f24cb26c', '2026-01-24', '2027-01-24', 'active');
-INSERT INTO public.purchased_courses VALUES ('870ab85c-8f36-4493-9c9a-8a6dce23c9c6', 'f11f2cd3-d75b-4cef-a055-db2c931885e2', '3a8fd589-134b-4879-84e7-9ba7a75ceebb', '2026-04-24', '2027-04-24', 'active');
-INSERT INTO public.purchased_courses VALUES ('0de87fb1-b888-41c2-b20a-469e73d8e587', '79e34960-f2ee-4ca0-a93b-f172d2801a3b', 'ec8d8bbd-8eb3-4e4c-8841-bf2a6452148e', '2025-08-05', '2026-08-05', 'active');
-INSERT INTO public.purchased_courses VALUES ('7d0e4b5f-b891-46fc-bb7a-2533a49136d2', '79e34960-f2ee-4ca0-a93b-f172d2801a3b', '8b3d08dd-b510-400c-ad34-252fec1e29e8', '2025-08-20', '2026-08-20', 'active');
-INSERT INTO public.purchased_courses VALUES ('22ff79ed-95ea-468c-a9ea-5c4cf951116b', '78af36a8-3047-4c4b-88b1-4ae5f1e795ef', '36123d5d-999b-4edf-baec-b02a9832463a', '2026-04-29', '2027-04-29', 'active');
-INSERT INTO public.purchased_courses VALUES ('7be4277a-b2c8-4209-9f90-c2c42bdb8677', '78af36a8-3047-4c4b-88b1-4ae5f1e795ef', '8b3d08dd-b510-400c-ad34-252fec1e29e8', '2026-01-09', '2027-01-09', 'active');
-INSERT INTO public.purchased_courses VALUES ('89f4cb9a-3a92-4528-b73c-3781f7d82f68', 'c557121d-38e8-49dd-8411-3d1d2c53f9fa', '4c7fc281-d61d-44e6-8407-3f80ef617d13', '2026-03-28', '2027-03-28', 'active');
-INSERT INTO public.purchased_courses VALUES ('cfdc884e-d22b-419f-841e-4d8b52596702', 'c557121d-38e8-49dd-8411-3d1d2c53f9fa', '03e174de-2023-4068-8b4e-42376a5941f2', '2026-05-02', '2027-05-02', 'active');
-INSERT INTO public.purchased_courses VALUES ('559a91dd-e5f0-4689-80eb-e115d514fcc9', '14e2e14a-d4ce-4068-90cf-ba3ffbcde32c', 'a89be45e-197f-4219-8029-bc8d908e27e5', '2026-04-25', '2027-04-25', 'active');
-INSERT INTO public.purchased_courses VALUES ('685b8c95-9b4d-4c30-85dc-d58bcd59703e', '14e2e14a-d4ce-4068-90cf-ba3ffbcde32c', '7290d0d9-8713-480c-9b06-c5a67ba2a346', '2026-04-30', '2027-04-30', 'active');
-INSERT INTO public.purchased_courses VALUES ('24cf684b-8e1c-42d5-84eb-c6117327404c', 'a071ef39-68ac-4006-97f5-1dc52317656a', '9ae65e9e-9f59-47a5-ae14-90bfadbde12a', '2025-10-24', '2026-10-24', 'active');
-INSERT INTO public.purchased_courses VALUES ('3f499797-be59-467f-8ed3-d52871f84c7d', '76f89faf-1ae6-4bc5-9a5f-538a211b3335', '62f61fe7-d45a-42d8-aa73-8a276ae7abce', '2025-11-30', '2026-11-30', 'active');
-INSERT INTO public.purchased_courses VALUES ('5769c10f-cf8c-42a3-a815-9755b8a7cf48', '76f89faf-1ae6-4bc5-9a5f-538a211b3335', 'a8f76da3-cb1d-4c8c-ab4e-4da9ed955a56', '2025-11-21', '2026-11-21', 'active');
-INSERT INTO public.purchased_courses VALUES ('ccdf2fb0-126b-4603-bbb2-d1cf92df414c', '76f89faf-1ae6-4bc5-9a5f-538a211b3335', 'f7fc7b6d-d415-4b3f-a8f4-136268b28e02', '2025-09-05', '2026-09-05', 'active');
-INSERT INTO public.purchased_courses VALUES ('86b8c6a8-413d-433e-92e4-6ed67401e015', 'fef3ee6e-48ad-4e55-82d5-755075dc938d', 'f2e090e4-7489-4797-905a-78ada21207ba', '2025-03-14', '2026-03-14', 'expired');
-INSERT INTO public.purchased_courses VALUES ('89319af4-3d5d-4d6f-bc59-10a5b9352699', 'd4e9cfb7-2f50-49c2-b299-92ff1575c801', 'f7fc7b6d-d415-4b3f-a8f4-136268b28e02', '2025-08-03', '2026-08-03', 'active');
-INSERT INTO public.purchased_courses VALUES ('20c74f20-48bb-400a-b4e5-0f0bb92f3f24', 'd4e9cfb7-2f50-49c2-b299-92ff1575c801', '1a8851a7-3606-4260-b9af-9a9548e0c329', '2025-05-06', '2026-05-06', 'expired');
-INSERT INTO public.purchased_courses VALUES ('eb4a5137-9a19-4eb6-bca3-62cb20e06e69', '556e29e7-2d94-43a9-941d-4637653afae6', 'a8f76da3-cb1d-4c8c-ab4e-4da9ed955a56', '2026-02-10', '2027-02-10', 'active');
-INSERT INTO public.purchased_courses VALUES ('a248cb4d-dc54-4978-96a3-d1ff4da17df9', 'b4a7a5a3-2d7f-4c77-81cc-d0084137c654', 'c264d088-f827-4459-8184-3b0cf298d98a', '2025-11-01', '2026-11-01', 'active');
-INSERT INTO public.purchased_courses VALUES ('4303faef-a42b-43fd-90f3-31110eabbc6a', '41694892-efd6-49d5-9965-f64407334fed', '8c6f5b84-09f7-4ea2-91cc-9fcfc337e29f', '2026-04-18', '2027-04-18', 'active');
-INSERT INTO public.purchased_courses VALUES ('af2fc6e3-8e12-41b7-9c54-5a4396aba2d8', '2027739a-ff17-46a0-8a87-263b348bb5ff', '18eb8272-e0aa-4dbd-beee-ef44e49604e4', '2025-07-16', '2026-07-16', 'active');
-INSERT INTO public.purchased_courses VALUES ('26ae524a-f7a0-4a8d-9e4a-d6aee5353afa', '2027739a-ff17-46a0-8a87-263b348bb5ff', '8b3d08dd-b510-400c-ad34-252fec1e29e8', '2025-10-18', '2026-10-18', 'active');
-INSERT INTO public.purchased_courses VALUES ('664388db-0765-4423-b8c4-b0826328dee7', '2027739a-ff17-46a0-8a87-263b348bb5ff', 'bc79b86f-c88a-4d1f-a3b0-26adfb63334f', '2025-12-07', '2026-12-07', 'active');
-INSERT INTO public.purchased_courses VALUES ('2c89fbc4-1339-4af5-ab7e-5a8e80567308', '2c16ebc1-b8f4-4b31-8853-4413c5899d61', '5ec4852e-6244-4d67-938f-24350d31d7d8', '2025-11-07', '2026-11-07', 'active');
-INSERT INTO public.purchased_courses VALUES ('8ef071a8-7eba-4148-a245-1cf8003d9849', '2d4262e5-7171-471e-90ca-d9d4c0ac9afe', 'ec8d8bbd-8eb3-4e4c-8841-bf2a6452148e', '2025-12-08', '2026-12-08', 'active');
-INSERT INTO public.purchased_courses VALUES ('25da4773-91c0-40ca-8504-c8dbb32e2582', '4b8ec2d5-cb86-4b75-80e2-fa876f1d4360', '36123d5d-999b-4edf-baec-b02a9832463a', '2026-04-12', '2027-04-12', 'active');
-INSERT INTO public.purchased_courses VALUES ('3bd60fc7-39ad-4c24-a5b9-080c8f139ee2', '4b8ec2d5-cb86-4b75-80e2-fa876f1d4360', '8c6f5b84-09f7-4ea2-91cc-9fcfc337e29f', '2026-03-19', '2027-03-19', 'active');
-INSERT INTO public.purchased_courses VALUES ('8eeb491d-5126-49ae-8f78-6e5414fb4c00', 'eba28432-e0e8-4e83-be5c-9d5e64b8f776', '1a8851a7-3606-4260-b9af-9a9548e0c329', '2025-11-25', '2026-11-25', 'active');
-INSERT INTO public.purchased_courses VALUES ('ffc6e930-93d9-4a19-acfb-e11510822ebd', 'eba28432-e0e8-4e83-be5c-9d5e64b8f776', 'c264d088-f827-4459-8184-3b0cf298d98a', '2025-12-18', '2026-12-18', 'active');
-INSERT INTO public.purchased_courses VALUES ('a43c1611-e2cd-476c-95b2-45c752871002', 'eba28432-e0e8-4e83-be5c-9d5e64b8f776', '8c6f5b84-09f7-4ea2-91cc-9fcfc337e29f', '2026-01-30', '2027-01-30', 'active');
-INSERT INTO public.purchased_courses VALUES ('489b7196-a400-47a7-8b6f-50a95064241c', '607733fe-e0af-4227-833e-a877633f5bd3', '03e174de-2023-4068-8b4e-42376a5941f2', '2025-09-22', '2026-09-22', 'active');
-INSERT INTO public.purchased_courses VALUES ('7b87ef85-f703-42d0-9496-328581b2c8a8', '58a3b6bf-3bce-4522-a54f-486c75f6c406', 'f1da1b58-c492-46b9-b986-97d2b8a79b3e', '2026-03-15', '2027-03-15', 'active');
-INSERT INTO public.purchased_courses VALUES ('af2295f5-760f-43c0-b1e7-91f0e16ccc53', '58a3b6bf-3bce-4522-a54f-486c75f6c406', '8618c102-115b-4f80-b0eb-5f89109d1864', '2026-02-19', '2027-02-19', 'active');
-INSERT INTO public.purchased_courses VALUES ('d9c7329b-7fb9-4311-8575-32041bff153c', '58a3b6bf-3bce-4522-a54f-486c75f6c406', '8c6f5b84-09f7-4ea2-91cc-9fcfc337e29f', '2026-04-24', '2027-04-24', 'active');
-INSERT INTO public.purchased_courses VALUES ('50178143-d774-414a-8849-096834f4eecb', '9205964d-8372-4563-89d4-b549d3d1ab01', '7290d0d9-8713-480c-9b06-c5a67ba2a346', '2025-10-26', '2026-10-26', 'active');
-INSERT INTO public.purchased_courses VALUES ('525fd934-5cd6-41b9-88ff-f7c11d34cd7b', '87c81a7f-b8b9-4aa7-8c7c-5e252447dc0c', 'a1463c38-87f1-4087-b875-22d81d083f8c', '2025-11-08', '2026-11-08', 'active');
-INSERT INTO public.purchased_courses VALUES ('d7e6a837-730c-4eb8-8f88-d2f65b0ebf41', '295e6eb5-15d9-4d1f-b648-5a1d7d1b15b2', '4c7fc281-d61d-44e6-8407-3f80ef617d13', '2026-04-02', '2027-04-02', 'active');
-INSERT INTO public.purchased_courses VALUES ('8ea4c5b7-f7af-40c9-8a43-88bde3ab341a', '295e6eb5-15d9-4d1f-b648-5a1d7d1b15b2', '119bf936-d0ee-4696-a96e-16564396dc7b', '2026-03-14', '2027-03-14', 'active');
-INSERT INTO public.purchased_courses VALUES ('03bc9fb0-1e3a-48db-839d-2e0ba096adab', '295e6eb5-15d9-4d1f-b648-5a1d7d1b15b2', 'a8f76da3-cb1d-4c8c-ab4e-4da9ed955a56', '2026-03-15', '2027-03-15', 'active');
-INSERT INTO public.purchased_courses VALUES ('b98285b9-f47c-4c14-86d8-d0a3360da09c', '295e6eb5-15d9-4d1f-b648-5a1d7d1b15b2', '8618c102-115b-4f80-b0eb-5f89109d1864', '2026-03-30', '2027-03-30', 'active');
-INSERT INTO public.purchased_courses VALUES ('10e08527-fc9b-46f3-a974-88d5f5076be2', '5614c63e-b164-439a-bfad-ad68b28d05f5', '18eb8272-e0aa-4dbd-beee-ef44e49604e4', '2025-04-13', '2026-04-13', 'expired');
-INSERT INTO public.purchased_courses VALUES ('d3d3ba0f-46f6-4220-8525-c7c0528c4d0a', '5614c63e-b164-439a-bfad-ad68b28d05f5', 'a8f76da3-cb1d-4c8c-ab4e-4da9ed955a56', '2025-08-01', '2026-08-01', 'active');
-INSERT INTO public.purchased_courses VALUES ('0cefa603-952a-433d-b0c0-1a8e90b4b177', '29199910-4a41-4c96-98af-484385e37f24', '8b3d08dd-b510-400c-ad34-252fec1e29e8', '2025-01-26', '2026-01-26', 'expired');
-INSERT INTO public.purchased_courses VALUES ('6193d8b8-8b2f-4c74-8ad7-d6d42c414787', '29199910-4a41-4c96-98af-484385e37f24', '03e174de-2023-4068-8b4e-42376a5941f2', '2026-05-01', '2027-05-01', 'active');
+INSERT INTO public.purchased_courses VALUES ('85ced628-d46e-416e-88ee-a71d2f6c74f2', '8a1743d9-d8b2-419e-9fa2-9d3190e8562d', 'a092b310-c25c-4ff9-9620-a966924916eb', '2026-05-03', '2027-05-03', 'active');
+INSERT INTO public.purchased_courses VALUES ('39b4e763-3004-429e-b0d6-a3bd6841873b', 'dffd8773-f4f0-43a0-ab4d-b759a9f421b5', 'c17c7717-5766-4873-91f2-ff097b60167c', '2026-01-13', '2027-01-13', 'active');
+INSERT INTO public.purchased_courses VALUES ('4cf4d0da-3f72-4915-8c30-a25151653384', 'dffd8773-f4f0-43a0-ab4d-b759a9f421b5', '2d3829b6-a24c-4d94-8b1b-9a3eb7c3a631', '2025-11-07', '2026-11-07', 'active');
+INSERT INTO public.purchased_courses VALUES ('4e6b641a-f7c3-46e0-99cc-0dd44bd22e7d', '9014c974-8569-4f65-a9fe-38cac12e5f34', '0dcee391-2bc9-4439-8e8b-d7afb7c8e53e', '2026-03-23', '2027-03-23', 'active');
+INSERT INTO public.purchased_courses VALUES ('71cf7236-a150-4882-b74d-f98062f53ba9', '9014c974-8569-4f65-a9fe-38cac12e5f34', '502bd0fa-6477-4259-a5a4-fe8da3a4d8c6', '2025-08-24', '2026-08-24', 'active');
+INSERT INTO public.purchased_courses VALUES ('3292895c-13b9-468f-876b-c6aa8025bff6', '29525e9d-0979-4b60-aa79-81a6388253d2', 'ee1a7c0c-7565-49ba-89ef-1cd66c87123e', '2025-09-20', '2026-09-20', 'active');
+INSERT INTO public.purchased_courses VALUES ('b5e87f77-5540-4bfa-8f20-d3428827cba6', '29525e9d-0979-4b60-aa79-81a6388253d2', 'd9d4b197-9d22-404a-8f3e-c1ec2a5e91f1', '2026-04-06', '2027-04-06', 'active');
+INSERT INTO public.purchased_courses VALUES ('fa22f99d-2dd6-47d5-9add-ed591b2b196a', 'e02e7c9e-3a62-4f24-b451-bf4e6a107772', '59d11679-2a48-4372-a15a-13154cd3557d', '2026-02-01', '2027-02-01', 'active');
+INSERT INTO public.purchased_courses VALUES ('3f6787c7-5a5d-4ae0-81d1-6c8f9d333b85', 'e02e7c9e-3a62-4f24-b451-bf4e6a107772', '5b7b495a-0c06-4f90-8635-c6958511d829', '2026-02-17', '2027-02-17', 'active');
+INSERT INTO public.purchased_courses VALUES ('4d0401f5-de03-437f-b8ce-6aa6c73e40e2', 'e02e7c9e-3a62-4f24-b451-bf4e6a107772', '2d3829b6-a24c-4d94-8b1b-9a3eb7c3a631', '2026-04-05', '2027-04-05', 'active');
+INSERT INTO public.purchased_courses VALUES ('fd6043c9-4920-4fb1-ab2f-f83537c2547d', 'd7e2fe70-8cf4-41ce-8bac-252223a8da58', 'a092b310-c25c-4ff9-9620-a966924916eb', '2025-11-19', '2026-11-19', 'active');
+INSERT INTO public.purchased_courses VALUES ('4de6a1b4-0cca-4b61-a3eb-a1fb4f3c3aaa', '27ebd45b-a30e-4187-9a86-8599643dbc39', '9a65d469-d61c-4059-be28-56d91345973d', '2026-03-24', '2027-03-24', 'active');
+INSERT INTO public.purchased_courses VALUES ('5afc479f-e4fe-47ab-93a4-af1e7278adb9', '27ebd45b-a30e-4187-9a86-8599643dbc39', 'f49ceefc-95d1-493d-8eb4-e5384641c09c', '2025-08-26', '2026-08-26', 'active');
+INSERT INTO public.purchased_courses VALUES ('1a98aa1c-4257-4498-8b16-d72b062b3b58', '27ebd45b-a30e-4187-9a86-8599643dbc39', 'f49ceefc-95d1-493d-8eb4-e5384641c09c', '2026-01-21', '2027-01-21', 'active');
+INSERT INTO public.purchased_courses VALUES ('3322de6f-3fe8-406d-9a16-a5008d364361', '1e42b90f-c81b-48cb-84a2-f013166ae6d9', '63eed6eb-74da-4fe8-a7ad-ac01a69bab9c', '2026-04-12', '2027-04-12', 'active');
+INSERT INTO public.purchased_courses VALUES ('eff71e10-5a68-4a79-a300-fbbbb261e28a', '1e42b90f-c81b-48cb-84a2-f013166ae6d9', '63eed6eb-74da-4fe8-a7ad-ac01a69bab9c', '2025-05-25', '2026-05-25', 'active');
+INSERT INTO public.purchased_courses VALUES ('7e080016-1286-4955-a2e3-27b4e5ff6fb9', '764b1b70-3f86-4bf9-b319-d1c54c85fbcd', 'c17c7717-5766-4873-91f2-ff097b60167c', '2025-03-24', '2026-03-24', 'expired');
+INSERT INTO public.purchased_courses VALUES ('613415c4-eb18-4725-b300-ad062fc83bbc', '227aba69-4fb9-462c-ad73-18f5f50eda76', 'a092b310-c25c-4ff9-9620-a966924916eb', '2025-12-11', '2026-12-11', 'active');
+INSERT INTO public.purchased_courses VALUES ('e51d33fa-3727-4da7-a225-b9618366df19', 'cee489f7-4c40-4ae3-9677-c1b06b2a19f8', '1c3a0c9c-0c16-43c7-ae3b-b702ded59709', '2025-10-17', '2026-10-17', 'active');
+INSERT INTO public.purchased_courses VALUES ('5dbb3927-67d4-44d0-90a1-237411e486f0', '6deec448-f858-4f38-adcd-2bc549ac8c94', 'f3daa59f-3ea2-4cd4-a3f8-c574868d257b', '2026-04-23', '2027-04-23', 'active');
+INSERT INTO public.purchased_courses VALUES ('90b38d09-713d-4c17-bcb6-e0bc5d1d9680', '61214456-60d4-40c6-8f3d-8c027c9508ce', '940c2c75-ef20-4875-96ff-2241ef5882ba', '2024-12-15', '2025-12-15', 'expired');
+INSERT INTO public.purchased_courses VALUES ('a8062dee-14a2-4d13-99e2-c49962f0d10c', '5717db47-232f-41f6-88cc-7bb96027de15', '52a60d7d-9df4-4266-82e2-371213b8c5c0', '2024-11-25', '2025-11-25', 'expired');
+INSERT INTO public.purchased_courses VALUES ('1aa5c578-e0e9-4519-9b17-a5dd0ac8b238', '5717db47-232f-41f6-88cc-7bb96027de15', '2d3829b6-a24c-4d94-8b1b-9a3eb7c3a631', '2025-08-16', '2026-08-16', 'active');
+INSERT INTO public.purchased_courses VALUES ('d7b6863b-f52e-4506-8af6-0c72fb93a842', '5717db47-232f-41f6-88cc-7bb96027de15', 'd9d4b197-9d22-404a-8f3e-c1ec2a5e91f1', '2025-11-22', '2026-11-22', 'active');
+INSERT INTO public.purchased_courses VALUES ('37614b93-a016-467d-bd45-5ccaa54d02ee', 'edd62666-5cde-4157-b012-733f6a6fadce', '1b906bc2-ae85-4091-a7e7-22615ebe7c5e', '2026-02-10', '2027-02-10', 'active');
+INSERT INTO public.purchased_courses VALUES ('ce72a77e-b3d1-4c8e-948e-9875215024f2', '8a05a3b4-e0f0-46f4-b84b-9d2873ab4cb4', '502bd0fa-6477-4259-a5a4-fe8da3a4d8c6', '2026-01-17', '2027-01-17', 'active');
+INSERT INTO public.purchased_courses VALUES ('55b55f9d-d068-4144-ad7e-2e68f8320cb3', '8a05a3b4-e0f0-46f4-b84b-9d2873ab4cb4', 'f3daa59f-3ea2-4cd4-a3f8-c574868d257b', '2025-12-04', '2026-12-04', 'active');
+INSERT INTO public.purchased_courses VALUES ('da8a6074-cd03-450b-80aa-2b74a816de01', 'bb4a53e9-3e22-46e1-b20b-10c8847435ad', 'c17c7717-5766-4873-91f2-ff097b60167c', '2026-01-15', '2027-01-15', 'active');
+INSERT INTO public.purchased_courses VALUES ('48fec336-dd0a-4d1c-8251-550f32fa8778', '56c50fa2-ea25-4330-89b3-a5c0c77ec289', '940c2c75-ef20-4875-96ff-2241ef5882ba', '2025-09-27', '2026-09-27', 'active');
+INSERT INTO public.purchased_courses VALUES ('483133f8-ca58-4a76-9c6d-2507974d76bc', '36746652-9b70-40e4-b691-5b60fd28cee0', '4496ee09-31dc-43a6-a587-7b2e3d42dad8', '2026-04-30', '2027-04-30', 'active');
+INSERT INTO public.purchased_courses VALUES ('b4c4b388-aff3-4fc6-b8e1-cbe982fb5f94', '36746652-9b70-40e4-b691-5b60fd28cee0', '65d9571a-365b-41a5-b3b7-efc625a01e37', '2026-04-28', '2027-04-28', 'active');
+INSERT INTO public.purchased_courses VALUES ('230b09c6-ec9c-4180-8872-422c2eeacf74', '36746652-9b70-40e4-b691-5b60fd28cee0', 'f3daa59f-3ea2-4cd4-a3f8-c574868d257b', '2026-04-09', '2027-04-09', 'active');
+INSERT INTO public.purchased_courses VALUES ('85c08abb-c693-4ba0-9d31-26b59ddf9a99', 'dd9e2228-2f05-427b-acb8-421f3860572f', 'f3daa59f-3ea2-4cd4-a3f8-c574868d257b', '2025-07-20', '2026-07-20', 'active');
+INSERT INTO public.purchased_courses VALUES ('7ece4690-2efa-4880-9612-8cecdc942aac', 'dd9e2228-2f05-427b-acb8-421f3860572f', 'eaf11106-bbf1-4b5a-8fc0-8b625ad6254c', '2025-11-06', '2026-11-06', 'active');
+INSERT INTO public.purchased_courses VALUES ('8cdeca98-3659-4de7-b314-48e95893df46', '5a5164e4-57b7-4ff3-889d-7cbee44a010e', '3f8a1462-322e-4aa3-a466-68fa16bdf47a', '2025-12-08', '2026-12-08', 'active');
+INSERT INTO public.purchased_courses VALUES ('b1d04456-960d-4515-afaa-bc572754750a', '69d028ed-807f-4946-be09-d4985c44c241', '1b906bc2-ae85-4091-a7e7-22615ebe7c5e', '2026-04-27', '2027-04-27', 'active');
+INSERT INTO public.purchased_courses VALUES ('2cb288ac-8be1-4fb1-84a6-26065c2152d6', '54e25d8d-dab3-49c4-b863-53621351924a', 'c17c7717-5766-4873-91f2-ff097b60167c', '2025-06-02', '2026-06-02', 'active');
+INSERT INTO public.purchased_courses VALUES ('a5b33be5-8870-4062-9d18-8c73727246fa', '05afcd6a-1ad5-4311-8bf6-7139d634ee48', '59d11679-2a48-4372-a15a-13154cd3557d', '2025-04-02', '2026-04-02', 'expired');
+INSERT INTO public.purchased_courses VALUES ('b94059bc-64a3-4929-8edb-08ac0dafd7cb', '05afcd6a-1ad5-4311-8bf6-7139d634ee48', '0dcee391-2bc9-4439-8e8b-d7afb7c8e53e', '2026-04-23', '2027-04-23', 'active');
+INSERT INTO public.purchased_courses VALUES ('77ed399a-fe57-4108-b9a8-8701a683bdef', '4113404c-81b0-46a9-83ea-89ba7863b0aa', '502bd0fa-6477-4259-a5a4-fe8da3a4d8c6', '2025-12-17', '2026-12-17', 'active');
+INSERT INTO public.purchased_courses VALUES ('c73b2c3d-605a-4296-a920-8adfce5afcdc', '4113404c-81b0-46a9-83ea-89ba7863b0aa', '1c3a0c9c-0c16-43c7-ae3b-b702ded59709', '2026-05-04', '2027-05-04', 'active');
+INSERT INTO public.purchased_courses VALUES ('c6a145d9-46da-44c9-849f-71a0cda698ff', '050ce4dc-e30d-4d5c-b887-1306202c2b3e', '19bd6c99-2cfd-4986-9986-4935b90c17fa', '2025-06-19', '2026-06-19', 'active');
+INSERT INTO public.purchased_courses VALUES ('4eccc7d4-39ae-4bf3-acbc-d73bda7c4667', '04d223ea-6797-49bd-8e05-0e0de94c5563', '63eed6eb-74da-4fe8-a7ad-ac01a69bab9c', '2024-09-07', '2025-09-07', 'expired');
+INSERT INTO public.purchased_courses VALUES ('df94e5f0-8081-41e7-999c-42a9a5025f37', '04d223ea-6797-49bd-8e05-0e0de94c5563', '0909ea3b-f59e-4297-9b33-5b37130bb152', '2024-10-28', '2025-10-28', 'expired');
+INSERT INTO public.purchased_courses VALUES ('eb16013b-5d3c-41b6-98f4-2932e4433fb5', '9f0b0f39-853f-4da8-9687-b9357d440d20', '2ee9e287-795c-4b62-bbad-70cb4d0ff748', '2026-02-01', '2027-02-01', 'active');
+INSERT INTO public.purchased_courses VALUES ('33cee59c-db75-47ac-8c27-c2321a3f20aa', '9f0b0f39-853f-4da8-9687-b9357d440d20', 'eaf11106-bbf1-4b5a-8fc0-8b625ad6254c', '2026-02-05', '2027-02-05', 'active');
+INSERT INTO public.purchased_courses VALUES ('7613e8da-0f4e-46e6-ad38-3577aefad1fe', '9f0b0f39-853f-4da8-9687-b9357d440d20', '4496ee09-31dc-43a6-a587-7b2e3d42dad8', '2026-03-31', '2027-03-31', 'active');
+INSERT INTO public.purchased_courses VALUES ('1bbbcc2d-62ec-4007-a46c-18231123d9c9', 'fbfb3025-8aaf-47ed-b65b-cfedbadffcc5', 'f49ceefc-95d1-493d-8eb4-e5384641c09c', '2025-07-16', '2026-07-16', 'active');
+INSERT INTO public.purchased_courses VALUES ('e2d99d9f-3042-4796-aeba-b0c90a70cbe0', 'fbfb3025-8aaf-47ed-b65b-cfedbadffcc5', 'bac90a60-c4fd-4814-adfd-a561386ae7f9', '2025-03-23', '2026-03-23', 'expired');
+INSERT INTO public.purchased_courses VALUES ('b82e84ee-f3c5-40e3-a4fc-caa5e6365a49', 'fbfb3025-8aaf-47ed-b65b-cfedbadffcc5', 'a092b310-c25c-4ff9-9620-a966924916eb', '2025-03-31', '2026-03-31', 'expired');
+INSERT INTO public.purchased_courses VALUES ('38b13c9c-2d99-4738-bae0-ee7c8ecae9f2', 'e68cd796-3311-4c5f-ba19-375f0c970472', 'f3daa59f-3ea2-4cd4-a3f8-c574868d257b', '2026-05-02', '2027-05-02', 'active');
+INSERT INTO public.purchased_courses VALUES ('7b1d0a27-769c-4fc4-a138-05983a950e41', '519cbc73-b49c-47dc-8c6e-369322853020', '1c3a0c9c-0c16-43c7-ae3b-b702ded59709', '2026-03-29', '2027-03-29', 'active');
+INSERT INTO public.purchased_courses VALUES ('7074f20c-2072-423b-a6de-ab6a97c9dcf9', '519cbc73-b49c-47dc-8c6e-369322853020', '7eeec75d-9957-4d36-a8ac-006b9d4ffb39', '2026-04-11', '2027-04-11', 'active');
+INSERT INTO public.purchased_courses VALUES ('3e14a9b3-2531-4761-b52a-982d1e6db334', 'ce5886d8-7aa0-4991-a422-29edbab37a75', '2ee9e287-795c-4b62-bbad-70cb4d0ff748', '2026-02-22', '2027-02-22', 'active');
+INSERT INTO public.purchased_courses VALUES ('dddfd87b-500d-457b-aaca-7ff60ac7a724', '6862b025-a58b-42f2-8fa4-e5bfab4abb07', '59d11679-2a48-4372-a15a-13154cd3557d', '2025-02-03', '2026-02-03', 'expired');
+INSERT INTO public.purchased_courses VALUES ('46438033-17c0-4bef-b15d-ef0ca2091178', '6862b025-a58b-42f2-8fa4-e5bfab4abb07', '59d11679-2a48-4372-a15a-13154cd3557d', '2025-02-07', '2026-02-07', 'expired');
+INSERT INTO public.purchased_courses VALUES ('8fc23ccc-90a8-4fe0-8d6e-cdb57f3daf99', '6862b025-a58b-42f2-8fa4-e5bfab4abb07', '46b29ac9-92c1-4d60-a863-789dbdd0b757', '2025-03-31', '2026-03-31', 'expired');
+INSERT INTO public.purchased_courses VALUES ('bd4cb567-25f4-4ee0-945e-7767d1afb2b4', '0c54cece-e296-47fe-aea2-129343a57dce', '0909ea3b-f59e-4297-9b33-5b37130bb152', '2025-07-01', '2026-07-01', 'active');
+INSERT INTO public.purchased_courses VALUES ('5f13defd-919b-499f-b0a5-a981ecef3534', '1ffc4454-7b78-4499-9f9f-dd1fb738879c', '940c2c75-ef20-4875-96ff-2241ef5882ba', '2026-03-21', '2027-03-21', 'active');
+INSERT INTO public.purchased_courses VALUES ('f948cde8-9ecb-4eb4-b154-7435ffede787', 'fc2fff95-b416-4220-908b-31e45099635e', '1c3a0c9c-0c16-43c7-ae3b-b702ded59709', '2026-01-05', '2027-01-05', 'active');
+INSERT INTO public.purchased_courses VALUES ('d7a4006b-ae07-4b54-9a1e-0e259281b044', 'fc2fff95-b416-4220-908b-31e45099635e', 'a092b310-c25c-4ff9-9620-a966924916eb', '2024-12-19', '2025-12-19', 'expired');
+INSERT INTO public.purchased_courses VALUES ('ba23a387-3594-444a-a770-d5dcac49f3ef', '9b419dee-9aeb-4942-b66d-0b29b21361b3', '940c2c75-ef20-4875-96ff-2241ef5882ba', '2025-10-24', '2026-10-24', 'active');
+INSERT INTO public.purchased_courses VALUES ('c4ceefd5-7806-480c-9780-43f50be9674f', '9b419dee-9aeb-4942-b66d-0b29b21361b3', '4496ee09-31dc-43a6-a587-7b2e3d42dad8', '2026-02-05', '2027-02-05', 'active');
+INSERT INTO public.purchased_courses VALUES ('0aa25bf8-b611-4e81-a25f-757abbc8bd93', 'a833f183-973d-4b88-a2f1-d80022585c74', '46b29ac9-92c1-4d60-a863-789dbdd0b757', '2026-01-19', '2027-01-19', 'active');
+INSERT INTO public.purchased_courses VALUES ('9482dcbb-2820-4595-8acc-109fbc5c3992', 'a833f183-973d-4b88-a2f1-d80022585c74', '2d3829b6-a24c-4d94-8b1b-9a3eb7c3a631', '2026-03-31', '2027-03-31', 'active');
+INSERT INTO public.purchased_courses VALUES ('67da5ff2-8982-4c71-a9e6-18fbc598ab4a', 'cb30e94f-9889-4642-bd79-2fadad64209f', 'bac90a60-c4fd-4814-adfd-a561386ae7f9', '2026-02-24', '2027-02-24', 'active');
+INSERT INTO public.purchased_courses VALUES ('f63bf5ea-4856-4a7f-9a4c-e0e7c535f6db', '236f2990-98cb-4f2d-9b66-48d8c66b50c1', '19bd6c99-2cfd-4986-9986-4935b90c17fa', '2025-10-26', '2026-10-26', 'active');
+INSERT INTO public.purchased_courses VALUES ('8b2da6ac-8786-476f-afdc-ed35b1bbcc86', 'eb71afcf-4697-422f-83fc-6398f9de6a2e', 'eaf11106-bbf1-4b5a-8fc0-8b625ad6254c', '2026-04-22', '2027-04-22', 'active');
+INSERT INTO public.purchased_courses VALUES ('6f5bb3c7-2b9d-4f95-aef3-09412bea97d8', 'eb71afcf-4697-422f-83fc-6398f9de6a2e', '3f8a1462-322e-4aa3-a466-68fa16bdf47a', '2026-04-25', '2027-04-25', 'active');
+INSERT INTO public.purchased_courses VALUES ('14a52eee-9629-4087-aa12-bd6fd4529e4d', 'eb71afcf-4697-422f-83fc-6398f9de6a2e', '940c2c75-ef20-4875-96ff-2241ef5882ba', '2026-05-02', '2027-05-02', 'active');
+INSERT INTO public.purchased_courses VALUES ('e106ceeb-8990-4305-a55c-3068a8ed14ce', 'eb71afcf-4697-422f-83fc-6398f9de6a2e', '5b7b495a-0c06-4f90-8635-c6958511d829', '2026-04-22', '2027-04-22', 'active');
+INSERT INTO public.purchased_courses VALUES ('b502d50d-24f6-4d05-a4c4-5fc6675faf86', '9e67818e-1015-48b6-91fe-0f3e2a76054e', 'd9d4b197-9d22-404a-8f3e-c1ec2a5e91f1', '2025-05-25', '2026-05-25', 'active');
+INSERT INTO public.purchased_courses VALUES ('54ed12f1-329f-4d80-9ae9-f37e7e176943', '9e67818e-1015-48b6-91fe-0f3e2a76054e', '63eed6eb-74da-4fe8-a7ad-ac01a69bab9c', '2025-07-09', '2026-07-09', 'active');
+INSERT INTO public.purchased_courses VALUES ('8a006393-f5ef-4384-8e24-4402c391fbe4', '9879eed8-286a-498a-bac6-8f91bbf48bba', 'ffece5ef-9d37-4a84-93b9-a17a4e4ba2c2', '2026-05-05', '2027-05-05', 'active');
 
 
 --
--- TOC entry 4995 (class 0 OID 24794)
--- Dependencies: 221
+-- TOC entry 5011 (class 0 OID 25023)
+-- Dependencies: 222
 -- Data for Name: service_bookings; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.service_bookings VALUES ('3ce33320-57bb-4b2e-8fdb-852faaa4635f', 'e6f5427e-f9ef-4492-90d0-3384f045caa5', '7af5d1fb-0939-4871-9e0c-c3ce1d9673d6', '2024-11-21 14:17:22.80003', '2024-11-21 15:17:22.80003', 'завершено');
-INSERT INTO public.service_bookings VALUES ('0ba5b51c-1264-4a9a-927e-c9db823d88ab', 'd363043a-9ff5-4b00-a7e2-e55cec25c791', '7af5d1fb-0939-4871-9e0c-c3ce1d9673d6', '2025-02-07 11:44:55.563185', '2025-02-07 12:44:55.563185', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('c97630e9-87ab-469c-bebd-c51e4d627fd8', '8161e4da-e19c-4a24-a1d3-bca8f12a0644', 'dcb7e75a-c89f-4b0b-a55f-f93b164652aa', '2025-08-12 12:52:43.401981', '2025-08-12 13:52:43.401981', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('6f09987d-903d-40a5-ac2e-2adb6d249cde', '98450b8d-0905-4226-9dc6-1afd8a993f43', 'd5446445-74a8-49e9-9de0-529ecc7793a3', '2026-04-21 21:45:14.259985', '2026-04-21 22:45:14.259985', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('1510607a-86ec-49cf-8bb5-7a804848db79', 'f5e0b0ca-f27f-4e9d-a0a4-1dbbee607aae', 'd5446445-74a8-49e9-9de0-529ecc7793a3', '2026-04-24 12:17:40.915103', '2026-04-24 13:17:40.915103', 'отменено');
-INSERT INTO public.service_bookings VALUES ('ccd40085-3c63-42db-b9c2-9067fb3a6ed1', '60b62f2f-242d-47fc-8733-67288ec30cd9', 'd5446445-74a8-49e9-9de0-529ecc7793a3', '2026-04-13 03:19:42.563273', '2026-04-13 04:19:42.563273', 'завершено');
-INSERT INTO public.service_bookings VALUES ('55020d37-6381-4758-b927-fa88d14a08aa', '4701b341-55ca-4f7f-8c97-86435779f58d', '8b0275c9-9acb-4c08-93d0-d39d25b09094', '2025-12-23 15:21:56.943481', '2025-12-23 16:21:56.943481', 'завершено');
-INSERT INTO public.service_bookings VALUES ('ef2ca9f7-b682-483f-9112-df3e6f816c1c', 'bbc6c4ec-4fdc-4e2a-9629-7b78dda47f45', '8b0275c9-9acb-4c08-93d0-d39d25b09094', '2024-08-19 00:51:12.960739', '2024-08-19 01:51:12.960739', 'завершено');
-INSERT INTO public.service_bookings VALUES ('372744bf-4875-48cf-9a66-f1d37ddb51d0', 'e971575c-a0fd-47c8-8ab5-58b78d646868', 'f0132695-2dd2-4cc3-b054-555903de6d7d', '2026-03-30 15:13:42.7491', '2026-03-30 16:13:42.7491', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('93bc0826-7556-4ce4-80af-bf335bef8241', 'c3f0a581-6c19-474c-acab-5202b120d603', 'f0132695-2dd2-4cc3-b054-555903de6d7d', '2026-03-15 03:01:14.051858', '2026-03-15 04:01:14.051858', 'отменено');
-INSERT INTO public.service_bookings VALUES ('1d16b984-8c07-4752-a29a-0e391213e2cd', 'ea07fce7-c070-43e9-81a8-b7c8ed41f7ca', 'f0132695-2dd2-4cc3-b054-555903de6d7d', '2025-12-17 09:41:00.370123', '2025-12-17 10:41:00.370123', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('721d3f12-0820-4d9c-8921-4352526f549b', 'dcd7159f-e028-421d-8101-0ff3f5143eaf', 'a7a54bc0-d838-4016-8864-8c15cc32b2d9', '2026-01-21 03:56:23.24026', '2026-01-21 04:56:23.24026', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('61d6c2c5-ecce-40e2-bde8-b77e00a4bb3d', 'e6f5427e-f9ef-4492-90d0-3384f045caa5', 'a7a54bc0-d838-4016-8864-8c15cc32b2d9', '2026-03-03 15:15:04.338969', '2026-03-03 16:15:04.338969', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('d81c1c17-ae64-4c2c-9252-669a8fce3823', 'e6f5427e-f9ef-4492-90d0-3384f045caa5', 'a7a54bc0-d838-4016-8864-8c15cc32b2d9', '2025-11-06 18:57:40.962191', '2025-11-06 19:57:40.962191', 'завершено');
-INSERT INTO public.service_bookings VALUES ('e5076dfa-78af-4b1b-a22a-a61f2d0a8341', '1f04b223-8f58-436f-af6f-681db42332bf', 'c470d455-cc38-4c0b-b6d3-1ddaf0695f16', '2025-09-25 15:43:34.600857', '2025-09-25 16:43:34.600857', 'завершено');
-INSERT INTO public.service_bookings VALUES ('8068f63c-04f7-48e7-94f8-e23fb1160c4e', 'cdb0813b-d943-4207-9a8d-408f2b2fc7c8', 'd28e35fb-58ae-4bbc-b419-b12ebe3118bd', '2025-11-03 02:45:04.448458', '2025-11-03 03:45:04.448458', 'отменено');
-INSERT INTO public.service_bookings VALUES ('95d7127d-ddef-4386-a008-0c90900c899e', 'b0791fea-9c6b-4c36-afdf-ed1374ae8c82', 'd28e35fb-58ae-4bbc-b419-b12ebe3118bd', '2025-12-09 05:59:49.048412', '2025-12-09 06:59:49.048412', 'завершено');
-INSERT INTO public.service_bookings VALUES ('4e1090be-814a-4faa-8844-06e8c1d8526d', '76412a7a-35da-403f-b13a-1579129ea0f3', '3eac485f-02da-45fc-a87c-bdef8198c18c', '2024-10-27 19:17:11.391501', '2024-10-27 20:17:11.391501', 'завершено');
-INSERT INTO public.service_bookings VALUES ('23acec67-fcf8-4534-9bf9-e80681a81938', '6d6e94a8-b716-4fc2-9748-78ea1d89e70f', 'd760a6ae-9aeb-49b9-b6aa-eec5ffe9531e', '2026-02-14 07:39:03.745769', '2026-02-14 08:39:03.745769', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('71b048fa-ffbe-42e3-845a-8f51ae3578d2', 'cb48e335-3ccb-4491-9160-703585b18669', 'd760a6ae-9aeb-49b9-b6aa-eec5ffe9531e', '2026-04-24 04:53:57.642439', '2026-04-24 05:53:57.642439', 'завершено');
-INSERT INTO public.service_bookings VALUES ('b578a4fc-e11f-4b5e-acdc-ba3fbefce8a2', 'ba3a0175-c053-4173-ba00-245db4645a69', 'd77a2d11-6001-415e-858f-c6b482f08ed2', '2026-01-01 23:43:24.044221', '2026-01-02 00:43:24.044221', 'отменено');
-INSERT INTO public.service_bookings VALUES ('af53c755-8862-47c3-9aab-a6aa889fac94', '4f615d69-3d65-4877-876c-6fea280c2a7f', 'ec73ed14-18fa-47c4-952b-36011af06896', '2026-03-05 00:13:26.677041', '2026-03-05 01:13:26.677041', 'завершено');
-INSERT INTO public.service_bookings VALUES ('7291e0cf-0758-4209-9441-32451465ca9f', '7e0a1c54-56d5-4341-aff6-8a215c65a392', 'ec73ed14-18fa-47c4-952b-36011af06896', '2025-07-25 01:24:32.779276', '2025-07-25 02:24:32.779276', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('9e9191f3-45be-47f5-ba2c-3299c820fcfa', 'dcd7159f-e028-421d-8101-0ff3f5143eaf', '71543d46-b102-4b40-82aa-2d78c23e9542', '2026-06-05 09:38:06.953233', '2026-06-05 10:38:06.953233', 'ожидает_оплаты');
-INSERT INTO public.service_bookings VALUES ('e4305593-a098-404c-94ed-47f8aa691c5d', '3a0d6511-9176-4ab6-a133-7229bb7f7037', 'ee265a4d-9c7b-46f8-b25b-9d4ac0a5c6df', '2026-03-09 23:17:41.934804', '2026-03-10 00:17:41.934804', 'отменено');
-INSERT INTO public.service_bookings VALUES ('43b8c3f3-60c8-4e66-91fb-0b70edbf44e5', '4c15a4e4-9975-43ee-9f5f-393a8eb7efc0', 'db91092a-69aa-46f1-a4c5-69f7be4a9a90', '2026-04-06 11:17:23.515546', '2026-04-06 12:17:23.515546', 'завершено');
-INSERT INTO public.service_bookings VALUES ('8769f46d-6658-4faa-b3aa-b826c4b03e5d', '87466623-f080-4f82-aeb9-81ab0f5667c1', 'ce5ca999-f1eb-4c19-a50a-accb201681bb', '2026-05-09 19:35:09.895882', '2026-05-09 20:35:09.895882', 'создано');
-INSERT INTO public.service_bookings VALUES ('2c04c2f6-acf6-4e35-8b12-9cd6632fbbde', '93b78a2c-4505-4931-af60-60e07d09dc15', '80fa2d37-dda0-4008-a947-32d4b28ff102', '2026-01-28 02:44:24.742043', '2026-01-28 03:44:24.742043', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('0614d257-507c-4d8a-beb9-fb263d7e3fe7', '58018845-9705-43dc-9c15-a09d315910a3', '80fa2d37-dda0-4008-a947-32d4b28ff102', '2026-01-11 05:51:13.479392', '2026-01-11 06:51:13.479392', 'завершено');
-INSERT INTO public.service_bookings VALUES ('83cbf7a9-0f05-4400-9de7-ae24818f7258', 'db1af11e-469b-40a7-b85c-e0b88369ce17', '80fa2d37-dda0-4008-a947-32d4b28ff102', '2026-03-30 17:13:45.528605', '2026-03-30 18:13:45.528605', 'отменено');
-INSERT INTO public.service_bookings VALUES ('819089e1-8268-4061-953f-9364daccdd83', '7e0a1c54-56d5-4341-aff6-8a215c65a392', '2f22b8d4-566e-4615-a4cf-08d80c4f5967', '2026-02-13 01:19:12.278408', '2026-02-13 02:19:12.278408', 'завершено');
-INSERT INTO public.service_bookings VALUES ('08ae25e5-c902-4bf8-8190-16890f585a2f', 'f99887cb-b432-41e3-9ce3-6b20dc462be9', '2f22b8d4-566e-4615-a4cf-08d80c4f5967', '2025-12-03 12:12:56.641069', '2025-12-03 13:12:56.641069', 'завершено');
-INSERT INTO public.service_bookings VALUES ('4f6bc62d-650c-4a5f-8171-6b2e8e07e4c9', '29cc7cbe-6d31-49c2-8cef-725566b80438', '2f22b8d4-566e-4615-a4cf-08d80c4f5967', '2026-04-17 10:19:33.158801', '2026-04-17 11:19:33.158801', 'завершено');
-INSERT INTO public.service_bookings VALUES ('b3064ae2-78b9-41f6-8084-d224bf6fb328', '76412a7a-35da-403f-b13a-1579129ea0f3', 'f11f2cd3-d75b-4cef-a055-db2c931885e2', '2026-04-03 07:41:08.857052', '2026-04-03 08:41:08.857052', 'завершено');
-INSERT INTO public.service_bookings VALUES ('eff2a1d3-6163-4d37-98a8-62f9e6804e2e', '1f04b223-8f58-436f-af6f-681db42332bf', 'f11f2cd3-d75b-4cef-a055-db2c931885e2', '2026-03-17 08:51:13.981644', '2026-03-17 09:51:13.981644', 'завершено');
-INSERT INTO public.service_bookings VALUES ('204877df-327a-4e31-85ca-b2af2ebd3a1b', 'c981e255-247e-4c27-8beb-8bb9dbf78eb9', '79e34960-f2ee-4ca0-a93b-f172d2801a3b', '2025-11-08 10:54:59.968714', '2025-11-08 11:54:59.968714', 'завершено');
-INSERT INTO public.service_bookings VALUES ('1839413f-7399-45dd-9a3b-22df0a1e19ac', 'f99887cb-b432-41e3-9ce3-6b20dc462be9', '79e34960-f2ee-4ca0-a93b-f172d2801a3b', '2025-07-24 03:33:04.827192', '2025-07-24 04:33:04.827192', 'завершено');
-INSERT INTO public.service_bookings VALUES ('43e5a996-72f9-4be9-86ef-673da8054a60', 'e971575c-a0fd-47c8-8ab5-58b78d646868', '78af36a8-3047-4c4b-88b1-4ae5f1e795ef', '2026-02-16 15:37:22.410457', '2026-02-16 16:37:22.410457', 'отменено');
-INSERT INTO public.service_bookings VALUES ('85ac91fd-5b67-4ce4-8175-20e94f7e8614', '58018845-9705-43dc-9c15-a09d315910a3', '78af36a8-3047-4c4b-88b1-4ae5f1e795ef', '2025-06-18 23:03:11.708449', '2025-06-19 00:03:11.708449', 'завершено');
-INSERT INTO public.service_bookings VALUES ('b554f7b9-ece2-447c-9624-fbcf8c656112', '60b62f2f-242d-47fc-8733-67288ec30cd9', 'c557121d-38e8-49dd-8411-3d1d2c53f9fa', '2026-05-23 10:09:49.049262', '2026-05-23 11:09:49.049262', 'создано');
-INSERT INTO public.service_bookings VALUES ('7477cee7-0ae7-465a-a5fd-be8aa608a0fc', 'dba6a4db-a2b6-4f7d-b0e5-ce6e23761239', 'c557121d-38e8-49dd-8411-3d1d2c53f9fa', '2026-05-14 06:07:21.745764', '2026-05-14 07:07:21.745764', 'подтверждено');
-INSERT INTO public.service_bookings VALUES ('ef453c45-bbe9-406f-852a-e4d7650b7611', '7497a885-c6b8-47a9-b9cf-7303ffc510e5', '14e2e14a-d4ce-4068-90cf-ba3ffbcde32c', '2026-04-13 09:28:08.932742', '2026-04-13 10:28:08.932742', 'отменено');
-INSERT INTO public.service_bookings VALUES ('9bea6e48-0f70-42d7-9603-59385a967f94', 'cb48e335-3ccb-4491-9160-703585b18669', '14e2e14a-d4ce-4068-90cf-ba3ffbcde32c', '2026-04-24 00:33:58.879013', '2026-04-24 01:33:58.879013', 'отменено');
-INSERT INTO public.service_bookings VALUES ('b924eb67-c10c-49a7-9f3c-35b32b318187', '2f1d0954-38c3-4b92-9d51-3b6ebc5441c4', 'b58401d3-64f4-4bc4-8d6d-e2f36aca7e4a', '2025-11-29 17:58:04.250477', '2025-11-29 18:58:04.250477', 'завершено');
-INSERT INTO public.service_bookings VALUES ('932438ff-3e8d-41a5-917b-bf61fae928f7', 'd363043a-9ff5-4b00-a7e2-e55cec25c791', 'b58401d3-64f4-4bc4-8d6d-e2f36aca7e4a', '2025-12-18 09:43:15.637579', '2025-12-18 10:43:15.637579', 'завершено');
-INSERT INTO public.service_bookings VALUES ('84b8a142-d944-407d-a975-548e99d526d9', 'd363043a-9ff5-4b00-a7e2-e55cec25c791', 'a071ef39-68ac-4006-97f5-1dc52317656a', '2026-01-12 21:41:59.166083', '2026-01-12 22:41:59.166083', 'завершено');
-INSERT INTO public.service_bookings VALUES ('4c809bbf-b241-4f17-adac-af0ed3a6aafb', 'a1dbaf18-010f-4427-a6ad-d007d9ba1333', 'feff420f-5bd1-44f3-921a-effd234f78fc', '2025-05-14 22:38:06.326852', '2025-05-14 23:38:06.326852', 'завершено');
-INSERT INTO public.service_bookings VALUES ('e8d32ca2-2a5e-463e-b532-8eeaf0c69c47', 'a1dbaf18-010f-4427-a6ad-d007d9ba1333', '76f89faf-1ae6-4bc5-9a5f-538a211b3335', '2025-12-06 00:54:06.482639', '2025-12-06 01:54:06.482639', 'завершено');
-INSERT INTO public.service_bookings VALUES ('f050f0d8-6d60-4b9d-b1aa-d6fd322970cf', '81bf8064-1d2f-4d5a-9f39-07110375123a', '556e29e7-2d94-43a9-941d-4637653afae6', '2026-01-24 13:00:18.740628', '2026-01-24 14:00:18.740628', 'отменено');
-INSERT INTO public.service_bookings VALUES ('e7e81ad4-1d53-43f6-9bf2-afc6d26f3f0f', 'aa288965-0aa2-4c2e-a7de-083477479d18', 'b4a7a5a3-2d7f-4c77-81cc-d0084137c654', '2025-12-21 16:35:10.247688', '2025-12-21 17:35:10.247688', 'отменено');
-INSERT INTO public.service_bookings VALUES ('bcd28140-3ec5-4c64-baa8-60a2ab232e1c', '4f615d69-3d65-4877-876c-6fea280c2a7f', 'b4a7a5a3-2d7f-4c77-81cc-d0084137c654', '2026-02-13 17:12:14.223382', '2026-02-13 18:12:14.223382', 'завершено');
-INSERT INTO public.service_bookings VALUES ('7b2c1204-c39b-4a0d-b23c-66f3f3d0b6fc', '3a0fa377-7035-4d4b-84f2-238cb1df2ef9', '9332fe43-ec3b-4704-927b-faf98b9b9cc3', '2026-03-31 10:40:41.864', '2026-03-31 11:40:41.864', 'завершено');
-INSERT INTO public.service_bookings VALUES ('b38e623c-499f-4aeb-a034-f2fc4bf31d9e', '98450b8d-0905-4226-9dc6-1afd8a993f43', '41694892-efd6-49d5-9965-f64407334fed', '2026-03-13 15:50:38.937468', '2026-03-13 16:50:38.937468', 'отменено');
-INSERT INTO public.service_bookings VALUES ('ed63a1fd-9ed4-47b0-a38f-6d591dd805a3', '87466623-f080-4f82-aeb9-81ab0f5667c1', '2d4262e5-7171-471e-90ca-d9d4c0ac9afe', '2026-03-09 09:15:36.42067', '2026-03-09 10:15:36.42067', 'завершено');
-INSERT INTO public.service_bookings VALUES ('41785e93-c23a-462c-b52c-07b16c3bfcd0', '98450b8d-0905-4226-9dc6-1afd8a993f43', '2d4262e5-7171-471e-90ca-d9d4c0ac9afe', '2024-11-24 23:29:02.857763', '2024-11-25 00:29:02.857763', 'завершено');
-INSERT INTO public.service_bookings VALUES ('412ad266-446a-4298-b39e-723f94cbfd9d', 'dcd7159f-e028-421d-8101-0ff3f5143eaf', '4b8ec2d5-cb86-4b75-80e2-fa876f1d4360', '2026-05-17 22:12:15.993438', '2026-05-17 23:12:15.993438', 'ожидает_оплаты');
-INSERT INTO public.service_bookings VALUES ('32c25350-ba8d-4cf8-a2a7-004a35d6b990', '5d63297b-3bb4-4502-8876-fa96ececd8c8', 'eba28432-e0e8-4e83-be5c-9d5e64b8f776', '2026-05-14 03:13:33.188178', '2026-05-14 04:13:33.188178', 'подтверждено');
-INSERT INTO public.service_bookings VALUES ('3c255bff-e02d-4dbe-bac9-283bc876a2cc', '60b62f2f-242d-47fc-8733-67288ec30cd9', 'eba28432-e0e8-4e83-be5c-9d5e64b8f776', '2026-03-27 15:59:09.406658', '2026-03-27 16:59:09.406658', 'отменено');
-INSERT INTO public.service_bookings VALUES ('aa27243a-9228-4613-95bf-2dde37cfc3c5', 'bbc6c4ec-4fdc-4e2a-9629-7b78dda47f45', '607733fe-e0af-4227-833e-a877633f5bd3', '2025-08-28 08:51:47.870726', '2025-08-28 09:51:47.870726', 'завершено');
-INSERT INTO public.service_bookings VALUES ('7fba2bab-f4cd-42b3-b52c-289a3db87cd6', 'ea07fce7-c070-43e9-81a8-b7c8ed41f7ca', '607733fe-e0af-4227-833e-a877633f5bd3', '2025-09-04 00:44:43.839998', '2025-09-04 01:44:43.839998', 'завершено');
-INSERT INTO public.service_bookings VALUES ('96306422-c406-4244-beab-ab03dc31cf85', '50415186-3332-433e-af65-2f20740958c2', '58a3b6bf-3bce-4522-a54f-486c75f6c406', '2026-06-05 15:12:15.725767', '2026-06-05 16:12:15.725767', 'ожидает_оплаты');
-INSERT INTO public.service_bookings VALUES ('b7612759-4bc6-4928-97c4-eebf2457437a', '045673b9-16df-4f91-8cd2-171713672717', '1d02b5a7-00d0-4348-9e05-cd2395dbfd8d', '2026-05-09 17:04:02.128882', '2026-05-09 18:04:02.128882', 'создано');
-INSERT INTO public.service_bookings VALUES ('1cc4bc2d-5e50-4156-81ad-42b7ededfd1a', '927214ec-059d-45e5-8560-cc0918fcb4e4', '9205964d-8372-4563-89d4-b549d3d1ab01', '2025-08-30 05:20:14.547929', '2025-08-30 06:20:14.547929', 'завершено');
-INSERT INTO public.service_bookings VALUES ('35899bea-d9b9-4aa0-8e72-738c1efa07c7', '2c2537e8-5b49-4ebb-8e4b-15844d6e50a5', '87c81a7f-b8b9-4aa7-8c7c-5e252447dc0c', '2025-12-30 21:15:21.323497', '2025-12-30 22:15:21.323497', 'завершено');
-INSERT INTO public.service_bookings VALUES ('2e4c25f7-9955-4571-84b7-4fadd71ef026', 'f5558bec-45a7-4945-b042-0fdd506e97ea', '295e6eb5-15d9-4d1f-b648-5a1d7d1b15b2', '2026-06-07 01:14:25.071203', '2026-06-07 02:14:25.071203', 'создано');
-INSERT INTO public.service_bookings VALUES ('3bf648c6-4d54-49b7-a718-e3e48c141232', '80a4d0cb-3e52-4877-8468-35cb9ff14c03', '5614c63e-b164-439a-bfad-ad68b28d05f5', '2026-04-25 15:01:21.578021', '2026-04-25 16:01:21.578021', 'завершено');
-INSERT INTO public.service_bookings VALUES ('22bde857-5afa-4969-aba5-e43fcc53d6fc', '97ca912e-ed47-4d19-931a-042ab796d020', '29199910-4a41-4c96-98af-484385e37f24', '2024-11-20 11:12:54.656625', '2024-11-20 12:12:54.656625', 'завершено');
-INSERT INTO public.service_bookings VALUES ('3c8ee60c-8f86-4fde-a6f8-c3132b5d0022', '6d6e94a8-b716-4fc2-9748-78ea1d89e70f', '29199910-4a41-4c96-98af-484385e37f24', '2025-11-06 00:03:29.119078', '2025-11-06 01:03:29.119078', 'клиент_не_явился');
-INSERT INTO public.service_bookings VALUES ('7928499e-75be-4958-8916-529c0e99346a', '4c15a4e4-9975-43ee-9f5f-393a8eb7efc0', '29199910-4a41-4c96-98af-484385e37f24', '2025-08-27 14:02:49.003975', '2025-08-27 15:02:49.003975', 'клиент_не_явился');
+INSERT INTO public.service_bookings VALUES ('1087d531-b9f0-4fba-8db4-a194888b7be3', '2008d077-82f6-494c-9c59-ab5251c68a53', '8a1743d9-d8b2-419e-9fa2-9d3190e8562d', '2026-06-04 04:06:20.400269', '2026-06-04 05:06:20.400269', 'создано');
+INSERT INTO public.service_bookings VALUES ('db0ac34d-8521-4afc-a6b5-7d7cfa2523cf', '9af34294-5370-4d17-9b09-f0ec550fdfcb', '29525e9d-0979-4b60-aa79-81a6388253d2', '2025-09-14 13:39:52.056883', '2025-09-14 14:39:52.056883', 'завершено');
+INSERT INTO public.service_bookings VALUES ('32042c9f-9f08-4ef6-9ef6-04835496c720', '3ad1ce20-4213-47dc-970e-e3ca53d120e2', '55617455-aa81-4a19-b876-21b9c3c07966', '2026-02-12 06:52:27.024582', '2026-02-12 07:52:27.024582', 'завершено');
+INSERT INTO public.service_bookings VALUES ('05b64f09-42d9-4209-9ba7-ba66d3becf38', 'af7631bf-5f76-4722-90fe-a564aef80f6e', '55617455-aa81-4a19-b876-21b9c3c07966', '2026-03-10 01:47:22.259505', '2026-03-10 02:47:22.259505', 'отменено');
+INSERT INTO public.service_bookings VALUES ('aa213c24-7bbd-4c6a-9b6c-85ed7fdf831b', '3ad1ce20-4213-47dc-970e-e3ca53d120e2', '27ebd45b-a30e-4187-9a86-8599643dbc39', '2024-06-21 04:49:32.073057', '2024-06-21 05:49:32.073057', 'отменено');
+INSERT INTO public.service_bookings VALUES ('fe7c9900-3c56-4458-b0ff-558a4b0654e0', '1d954e15-47df-4d82-9681-3832748878a9', '27ebd45b-a30e-4187-9a86-8599643dbc39', '2026-05-11 09:56:40.122059', '2026-05-11 10:56:40.122059', 'создано');
+INSERT INTO public.service_bookings VALUES ('e7cd6a11-f503-4b52-b62f-5e40f74ceec3', '1d954e15-47df-4d82-9681-3832748878a9', '227aba69-4fb9-462c-ad73-18f5f50eda76', '2025-12-24 09:59:26.031531', '2025-12-24 10:59:26.031531', 'завершено');
+INSERT INTO public.service_bookings VALUES ('22555f12-f067-40f0-b0c6-d0aa1ddaf96c', 'f33ed11d-5efa-41e8-bbf6-2d0c1031f131', '227aba69-4fb9-462c-ad73-18f5f50eda76', '2025-10-13 02:38:35.2461', '2025-10-13 03:38:35.2461', 'отменено');
+INSERT INTO public.service_bookings VALUES ('96737a80-02e1-4169-967d-a8417bada2ec', '9af34294-5370-4d17-9b09-f0ec550fdfcb', '61214456-60d4-40c6-8f3d-8c027c9508ce', '2025-07-10 01:50:25.315129', '2025-07-10 02:50:25.315129', 'завершено');
+INSERT INTO public.service_bookings VALUES ('fc824156-0b9b-4315-b666-96a9cd05eb8b', '80bfcd5e-1a7e-451c-b275-76930405a265', '5717db47-232f-41f6-88cc-7bb96027de15', '2025-05-16 18:47:24.932858', '2025-05-16 19:47:24.932858', 'завершено');
+INSERT INTO public.service_bookings VALUES ('46e6eda4-f702-4afa-b8f7-124d013a07e3', '5b4d720d-8a57-4721-95e8-e6e2bdef4102', '5717db47-232f-41f6-88cc-7bb96027de15', '2025-10-11 05:04:25.661871', '2025-10-11 06:04:25.661871', 'отменено');
+INSERT INTO public.service_bookings VALUES ('9a184893-33ca-4786-b804-473ea13f59e1', 'c694dbb1-9268-43a7-8cf5-8d18720d9fa8', '5717db47-232f-41f6-88cc-7bb96027de15', '2024-12-24 08:30:52.182285', '2024-12-24 09:30:52.182285', 'отменено');
+INSERT INTO public.service_bookings VALUES ('5ac9245d-3d59-4841-b2f4-fb33a8d0b206', 'c8bb5df8-f3e4-42dc-8dfa-a43daaa9925f', 'edd62666-5cde-4157-b012-733f6a6fadce', '2026-02-09 17:32:14.719315', '2026-02-09 18:32:14.719315', 'отменено');
+INSERT INTO public.service_bookings VALUES ('4395c0b9-b95c-4573-a251-5cc27476474f', 'a9ced920-780e-4682-96c3-a2f8e68a25c1', 'edd62666-5cde-4157-b012-733f6a6fadce', '2026-01-26 15:54:16.81886', '2026-01-26 16:54:16.81886', 'отменено');
+INSERT INTO public.service_bookings VALUES ('22a8902a-84b1-4ac0-9241-4014b5f7c12a', '0b04a18e-f2da-4cfb-aeeb-40ab285d36ae', '8a05a3b4-e0f0-46f4-b84b-9d2873ab4cb4', '2026-03-06 21:53:10.037688', '2026-03-06 22:53:10.037688', 'завершено');
+INSERT INTO public.service_bookings VALUES ('f8ce08e1-9a4a-4609-8694-ebeb61f3c3fa', '15fb1219-b2ba-4a3c-9876-f59390460ffc', 'bb4a53e9-3e22-46e1-b20b-10c8847435ad', '2026-02-14 05:19:27.273738', '2026-02-14 06:19:27.273738', 'отменено');
+INSERT INTO public.service_bookings VALUES ('47be21a2-172a-4956-8223-b2cb2f85eb03', '350509d5-1403-4e0c-a12d-9f6512c48959', 'bb4a53e9-3e22-46e1-b20b-10c8847435ad', '2026-05-15 08:45:02.971525', '2026-05-15 09:45:02.971525', 'создано');
+INSERT INTO public.service_bookings VALUES ('b6e2f1f9-9432-4bad-bbac-e447aad97875', 'a370ad97-788b-4fb9-8f0b-dc88506a237b', '38f03b0a-bb5e-49f3-9fc6-4d1910f74989', '2026-03-22 04:07:47.807559', '2026-03-22 05:07:47.807559', 'завершено');
+INSERT INTO public.service_bookings VALUES ('6660ac26-863c-4ed8-9020-d0d6ae41108e', '0ad041eb-bad2-44ef-8d47-cfa8e5165196', '56c50fa2-ea25-4330-89b3-a5c0c77ec289', '2025-11-13 17:29:52.823159', '2025-11-13 18:29:52.823159', 'завершено');
+INSERT INTO public.service_bookings VALUES ('ac6596e9-144f-496b-bcce-3047e6d05d47', 'a65c4917-a962-47ba-9692-e654177c4388', '36746652-9b70-40e4-b691-5b60fd28cee0', '2026-04-06 20:48:09.789765', '2026-04-06 21:48:09.789765', 'завершено');
+INSERT INTO public.service_bookings VALUES ('aa7921f5-b0d3-4f29-b493-edb814e91a9c', '3ede3b53-72ff-4512-82cd-af8ce7b204be', '69d028ed-807f-4946-be09-d4985c44c241', '2025-06-14 01:18:57.707635', '2025-06-14 02:18:57.707635', 'отменено');
+INSERT INTO public.service_bookings VALUES ('05c9b9b3-8a58-42da-b655-966e6aeb70d7', '350509d5-1403-4e0c-a12d-9f6512c48959', '54e25d8d-dab3-49c4-b863-53621351924a', '2025-07-07 12:14:54.450674', '2025-07-07 13:14:54.450674', 'завершено');
+INSERT INTO public.service_bookings VALUES ('3f571ec0-7033-4515-ab00-c4738409a32d', '123688f1-5265-478d-8f35-c5866d42fcdc', '05afcd6a-1ad5-4311-8bf6-7139d634ee48', '2026-05-17 16:46:45.928971', '2026-05-17 17:46:45.928971', 'подтверждено');
+INSERT INTO public.service_bookings VALUES ('41d504f0-5a19-4e2a-8810-0a551b4d047e', 'a65c4917-a962-47ba-9692-e654177c4388', '05afcd6a-1ad5-4311-8bf6-7139d634ee48', '2024-10-26 07:59:24.278008', '2024-10-26 08:59:24.278008', 'завершено');
+INSERT INTO public.service_bookings VALUES ('4f327c08-298c-478c-a1bb-d5e03ebb2ff2', '0b04a18e-f2da-4cfb-aeeb-40ab285d36ae', '4113404c-81b0-46a9-83ea-89ba7863b0aa', '2025-04-19 12:55:16.477043', '2025-04-19 13:55:16.477043', 'завершено');
+INSERT INTO public.service_bookings VALUES ('a234c8c5-9cf9-431e-8b50-60686bf794c5', 'de82bd12-1b3a-4e99-ac12-71cc713f041c', '4113404c-81b0-46a9-83ea-89ba7863b0aa', '2026-02-12 23:22:58.743916', '2026-02-13 00:22:58.743916', 'завершено');
+INSERT INTO public.service_bookings VALUES ('2a472d3e-b280-425d-ba5a-41079083a86d', 'a370ad97-788b-4fb9-8f0b-dc88506a237b', '04d223ea-6797-49bd-8e05-0e0de94c5563', '2024-12-19 04:17:02.130512', '2024-12-19 05:17:02.130512', 'завершено');
+INSERT INTO public.service_bookings VALUES ('047082e6-13f1-4826-af28-d0daa9904ec8', '2900cece-8809-471c-9b05-9d9f82051bdc', '9f0b0f39-853f-4da8-9687-b9357d440d20', '2026-05-19 14:34:17.556461', '2026-05-19 15:34:17.556461', 'подтверждено');
+INSERT INTO public.service_bookings VALUES ('4d0bd085-a891-4f3b-bb7e-41f41f59bc13', 'cf30ae16-e60b-4cbf-9bfe-7b2afaff3ade', '9f0b0f39-853f-4da8-9687-b9357d440d20', '2026-04-22 17:02:21.82074', '2026-04-22 18:02:21.82074', 'отменено');
+INSERT INTO public.service_bookings VALUES ('d782e57c-76ba-45ae-a9b9-fa32f82a8d4b', '15fb1219-b2ba-4a3c-9876-f59390460ffc', '5cbfb257-6e90-49d2-b424-0eb6d87c94ef', '2025-09-02 00:05:00.810014', '2025-09-02 01:05:00.810014', 'завершено');
+INSERT INTO public.service_bookings VALUES ('b8ce01d8-6be5-4b7b-a649-949c3d0c9f02', 'ab80e721-b57f-4cd8-99c5-d44cdd56e34c', '5cbfb257-6e90-49d2-b424-0eb6d87c94ef', '2026-01-03 06:52:21.176545', '2026-01-03 07:52:21.176545', 'отменено');
+INSERT INTO public.service_bookings VALUES ('0ff93f3a-1af6-4477-bf30-d4c9466ad71d', 'c187ba36-7781-4b31-acc2-984a668d1df0', 'e68cd796-3311-4c5f-ba19-375f0c970472', '2026-03-31 11:13:38.136274', '2026-03-31 12:13:38.136274', 'завершено');
+INSERT INTO public.service_bookings VALUES ('1de6bcaf-fbdc-4886-bb33-b76872fde5fc', '61d9e6d7-5fc7-4a6b-ba49-8ccc8111252b', 'e68cd796-3311-4c5f-ba19-375f0c970472', '2026-02-21 10:56:40.653388', '2026-02-21 11:56:40.653388', 'отменено');
+INSERT INTO public.service_bookings VALUES ('f384c17b-f31d-43a9-8e15-0b1b63e84075', '25197915-9332-4516-97bc-b26a9bc03ba1', '519cbc73-b49c-47dc-8c6e-369322853020', '2026-05-18 01:45:01.323228', '2026-05-18 02:45:01.323228', 'подтверждено');
+INSERT INTO public.service_bookings VALUES ('1c51da20-d9d9-4e09-b569-92525baf293e', '9ac57164-dc0b-44c5-852a-8f51691f7e44', '519cbc73-b49c-47dc-8c6e-369322853020', '2026-04-21 04:42:36.354498', '2026-04-21 05:42:36.354498', 'отменено');
+INSERT INTO public.service_bookings VALUES ('da08e877-4ba1-4eea-bd11-8b6cf8a47b3e', '0e7a8c72-5fae-4f11-8bbf-83a7ae6ef156', '4af05f5c-988b-4660-a84e-a869955f66ef', '2026-05-09 20:31:57.135303', '2026-05-09 21:31:57.135303', 'подтверждено');
+INSERT INTO public.service_bookings VALUES ('ff3eefd4-0e41-4820-b0d9-73871892e0f7', 'cda12fd2-602a-4c84-89fb-e009dec9a7c5', '4af05f5c-988b-4660-a84e-a869955f66ef', '2025-09-29 16:22:10.95423', '2025-09-29 17:22:10.95423', 'отменено');
+INSERT INTO public.service_bookings VALUES ('a1a48ac2-5891-4e3f-9f06-9b606bd9f1b7', 'de82bd12-1b3a-4e99-ac12-71cc713f041c', 'ce5886d8-7aa0-4991-a422-29edbab37a75', '2025-03-02 03:18:42.141257', '2025-03-02 04:18:42.141257', 'завершено');
+INSERT INTO public.service_bookings VALUES ('8650afa9-3a58-4f5b-a92c-68ca04459087', 'ad39b699-1bfd-4e98-963d-06f04a908357', 'ce5886d8-7aa0-4991-a422-29edbab37a75', '2026-02-04 00:20:15.13474', '2026-02-04 01:20:15.13474', 'отменено');
+INSERT INTO public.service_bookings VALUES ('71fd5584-233d-488f-b239-2d780fab9004', '2337ae54-f86b-4b7b-8df4-c12f88828e1d', '6862b025-a58b-42f2-8fa4-e5bfab4abb07', '2025-12-21 19:27:06.211602', '2025-12-21 20:27:06.211602', 'завершено');
+INSERT INTO public.service_bookings VALUES ('857996e4-0e98-44e1-bdcb-66268103ed13', 'c694dbb1-9268-43a7-8cf5-8d18720d9fa8', '6862b025-a58b-42f2-8fa4-e5bfab4abb07', '2026-03-01 23:20:40.987448', '2026-03-02 00:20:40.987448', 'отменено');
+INSERT INTO public.service_bookings VALUES ('193f51b3-5d83-4075-aaeb-5d75c7a9b664', '658ed569-36b0-4247-a7cd-03a5e78261d0', '1ffc4454-7b78-4499-9f9f-dd1fb738879c', '2026-05-17 03:25:00.13593', '2026-05-17 04:25:00.13593', 'создано');
+INSERT INTO public.service_bookings VALUES ('44023cb4-9617-4a89-99a3-c3235a55259c', 'c8bb5df8-f3e4-42dc-8dfa-a43daaa9925f', 'a833f183-973d-4b88-a2f1-d80022585c74', '2026-02-13 08:43:24.50195', '2026-02-13 09:43:24.50195', 'завершено');
+INSERT INTO public.service_bookings VALUES ('302c2584-db42-4af0-8c5f-8c2d078cf1e3', '384ea40c-13d6-4460-8763-318591f77fc9', 'cb30e94f-9889-4642-bd79-2fadad64209f', '2026-03-30 21:10:38.691341', '2026-03-30 22:10:38.691341', 'отменено');
+INSERT INTO public.service_bookings VALUES ('a688bd4f-d792-4d4d-819f-180baae46a59', '2008d077-82f6-494c-9c59-ab5251c68a53', 'cb30e94f-9889-4642-bd79-2fadad64209f', '2026-05-26 17:44:33.575312', '2026-05-26 18:44:33.575312', 'создано');
+INSERT INTO public.service_bookings VALUES ('855906e2-037a-444e-b6bc-5500f04e201e', 'f98aa21d-1923-4658-9273-522cf637f043', 'cb30e94f-9889-4642-bd79-2fadad64209f', '2026-02-28 01:59:08.765453', '2026-02-28 02:59:08.765453', 'завершено');
+INSERT INTO public.service_bookings VALUES ('2088b905-da38-45b4-b43a-7afcbf8dfcb3', '53c2ac7a-9de8-4557-92d7-6e18e448d084', '236f2990-98cb-4f2d-9b66-48d8c66b50c1', '2026-04-12 14:35:52.931007', '2026-04-12 15:35:52.931007', 'завершено');
+INSERT INTO public.service_bookings VALUES ('fd4104b8-c525-46f9-b543-4595b9d8bcea', '123688f1-5265-478d-8f35-c5866d42fcdc', '236f2990-98cb-4f2d-9b66-48d8c66b50c1', '2026-03-19 02:57:50.517023', '2026-03-19 03:57:50.517023', 'отменено');
+INSERT INTO public.service_bookings VALUES ('9291fcc7-7385-4081-8ddb-b10448fdbf53', '0e7a8c72-5fae-4f11-8bbf-83a7ae6ef156', 'eb71afcf-4697-422f-83fc-6398f9de6a2e', '2026-04-18 06:59:01.890038', '2026-04-18 07:59:01.890038', 'завершено');
+INSERT INTO public.service_bookings VALUES ('cdb61c80-057e-46b9-834f-6fa6dc5c78de', '2008d077-82f6-494c-9c59-ab5251c68a53', '9e67818e-1015-48b6-91fe-0f3e2a76054e', '2026-04-01 12:09:43.462335', '2026-04-01 13:09:43.462335', 'завершено');
+INSERT INTO public.service_bookings VALUES ('e8c7b2b2-45f2-4663-bef1-7380c10a0882', '9a444534-769b-4efc-a176-e14092345b0d', '9c43afd4-020a-4815-adfc-49909da3c895', '2026-04-18 14:09:29.960077', '2026-04-18 15:09:29.960077', 'отменено');
+INSERT INTO public.service_bookings VALUES ('3e6db98c-48d5-468e-a463-688f47fc7ba8', '97c99327-5f39-4585-94b4-2a4d7372f698', '9c43afd4-020a-4815-adfc-49909da3c895', '2026-04-05 07:53:19.375473', '2026-04-05 08:53:19.375473', 'отменено');
+INSERT INTO public.service_bookings VALUES ('8aa09516-8e1d-4781-9827-6fd732efbeb3', '9af34294-5370-4d17-9b09-f0ec550fdfcb', '9879eed8-286a-498a-bac6-8f91bbf48bba', '2026-04-06 21:28:46.843129', '2026-04-06 22:28:46.843129', 'завершено');
 
 
 --
--- TOC entry 4996 (class 0 OID 24798)
--- Dependencies: 222
+-- TOC entry 5012 (class 0 OID 25041)
+-- Dependencies: 223
 -- Data for Name: service_reviews; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.service_reviews VALUES ('acb0b610-a7d9-4879-9711-4da70fe7e263', 3, 'Цена полностью оправдывает качество.', '2024-11-26', '3ce33320-57bb-4b2e-8fdb-852faaa4635f');
-INSERT INTO public.service_reviews VALUES ('52b5b0eb-a812-428b-89b5-499a53d92996', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-02-12', '0ba5b51c-1264-4a9a-927e-c9db823d88ab');
-INSERT INTO public.service_reviews VALUES ('aee36669-822f-41df-a61d-5d291ce375d9', 5, 'Лучшая инвестиция в мой бизнес за этот год!', '2026-04-26', '1510607a-86ec-49cf-8bb5-7a804848db79');
-INSERT INTO public.service_reviews VALUES ('a1179a93-594b-41a6-8e95-5c314eb81409', 2, 'Зря потратил время и деньги.', '2026-04-14', 'ccd40085-3c63-42db-b9c2-9067fb3a6ed1');
-INSERT INTO public.service_reviews VALUES ('3e3d207d-f1e1-47fd-a954-894d0ada962f', 1, 'Зря потратил время и деньги.', '2025-12-24', '55020d37-6381-4758-b927-fa88d14a08aa');
-INSERT INTO public.service_reviews VALUES ('add411ef-2f13-4ad2-bc4f-fdfa07ca7b93', 4, 'Специалист — профессионал своего дела, рекомендую.', '2026-04-01', '372744bf-4875-48cf-9a66-f1d37ddb51d0');
-INSERT INTO public.service_reviews VALUES ('932324bc-cd56-4a74-a373-a0c0bd6bbe83', 3, 'Цена полностью оправдывает качество.', '2026-03-20', '93bc0826-7556-4ce4-80af-bf335bef8241');
-INSERT INTO public.service_reviews VALUES ('866dfeb0-5f95-4188-85bd-8aa590e12966', 2, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-09-28', 'e5076dfa-78af-4b1b-a22a-a61f2d0a8341');
-INSERT INTO public.service_reviews VALUES ('20bb3da8-3877-41a4-b777-afe8bfaf4ea0', 3, 'Цена полностью оправдывает качество.', '2025-11-07', '8068f63c-04f7-48e7-94f8-e23fb1160c4e');
-INSERT INTO public.service_reviews VALUES ('158bbb6f-4a39-49bf-9a7e-407a23f52031', 2, 'Много воды, хотелось бы больше практики.', '2025-12-12', '95d7127d-ddef-4386-a008-0c90900c899e');
-INSERT INTO public.service_reviews VALUES ('02f1728e-af6c-40cf-be89-f67a886cd81b', 1, 'Много воды, хотелось бы больше практики.', '2024-10-29', '4e1090be-814a-4faa-8844-06e8c1d8526d');
-INSERT INTO public.service_reviews VALUES ('f8ba3f26-fd40-4cb5-92b5-17691c39c6fa', 5, 'Лучшая инвестиция в мой бизнес за этот год!', '2026-02-16', '23acec67-fcf8-4534-9bf9-e80681a81938');
-INSERT INTO public.service_reviews VALUES ('19e1730d-564a-4d43-b3c0-edabe0902966', 2, 'Много воды, хотелось бы больше практики.', '2026-03-09', 'af53c755-8862-47c3-9aab-a6aa889fac94');
-INSERT INTO public.service_reviews VALUES ('a00a3a91-a014-4172-b4ab-8426b78c0eda', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2026-03-14', 'e4305593-a098-404c-94ed-47f8aa691c5d');
-INSERT INTO public.service_reviews VALUES ('e225d355-1320-43d8-94ea-6f0eab5b6c88', 4, 'Специалист — профессионал своего дела, рекомендую.', '2026-04-11', '43b8c3f3-60c8-4e66-91fb-0b70edbf44e5');
-INSERT INTO public.service_reviews VALUES ('9037d4f2-c04b-4246-915d-81628e257bb6', 1, 'Зря потратил время и деньги.', '2026-01-31', '2c04c2f6-acf6-4e35-8b12-9cd6632fbbde');
-INSERT INTO public.service_reviews VALUES ('887e199b-445b-4cd3-ac45-804094f01fd6', 4, 'Лучшая инвестиция в мой бизнес за этот год!', '2026-01-13', '0614d257-507c-4d8a-beb9-fb263d7e3fe7');
-INSERT INTO public.service_reviews VALUES ('4b9d671c-441d-4006-bce6-554234413300', 4, 'Лучшая инвестиция в мой бизнес за этот год!', '2026-04-02', '83cbf7a9-0f05-4400-9de7-ae24818f7258');
-INSERT INTO public.service_reviews VALUES ('373f1651-d805-4bd7-b755-2afb2fbaae7e', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2026-02-16', '819089e1-8268-4061-953f-9364daccdd83');
-INSERT INTO public.service_reviews VALUES ('c7f0c6c5-dcd9-40be-a38f-bfcd9d22337b', 3, 'Цена полностью оправдывает качество.', '2025-12-04', '08ae25e5-c902-4bf8-8190-16890f585a2f');
-INSERT INTO public.service_reviews VALUES ('e3f82305-9de6-4b4a-b721-ca770cd7d84b', 4, 'Отличный материал, очень помогло!', '2026-04-22', '4f6bc62d-650c-4a5f-8171-6b2e8e07e4c9');
-INSERT INTO public.service_reviews VALUES ('25494f08-f4c2-49c4-816b-06fdffbedaf6', 1, 'Много воды, хотелось бы больше практики.', '2026-03-19', 'eff2a1d3-6163-4d37-98a8-62f9e6804e2e');
-INSERT INTO public.service_reviews VALUES ('5f9efc8d-3643-4311-9070-70b208cd0960', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-11-10', '204877df-327a-4e31-85ca-b2af2ebd3a1b');
-INSERT INTO public.service_reviews VALUES ('f95be384-26d3-4750-8ef7-3d898607c802', 1, 'Много воды, хотелось бы больше практики.', '2025-07-28', '1839413f-7399-45dd-9a3b-22df0a1e19ac');
-INSERT INTO public.service_reviews VALUES ('3af2a1d3-0bdb-40fe-b373-eb5de0d47cf7', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2026-02-21', '43e5a996-72f9-4be9-86ef-673da8054a60');
-INSERT INTO public.service_reviews VALUES ('dd4809d7-deb4-4282-980c-7ac135533ad7', 3, 'Материал хороший, но подача немного сухая.', '2025-06-23', '85ac91fd-5b67-4ce4-8175-20e94f7e8614');
-INSERT INTO public.service_reviews VALUES ('905087f3-5e4e-4b3b-abf9-75605e592826', 2, 'Много воды, хотелось бы больше практики.', '2026-04-26', '9bea6e48-0f70-42d7-9603-59385a967f94');
-INSERT INTO public.service_reviews VALUES ('00804658-3d44-4e49-83e5-cf0823f3bcf5', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2025-12-02', 'b924eb67-c10c-49a7-9f3c-35b32b318187');
-INSERT INTO public.service_reviews VALUES ('0bcc7481-7109-428f-8312-face587f1345', 4, 'Специалист — профессионал своего дела, рекомендую.', '2025-12-19', '932438ff-3e8d-41a5-917b-bf61fae928f7');
-INSERT INTO public.service_reviews VALUES ('99714ad8-40c3-4f22-ba67-b490a2c0641e', 4, 'Специалист — профессионал своего дела, рекомендую.', '2026-01-15', '84b8a142-d944-407d-a975-548e99d526d9');
-INSERT INTO public.service_reviews VALUES ('3a992d4d-ec63-4894-98e1-630d90ab1cd2', 1, 'Много воды, хотелось бы больше практики.', '2025-12-09', 'e8d32ca2-2a5e-463e-b532-8eeaf0c69c47');
-INSERT INTO public.service_reviews VALUES ('ace8e925-f025-440a-ad8e-03df058c5009', 1, 'Много воды, хотелось бы больше практики.', '2026-03-15', 'b38e623c-499f-4aeb-a034-f2fc4bf31d9e');
-INSERT INTO public.service_reviews VALUES ('5e1464c1-008d-4f42-9838-f0d69bd283cf', 3, 'Материал хороший, но подача немного сухая.', '2026-03-11', 'ed63a1fd-9ed4-47b0-a38f-6d591dd805a3');
-INSERT INTO public.service_reviews VALUES ('d367c369-0192-4d4e-9d5b-e407ae7935f5', 4, 'Спасибо, всё четко и по делу.', '2024-11-27', '41785e93-c23a-462c-b52c-07b16c3bfcd0');
-INSERT INTO public.service_reviews VALUES ('e7286434-a15e-470b-9f4a-8904aaaff23f', 5, 'Спасибо, всё четко и по делу.', '2025-08-31', 'aa27243a-9228-4613-95bf-2dde37cfc3c5');
-INSERT INTO public.service_reviews VALUES ('cb8c179a-53e5-4946-8699-ddaa911136ba', 2, 'Много воды, хотелось бы больше практики.', '2025-08-31', '1cc4bc2d-5e50-4156-81ad-42b7ededfd1a');
-INSERT INTO public.service_reviews VALUES ('764f4798-0c9d-4acf-91db-b002fd2da34e', 2, 'Много воды, хотелось бы больше практики.', '2026-01-01', '35899bea-d9b9-4aa0-8e72-738c1efa07c7');
-INSERT INTO public.service_reviews VALUES ('1e1997a1-fd2c-40d3-9dc0-3e02ed5711bf', 2, 'Зря потратил время и деньги.', '2026-04-26', '3bf648c6-4d54-49b7-a718-e3e48c141232');
-INSERT INTO public.service_reviews VALUES ('a920fd13-4198-4481-a6b2-be36db53fafc', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2025-11-08', '3c8ee60c-8f86-4fde-a6f8-c3132b5d0022');
-INSERT INTO public.service_reviews VALUES ('35e74980-2c57-44f0-8107-588ccd066418', 4, 'Лучшая инвестиция в мой бизнес за этот год!', '2025-08-29', '7928499e-75be-4958-8916-529c0e99346a');
+INSERT INTO public.service_reviews VALUES ('83858be5-a947-4728-943f-bcf2fec5187e', 'db0ac34d-8521-4afc-a6b5-7d7cfa2523cf', 4, 'Спасибо, всё четко и по делу.', '2025-09-19');
+INSERT INTO public.service_reviews VALUES ('925f675c-16b2-437e-95b0-6ced6fa2a06c', '32042c9f-9f08-4ef6-9ef6-04835496c720', 3, 'Материал хороший, но подача немного сухая.', '2026-02-16');
+INSERT INTO public.service_reviews VALUES ('f889e630-9ca9-4cba-bf48-811423e5d961', '05b64f09-42d9-4209-9ba7-ba66d3becf38', 4, 'Профессионал своего дела, рекомендую.', '2026-03-14');
+INSERT INTO public.service_reviews VALUES ('4dccfd68-7a89-4f24-bc81-1d4c03d566f3', 'aa213c24-7bbd-4c6a-9b6c-85ed7fdf831b', 5, 'Лучшая инвестиция в мой бизнес!', '2024-06-26');
+INSERT INTO public.service_reviews VALUES ('49b90700-9048-44e9-80c3-970b7d864270', '22555f12-f067-40f0-b0c6-d0aa1ddaf96c', 4, 'Отличный материал, очень помогло!', '2025-10-15');
+INSERT INTO public.service_reviews VALUES ('60ab2d44-e72b-4447-9ada-971e53e20c09', '96737a80-02e1-4169-967d-a8417bada2ec', 1, 'Зря потратил время и деньги.', '2025-07-11');
+INSERT INTO public.service_reviews VALUES ('b3c532ad-f500-4386-bc66-07825bfcb53d', 'fc824156-0b9b-4315-b666-96a9cd05eb8b', 5, 'Лучшая инвестиция в мой бизнес!', '2025-05-18');
+INSERT INTO public.service_reviews VALUES ('9aac1e8c-3424-4609-b7e8-c6c53b1b0a6e', '46e6eda4-f702-4afa-b8f7-124d013a07e3', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2025-10-15');
+INSERT INTO public.service_reviews VALUES ('45442dd3-43c9-4d74-99ca-889e4d7a33a4', '5ac9245d-3d59-4841-b2f4-fb33a8d0b206', 2, 'Много воды, хотелось бы больше практики.', '2026-02-10');
+INSERT INTO public.service_reviews VALUES ('6ae8cd25-ec79-45de-8d02-dec6b1a8ea3c', '4395c0b9-b95c-4573-a251-5cc27476474f', 1, 'Много воды, хотелось бы больше практики.', '2026-01-31');
+INSERT INTO public.service_reviews VALUES ('8c789fd4-6009-4b37-9b6f-7b344bfa6c09', '22a8902a-84b1-4ac0-9241-4014b5f7c12a', 5, 'Спасибо, всё четко и по делу.', '2026-03-08');
+INSERT INTO public.service_reviews VALUES ('63597751-0d91-447d-a4d7-ccf749223747', 'f8ce08e1-9a4a-4609-8694-ebeb61f3c3fa', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2026-02-19');
+INSERT INTO public.service_reviews VALUES ('388bb0b8-a844-4f8d-82a6-f2f01d6f6d06', '6660ac26-863c-4ed8-9020-d0d6ae41108e', 2, 'Зря потратил время и деньги.', '2025-11-17');
+INSERT INTO public.service_reviews VALUES ('67300c15-b920-4620-a72d-e43e3082e581', 'ac6596e9-144f-496b-bcce-3047e6d05d47', 1, 'Не узнал ничего нового, всё есть в открытом доступе.', '2026-04-09');
+INSERT INTO public.service_reviews VALUES ('016bf267-6751-40d5-807f-ba4ffefa3961', '41d504f0-5a19-4e2a-8810-0a551b4d047e', 5, 'Лучшая инвестиция в мой бизнес!', '2024-10-30');
+INSERT INTO public.service_reviews VALUES ('7bba1cb6-c0bd-489c-830a-eaf27a03608c', '4f327c08-298c-478c-a1bb-d5e03ebb2ff2', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2025-04-21');
+INSERT INTO public.service_reviews VALUES ('70757970-bf8d-4261-a2af-f4dcf0f46464', 'a234c8c5-9cf9-431e-8b50-60686bf794c5', 3, 'Остались некоторые вопросы, но в целом неплохо.', '2026-02-16');
+INSERT INTO public.service_reviews VALUES ('370b85a4-1804-41fa-95d8-9b8ba031000a', '2a472d3e-b280-425d-ba5a-41079083a86d', 2, 'Много воды, хотелось бы больше практики.', '2024-12-23');
+INSERT INTO public.service_reviews VALUES ('c2757f06-9a9d-4354-a140-b043bc2e2f05', '4d0bd085-a891-4f3b-bb7e-41f41f59bc13', 4, 'Спасибо, всё четко и по делу.', '2026-04-24');
+INSERT INTO public.service_reviews VALUES ('ea93edcf-b1d5-4f32-8762-c163f58bc72d', 'b8ce01d8-6be5-4b7b-a649-949c3d0c9f02', 5, 'Спасибо, всё четко и по делу.', '2026-01-04');
+INSERT INTO public.service_reviews VALUES ('ae9f5a6b-74d8-4642-95c3-a476e44153aa', '0ff93f3a-1af6-4477-bf30-d4c9466ad71d', 3, 'Цена полностью оправдывает качество.', '2026-04-02');
+INSERT INTO public.service_reviews VALUES ('ada27d70-5c54-4654-9288-ccfdf6686c1d', '1c51da20-d9d9-4e09-b569-92525baf293e', 5, 'Спасибо, всё четко и по делу.', '2026-04-25');
+INSERT INTO public.service_reviews VALUES ('16ea559b-d460-495b-bc6a-7540b054bbd9', 'ff3eefd4-0e41-4820-b0d9-73871892e0f7', 5, 'Профессионал своего дела, рекомендую.', '2025-10-01');
+INSERT INTO public.service_reviews VALUES ('bf6a6eae-8175-40e7-beb1-8b21b1949893', 'a1a48ac2-5891-4e3f-9f06-9b606bd9f1b7', 4, 'Лучшая инвестиция в мой бизнес!', '2025-03-04');
+INSERT INTO public.service_reviews VALUES ('9d328391-63a6-4abc-a76e-a6be848d32a3', '8650afa9-3a58-4f5b-a92c-68ca04459087', 5, 'Профессионал своего дела, рекомендую.', '2026-02-09');
+INSERT INTO public.service_reviews VALUES ('45f53ac2-1450-43ef-ba48-de11ea214437', '71fd5584-233d-488f-b239-2d780fab9004', 3, 'Материал хороший, но подача немного сухая.', '2025-12-22');
+INSERT INTO public.service_reviews VALUES ('fe78c136-bc8a-4e2d-a669-cc26bba02408', '857996e4-0e98-44e1-bdcb-66268103ed13', 1, 'Зря потратил время и деньги.', '2026-03-05');
+INSERT INTO public.service_reviews VALUES ('1134ca15-d3d6-4501-a431-4736fca08803', '44023cb4-9617-4a89-99a3-c3235a55259c', 1, 'Много воды, хотелось бы больше практики.', '2026-02-18');
+INSERT INTO public.service_reviews VALUES ('2fab7fe2-d15c-4cad-8207-d6eff832a255', '855906e2-037a-444e-b6bc-5500f04e201e', 3, 'Цена полностью оправдывает качество.', '2026-03-01');
+INSERT INTO public.service_reviews VALUES ('c5f5ab85-aef6-4751-9f7c-65644ccd6848', '2088b905-da38-45b4-b43a-7afcbf8dfcb3', 2, 'Зря потратил время и деньги.', '2026-04-15');
+INSERT INTO public.service_reviews VALUES ('944a5165-9c9b-4092-b3cc-045c11863684', 'fd4104b8-c525-46f9-b543-4595b9d8bcea', 1, 'Зря потратил время и деньги.', '2026-03-24');
+INSERT INTO public.service_reviews VALUES ('ef18a2b4-5f96-4391-8419-2ff89521d9cb', '9291fcc7-7385-4081-8ddb-b10448fdbf53', 1, 'Много воды, хотелось бы больше практики.', '2026-04-21');
+INSERT INTO public.service_reviews VALUES ('497a17c5-ac44-4873-9060-70c64e222b93', 'e8c7b2b2-45f2-4663-bef1-7380c10a0882', 2, 'Много воды, хотелось бы больше практики.', '2026-04-20');
+INSERT INTO public.service_reviews VALUES ('c9c864c7-655f-4957-b4f3-df821ae0eb5c', '3e6db98c-48d5-468e-a463-688f47fc7ba8', 5, 'Полный восторг, превзошло все ожидания!', '2026-04-06');
 
 
 --
--- TOC entry 4997 (class 0 OID 24806)
--- Dependencies: 223
+-- TOC entry 5009 (class 0 OID 24995)
+-- Dependencies: 220
 -- Data for Name: services; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.services VALUES ('1f04b223-8f58-436f-af6f-681db42332bf', '5089dd27-b02f-469d-910c-34dfb52642c2', 'Разбор фин. модели', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 45, 4900.60);
-INSERT INTO public.services VALUES ('98450b8d-0905-4226-9dc6-1afd8a993f43', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', 'Внедрение CRM системы', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 45, 16604.44);
-INSERT INTO public.services VALUES ('a65d4636-b9a8-4794-97de-5c934f69871d', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', 'Разработка бизнес-плана', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 90, 8946.07);
-INSERT INTO public.services VALUES ('045673b9-16df-4f91-8cd2-171713672717', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', 'Внедрение CRM системы', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 90, 16109.92);
-INSERT INTO public.services VALUES ('80a4d0cb-3e52-4877-8468-35cb9ff14c03', '07beb9d4-b4e3-407d-b017-c892dc1f769a', 'Разработка бизнес-плана', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 60, 2040.73);
-INSERT INTO public.services VALUES ('dba6a4db-a2b6-4f7d-b0e5-ce6e23761239', 'e0599544-24eb-416b-b10b-306d34f3f419', 'Разбор фин. модели', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 45, 6770.02);
-INSERT INTO public.services VALUES ('0913d756-5673-4fbb-acfe-2692ac9b8fb8', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', 'Разбор фин. модели', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 60, 6481.33);
-INSERT INTO public.services VALUES ('917954aa-3fa3-43fa-92b4-4ee00af7cc55', '70b799ac-1620-4271-bc9d-ce54a41c3682', 'Разбор фин. модели', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 150, 9191.16);
-INSERT INTO public.services VALUES ('ea07fce7-c070-43e9-81a8-b7c8ed41f7ca', 'b407ec89-876f-43ed-ba50-289e55fbd869', 'Разработка бизнес-плана', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 60, 11673.11);
-INSERT INTO public.services VALUES ('e971575c-a0fd-47c8-8ab5-58b78d646868', '88d891ed-928c-4a23-a572-6855b60c50b7', 'Разработка бизнес-плана', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 180, 7513.64);
-INSERT INTO public.services VALUES ('8ef3e89f-a640-46d8-8c25-693ddae54df9', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', 'Построение отдела продаж', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 30, 10506.73);
-INSERT INTO public.services VALUES ('d1b63de3-38b8-4b16-9a59-b3cd9b50e8b1', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', 'Консультация по налогам ИП/ООО', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 150, 16954.71);
-INSERT INTO public.services VALUES ('db1af11e-469b-40a7-b85c-e0b88369ce17', '5089dd27-b02f-469d-910c-34dfb52642c2', 'Аудит маркетинговой стратегии', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 45, 12112.79);
-INSERT INTO public.services VALUES ('87466623-f080-4f82-aeb9-81ab0f5667c1', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', 'Построение отдела продаж', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 90, 6224.94);
-INSERT INTO public.services VALUES ('4701b341-55ca-4f7f-8c97-86435779f58d', 'e69deca2-7193-49e0-8e9f-daee0420a875', 'Оптимизация логистики', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 120, 14884.95);
-INSERT INTO public.services VALUES ('ba3a0175-c053-4173-ba00-245db4645a69', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', 'Построение отдела продаж', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 180, 16845.69);
-INSERT INTO public.services VALUES ('76412a7a-35da-403f-b13a-1579129ea0f3', '07beb9d4-b4e3-407d-b017-c892dc1f769a', 'HR-стратегия и найм', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 150, 9780.19);
-INSERT INTO public.services VALUES ('2f1d0954-38c3-4b92-9d51-3b6ebc5441c4', 'a50c19d0-a789-473b-994d-52b9212cee87', 'Построение отдела продаж', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 120, 5245.12);
-INSERT INTO public.services VALUES ('cb48e335-3ccb-4491-9160-703585b18669', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', 'HR-стратегия и найм', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 150, 19099.19);
-INSERT INTO public.services VALUES ('2c2537e8-5b49-4ebb-8e4b-15844d6e50a5', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', 'HR-стратегия и найм', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 30, 13036.83);
-INSERT INTO public.services VALUES ('7497a885-c6b8-47a9-b9cf-7303ffc510e5', '88d891ed-928c-4a23-a572-6855b60c50b7', 'Внедрение CRM системы', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 90, 8163.57);
-INSERT INTO public.services VALUES ('4c15a4e4-9975-43ee-9f5f-393a8eb7efc0', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', 'Разработка бизнес-плана', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 60, 18707.68);
-INSERT INTO public.services VALUES ('c981e255-247e-4c27-8beb-8bb9dbf78eb9', '86d6b656-583a-4227-9f10-7b763b3f3ea1', 'Консультация по налогам ИП/ООО', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 120, 15136.78);
-INSERT INTO public.services VALUES ('4ce619db-8f29-47a9-aed8-97284db5668b', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', 'Разбор фин. модели', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 30, 12408.79);
-INSERT INTO public.services VALUES ('106bbda2-c829-46f7-b2ee-53389dc5a7df', '07beb9d4-b4e3-407d-b017-c892dc1f769a', 'Разработка бизнес-плана', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 90, 15047.69);
-INSERT INTO public.services VALUES ('f5558bec-45a7-4945-b042-0fdd506e97ea', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', 'Разработка бизнес-плана', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 180, 10524.76);
-INSERT INTO public.services VALUES ('aa288965-0aa2-4c2e-a7de-083477479d18', '88d891ed-928c-4a23-a572-6855b60c50b7', 'HR-стратегия и найм', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 45, 3334.41);
-INSERT INTO public.services VALUES ('6d6e94a8-b716-4fc2-9748-78ea1d89e70f', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', 'Консультация по налогам ИП/ООО', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 180, 2777.67);
-INSERT INTO public.services VALUES ('f5e0b0ca-f27f-4e9d-a0a4-1dbbee607aae', '757e2a9d-624f-4bd2-a7ec-48331ca16a31', 'Аудит маркетинговой стратегии', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 45, 16789.88);
-INSERT INTO public.services VALUES ('3a0fa377-7035-4d4b-84f2-238cb1df2ef9', '5089dd27-b02f-469d-910c-34dfb52642c2', 'Разбор фин. модели', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 90, 8311.16);
-INSERT INTO public.services VALUES ('7e0a1c54-56d5-4341-aff6-8a215c65a392', '07beb9d4-b4e3-407d-b017-c892dc1f769a', 'Анализ конкурентов', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 30, 4484.64);
-INSERT INTO public.services VALUES ('f99887cb-b432-41e3-9ce3-6b20dc462be9', '582ada26-484e-4377-a94d-2761381c578b', 'Аудит маркетинговой стратегии', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 45, 17605.28);
-INSERT INTO public.services VALUES ('bbc6c4ec-4fdc-4e2a-9629-7b78dda47f45', '582ada26-484e-4377-a94d-2761381c578b', 'HR-стратегия и найм', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 120, 1677.40);
-INSERT INTO public.services VALUES ('c42de817-6553-4fd2-9f6c-29bb82e981a0', '5089dd27-b02f-469d-910c-34dfb52642c2', 'Построение отдела продаж', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 90, 7897.58);
-INSERT INTO public.services VALUES ('927214ec-059d-45e5-8560-cc0918fcb4e4', '4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', 'Анализ конкурентов', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 30, 8096.21);
-INSERT INTO public.services VALUES ('3a0d6511-9176-4ab6-a133-7229bb7f7037', 'a50c19d0-a789-473b-994d-52b9212cee87', 'Оптимизация логистики', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 30, 16779.51);
-INSERT INTO public.services VALUES ('8161e4da-e19c-4a24-a1d3-bca8f12a0644', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', 'Разработка бизнес-плана', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 30, 17090.93);
-INSERT INTO public.services VALUES ('93b78a2c-4505-4931-af60-60e07d09dc15', '174f4d28-2b01-4a54-b27a-76a50b600e50', 'Построение отдела продаж', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 150, 12600.39);
-INSERT INTO public.services VALUES ('60b62f2f-242d-47fc-8733-67288ec30cd9', '07beb9d4-b4e3-407d-b017-c892dc1f769a', 'HR-стратегия и найм', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 60, 18542.71);
-INSERT INTO public.services VALUES ('5d63297b-3bb4-4502-8876-fa96ececd8c8', '70b799ac-1620-4271-bc9d-ce54a41c3682', 'Разработка бизнес-плана', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 150, 15038.85);
-INSERT INTO public.services VALUES ('e15b728e-1134-4bfe-9771-ed7900f374aa', 'a50c19d0-a789-473b-994d-52b9212cee87', 'Разбор фин. модели', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 150, 13799.76);
-INSERT INTO public.services VALUES ('d858e9a6-ed60-4930-ae60-02971e807ae9', 'a50c19d0-a789-473b-994d-52b9212cee87', 'Разработка бизнес-плана', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 60, 2835.41);
-INSERT INTO public.services VALUES ('cdb0813b-d943-4207-9a8d-408f2b2fc7c8', '174f4d28-2b01-4a54-b27a-76a50b600e50', 'Оптимизация логистики', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 30, 19087.62);
-INSERT INTO public.services VALUES ('29cc7cbe-6d31-49c2-8cef-725566b80438', 'a50c19d0-a789-473b-994d-52b9212cee87', 'Консультация по налогам ИП/ООО', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 30, 18179.59);
-INSERT INTO public.services VALUES ('4f615d69-3d65-4877-876c-6fea280c2a7f', 'e69deca2-7193-49e0-8e9f-daee0420a875', 'Построение отдела продаж', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 45, 11117.92);
-INSERT INTO public.services VALUES ('97ca912e-ed47-4d19-931a-042ab796d020', '174f4d28-2b01-4a54-b27a-76a50b600e50', 'Построение отдела продаж', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 120, 10012.39);
-INSERT INTO public.services VALUES ('50415186-3332-433e-af65-2f20740958c2', 'bb90ff09-cafb-4403-92a2-07d928d8daa9', 'Разбор фин. модели', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 120, 18393.35);
-INSERT INTO public.services VALUES ('dcd7159f-e028-421d-8101-0ff3f5143eaf', 'e69deca2-7193-49e0-8e9f-daee0420a875', 'Разбор фин. модели', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 30, 13801.12);
-INSERT INTO public.services VALUES ('58018845-9705-43dc-9c15-a09d315910a3', '174f4d28-2b01-4a54-b27a-76a50b600e50', 'Аудит маркетинговой стратегии', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 60, 17761.22);
-INSERT INTO public.services VALUES ('e6f5427e-f9ef-4492-90d0-3384f045caa5', 'a50c19d0-a789-473b-994d-52b9212cee87', 'Построение отдела продаж', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 90, 6199.11);
-INSERT INTO public.services VALUES ('04754527-6492-4a48-ab1f-e611c15a43d5', 'eb2a31b9-8e64-4f7e-86a7-03678d49994b', 'Разработка бизнес-плана', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 180, 8944.93);
-INSERT INTO public.services VALUES ('c3f0a581-6c19-474c-acab-5202b120d603', 'ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', 'Анализ конкурентов', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 60, 7999.32);
-INSERT INTO public.services VALUES ('d363043a-9ff5-4b00-a7e2-e55cec25c791', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', 'Аудит маркетинговой стратегии', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 30, 6652.63);
-INSERT INTO public.services VALUES ('33bf7362-3a96-4292-9f62-b1a3e6641c85', 'b3df3dff-3594-4c43-b9da-4b936d7f1282', 'HR-стратегия и найм', 'Помогу выстроить прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 150, 19859.04);
-INSERT INTO public.services VALUES ('b0791fea-9c6b-4c36-afdf-ed1374ae8c82', '6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', 'Построение отдела продаж', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 90, 7534.92);
-INSERT INTO public.services VALUES ('7533296e-2121-4402-9bf0-291a25dcd72a', '174f4d28-2b01-4a54-b27a-76a50b600e50', 'Оптимизация логистики', 'Индивидуальная онлайн-встреча. Разберем вашу нишу и подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 30, 17422.42);
-INSERT INTO public.services VALUES ('81bf8064-1d2f-4d5a-9f39-07110375123a', '6c7c202c-6e67-4771-8e6d-cea923775928', 'Разбор фин. модели', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 120, 14977.30);
-INSERT INTO public.services VALUES ('6164a3a4-6195-406b-ad0e-5249458b43ac', '174f4d28-2b01-4a54-b27a-76a50b600e50', 'Разбор фин. модели', 'Глубокий анализ ваших бизнес-процессов с предоставлением письменного отчета и рекомендаций по автоматизации и снижению издержек.', 90, 6009.89);
-INSERT INTO public.services VALUES ('a1dbaf18-010f-4427-a6ad-d007d9ba1333', '174f4d28-2b01-4a54-b27a-76a50b600e50', 'Оптимизация логистики', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 90, 11675.10);
-INSERT INTO public.services VALUES ('4ed2e7ce-017b-4c91-9edb-d04efeb32305', '9410282f-eb82-40e3-bf8d-3a0fa6f0deed', 'Анализ конкурентов', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим пошаговый план по увеличению конверсии и выручки.', 60, 4625.59);
+INSERT INTO public.services VALUES ('123688f1-5265-478d-8f35-c5866d42fcdc', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', 'Анализ конкурентов', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 90, 5558.18);
+INSERT INTO public.services VALUES ('af7631bf-5f76-4722-90fe-a564aef80f6e', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', 'Оптимизация логистики', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 45, 3400.36);
+INSERT INTO public.services VALUES ('a65c4917-a962-47ba-9692-e654177c4388', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', 'Построение отдела продаж', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 180, 17526.97);
+INSERT INTO public.services VALUES ('fee37b65-d9c8-4fec-b90b-f8afa54c59f8', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', 'Построение отдела продаж', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 90, 5694.00);
+INSERT INTO public.services VALUES ('1d954e15-47df-4d82-9681-3832748878a9', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', 'Разработка бизнес-плана', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 150, 13855.79);
+INSERT INTO public.services VALUES ('c694dbb1-9268-43a7-8cf5-8d18720d9fa8', '9e2538b1-105a-41e5-93b5-958545f78e43', 'HR-стратегия и найм', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 45, 19602.68);
+INSERT INTO public.services VALUES ('53c2ac7a-9de8-4557-92d7-6e18e448d084', '9e2538b1-105a-41e5-93b5-958545f78e43', 'Оптимизация логистики', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 90, 18692.74);
+INSERT INTO public.services VALUES ('0e7a8c72-5fae-4f11-8bbf-83a7ae6ef156', '455d3a9e-0b1c-43f1-91ae-97904ec21f35', 'Консультация по налогам', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим план по увеличению выручки.', 60, 19657.89);
+INSERT INTO public.services VALUES ('47bfe791-5dfe-4f70-bba6-79b00a1e5588', '2b122c6b-e3d8-4b39-b165-aa8b61834322', 'Консультация по налогам', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим план по увеличению выручки.', 45, 10332.09);
+INSERT INTO public.services VALUES ('9af34294-5370-4d17-9b09-f0ec550fdfcb', '8bdb45be-5e06-4224-904e-ca10724599f0', 'Разработка бизнес-плана', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 45, 14938.72);
+INSERT INTO public.services VALUES ('15fb1219-b2ba-4a3c-9876-f59390460ffc', '8bdb45be-5e06-4224-904e-ca10724599f0', 'HR-стратегия и найм', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 45, 10292.50);
+INSERT INTO public.services VALUES ('350509d5-1403-4e0c-a12d-9f6512c48959', '035c6559-1715-4f72-91a1-9b8ec53abb80', 'Разработка бизнес-плана', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 120, 12491.93);
+INSERT INTO public.services VALUES ('2900cece-8809-471c-9b05-9d9f82051bdc', '43326f8a-d949-430c-aea3-735d47979c13', 'Разработка бизнес-плана', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим план по увеличению выручки.', 45, 11189.35);
+INSERT INTO public.services VALUES ('faf1540a-cead-4809-96e6-65e2344219b0', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', 'Оптимизация логистики', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим план по увеличению выручки.', 150, 19189.64);
+INSERT INTO public.services VALUES ('2a76aea4-9ef4-4024-a6f8-ee02515ba359', '2b122c6b-e3d8-4b39-b165-aa8b61834322', 'Анализ конкурентов', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим план по увеличению выручки.', 30, 15876.01);
+INSERT INTO public.services VALUES ('5b4d720d-8a57-4721-95e8-e6e2bdef4102', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', 'Построение отдела продаж', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 60, 15346.31);
+INSERT INTO public.services VALUES ('5a321b36-6dd7-454b-9e19-7648fbcfe92d', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Консультация по налогам', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 30, 12997.89);
+INSERT INTO public.services VALUES ('ab80e721-b57f-4cd8-99c5-d44cdd56e34c', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', 'Оптимизация логистики', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 150, 15003.60);
+INSERT INTO public.services VALUES ('9a444534-769b-4efc-a176-e14092345b0d', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', 'Разработка бизнес-плана', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 45, 1956.14);
+INSERT INTO public.services VALUES ('1d5bbcbc-7d0b-439f-86e9-2ba158868f76', 'ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', 'Консультация по налогам', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 45, 6967.61);
+INSERT INTO public.services VALUES ('cf30ae16-e60b-4cbf-9bfe-7b2afaff3ade', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', 'Анализ конкурентов', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 120, 4935.01);
+INSERT INTO public.services VALUES ('2008d077-82f6-494c-9c59-ab5251c68a53', '2521227e-be29-4c74-b38b-29c6a5741457', 'Построение отдела продаж', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 60, 19976.85);
+INSERT INTO public.services VALUES ('a9ced920-780e-4682-96c3-a2f8e68a25c1', '43326f8a-d949-430c-aea3-735d47979c13', 'Консультация по налогам', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 30, 9648.73);
+INSERT INTO public.services VALUES ('f98aa21d-1923-4658-9273-522cf637f043', '09697d5c-94af-460c-a1bb-de10bc92f737', 'Внедрение CRM', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 180, 7717.97);
+INSERT INTO public.services VALUES ('0ad041eb-bad2-44ef-8d47-cfa8e5165196', '2521227e-be29-4c74-b38b-29c6a5741457', 'Разбор фин. модели', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 120, 13999.01);
+INSERT INTO public.services VALUES ('039bb914-b310-4b2d-b430-d5af05d55526', 'df5bc45a-5a71-4988-89c5-cfc8704a0a07', 'Аудит маркетинговой стратегии', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 30, 6042.97);
+INSERT INTO public.services VALUES ('af3aa745-453f-4998-9360-5c0b9ff229fa', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', 'HR-стратегия и найм', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 60, 17093.52);
+INSERT INTO public.services VALUES ('658ed569-36b0-4247-a7cd-03a5e78261d0', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', 'Разбор фин. модели', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 150, 2279.76);
+INSERT INTO public.services VALUES ('0b04a18e-f2da-4cfb-aeeb-40ab285d36ae', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', 'Построение отдела продаж', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 60, 19398.94);
+INSERT INTO public.services VALUES ('6066bdef-af10-492d-8846-c1ffb137074e', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', 'Разработка бизнес-плана', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 120, 5563.64);
+INSERT INTO public.services VALUES ('ceb86536-7d65-46c5-b5a6-17ea48285b8d', 'b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', 'HR-стратегия и найм', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 150, 4612.49);
+INSERT INTO public.services VALUES ('c187ba36-7781-4b31-acc2-984a668d1df0', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', 'Разработка бизнес-плана', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим план по увеличению выручки.', 45, 12531.56);
+INSERT INTO public.services VALUES ('c8bb5df8-f3e4-42dc-8dfa-a43daaa9925f', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', 'Анализ конкурентов', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 90, 12870.27);
+INSERT INTO public.services VALUES ('2e8cc8c8-ec54-45bd-a3aa-5970a45bd965', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', 'Разработка бизнес-плана', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 180, 7077.60);
+INSERT INTO public.services VALUES ('f3392a2e-c769-4980-b370-2722372625bb', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', 'Разработка бизнес-плана', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим план по увеличению выручки.', 45, 7142.11);
+INSERT INTO public.services VALUES ('054f7025-2424-46b8-af4d-62e0eb23993c', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', 'Разбор фин. модели', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 120, 5695.13);
+INSERT INTO public.services VALUES ('25197915-9332-4516-97bc-b26a9bc03ba1', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Разбор фин. модели', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 90, 19870.09);
+INSERT INTO public.services VALUES ('a370ad97-788b-4fb9-8f0b-dc88506a237b', '1cfc4b5b-97e4-471d-b512-6d25abf9e85d', 'Разработка бизнес-плана', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 30, 11822.23);
+INSERT INTO public.services VALUES ('2337ae54-f86b-4b7b-8df4-c12f88828e1d', '2b122c6b-e3d8-4b39-b165-aa8b61834322', 'Аудит маркетинговой стратегии', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 90, 15015.02);
+INSERT INTO public.services VALUES ('f33ed11d-5efa-41e8-bbf6-2d0c1031f131', '9e2538b1-105a-41e5-93b5-958545f78e43', 'Анализ конкурентов', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 90, 1605.88);
+INSERT INTO public.services VALUES ('42e4a7a9-d047-4f19-a62e-83b8da19ee0f', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Разработка бизнес-плана', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 150, 12650.17);
+INSERT INTO public.services VALUES ('80bfcd5e-1a7e-451c-b275-76930405a265', '9e2538b1-105a-41e5-93b5-958545f78e43', 'HR-стратегия и найм', 'Детальный разбор вашей текущей ситуации. Найдем узкие места и составим план по увеличению выручки.', 45, 9039.94);
+INSERT INTO public.services VALUES ('384ea40c-13d6-4460-8763-318591f77fc9', 'f9ff0172-e1df-44c3-862e-6f55b5753cdc', 'Построение отдела продаж', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 30, 5129.84);
+INSERT INTO public.services VALUES ('97c99327-5f39-4585-94b4-2a4d7372f698', '40ce8df9-88ba-4316-ba21-16c38a2bd93d', 'Разбор фин. модели', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 90, 5513.27);
+INSERT INTO public.services VALUES ('7c40b300-64db-4256-9fdb-42f3344f8cf7', 'e8eba8f7-b98a-441e-853e-ca158c4a3e9d', 'HR-стратегия и найм', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 90, 9100.98);
+INSERT INTO public.services VALUES ('4cc82d59-f8ae-49dd-ab2b-348b63f2526f', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', 'Аудит маркетинговой стратегии', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 30, 2833.07);
+INSERT INTO public.services VALUES ('a34db8f1-9d20-4475-b375-11fd7a8f51ba', '09697d5c-94af-460c-a1bb-de10bc92f737', 'Разбор фин. модели', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 180, 15088.18);
+INSERT INTO public.services VALUES ('ad39b699-1bfd-4e98-963d-06f04a908357', 'c3d9e5d9-c728-4111-ba0e-3e5837247d22', 'Внедрение CRM', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 30, 5514.17);
+INSERT INTO public.services VALUES ('3ad1ce20-4213-47dc-970e-e3ca53d120e2', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', 'Аудит маркетинговой стратегии', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 120, 15635.36);
+INSERT INTO public.services VALUES ('78f869bf-054d-454c-9e22-e9690c248d68', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', 'Построение отдела продаж', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 45, 5949.68);
+INSERT INTO public.services VALUES ('3ede3b53-72ff-4512-82cd-af8ce7b204be', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Разбор фин. модели', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 180, 13635.42);
+INSERT INTO public.services VALUES ('73fc0b01-833c-49f0-a83d-7202bb14b691', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', 'Построение отдела продаж', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 30, 9348.29);
+INSERT INTO public.services VALUES ('9ac57164-dc0b-44c5-852a-8f51691f7e44', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Анализ конкурентов', 'Анализ ваших бизнес-процессов с отчетом и рекомендациями по автоматизации и снижению издержек.', 150, 13005.18);
+INSERT INTO public.services VALUES ('cda12fd2-602a-4c84-89fb-e009dec9a7c5', '9e2538b1-105a-41e5-93b5-958545f78e43', 'Анализ конкурентов', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 150, 8837.15);
+INSERT INTO public.services VALUES ('ae28e0e8-35a3-4c67-ac9c-bc352d5bcd02', 'd9b6402e-b747-4701-86a2-4e70537eaeec', 'Построение отдела продаж', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 90, 10215.59);
+INSERT INTO public.services VALUES ('61d9e6d7-5fc7-4a6b-ba49-8ccc8111252b', '98e27bfe-a371-4fae-8dd4-a3a92e14ac14', 'Построение отдела продаж', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 90, 1586.91);
+INSERT INTO public.services VALUES ('b9a7fa81-ee26-419a-aba0-57bd9c2557b2', '49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', 'Консультация по налогам', 'Выстроим прозрачную систему мотивации и KPI для ваших сотрудников, чтобы они работали на результат.', 45, 6898.99);
+INSERT INTO public.services VALUES ('de82bd12-1b3a-4e99-ac12-71cc713f041c', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Построение отдела продаж', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 180, 11572.94);
+INSERT INTO public.services VALUES ('235b2436-b20b-4e3a-a50b-54913d810e4d', 'ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'Внедрение CRM', 'Индивидуальная онлайн-встреча. Подберем оптимальный налоговый режим, чтобы не переплачивать государству.', 150, 13755.87);
+INSERT INTO public.services VALUES ('be374a73-fc5b-4b09-8aae-433f0e43f0cf', '9e2538b1-105a-41e5-93b5-958545f78e43', 'Оптимизация логистики', 'Сессия вопрос-ответ с детальным погружением в специфику вашего бизнеса. Только практические советы.', 90, 14823.29);
 
 
 --
--- TOC entry 4998 (class 0 OID 24812)
--- Dependencies: 224
+-- TOC entry 5008 (class 0 OID 24978)
+-- Dependencies: 219
 -- Data for Name: specialist_categories; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.specialist_categories VALUES ('9410282f-eb82-40e3-bf8d-3a0fa6f0deed', '7f89048c-c357-4f73-89f4-bc0136aa56f1', 'Независимый аудитор');
-INSERT INTO public.specialist_categories VALUES ('b407ec89-876f-43ed-ba50-289e55fbd869', '52dddffe-6633-45c8-8eb9-49dc8143c6ed', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('b407ec89-876f-43ed-ba50-289e55fbd869', '6777ef7c-3af1-4264-8ed7-f22951191744', 'Уровень Senior');
-INSERT INTO public.specialist_categories VALUES ('b407ec89-876f-43ed-ba50-289e55fbd869', '132651b5-507d-41b0-b5b6-0e8cfca64368', 'Ментор и наставник');
-INSERT INTO public.specialist_categories VALUES ('07beb9d4-b4e3-407d-b017-c892dc1f769a', '7f89048c-c357-4f73-89f4-bc0136aa56f1', 'Lead-специалист');
-INSERT INTO public.specialist_categories VALUES ('07beb9d4-b4e3-407d-b017-c892dc1f769a', '632f2903-c1a9-4cc8-aef7-9e7012348677', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('07beb9d4-b4e3-407d-b017-c892dc1f769a', 'f8b6dcd4-b85a-470d-9cbb-5387a0ce9d0a', 'Lead-специалист');
-INSERT INTO public.specialist_categories VALUES ('174f4d28-2b01-4a54-b27a-76a50b600e50', '6777ef7c-3af1-4264-8ed7-f22951191744', 'Практикующий эксперт');
-INSERT INTO public.specialist_categories VALUES ('174f4d28-2b01-4a54-b27a-76a50b600e50', 'f8b6dcd4-b85a-470d-9cbb-5387a0ce9d0a', 'Ментор и наставник');
-INSERT INTO public.specialist_categories VALUES ('a50c19d0-a789-473b-994d-52b9212cee87', '52dddffe-6633-45c8-8eb9-49dc8143c6ed', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('5089dd27-b02f-469d-910c-34dfb52642c2', 'f8b6dcd4-b85a-470d-9cbb-5387a0ce9d0a', 'Уровень Senior');
-INSERT INTO public.specialist_categories VALUES ('e69deca2-7193-49e0-8e9f-daee0420a875', '632f2903-c1a9-4cc8-aef7-9e7012348677', 'Независимый аудитор');
-INSERT INTO public.specialist_categories VALUES ('70b799ac-1620-4271-bc9d-ce54a41c3682', 'a7e9fadf-3921-466b-8bda-b68c904f855a', 'Уровень Senior');
-INSERT INTO public.specialist_categories VALUES ('86d6b656-583a-4227-9f10-7b763b3f3ea1', '6777ef7c-3af1-4264-8ed7-f22951191744', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('86d6b656-583a-4227-9f10-7b763b3f3ea1', 'f8b6dcd4-b85a-470d-9cbb-5387a0ce9d0a', 'Ментор и наставник');
-INSERT INTO public.specialist_categories VALUES ('582ada26-484e-4377-a94d-2761381c578b', '6777ef7c-3af1-4264-8ed7-f22951191744', 'Lead-специалист');
-INSERT INTO public.specialist_categories VALUES ('582ada26-484e-4377-a94d-2761381c578b', '632f2903-c1a9-4cc8-aef7-9e7012348677', 'Практикующий эксперт');
-INSERT INTO public.specialist_categories VALUES ('b3df3dff-3594-4c43-b9da-4b936d7f1282', 'a4257156-4c00-456b-bd0b-6af4aabffdd2', 'Lead-специалист');
-INSERT INTO public.specialist_categories VALUES ('4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '7f89048c-c357-4f73-89f4-bc0136aa56f1', 'Уровень Middle');
-INSERT INTO public.specialist_categories VALUES ('4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '632f2903-c1a9-4cc8-aef7-9e7012348677', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', 'a4257156-4c00-456b-bd0b-6af4aabffdd2', 'Lead-специалист');
-INSERT INTO public.specialist_categories VALUES ('6c7c202c-6e67-4771-8e6d-cea923775928', '6777ef7c-3af1-4264-8ed7-f22951191744', 'Уровень Middle');
-INSERT INTO public.specialist_categories VALUES ('6c7c202c-6e67-4771-8e6d-cea923775928', '132651b5-507d-41b0-b5b6-0e8cfca64368', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('bb90ff09-cafb-4403-92a2-07d928d8daa9', 'a4257156-4c00-456b-bd0b-6af4aabffdd2', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('bb90ff09-cafb-4403-92a2-07d928d8daa9', '52dddffe-6633-45c8-8eb9-49dc8143c6ed', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('eb2a31b9-8e64-4f7e-86a7-03678d49994b', 'f8b6dcd4-b85a-470d-9cbb-5387a0ce9d0a', 'Практикующий эксперт');
-INSERT INTO public.specialist_categories VALUES ('eb2a31b9-8e64-4f7e-86a7-03678d49994b', '52dddffe-6633-45c8-8eb9-49dc8143c6ed', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('e0599544-24eb-416b-b10b-306d34f3f419', '6777ef7c-3af1-4264-8ed7-f22951191744', 'Уровень Middle');
-INSERT INTO public.specialist_categories VALUES ('757e2a9d-624f-4bd2-a7ec-48331ca16a31', 'a7e9fadf-3921-466b-8bda-b68c904f855a', 'Уровень Middle');
-INSERT INTO public.specialist_categories VALUES ('757e2a9d-624f-4bd2-a7ec-48331ca16a31', 'a4257156-4c00-456b-bd0b-6af4aabffdd2', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('757e2a9d-624f-4bd2-a7ec-48331ca16a31', '6777ef7c-3af1-4264-8ed7-f22951191744', 'Практикующий эксперт');
-INSERT INTO public.specialist_categories VALUES ('ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', 'a4257156-4c00-456b-bd0b-6af4aabffdd2', 'Ментор и наставник');
-INSERT INTO public.specialist_categories VALUES ('ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', '52dddffe-6633-45c8-8eb9-49dc8143c6ed', 'Независимый аудитор');
-INSERT INTO public.specialist_categories VALUES ('6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '7f89048c-c357-4f73-89f4-bc0136aa56f1', 'Практикующий эксперт');
-INSERT INTO public.specialist_categories VALUES ('6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '52dddffe-6633-45c8-8eb9-49dc8143c6ed', 'Независимый аудитор');
-INSERT INTO public.specialist_categories VALUES ('6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', 'a4257156-4c00-456b-bd0b-6af4aabffdd2', 'Консультант-аналитик');
-INSERT INTO public.specialist_categories VALUES ('88d891ed-928c-4a23-a572-6855b60c50b7', '6777ef7c-3af1-4264-8ed7-f22951191744', 'Независимый аудитор');
-INSERT INTO public.specialist_categories VALUES ('88d891ed-928c-4a23-a572-6855b60c50b7', '132651b5-507d-41b0-b5b6-0e8cfca64368', 'Lead-специалист');
+INSERT INTO public.specialist_categories VALUES ('c3d9e5d9-c728-4111-ba0e-3e5837247d22', '76fecc11-c995-420a-a666-ba17ea0e30ff', 'Практикующий эксперт');
+INSERT INTO public.specialist_categories VALUES ('2b122c6b-e3d8-4b39-b165-aa8b61834322', 'c6988c7c-3d75-4631-a4d8-b721558b3cf1', 'Уровень Middle');
+INSERT INTO public.specialist_categories VALUES ('2b122c6b-e3d8-4b39-b165-aa8b61834322', '76fecc11-c995-420a-a666-ba17ea0e30ff', 'Практикующий эксперт');
+INSERT INTO public.specialist_categories VALUES ('f9ff0172-e1df-44c3-862e-6f55b5753cdc', '603cc426-250e-4dce-ba28-5fc6c575363a', 'Практикующий эксперт');
+INSERT INTO public.specialist_categories VALUES ('ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', 'c6988c7c-3d75-4631-a4d8-b721558b3cf1', 'Практикующий эксперт');
+INSERT INTO public.specialist_categories VALUES ('ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '0bc40aae-f266-4c5f-af6a-3127f26c7257', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '7a45023d-107d-4c63-8aeb-173fbf9e1244', 'Уровень Middle');
+INSERT INTO public.specialist_categories VALUES ('8bdb45be-5e06-4224-904e-ca10724599f0', '298f0067-0647-45e9-a10e-27ff78711092', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('2521227e-be29-4c74-b38b-29c6a5741457', '0bc40aae-f266-4c5f-af6a-3127f26c7257', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('2521227e-be29-4c74-b38b-29c6a5741457', 'c6988c7c-3d75-4631-a4d8-b721558b3cf1', 'Независимый аудитор');
+INSERT INTO public.specialist_categories VALUES ('d9b6402e-b747-4701-86a2-4e70537eaeec', '7a45023d-107d-4c63-8aeb-173fbf9e1244', 'Уровень Middle');
+INSERT INTO public.specialist_categories VALUES ('d9b6402e-b747-4701-86a2-4e70537eaeec', '603cc426-250e-4dce-ba28-5fc6c575363a', 'Независимый аудитор');
+INSERT INTO public.specialist_categories VALUES ('1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '0bc40aae-f266-4c5f-af6a-3127f26c7257', 'Уровень Middle');
+INSERT INTO public.specialist_categories VALUES ('1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '298f0067-0647-45e9-a10e-27ff78711092', 'Независимый аудитор');
+INSERT INTO public.specialist_categories VALUES ('43326f8a-d949-430c-aea3-735d47979c13', '76fecc11-c995-420a-a666-ba17ea0e30ff', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('43326f8a-d949-430c-aea3-735d47979c13', '7a45023d-107d-4c63-8aeb-173fbf9e1244', 'Практикующий эксперт');
+INSERT INTO public.specialist_categories VALUES ('9e2538b1-105a-41e5-93b5-958545f78e43', '2971d7fd-2f27-4e7a-8b8d-2dbf8bf8c3d8', 'Практикующий эксперт');
+INSERT INTO public.specialist_categories VALUES ('9e2538b1-105a-41e5-93b5-958545f78e43', 'b288d33d-10e4-4185-9e90-a9251f14d584', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('9e2538b1-105a-41e5-93b5-958545f78e43', 'c6988c7c-3d75-4631-a4d8-b721558b3cf1', 'Практикующий эксперт');
+INSERT INTO public.specialist_categories VALUES ('035c6559-1715-4f72-91a1-9b8ec53abb80', 'c6988c7c-3d75-4631-a4d8-b721558b3cf1', 'Консультант-аналитик');
+INSERT INTO public.specialist_categories VALUES ('035c6559-1715-4f72-91a1-9b8ec53abb80', 'b288d33d-10e4-4185-9e90-a9251f14d584', 'Lead-специалист');
+INSERT INTO public.specialist_categories VALUES ('e8eba8f7-b98a-441e-853e-ca158c4a3e9d', 'c6988c7c-3d75-4631-a4d8-b721558b3cf1', 'Уровень Senior');
+INSERT INTO public.specialist_categories VALUES ('98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '7a45023d-107d-4c63-8aeb-173fbf9e1244', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('98e27bfe-a371-4fae-8dd4-a3a92e14ac14', 'c6988c7c-3d75-4631-a4d8-b721558b3cf1', 'Уровень Middle');
+INSERT INTO public.specialist_categories VALUES ('df5bc45a-5a71-4988-89c5-cfc8704a0a07', '298f0067-0647-45e9-a10e-27ff78711092', 'Независимый аудитор');
+INSERT INTO public.specialist_categories VALUES ('40ce8df9-88ba-4316-ba21-16c38a2bd93d', '298f0067-0647-45e9-a10e-27ff78711092', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('40ce8df9-88ba-4316-ba21-16c38a2bd93d', '603cc426-250e-4dce-ba28-5fc6c575363a', 'Консультант-аналитик');
+INSERT INTO public.specialist_categories VALUES ('455d3a9e-0b1c-43f1-91ae-97904ec21f35', '0bc40aae-f266-4c5f-af6a-3127f26c7257', 'Практикующий эксперт');
+INSERT INTO public.specialist_categories VALUES ('455d3a9e-0b1c-43f1-91ae-97904ec21f35', '7a45023d-107d-4c63-8aeb-173fbf9e1244', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '298f0067-0647-45e9-a10e-27ff78711092', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '7a45023d-107d-4c63-8aeb-173fbf9e1244', 'Lead-специалист');
+INSERT INTO public.specialist_categories VALUES ('ffd80e04-bf76-41a2-baf5-6125374f4cf6', '0bc40aae-f266-4c5f-af6a-3127f26c7257', 'Консультант-аналитик');
+INSERT INTO public.specialist_categories VALUES ('ffd80e04-bf76-41a2-baf5-6125374f4cf6', '2971d7fd-2f27-4e7a-8b8d-2dbf8bf8c3d8', 'Ментор и наставник');
+INSERT INTO public.specialist_categories VALUES ('09697d5c-94af-460c-a1bb-de10bc92f737', '603cc426-250e-4dce-ba28-5fc6c575363a', 'Lead-специалист');
 
 
 --
--- TOC entry 4999 (class 0 OID 24817)
--- Dependencies: 225
+-- TOC entry 5006 (class 0 OID 24955)
+-- Dependencies: 217
 -- Data for Name: specialist_profiles; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.specialist_profiles VALUES ('9410282f-eb82-40e3-bf8d-3a0fa6f0deed', 'de75a2a8-50d0-438c-9305-27501f1904c2', 'Кризис-менеджер с опытом работы в ритейле. Оптимизирую расходы и сохраняю эффективность команды в турбулентные времена.', 18, '2025-06-18', 'active');
-INSERT INTO public.specialist_profiles VALUES ('b407ec89-876f-43ed-ba50-289e55fbd869', '96d5b621-4431-4e00-9263-3d566f4f349c', 'Корпоративный юрист с 15-летним стажем. Защита интеллектуальной собственности, составление сложных договоров и представительство в суде.', 16, '2024-06-13', 'active');
-INSERT INTO public.specialist_profiles VALUES ('07beb9d4-b4e3-407d-b017-c892dc1f769a', 'f24aad0e-0ce5-4767-a38d-09d32c7d07a6', 'IT-архитектор. Внедряю Битрикс24, amoCRM и 1С. Автоматизирую рутину, чтобы вы могли заниматься только стратегией.', 3, '2025-03-09', 'active');
-INSERT INTO public.specialist_profiles VALUES ('174f4d28-2b01-4a54-b27a-76a50b600e50', 'b3321f3e-cbcd-46f8-acb4-f337d59c4e0f', 'Профессиональный HR-партнер. Знаю, как схантить лучших специалистов на рынке и снизить текучку кадров в 2 раза.', 8, '2024-08-23', 'suspended');
-INSERT INTO public.specialist_profiles VALUES ('a50c19d0-a789-473b-994d-52b9212cee87', 'dededfca-a1ea-4324-9731-8d2352dd4298', 'Помогаю бизнесу расти. Более 10 лет в B2B продажах, выстроил отделы продаж для 15 крупных компаний.', 3, '2024-06-08', 'active');
-INSERT INTO public.specialist_profiles VALUES ('5089dd27-b02f-469d-910c-34dfb52642c2', 'aa9bf891-e1cd-4ccb-a693-7e59b4819456', 'Кризис-менеджер с опытом работы в ритейле. Оптимизирую расходы и сохраняю эффективность команды в турбулентные времена.', 20, '2024-11-05', 'active');
-INSERT INTO public.specialist_profiles VALUES ('e69deca2-7193-49e0-8e9f-daee0420a875', 'a38bb4e0-b02e-4088-9486-6d4a9d70c0ca', 'Помогаю бизнесу расти. Более 10 лет в B2B продажах, выстроил отделы продаж для 15 крупных компаний.', 6, '2024-07-17', 'active');
-INSERT INTO public.specialist_profiles VALUES ('70b799ac-1620-4271-bc9d-ce54a41c3682', '185d4602-6b48-4cf4-934a-4af5acb1262f', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 5, '2025-05-09', 'active');
-INSERT INTO public.specialist_profiles VALUES ('86d6b656-583a-4227-9f10-7b763b3f3ea1', 'e96670b8-3449-4182-bc61-122beb179513', 'Сертифицированный аудитор. Разберу ваши финансы, найду кассовые разрывы и легально снижу налоговую нагрузку.', 3, '2025-07-07', 'active');
-INSERT INTO public.specialist_profiles VALUES ('582ada26-484e-4377-a94d-2761381c578b', 'bdc58557-53c6-48af-9944-2ef575f75617', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 16, '2024-12-25', 'active');
-INSERT INTO public.specialist_profiles VALUES ('b3df3dff-3594-4c43-b9da-4b936d7f1282', '4c48e674-d26c-4e5f-8663-62032a4ee1da', 'Сертифицированный аудитор. Разберу ваши финансы, найду кассовые разрывы и легально снижу налоговую нагрузку.', 8, '2024-12-26', 'active');
-INSERT INTO public.specialist_profiles VALUES ('4ea7ba5d-4892-4ed3-9779-b7d1b1023ca6', '88e7fc43-b5b3-4e10-912e-de451e80b79c', 'IT-архитектор. Внедряю Битрикс24, amoCRM и 1С. Автоматизирую рутину, чтобы вы могли заниматься только стратегией.', 13, '2024-06-15', 'suspended');
-INSERT INTO public.specialist_profiles VALUES ('6c7c202c-6e67-4771-8e6d-cea923775928', '071c4cc5-0fcc-4aaa-9d26-0eab4e1bcd05', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 15, '2024-11-16', 'active');
-INSERT INTO public.specialist_profiles VALUES ('bb90ff09-cafb-4403-92a2-07d928d8daa9', '2008e2ee-f2d1-4059-8aec-a51f029f119f', 'IT-архитектор. Внедряю Битрикс24, amoCRM и 1С. Автоматизирую рутину, чтобы вы могли заниматься только стратегией.', 10, '2025-05-31', 'inactive');
-INSERT INTO public.specialist_profiles VALUES ('eb2a31b9-8e64-4f7e-86a7-03678d49994b', '16d1099d-25a0-437f-b3e9-f122a9d21177', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 2, '2025-05-15', 'active');
-INSERT INTO public.specialist_profiles VALUES ('e0599544-24eb-416b-b10b-306d34f3f419', '8d5503e0-1070-4b91-809f-65235af7955c', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 3, '2024-10-12', 'active');
-INSERT INTO public.specialist_profiles VALUES ('757e2a9d-624f-4bd2-a7ec-48331ca16a31', '8777c501-66bf-41d5-9c66-d49f27e9e26b', 'Кризис-менеджер с опытом работы в ритейле. Оптимизирую расходы и сохраняю эффективность команды в турбулентные времена.', 12, '2025-04-30', 'active');
-INSERT INTO public.specialist_profiles VALUES ('ae8fd7a3-d5f0-444b-aa41-c0dd202a76f6', 'bed0a05f-49cd-4720-b2ed-046625788faf', 'Сертифицированный аудитор. Разберу ваши финансы, найду кассовые разрывы и легально снижу налоговую нагрузку.', 6, '2025-05-11', 'active');
-INSERT INTO public.specialist_profiles VALUES ('6c99bdd4-52cc-45b4-a9bc-d15b7c6ee45e', '75d80153-dc19-446b-9c9a-b3dfd7ec0713', 'Профессиональный HR-партнер. Знаю, как схантить лучших специалистов на рынке и снизить текучку кадров в 2 раза.', 9, '2025-02-18', 'active');
-INSERT INTO public.specialist_profiles VALUES ('88d891ed-928c-4a23-a572-6855b60c50b7', '5a4a36ec-7c8b-4e23-b8dd-41333dbf999d', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 3, '2024-10-24', 'active');
+INSERT INTO public.specialist_profiles VALUES ('c3d9e5d9-c728-4111-ba0e-3e5837247d22', '2a531c5b-089d-46b3-84d8-b1b72f5d8386', 'Специалист по инвестициям и привлечению капитала. Помог 5 стартапам привлечь раунды от венчурных фондов.', 3, '2025-02-15', 'active');
+INSERT INTO public.specialist_profiles VALUES ('2b122c6b-e3d8-4b39-b165-aa8b61834322', 'fad620eb-e964-4616-be8a-c92e3d8cc332', 'Кризис-менеджер с опытом работы в ритейле. Оптимизирую расходы и сохраняю эффективность команды в турбулентные времена.', 13, '2025-09-11', 'active');
+INSERT INTO public.specialist_profiles VALUES ('f9ff0172-e1df-44c3-862e-6f55b5753cdc', 'dafecfa2-6953-4a7e-8f9c-7f0579219430', 'Специалист по инвестициям и привлечению капитала. Помог 5 стартапам привлечь раунды от венчурных фондов.', 9, '2025-06-24', 'active');
+INSERT INTO public.specialist_profiles VALUES ('ac7ea9aa-7d89-4a24-ab04-38bc2c2eceb6', '5d4dd4f4-f5b6-4a30-aced-131f81dda96f', 'Профессиональный HR-партнер. Знаю, как схантить лучших специалистов на рынке и снизить текучку кадров в 2 раза.', 10, '2025-11-05', 'suspended');
+INSERT INTO public.specialist_profiles VALUES ('8bdb45be-5e06-4224-904e-ca10724599f0', '149b86a6-dad3-45e3-a4c7-73798d607eb8', 'Сертифицированный аудитор. Разберу ваши финансы, найду кассовые разрывы и легально снижу налоговую нагрузку.', 10, '2025-01-13', 'suspended');
+INSERT INTO public.specialist_profiles VALUES ('2521227e-be29-4c74-b38b-29c6a5741457', '9690c905-e5f6-4821-9734-5a534ef83438', 'Специалист по инвестициям и привлечению капитала. Помог 5 стартапам привлечь раунды от венчурных фондов.', 4, '2025-06-09', 'active');
+INSERT INTO public.specialist_profiles VALUES ('d9b6402e-b747-4701-86a2-4e70537eaeec', '1a0bc815-fd32-45c9-b429-2a17f76bf8b9', 'Специалист по инвестициям и привлечению капитала. Помог 5 стартапам привлечь раунды от венчурных фондов.', 18, '2025-04-17', 'inactive');
+INSERT INTO public.specialist_profiles VALUES ('1cfc4b5b-97e4-471d-b512-6d25abf9e85d', '22c7d845-68b9-4852-b533-c209e2c1656c', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 15, '2024-11-06', 'active');
+INSERT INTO public.specialist_profiles VALUES ('43326f8a-d949-430c-aea3-735d47979c13', '636f7fc0-02d3-405f-a3bb-c6496fd37a04', 'Профессиональный HR-партнер. Знаю, как схантить лучших специалистов на рынке и снизить текучку кадров в 2 раза.', 10, '2025-04-09', 'inactive');
+INSERT INTO public.specialist_profiles VALUES ('9e2538b1-105a-41e5-93b5-958545f78e43', '738b8b06-6c51-440d-aa85-e0bb39168ef7', 'Специалист по инвестициям и привлечению капитала. Помог 5 стартапам привлечь раунды от венчурных фондов.', 15, '2024-12-20', 'suspended');
+INSERT INTO public.specialist_profiles VALUES ('035c6559-1715-4f72-91a1-9b8ec53abb80', 'd4b5eecc-486b-4dda-bcaa-0cf993190744', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 8, '2024-11-13', 'active');
+INSERT INTO public.specialist_profiles VALUES ('e8eba8f7-b98a-441e-853e-ca158c4a3e9d', '10d255cd-a73b-429c-85f0-edb4a0cadaa5', 'Кризис-менеджер с опытом работы в ритейле. Оптимизирую расходы и сохраняю эффективность команды в турбулентные времена.', 12, '2024-11-14', 'active');
+INSERT INTO public.specialist_profiles VALUES ('98e27bfe-a371-4fae-8dd4-a3a92e14ac14', '8a5d891a-6766-4d76-bb94-c8cbfd7dd087', 'Профессиональный HR-партнер. Знаю, как схантить лучших специалистов на рынке и снизить текучку кадров в 2 раза.', 7, '2025-11-04', 'inactive');
+INSERT INTO public.specialist_profiles VALUES ('df5bc45a-5a71-4988-89c5-cfc8704a0a07', '42eff525-bcb2-4b78-8ab3-9e5f7b743f23', 'Профессиональный HR-партнер. Знаю, как схантить лучших специалистов на рынке и снизить текучку кадров в 2 раза.', 14, '2025-08-03', 'active');
+INSERT INTO public.specialist_profiles VALUES ('40ce8df9-88ba-4316-ba21-16c38a2bd93d', 'fe876d02-9d46-44a4-849f-c56f6bddc134', 'Корпоративный юрист с 15-летним стажем. Защита интеллектуальной собственности, составление сложных договоров и представительство в суде.', 5, '2025-04-22', 'active');
+INSERT INTO public.specialist_profiles VALUES ('455d3a9e-0b1c-43f1-91ae-97904ec21f35', 'a8096d12-c4fa-40be-a9cc-3ccfb65eac00', 'Эксперт по маркетплейсам. Вывожу товары в ТОП на Wildberries и Ozon. Управляю рекламными бюджетами от 1 млн рублей.', 6, '2024-06-02', 'active');
+INSERT INTO public.specialist_profiles VALUES ('b665a9b3-32b8-4cea-a3ef-5aa03dfbda7f', '80c8ca11-4c3e-4686-bfaf-0f516ab644a4', 'Корпоративный юрист с 15-летним стажем. Защита интеллектуальной собственности, составление сложных договоров и представительство в суде.', 11, '2025-06-03', 'active');
+INSERT INTO public.specialist_profiles VALUES ('49cb9cd8-5035-4aef-a9af-4f161cc9b8eb', '44c7af7a-ae02-4357-b839-393ed4c1ab33', 'Специалист по инвестициям и привлечению капитала. Помог 5 стартапам привлечь раунды от венчурных фондов.', 6, '2025-02-07', 'active');
+INSERT INTO public.specialist_profiles VALUES ('ffd80e04-bf76-41a2-baf5-6125374f4cf6', 'da907fa2-4802-4e6a-ad74-58c38da3e8d0', 'Корпоративный юрист с 15-летним стажем. Защита интеллектуальной собственности, составление сложных договоров и представительство в суде.', 14, '2024-10-23', 'active');
+INSERT INTO public.specialist_profiles VALUES ('09697d5c-94af-460c-a1bb-de10bc92f737', '2e41139f-dc96-4663-927b-b598282733f5', 'Специалист по инвестициям и привлечению капитала. Помог 5 стартапам привлечь раунды от венчурных фондов.', 10, '2024-06-05', 'active');
 
 
 --
--- TOC entry 5000 (class 0 OID 24824)
--- Dependencies: 226
+-- TOC entry 5005 (class 0 OID 24937)
+-- Dependencies: 216
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES ('de75a2a8-50d0-438c-9305-27501f1904c2', 'roslynbradtke@luettgen.io', 'Stehr3873544', 'Hsk8Z&ATn72#', 'Анастасия', 'Попова', '71882018728', '2025-06-09', 'specialist');
-INSERT INTO public.users VALUES ('96d5b621-4431-4e00-9263-3d566f4f349c', 'luragrant@pacocha.info', 'Strosin8962482', 'J5spG6x*#P7N', 'Анна', 'Васильева', '72306004801', '2024-06-10', 'specialist');
-INSERT INTO public.users VALUES ('f24aad0e-0ce5-4767-a38d-09d32c7d07a6', 'jaimecorkery@rolfson.io', 'Nienow9533806', 'ZTqUICoDvVI8', 'Дарья', 'Михайлова', '71933863021', '2025-03-06', 'specialist');
-INSERT INTO public.users VALUES ('b3321f3e-cbcd-46f8-acb4-f337d59c4e0f', 'earnestinekovacek@skiles.info', 'Hudson293925', 'Bd@0*#9o4?U#', 'Анна', 'Соколова', '76457799410', '2024-08-18', 'specialist');
-INSERT INTO public.users VALUES ('dededfca-a1ea-4324-9731-8d2352dd4298', 'sheilabatz@fritsch.org', 'Kohler660391', 'Y38gS*2Jp!ee', 'Михаил', 'Смирнов', '74967616816', '2024-05-31', 'specialist');
-INSERT INTO public.users VALUES ('aa9bf891-e1cd-4ccb-a693-7e59b4819456', 'eliseoyost@considine.net', 'Rippin810371', 'd4qT1@q@.-Sz', 'Анастасия', 'Михайлова', '72838822719', '2024-10-27', 'specialist');
-INSERT INTO public.users VALUES ('a38bb4e0-b02e-4088-9486-6d4a9d70c0ca', 'orengreenfelder@green.net', 'Reichert3273839', '88zfK9x5JoWF', 'Анна', 'Соколова', '78218761191', '2024-07-11', 'specialist');
-INSERT INTO public.users VALUES ('185d4602-6b48-4cf4-934a-4af5acb1262f', 'duncantromp@orn.net', 'Wyman4245135', 'p59kVQ!*zhCu', 'Екатерина', 'Кузнецова', '74496214845', '2025-05-01', 'specialist');
-INSERT INTO public.users VALUES ('e96670b8-3449-4182-bc61-122beb179513', 'clarakovacek@welch.com', 'Tromp8794554', '6z24Mh?bL02n', 'Дмитрий', 'Волков', '71378716903', '2025-06-28', 'specialist');
-INSERT INTO public.users VALUES ('bdc58557-53c6-48af-9944-2ef575f75617', 'roderickcrooks@goldner.org', 'Mitchell7803956', 'gPj88mjV&_31', 'Татьяна', 'Смирнова', '71395589196', '2024-12-22', 'specialist');
-INSERT INTO public.users VALUES ('4c48e674-d26c-4e5f-8663-62032a4ee1da', 'kennethfranecki@hudson.com', 'Gerlach2205244', 'bzTw!x10eLB&', 'Андрей', 'Иванов', '75799829336', '2024-12-21', 'specialist');
-INSERT INTO public.users VALUES ('88e7fc43-b5b3-4e10-912e-de451e80b79c', 'raymondhaag@satterfield.info', 'Carter4584165', '6*IFIDvQe.!Y', 'Илья', 'Фёдоров', '71572200746', '2024-06-08', 'specialist');
-INSERT INTO public.users VALUES ('071c4cc5-0fcc-4aaa-9d26-0eab4e1bcd05', 'lloydspencer@predovic.biz', 'Stehr9077881', '@#nb#W905f6F', 'Алексей', 'Лебедев', '79525108374', '2024-11-12', 'specialist');
-INSERT INTO public.users VALUES ('2008e2ee-f2d1-4059-8aec-a51f029f119f', 'dereckkrajcik@braun.name', 'Christiansen2535770', '@kPhxeO*AVOU', 'Михаил', 'Волков', '71662445872', '2025-05-22', 'specialist');
-INSERT INTO public.users VALUES ('16d1099d-25a0-437f-b3e9-f122a9d21177', 'myrongibson@smith.com', 'Murazik4126494', 'W?JL-E&ZdQD0', 'Роман', 'Иванов', '77393607961', '2025-05-07', 'specialist');
-INSERT INTO public.users VALUES ('8d5503e0-1070-4b91-809f-65235af7955c', 'daphneekub@gulgowski.io', 'Stoltenberg8048491', 'Nh94hU7cC904', 'Иван', 'Лебедев', '77991365328', '2024-10-07', 'specialist');
-INSERT INTO public.users VALUES ('8777c501-66bf-41d5-9c66-d49f27e9e26b', 'emersongibson@treutel.net', 'Bayer1527614', 'K#SU8Fr1V6@e', 'Татьяна', 'Попова', '77167125923', '2025-04-24', 'specialist');
-INSERT INTO public.users VALUES ('bed0a05f-49cd-4720-b2ed-046625788faf', 'cesarbruen@cassin.io', 'Ankunding5532679', 'O@Ts51HhM27H', 'Елена', 'Соколова', '74984562278', '2025-05-05', 'specialist');
-INSERT INTO public.users VALUES ('75d80153-dc19-446b-9c9a-b3dfd7ec0713', 'destinihauck@mayer.net', 'Considine2316455', 'ctPg6Q0nn3ry', 'Юлия', 'Новикова', '75486994625', '2025-02-18', 'specialist');
-INSERT INTO public.users VALUES ('5a4a36ec-7c8b-4e23-b8dd-41333dbf999d', 'giovannithompson@maggio.io', 'Rau4490529', 'wM7w24D&6xAu', 'Мария', 'Фёдорова', '71731678664', '2024-10-19', 'specialist');
-INSERT INTO public.users VALUES ('7af5d1fb-0939-4871-9e0c-c3ce1d9673d6', 'felipalind@erdman.biz', 'Prohaska7714516', 'tN&zGs9.d?Jw', 'Артем', 'Васильев', '76139933168', '2024-11-07', 'client');
-INSERT INTO public.users VALUES ('dcb7e75a-c89f-4b0b-a55f-f93b164652aa', 'scarlettbreitenberg@thiel.io', 'Runolfsson6816359', '##efnavb0zvn', 'Наталья', 'Соколова', '76793335957', '2025-01-27', 'client');
-INSERT INTO public.users VALUES ('d5446445-74a8-49e9-9de0-529ecc7793a3', 'abdulcartwright@moore.com', 'Schowalter4684608', 'mNb2b5VC0m3G', 'Юлия', 'Петрова', '73049920438', '2025-12-23', 'client');
-INSERT INTO public.users VALUES ('8b0275c9-9acb-4c08-93d0-d39d25b09094', 'guadalupeflatley@steuber.org', 'Gislason3006371', '940bMP_354B@', 'Татьяна', 'Кузнецова', '73560919946', '2024-07-24', 'client');
-INSERT INTO public.users VALUES ('f0132695-2dd2-4cc3-b054-555903de6d7d', 'aurorekunde@beier.org', 'Osinski2106954', 'j9@jsJ9foxZb', 'Анна', 'Новикова', '76007458595', '2024-11-17', 'client');
-INSERT INTO public.users VALUES ('a7a54bc0-d838-4016-8864-8c15cc32b2d9', 'jeffreystanton@gleichner.net', 'Greenfelder2649489', 'RwnM?FqwogpM', 'Наталья', 'Кузнецова', '71883766682', '2025-06-02', 'client');
-INSERT INTO public.users VALUES ('c470d455-cc38-4c0b-b6d3-1ddaf0695f16', 'jarenbarton@little.com', 'Gerhold8048450', '2*t2at8N21V6', 'Екатерина', 'Смирнова', '76188926008', '2025-06-15', 'client');
-INSERT INTO public.users VALUES ('d28e35fb-58ae-4bbc-b419-b12ebe3118bd', 'robertschimmel@ferry.org', 'Romaguera3466475', 'PFePDEg0X7g*', 'Иван', 'Морозов', '74570708306', '2024-05-11', 'client');
-INSERT INTO public.users VALUES ('3eac485f-02da-45fc-a87c-bdef8198c18c', 'kyliebeatty@windler.com', 'Beier971699', 'T51TXWtscMN8', 'Дарья', 'Попова', '76525695350', '2024-10-23', 'client');
-INSERT INTO public.users VALUES ('5aad6155-d3fe-48f3-be60-ec1037050390', 'rhiannonschmidt@fay.io', 'Littel177370', '1$_t7r4tI9Rc', 'Татьяна', 'Морозова', '73389136084', '2024-07-09', 'client');
-INSERT INTO public.users VALUES ('d760a6ae-9aeb-49b9-b6aa-eec5ffe9531e', 'clarenicolas@rempel.biz', 'Denesik8156749', 't0IOCl?oM82d', 'Алексей', 'Смирнов', '75098854122', '2025-07-28', 'client');
-INSERT INTO public.users VALUES ('617e7367-3e5c-4767-9edf-79c90c5ad0ff', 'haleighmorar@graham.com', 'Parker1117423', '&RWmppTUD-25', 'Анна', 'Фёдорова', '77827544851', '2024-08-09', 'client');
-INSERT INTO public.users VALUES ('d77a2d11-6001-415e-858f-c6b482f08ed2', 'roycesauer@welch.name', 'Bode6977818', 'rBqVa83iYm$_', 'Екатерина', 'Васильева', '71738398549', '2024-09-16', 'client');
-INSERT INTO public.users VALUES ('ec73ed14-18fa-47c4-952b-36011af06896', 'mosheschmitt@gottlieb.org', 'Bednar8668640', 'VJGL5Q8#NN@&', 'Елена', 'Волкова', '71507028708', '2025-06-03', 'client');
-INSERT INTO public.users VALUES ('71543d46-b102-4b40-82aa-2d78c23e9542', 'cletusbrown@trantow.com', 'Senger1152803', '_?17FK02A892', 'Екатерина', 'Смирнова', '79309039371', '2026-03-25', 'client');
-INSERT INTO public.users VALUES ('ee265a4d-9c7b-46f8-b25b-9d4ac0a5c6df', 'scottyarmstrong@hermann.biz', 'Frami3716474', '6yns&RW*&@K9', 'Дарья', 'Смирнова', '77783210977', '2026-01-25', 'client');
-INSERT INTO public.users VALUES ('db91092a-69aa-46f1-a4c5-69f7be4a9a90', 'dariondibbert@cummerata.name', 'Adams3233907', 'aZ-DVq#E5!8@', 'Роман', 'Соколов', '73958678311', '2025-11-06', 'client');
-INSERT INTO public.users VALUES ('ce5ca999-f1eb-4c19-a50a-accb201681bb', 'macijones@nader.io', 'Gutkowski7208876', '_T7$T7gjZKS1', 'Виктория', 'Попова', '73737873677', '2025-09-07', 'client');
-INSERT INTO public.users VALUES ('80fa2d37-dda0-4008-a947-32d4b28ff102', 'joannewilkinson@farrell.net', 'Pouros8683715', '8yv$i?AYh4Z3', 'Мария', 'Васильева', '72700559528', '2025-12-02', 'client');
-INSERT INTO public.users VALUES ('2f22b8d4-566e-4615-a4cf-08d80c4f5967', 'cliftonjohnston@mcdermott.info', 'Hodkiewicz6843266', 'INd4EZx6QQCw', 'Кирилл', 'Михайлов', '77413902338', '2025-12-01', 'client');
-INSERT INTO public.users VALUES ('f11f2cd3-d75b-4cef-a055-db2c931885e2', 'jaedenhessel@kuvalis.org', 'Fritsch2403968', '4VdB96dWt6G9', 'Алина', 'Новикова', '73490635515', '2025-11-21', 'client');
-INSERT INTO public.users VALUES ('79e34960-f2ee-4ca0-a93b-f172d2801a3b', 'emmaleemertz@senger.name', 'Koss9283673', '$XG@@&!4#Qd2', 'Алина', 'Новикова', '79422525173', '2025-02-07', 'client');
-INSERT INTO public.users VALUES ('78af36a8-3047-4c4b-88b1-4ae5f1e795ef', 'cecilereynolds@crist.org', 'Fahey8349498', '?RH4PYp$4*Jp', 'Иван', 'Фёдоров', '71918380949', '2025-03-15', 'client');
-INSERT INTO public.users VALUES ('c557121d-38e8-49dd-8411-3d1d2c53f9fa', 'wilfredohagenes@marks.name', 'McCullough211552', 'L9Luy8eCAQc5', 'Андрей', 'Соколов', '77374189512', '2026-03-06', 'client');
-INSERT INTO public.users VALUES ('14e2e14a-d4ce-4068-90cf-ba3ffbcde32c', 'sydneymacejkovic@powlowski.net', 'Kozey8120658', 'gP6!295KX?RC', 'Илья', 'Михайлов', '78026862866', '2026-01-26', 'client');
-INSERT INTO public.users VALUES ('b58401d3-64f4-4bc4-8d6d-e2f36aca7e4a', 'freddieluettgen@welch.org', 'Bradtke3676692', '&!dEp1cT6nnB', 'Сергей', 'Смирнов', '71880795294', '2025-09-04', 'client');
-INSERT INTO public.users VALUES ('a071ef39-68ac-4006-97f5-1dc52317656a', 'jasminfeeney@wilkinson.net', 'Predovic1220775', 'nvhLoW.bDO3L', 'Виктор', 'Кузнецов', '73539360912', '2025-09-01', 'client');
-INSERT INTO public.users VALUES ('feff420f-5bd1-44f3-921a-effd234f78fc', 'shayleekoepp@jones.biz', 'Kuvalis2724617', '&_W8#dnj4kdO', 'Дмитрий', 'Петров', '78698280157', '2024-11-03', 'client');
-INSERT INTO public.users VALUES ('d3ab60ea-c5dd-4ff4-a253-d76442ada119', 'dorthaschinner@larkin.name', 'Konopelski9087727', 'u$25IW7Z1F0g', 'Ирина', 'Волкова', '71169988962', '2025-11-25', 'client');
-INSERT INTO public.users VALUES ('76f89faf-1ae6-4bc5-9a5f-538a211b3335', 'anaiscrooks@glover.net', 'Farrell7692212', 'DR*3RXC_kP5.', 'Максим', 'Фёдоров', '74864912152', '2025-08-07', 'client');
-INSERT INTO public.users VALUES ('fef3ee6e-48ad-4e55-82d5-755075dc938d', 'duncanhills@shields.info', 'Mann4243395', 'qKH2n5X2s3zU', 'Андрей', 'Михайлов', '75761219069', '2024-10-04', 'client');
-INSERT INTO public.users VALUES ('d4e9cfb7-2f50-49c2-b299-92ff1575c801', 'wellingtonkeebler@schuppe.com', 'Wintheiser2824620', '8f1XW-5?lap$', 'Артем', 'Михайлов', '75249772188', '2025-01-30', 'client');
-INSERT INTO public.users VALUES ('556e29e7-2d94-43a9-941d-4637653afae6', 'gaychristiansen@turcotte.name', 'Harber8917494', 'uPj1I!7&J.tw', 'Иван', 'Васильев', '78671585688', '2026-01-05', 'client');
-INSERT INTO public.users VALUES ('b4a7a5a3-2d7f-4c77-81cc-d0084137c654', 'oswaldmurphy@veum.org', 'Waters2921789', 'QWovSOLMaj?3', 'Дмитрий', 'Михайлов', '79134559091', '2025-05-16', 'client');
-INSERT INTO public.users VALUES ('9332fe43-ec3b-4704-927b-faf98b9b9cc3', 'ninahilll@collier.com', 'Hagenes7945739', '-1$-E9Zo1dU?', 'Илья', 'Иванов', '79843576729', '2026-03-02', 'client');
-INSERT INTO public.users VALUES ('41694892-efd6-49d5-9965-f64407334fed', 'lulagleichner@walsh.biz', 'Ratke1786772', '1@wGP4xIy?fz', 'Анастасия', 'Иванова', '77808321080', '2026-02-12', 'client');
-INSERT INTO public.users VALUES ('2027739a-ff17-46a0-8a87-263b348bb5ff', 'reagangislason@reichert.info', 'Hermiston6367453', 'PlNgN13iPARM', 'Алина', 'Васильева', '71177834359', '2025-06-27', 'client');
-INSERT INTO public.users VALUES ('2c16ebc1-b8f4-4b31-8853-4413c5899d61', 'ottodaugherty@heidenreich.biz', 'Hermiston2075218', 'pE&064128z#d', 'Алексей', 'Петров', '72389659537', '2024-06-27', 'client');
-INSERT INTO public.users VALUES ('02484dd8-15c7-4e9b-9c79-db9980fc3d84', 'isabellehoeger@keebler.biz', 'Terry1766321', 'iI2bKzk?WEfh', 'Анна', 'Соколова', '79668507194', '2026-01-20', 'client');
-INSERT INTO public.users VALUES ('2d4262e5-7171-471e-90ca-d9d4c0ac9afe', 'kenneditremblay@rolfson.org', 'Schowalter3029900', 'm1*WLQ_-rfyD', 'Алексей', 'Фёдоров', '78352229858', '2024-10-17', 'client');
-INSERT INTO public.users VALUES ('4b8ec2d5-cb86-4b75-80e2-fa876f1d4360', 'rachellejohnston@stanton.name', 'Mayer8528125', 'v9sT$RdG*@G*', 'Екатерина', 'Иванова', '71403650602', '2026-03-14', 'client');
-INSERT INTO public.users VALUES ('eba28432-e0e8-4e83-be5c-9d5e64b8f776', 'maxiemorissette@schumm.org', 'Considine472323', 'Bs&tee@s!gZw', 'Екатерина', 'Соколова', '72174750570', '2025-10-05', 'client');
-INSERT INTO public.users VALUES ('607733fe-e0af-4227-833e-a877633f5bd3', 'kaseymueller@harvey.org', 'Robel5732364', '2._.ubZ904@d', 'Александр', 'Иванов', '76483569858', '2025-06-28', 'client');
-INSERT INTO public.users VALUES ('58a3b6bf-3bce-4522-a54f-486c75f6c406', 'madalineleannon@rodriguez.net', 'Schamberger697017', 'vT#JQ3Q3Cv!9', 'Иван', 'Фёдоров', '72502612719', '2026-01-18', 'client');
-INSERT INTO public.users VALUES ('1d02b5a7-00d0-4348-9e05-cd2395dbfd8d', 'jennyferpurdy@legros.net', 'Wilkinson4543432', 'D$9Sw$m04Shx', 'Ольга', 'Соколова', '77783306601', '2025-01-03', 'client');
-INSERT INTO public.users VALUES ('9205964d-8372-4563-89d4-b549d3d1ab01', 'cathybartell@purdy.net', 'Paucek6828612', 'FqS!?34AJ1fM', 'Юлия', 'Фёдорова', '72099650457', '2025-02-02', 'client');
-INSERT INTO public.users VALUES ('87c81a7f-b8b9-4aa7-8c7c-5e252447dc0c', 'trenthilll@ryan.biz', 'Haley9338246', '&EC6_!BGT2-3', 'Ирина', 'Морозова', '78895264003', '2025-05-18', 'client');
-INSERT INTO public.users VALUES ('295e6eb5-15d9-4d1f-b648-5a1d7d1b15b2', 'enosschmeler@kub.org', 'Pagac9021115', 'ut13Q-Y@0p*F', 'Александр', 'Кузнецов', '77179931937', '2026-03-13', 'client');
-INSERT INTO public.users VALUES ('5614c63e-b164-439a-bfad-ad68b28d05f5', 'howardolson@hamill.net', 'Jacobson4152588', '3-#f-9x@0E14', 'Дмитрий', 'Михайлов', '73971563215', '2024-07-25', 'client');
-INSERT INTO public.users VALUES ('29199910-4a41-4c96-98af-484385e37f24', 'oceanequigley@koss.net', 'Wunsch1413715', 'A1ISfo7Uob_Y', 'Иван', 'Соколов', '72631777634', '2024-10-14', 'client');
+INSERT INTO public.users VALUES ('2a531c5b-089d-46b3-84d8-b1b72f5d8386', 'brookemcclure@davis.org', 'Kuhic466278', 'UuULzjY8y_i$', 'Иван', 'Лебедев', '79526583229', '2025-02-06', 'specialist');
+INSERT INTO public.users VALUES ('fad620eb-e964-4616-be8a-c92e3d8cc332', 'elveragaylord@langosh.name', 'Cummings8438276', '7dvxhy*764?l', 'Илья', 'Морозов', '71349251986', '2025-09-07', 'specialist');
+INSERT INTO public.users VALUES ('dafecfa2-6953-4a7e-8f9c-7f0579219430', 'viviantromp@green.info', 'Walker6967487', '4pRS?G_728-#', 'Анастасия', 'Иванова', '73790780846', '2025-06-20', 'specialist');
+INSERT INTO public.users VALUES ('5d4dd4f4-f5b6-4a30-aced-131f81dda96f', 'ottobeahan@corkery.net', 'Labadie858822', 'MeD7amdQy*z9', 'Анна', 'Фёдорова', '77964263012', '2025-11-05', 'specialist');
+INSERT INTO public.users VALUES ('149b86a6-dad3-45e3-a4c7-73798d607eb8', 'georgianahickle@parisian.info', 'Douglas7872989', 'YZt2Z1FnafQ9', 'Виктория', 'Васильева', '72849686677', '2025-01-10', 'specialist');
+INSERT INTO public.users VALUES ('9690c905-e5f6-4821-9734-5a534ef83438', 'dimitristeuber@metz.org', 'Pacocha9876530', '7kEUr!Am_6mV', 'Юлия', 'Морозова', '77380354703', '2025-06-05', 'specialist');
+INSERT INTO public.users VALUES ('1a0bc815-fd32-45c9-b429-2a17f76bf8b9', 'luralind@hettinger.net', 'Koepp8130752', 'YZBxHWV8!p1U', 'Анна', 'Волкова', '73319334277', '2025-04-10', 'specialist');
+INSERT INTO public.users VALUES ('22c7d845-68b9-4852-b533-c209e2c1656c', 'codymertz@keebler.info', 'Smith5905489', 'j$PbB_i1oz4-', 'Александр', 'Петров', '71788359564', '2024-11-06', 'specialist');
+INSERT INTO public.users VALUES ('636f7fc0-02d3-405f-a3bb-c6496fd37a04', 'wallaceritchie@krajcik.info', 'Kling8774555', 'VGA5QOpI3$!f', 'Сергей', 'Новиков', '72795027677', '2025-04-01', 'specialist');
+INSERT INTO public.users VALUES ('738b8b06-6c51-440d-aa85-e0bb39168ef7', 'trevermclaughlin@hand.info', 'Doyle8996678', '2q?PriY&?7Q7', 'Виктор', 'Васильев', '71850649876', '2024-12-12', 'specialist');
+INSERT INTO public.users VALUES ('d4b5eecc-486b-4dda-bcaa-0cf993190744', 'meggiehowell@mayer.net', 'Beier1113117', 'yjUR@@i_7Bvw', 'Александр', 'Лебедев', '71439514448', '2024-11-08', 'specialist');
+INSERT INTO public.users VALUES ('10d255cd-a73b-429c-85f0-edb4a0cadaa5', 'leonwyman@tillman.org', 'Stanton2613812', '?ab1?73*8-Ic', 'Наталья', 'Фёдорова', '75437719646', '2024-11-09', 'specialist');
+INSERT INTO public.users VALUES ('8a5d891a-6766-4d76-bb94-c8cbfd7dd087', 'josefarohan@conn.io', 'Batz688634', '_lyRO06$K4JB', 'Алина', 'Новикова', '73595142174', '2025-10-28', 'specialist');
+INSERT INTO public.users VALUES ('42eff525-bcb2-4b78-8ab3-9e5f7b743f23', 'nikolubowitz@kunde.name', 'Schultz1217795', 'Ba!#$-..iH84', 'Дарья', 'Михайлова', '77017136550', '2025-08-02', 'specialist');
+INSERT INTO public.users VALUES ('fe876d02-9d46-44a4-849f-c56f6bddc134', 'jacksonblock@mcclure.com', 'Borer698158', '-8Iykm6vVIPl', 'Юлия', 'Михайлова', '74618201390', '2025-04-17', 'specialist');
+INSERT INTO public.users VALUES ('a8096d12-c4fa-40be-a9cc-3ccfb65eac00', 'mozellemcclure@heaney.com', 'Osinski6386642', 'fGu.2B_V9KnH', 'Иван', 'Кузнецов', '76863900869', '2024-05-27', 'specialist');
+INSERT INTO public.users VALUES ('80c8ca11-4c3e-4686-bfaf-0f516ab644a4', 'nicholausmorissette@torp.name', 'Jenkins1144566', 'a-y_W7T7vL?_', 'Екатерина', 'Петрова', '71976411764', '2025-05-28', 'specialist');
+INSERT INTO public.users VALUES ('44c7af7a-ae02-4357-b839-393ed4c1ab33', 'borisking@hyatt.net', 'Krajcik851290', 'qCB2@FPq8M$2', 'Михаил', 'Попов', '77934650783', '2025-01-29', 'specialist');
+INSERT INTO public.users VALUES ('da907fa2-4802-4e6a-ad74-58c38da3e8d0', 'ciaramills@reynolds.org', 'Wisoky5183964', '3lmkb49!#A8m', 'Илья', 'Смирнов', '72564876984', '2024-10-18', 'specialist');
+INSERT INTO public.users VALUES ('2e41139f-dc96-4663-927b-b598282733f5', 'kittyziemann@langworth.org', 'Lang6633785', 'Vkx4sD&KNLZX', 'Екатерина', 'Соколова', '74233309526', '2024-06-02', 'specialist');
+INSERT INTO public.users VALUES ('8a1743d9-d8b2-419e-9fa2-9d3190e8562d', 'orphalind@zboncak.com', 'Stracke8346406', '7gqNR&_w1b@6', 'Мария', 'Волкова', '72104639461', '2025-11-16', 'client');
+INSERT INTO public.users VALUES ('dffd8773-f4f0-43a0-ab4d-b759a9f421b5', 'flaviohuel@parisian.com', 'Purdy7710516', 'F3p84J$.zzLV', 'Михаил', 'Васильев', '77466093943', '2024-12-25', 'client');
+INSERT INTO public.users VALUES ('9014c974-8569-4f65-a9fe-38cac12e5f34', 'turnersanford@sporer.biz', 'Kozey8091570', 'di_r*7Hl*N$t', 'Алина', 'Васильева', '73679555127', '2025-01-12', 'client');
+INSERT INTO public.users VALUES ('29525e9d-0979-4b60-aa79-81a6388253d2', 'ashleyjerde@gorczany.info', 'Moen5150462', 'WF-_SBj@p7i*', 'Виктор', 'Фёдоров', '71176724837', '2025-08-15', 'client');
+INSERT INTO public.users VALUES ('e02e7c9e-3a62-4f24-b451-bf4e6a107772', 'harmonyfadel@mccullough.com', 'Predovic213856', '7-10l06ubdt9', 'Елена', 'Михайлова', '75858536065', '2025-12-23', 'client');
+INSERT INTO public.users VALUES ('d7e2fe70-8cf4-41ce-8bac-252223a8da58', 'juwantoy@hills.info', 'Fisher8522461', 'x5BD#XB_kbT7', 'Ирина', 'Петрова', '76097995590', '2025-01-22', 'client');
+INSERT INTO public.users VALUES ('55617455-aa81-4a19-b876-21b9c3c07966', 'anthonyharber@swaniawski.name', 'Mayer4450233', 'Zdam#mh@1mRN', 'Алексей', 'Соколов', '75244722580', '2025-05-29', 'client');
+INSERT INTO public.users VALUES ('27ebd45b-a30e-4187-9a86-8599643dbc39', 'guswalker@gutmann.biz', 'Metz9583234', 'm0gMuPoCXevW', 'Александр', 'Михайлов', '76701861968', '2024-05-14', 'client');
+INSERT INTO public.users VALUES ('1e42b90f-c81b-48cb-84a2-f013166ae6d9', 'kennithtorphy@cummerata.com', 'Goyette2096659', '@l7daHssO5v&', 'Иван', 'Лебедев', '73281309527', '2024-11-26', 'client');
+INSERT INTO public.users VALUES ('764b1b70-3f86-4bf9-b319-d1c54c85fbcd', 'aiyanarutherford@welch.org', 'Daniel338751', '@UTlmPvt.lt*', 'Мария', 'Новикова', '71750469168', '2025-03-11', 'client');
+INSERT INTO public.users VALUES ('227aba69-4fb9-462c-ad73-18f5f50eda76', 'terrilldeckow@kuhn.biz', 'Considine4861379', 'I2VMR879X4DJ', 'Андрей', 'Новиков', '74057861594', '2025-07-07', 'client');
+INSERT INTO public.users VALUES ('cee489f7-4c40-4ae3-9677-c1b06b2a19f8', 'theresiapurdy@goyette.io', 'Hilpert3184987', '#dwn&ZwJ-PD8', 'Роман', 'Новиков', '77105928265', '2025-01-06', 'client');
+INSERT INTO public.users VALUES ('6deec448-f858-4f38-adcd-2bc549ac8c94', 'kyleighkutch@klocko.com', 'Terry5061379', '!vCMbRrg@gkE', 'Илья', 'Соколов', '73620238189', '2026-04-20', 'client');
+INSERT INTO public.users VALUES ('61214456-60d4-40c6-8f3d-8c027c9508ce', 'bennyschamberger@trantow.org', 'Kessler2683238', '2n&d-08@09Ef', 'Сергей', 'Новиков', '72785469281', '2024-10-25', 'client');
+INSERT INTO public.users VALUES ('5717db47-232f-41f6-88cc-7bb96027de15', 'stuartbeer@abernathy.io', 'Flatley4791344', '7Y99Wway2g_1', 'Ирина', 'Васильева', '73578855443', '2024-05-12', 'client');
+INSERT INTO public.users VALUES ('edd62666-5cde-4157-b012-733f6a6fadce', 'jadenhauck@ankunding.com', 'Flatley8633781', 'SeZ6FG#h1Z*l', 'Юлия', 'Попова', '79863198092', '2025-10-23', 'client');
+INSERT INTO public.users VALUES ('8a05a3b4-e0f0-46f4-b84b-9d2873ab4cb4', 'zachariahmills@lang.net', 'Schroeder869992', 'eG!qv&Sd?Mx_', 'Сергей', 'Морозов', '71875494152', '2025-08-07', 'client');
+INSERT INTO public.users VALUES ('bb4a53e9-3e22-46e1-b20b-10c8847435ad', 'einolockman@crist.info', 'Lueilwitz762936', 'vx?.642Hfr62', 'Дмитрий', 'Новиков', '77754156129', '2025-05-15', 'client');
+INSERT INTO public.users VALUES ('6b0f1b05-021e-4f1e-97bf-44751975c45a', 'karsonkrajcik@mann.net', 'King7988659', 'F$367yoXRq?i', 'Роман', 'Кузнецов', '71188698269', '2026-01-08', 'client');
+INSERT INTO public.users VALUES ('38f03b0a-bb5e-49f3-9fc6-4d1910f74989', 'elodyjerde@brekke.org', 'Hegmann6878794', '07?7g5a8A7I#', 'Наталья', 'Морозова', '77686149821', '2025-09-06', 'client');
+INSERT INTO public.users VALUES ('56c50fa2-ea25-4330-89b3-a5c0c77ec289', 'cristaldooley@balistreri.org', 'Mohr7586692', '3SvoJDfL98aK', 'Алексей', 'Васильев', '74418877418', '2025-09-14', 'client');
+INSERT INTO public.users VALUES ('36746652-9b70-40e4-b691-5b60fd28cee0', 'seanbalistreri@heathcote.net', 'Gutkowski8725451', 'oawx#E3Iq@Pf', 'Екатерина', 'Васильева', '71987971379', '2026-03-04', 'client');
+INSERT INTO public.users VALUES ('dd9e2228-2f05-427b-acb8-421f3860572f', 'valentincorwin@buckridge.com', 'Schoen7833954', '6LAc?ukuUkYH', 'Наталья', 'Иванова', '73909731960', '2025-01-07', 'client');
+INSERT INTO public.users VALUES ('5a5164e4-57b7-4ff3-889d-7cbee44a010e', 'vernleannon@herman.net', 'Kulas7807567', '3kleP_eyJ-Ch', 'Ирина', 'Фёдорова', '75478950728', '2025-11-11', 'client');
+INSERT INTO public.users VALUES ('69d028ed-807f-4946-be09-d4985c44c241', 'vernonemard@stiedemann.com', 'Gislason7420541', 'q3RQe97!09V-', 'Иван', 'Смирнов', '72871085571', '2025-06-14', 'client');
+INSERT INTO public.users VALUES ('54e25d8d-dab3-49c4-b863-53621351924a', 'jeaniejakubowski@turner.name', 'Runte2214171', 'zS_C2P8sDVW4', 'Виктор', 'Волков', '74310074018', '2025-05-11', 'client');
+INSERT INTO public.users VALUES ('05afcd6a-1ad5-4311-8bf6-7139d634ee48', 'marcelobecker@cruickshank.info', 'Beatty1029233', 'YQXSIr5lx$5Z', 'Анастасия', 'Волкова', '73058604061', '2024-05-23', 'client');
+INSERT INTO public.users VALUES ('4113404c-81b0-46a9-83ea-89ba7863b0aa', 'gregoriakoelpin@wiza.net', 'Mertz4833904', 'zyP$QBp&68fi', 'Илья', 'Михайлов', '79588748728', '2024-07-23', 'client');
+INSERT INTO public.users VALUES ('050ce4dc-e30d-4d5c-b887-1306202c2b3e', 'rahsaanwindler@larson.biz', 'Emmerich1006538', 'j4e4QL_6WdCb', 'Роман', 'Васильев', '75085600985', '2025-03-18', 'client');
+INSERT INTO public.users VALUES ('04d223ea-6797-49bd-8e05-0e0de94c5563', 'cheyannefriesen@ruecker.net', 'Erdman5779885', '&sj2j7Z-4r-3', 'Роман', 'Новиков', '73669544375', '2024-07-05', 'client');
+INSERT INTO public.users VALUES ('9f0b0f39-853f-4da8-9687-b9357d440d20', 'ottilielittle@mann.com', 'Bayer5824807', '?yT0CX5Wdza8', 'Юлия', 'Васильева', '76133750040', '2025-10-19', 'client');
+INSERT INTO public.users VALUES ('fbfb3025-8aaf-47ed-b65b-cfedbadffcc5', 'stephengorczany@larkin.com', 'Feeney2131536', 'fdM6Nk09HM_m', 'Татьяна', 'Соколова', '76246227984', '2025-03-11', 'client');
+INSERT INTO public.users VALUES ('5cbfb257-6e90-49d2-b424-0eb6d87c94ef', 'astridjenkins@schroeder.info', 'Hayes3209516', 'P@-42RpNcMIR', 'Максим', 'Михайлов', '78985989846', '2025-02-11', 'client');
+INSERT INTO public.users VALUES ('e68cd796-3311-4c5f-ba19-375f0c970472', 'craiglittle@rowe.net', 'Jenkins7918834', 'gijzCPX$xh?r', 'Татьяна', 'Волкова', '79568694408', '2025-08-19', 'client');
+INSERT INTO public.users VALUES ('519cbc73-b49c-47dc-8c6e-369322853020', 'thelmamayert@strosin.org', 'Gleichner2646687', '$0q7t8JC4PDI', 'Юлия', 'Волкова', '76139907389', '2026-03-27', 'client');
+INSERT INTO public.users VALUES ('4af05f5c-988b-4660-a84e-a869955f66ef', 'monserratbrown@koss.net', 'Pfeffer8684147', 'eYrGDDOz4T9&', 'Роман', 'Иванов', '73564084311', '2025-07-23', 'client');
+INSERT INTO public.users VALUES ('ce5886d8-7aa0-4991-a422-29edbab37a75', 'gianniwintheiser@weber.biz', 'Quitzon6533390', '2YW4ph528brE', 'Максим', 'Петров', '73050886940', '2025-01-16', 'client');
+INSERT INTO public.users VALUES ('6862b025-a58b-42f2-8fa4-e5bfab4abb07', 'kamrynyost@larson.info', 'Schuppe9142540', 'boiI2NQce&Ku', 'Наталья', 'Морозова', '73319785737', '2025-01-15', 'client');
+INSERT INTO public.users VALUES ('0c54cece-e296-47fe-aea2-129343a57dce', 'deltafranecki@senger.com', 'Powlowski6156905', 'N50l1Z5n1MoY', 'Алина', 'Кузнецова', '72264517884', '2024-12-28', 'client');
+INSERT INTO public.users VALUES ('1ffc4454-7b78-4499-9f9f-dd1fb738879c', 'helenlabadie@bernhard.net', 'Collins8145619', 'fZ25d1bln##G', 'Кирилл', 'Волков', '74202953548', '2026-03-09', 'client');
+INSERT INTO public.users VALUES ('fc2fff95-b416-4220-908b-31e45099635e', 'aaliyahjenkins@effertz.io', 'Zboncak5120541', 'gR*7fWOY5$uG', 'Мария', 'Васильева', '71715667836', '2024-10-05', 'client');
+INSERT INTO public.users VALUES ('6cc5b1c3-f4f2-462a-8e98-9c1d64fdb568', 'jesusharber@padberg.com', 'Bechtelar4304299', '*U.Bn7gP*#!O', 'Иван', 'Иванов', '74336726665', '2025-05-04', 'client');
+INSERT INTO public.users VALUES ('9b419dee-9aeb-4942-b66d-0b29b21361b3', 'maeganweber@willms.com', 'Yost5226353', 'PV&rU_.5V$H3', 'Татьяна', 'Попова', '75882411345', '2025-05-12', 'client');
+INSERT INTO public.users VALUES ('a833f183-973d-4b88-a2f1-d80022585c74', 'elwynabernathy@jerde.org', 'Turner4739243', 'u_XX@o$P4X27', 'Мария', 'Соколова', '72214936105', '2025-05-05', 'client');
+INSERT INTO public.users VALUES ('cb30e94f-9889-4642-bd79-2fadad64209f', 'cliffordhaley@von.net', 'Blanda3795178', '7uuj.a4vwGoM', 'Юлия', 'Иванова', '73175654037', '2026-01-18', 'client');
+INSERT INTO public.users VALUES ('236f2990-98cb-4f2d-9b66-48d8c66b50c1', 'goldennienow@considine.io', 'Jacobi7927665', 'U69fMHPaz*Lp', 'Артем', 'Лебедев', '72246908770', '2025-03-07', 'client');
+INSERT INTO public.users VALUES ('eb71afcf-4697-422f-83fc-6398f9de6a2e', 'jaycepfeffer@moore.biz', 'Miller3935931', '@fr6LDi0#s-9', 'Дарья', 'Петрова', '77184676967', '2026-04-07', 'client');
+INSERT INTO public.users VALUES ('9e67818e-1015-48b6-91fe-0f3e2a76054e', 'samarapfeffer@senger.net', 'Gaylord4625319', 'tn0Q60Y#pdtS', 'Артем', 'Михайлов', '74877677262', '2025-01-18', 'client');
+INSERT INTO public.users VALUES ('9c43afd4-020a-4815-adfc-49909da3c895', 'miraclestrosin@brekke.biz', 'Fisher566098', 'h5u0n1m9Bxp4', 'Юлия', 'Попова', '75446149526', '2026-01-15', 'client');
+INSERT INTO public.users VALUES ('9879eed8-286a-498a-bac6-8f91bbf48bba', 'jacynthecremin@mertz.org', 'Will8770310', '$enNI&?I0Pm8', 'Андрей', 'Новиков', '76914162773', '2026-01-17', 'client');
 
 
 --
--- TOC entry 4804 (class 2606 OID 24832)
+-- TOC entry 4839 (class 2606 OID 25017)
 -- Name: availability_slots availability_slots_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1059,7 +1080,7 @@ ALTER TABLE ONLY public.availability_slots
 
 
 --
--- TOC entry 4806 (class 2606 OID 24834)
+-- TOC entry 4833 (class 2606 OID 24977)
 -- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1068,7 +1089,7 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- TOC entry 4808 (class 2606 OID 24836)
+-- TOC entry 4849 (class 2606 OID 25103)
 -- Name: course_reviews course_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1077,16 +1098,7 @@ ALTER TABLE ONLY public.course_reviews
 
 
 --
--- TOC entry 4810 (class 2606 OID 24838)
--- Name: course_reviews course_reviews_purchased_course_id_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.course_reviews
-    ADD CONSTRAINT course_reviews_purchased_course_id_key UNIQUE (purchased_course_id);
-
-
---
--- TOC entry 4812 (class 2606 OID 24840)
+-- TOC entry 4845 (class 2606 OID 25068)
 -- Name: courses courses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1095,7 +1107,7 @@ ALTER TABLE ONLY public.courses
 
 
 --
--- TOC entry 4814 (class 2606 OID 24842)
+-- TOC entry 4847 (class 2606 OID 25082)
 -- Name: purchased_courses purchased_courses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1104,7 +1116,7 @@ ALTER TABLE ONLY public.purchased_courses
 
 
 --
--- TOC entry 4816 (class 2606 OID 24844)
+-- TOC entry 4841 (class 2606 OID 25030)
 -- Name: service_bookings service_bookings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1113,16 +1125,7 @@ ALTER TABLE ONLY public.service_bookings
 
 
 --
--- TOC entry 4818 (class 2606 OID 24846)
--- Name: service_reviews service_reviews_booking_id_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.service_reviews
-    ADD CONSTRAINT service_reviews_booking_id_key UNIQUE (booking_id);
-
-
---
--- TOC entry 4820 (class 2606 OID 24848)
+-- TOC entry 4843 (class 2606 OID 25051)
 -- Name: service_reviews service_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1131,7 +1134,7 @@ ALTER TABLE ONLY public.service_reviews
 
 
 --
--- TOC entry 4822 (class 2606 OID 24850)
+-- TOC entry 4837 (class 2606 OID 25004)
 -- Name: services services_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1140,7 +1143,7 @@ ALTER TABLE ONLY public.services
 
 
 --
--- TOC entry 4824 (class 2606 OID 24852)
+-- TOC entry 4835 (class 2606 OID 24984)
 -- Name: specialist_categories specialist_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1149,7 +1152,7 @@ ALTER TABLE ONLY public.specialist_categories
 
 
 --
--- TOC entry 4826 (class 2606 OID 24854)
+-- TOC entry 4831 (class 2606 OID 24965)
 -- Name: specialist_profiles specialist_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1158,16 +1161,7 @@ ALTER TABLE ONLY public.specialist_profiles
 
 
 --
--- TOC entry 4828 (class 2606 OID 24856)
--- Name: specialist_profiles specialist_profiles_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.specialist_profiles
-    ADD CONSTRAINT specialist_profiles_user_id_key UNIQUE (user_id);
-
-
---
--- TOC entry 4830 (class 2606 OID 24858)
+-- TOC entry 4825 (class 2606 OID 24952)
 -- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1176,7 +1170,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 4832 (class 2606 OID 24860)
+-- TOC entry 4827 (class 2606 OID 24954)
 -- Name: users users_login_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1185,7 +1179,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 4834 (class 2606 OID 24862)
+-- TOC entry 4829 (class 2606 OID 24950)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1194,7 +1188,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 4835 (class 2606 OID 24863)
+-- TOC entry 4854 (class 2606 OID 25018)
 -- Name: availability_slots availability_slots_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1203,7 +1197,7 @@ ALTER TABLE ONLY public.availability_slots
 
 
 --
--- TOC entry 4836 (class 2606 OID 24868)
+-- TOC entry 4861 (class 2606 OID 25104)
 -- Name: course_reviews course_reviews_purchased_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1212,7 +1206,7 @@ ALTER TABLE ONLY public.course_reviews
 
 
 --
--- TOC entry 4837 (class 2606 OID 24873)
+-- TOC entry 4858 (class 2606 OID 25069)
 -- Name: courses courses_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1221,7 +1215,7 @@ ALTER TABLE ONLY public.courses
 
 
 --
--- TOC entry 4838 (class 2606 OID 24878)
+-- TOC entry 4859 (class 2606 OID 25088)
 -- Name: purchased_courses purchased_courses_course_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1230,7 +1224,7 @@ ALTER TABLE ONLY public.purchased_courses
 
 
 --
--- TOC entry 4839 (class 2606 OID 24883)
+-- TOC entry 4860 (class 2606 OID 25083)
 -- Name: purchased_courses purchased_courses_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1239,7 +1233,7 @@ ALTER TABLE ONLY public.purchased_courses
 
 
 --
--- TOC entry 4840 (class 2606 OID 24888)
+-- TOC entry 4855 (class 2606 OID 25031)
 -- Name: service_bookings service_bookings_service_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1248,7 +1242,7 @@ ALTER TABLE ONLY public.service_bookings
 
 
 --
--- TOC entry 4841 (class 2606 OID 24893)
+-- TOC entry 4856 (class 2606 OID 25036)
 -- Name: service_bookings service_bookings_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1257,7 +1251,7 @@ ALTER TABLE ONLY public.service_bookings
 
 
 --
--- TOC entry 4842 (class 2606 OID 24898)
+-- TOC entry 4857 (class 2606 OID 25052)
 -- Name: service_reviews service_reviews_booking_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1266,7 +1260,7 @@ ALTER TABLE ONLY public.service_reviews
 
 
 --
--- TOC entry 4843 (class 2606 OID 24903)
+-- TOC entry 4853 (class 2606 OID 25005)
 -- Name: services services_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1275,7 +1269,7 @@ ALTER TABLE ONLY public.services
 
 
 --
--- TOC entry 4844 (class 2606 OID 24908)
+-- TOC entry 4851 (class 2606 OID 24990)
 -- Name: specialist_categories specialist_categories_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1284,7 +1278,7 @@ ALTER TABLE ONLY public.specialist_categories
 
 
 --
--- TOC entry 4845 (class 2606 OID 24913)
+-- TOC entry 4852 (class 2606 OID 24985)
 -- Name: specialist_categories specialist_categories_profile_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1293,7 +1287,7 @@ ALTER TABLE ONLY public.specialist_categories
 
 
 --
--- TOC entry 4846 (class 2606 OID 24918)
+-- TOC entry 4850 (class 2606 OID 24966)
 -- Name: specialist_profiles specialist_profiles_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1301,11 +1295,11 @@ ALTER TABLE ONLY public.specialist_profiles
     ADD CONSTRAINT specialist_profiles_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id) ON DELETE CASCADE;
 
 
--- Completed on 2026-05-08 12:43:26
+-- Completed on 2026-05-08 14:14:50
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 2WkbU1fa7cy6RjLnN00Ua29FQ8Qd9C4FzzimOHvHm2tP0fRxm462a0uh9R4jEnG
+\unrestrict QvhkoISEhAUFe0WvKhOKPLByo8vJO3p0f2M6B2NYcIpQXbzvXPFBIZjYTm03ysC
 
