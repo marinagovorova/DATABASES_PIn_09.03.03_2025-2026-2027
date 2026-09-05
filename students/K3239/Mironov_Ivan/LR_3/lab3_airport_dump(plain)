@@ -1,0 +1,1867 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict dc65dhPu03okhsaTRn37d9SlTu7UrJlh7hj5jyoaPkrP0gjLy3rc47PhbZeyyPF
+
+-- Dumped from database version 18.3
+-- Dumped by pg_dump version 18.3
+
+-- Started on 2026-04-13 16:59:21 MSK
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4045 (class 1262 OID 16388)
+-- Name: lab3_airport; Type: DATABASE; Schema: -; Owner: postgres
+--
+-- Команда для создания БД 
+
+CREATE DATABASE lab3_airport WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'C';
+
+
+ALTER DATABASE lab3_airport OWNER TO postgres;
+
+\unrestrict dc65dhPu03okhsaTRn37d9SlTu7UrJlh7hj5jyoaPkrP0gjLy3rc47PhbZeyyPF
+\connect lab3_airport
+\restrict dc65dhPu03okhsaTRn37d9SlTu7UrJlh7hj5jyoaPkrP0gjLy3rc47PhbZeyyPF
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 225 (class 1259 OID 16425)
+-- Name: additional_service; Type: TABLE; Schema: public; Owner: postgres
+--
+
+
+-- Скрипт создания таблицы доп услуги
+
+CREATE TABLE public.additional_service (
+    service_id integer NOT NULL,
+    name character varying(20) NOT NULL,
+    description character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.additional_service OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16424)
+-- Name: additional_service_service_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.additional_service_service_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.additional_service_service_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4046 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: additional_service_service_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.additional_service_service_id_seq OWNED BY public.additional_service.service_id;
+
+
+--
+-- TOC entry 226 (class 1259 OID 16464)
+-- Name: airplane; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.airplane (
+    type character varying(10) NOT NULL,
+    board_number character varying(10) NOT NULL,
+    company_id integer NOT NULL,
+    capacity integer NOT NULL,
+    country character varying(30) NOT NULL,
+    load_capacity integer NOT NULL,
+    productivity integer NOT NULL,
+    purpose character varying(20) NOT NULL,
+    speed integer NOT NULL,
+    last_repair_date date NOT NULL,
+    release_date date NOT NULL,
+    flight_hours integer NOT NULL,
+    fuel_consumption integer NOT NULL,
+-- проверки
+    CONSTRAINT airplane_capacity_check CHECK ((capacity > 0)),
+    CONSTRAINT airplane_check CHECK ((last_repair_date > release_date)),
+    CONSTRAINT airplane_flight_hours_check CHECK ((flight_hours > 0)),
+    CONSTRAINT airplane_fuel_consumption_check CHECK ((fuel_consumption > 0)),
+    CONSTRAINT airplane_load_capacity_check CHECK ((load_capacity > 0)),
+    CONSTRAINT airplane_productivity_check CHECK ((productivity > 0)),
+    CONSTRAINT airplane_speed_check CHECK ((speed > 0))
+);
+
+
+ALTER TABLE public.airplane OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16404)
+-- Name: airport; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.airport (
+    airport_code character varying(3) NOT NULL,
+    name character varying(20) NOT NULL,
+    country character varying(30) NOT NULL,
+    address character varying(60) NOT NULL,
+    owner_company character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.airport OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16393)
+-- Name: aviacompany; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.aviacompany (
+    company_id integer NOT NULL,
+    name character varying(20) NOT NULL,
+    country character varying(30) NOT NULL,
+    legal_address character varying(50) NOT NULL,
+    phone character varying(15),
+    email character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public.aviacompany OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16392)
+-- Name: aviacompany_company_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.aviacompany_company_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.aviacompany_company_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4047 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: aviacompany_company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.aviacompany_company_id_seq OWNED BY public.aviacompany.company_id;
+
+
+--
+-- TOC entry 223 (class 1259 OID 16415)
+-- Name: cash_desk; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cash_desk (
+    cash_desk_id integer NOT NULL,
+    address character varying(50) NOT NULL,
+    status character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public.cash_desk OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 16414)
+-- Name: cash_desk_cash_desk_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cash_desk_cash_desk_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cash_desk_cash_desk_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4048 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: cash_desk_cash_desk_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cash_desk_cash_desk_id_seq OWNED BY public.cash_desk.cash_desk_id;
+
+
+--
+-- TOC entry 241 (class 1259 OID 16789)
+-- Name: crew; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.crew (
+    crew_id integer NOT NULL,
+    flight_id integer NOT NULL,
+    passport_number character varying(11) NOT NULL,
+    medical_status character varying(10) NOT NULL,
+    medical_date timestamp without time zone NOT NULL,
+    rejection_reason character varying(40)
+);
+
+
+ALTER TABLE public.crew OWNER TO postgres;
+
+--
+-- TOC entry 240 (class 1259 OID 16788)
+-- Name: crew_crew_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.crew_crew_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.crew_crew_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4049 (class 0 OID 0)
+-- Dependencies: 240
+-- Name: crew_crew_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.crew_crew_id_seq OWNED BY public.crew.crew_id;
+
+
+--
+-- TOC entry 228 (class 1259 OID 16495)
+-- Name: employee; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employee (
+    full_name character varying(30) NOT NULL,
+    "position" character varying(40) NOT NULL,
+    company_id integer NOT NULL,
+    employee_id integer NOT NULL
+);
+
+
+ALTER TABLE public.employee OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 16494)
+-- Name: employee_employee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.employee_employee_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.employee_employee_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4050 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: employee_employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.employee_employee_id_seq OWNED BY public.employee.employee_id;
+
+
+--
+-- TOC entry 232 (class 1259 OID 16551)
+-- Name: employee_passport; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employee_passport (
+    passport_number_and_series character varying(11) NOT NULL,
+    employee_id integer NOT NULL,
+    passport_type character varying(10) NOT NULL,
+    country character varying(30) NOT NULL,
+    issue_by character varying(30) NOT NULL,
+    issue_date date NOT NULL,
+    issue_place character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public.employee_passport OWNER TO postgres;
+
+--
+-- TOC entry 235 (class 1259 OID 16646)
+-- Name: flight; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.flight (
+    route_number character varying(10) NOT NULL,
+    board_number character varying(10) NOT NULL,
+    status character varying(10) NOT NULL,
+    flight_id integer NOT NULL,
+    actual_departure timestamp without time zone,
+    actual_arrival timestamp without time zone,
+    planned_departure timestamp without time zone NOT NULL,
+    planned_arrival timestamp without time zone NOT NULL,
+    CONSTRAINT flight_check CHECK ((planned_arrival > planned_departure)),
+    CONSTRAINT flight_check1 CHECK (((actual_arrival IS NULL) OR (actual_arrival > actual_departure)))
+);
+
+
+ALTER TABLE public.flight OWNER TO postgres;
+
+--
+-- TOC entry 234 (class 1259 OID 16645)
+-- Name: flight_flight_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.flight_flight_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.flight_flight_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4051 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: flight_flight_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.flight_flight_id_seq OWNED BY public.flight.flight_id;
+
+
+--
+-- TOC entry 239 (class 1259 OID 16748)
+-- Name: flight_transit; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.flight_transit (
+    flight_transit_id integer NOT NULL,
+    flight_id integer NOT NULL,
+    transit_id integer NOT NULL,
+    planned_arrival timestamp without time zone NOT NULL,
+    planned_departure timestamp without time zone NOT NULL,
+    actual_arrival timestamp without time zone,
+    actual_departure timestamp without time zone,
+    CONSTRAINT flight_transit_check CHECK ((planned_departure > planned_arrival)),
+    CONSTRAINT flight_transit_check1 CHECK (((actual_arrival IS NULL) OR (actual_departure IS NULL) OR (actual_departure > actual_arrival)))
+);
+
+
+ALTER TABLE public.flight_transit OWNER TO postgres;
+
+--
+-- TOC entry 238 (class 1259 OID 16747)
+-- Name: flight_transit_flight_transit_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.flight_transit_flight_transit_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.flight_transit_flight_transit_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4052 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: flight_transit_flight_transit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.flight_transit_flight_transit_id_seq OWNED BY public.flight_transit.flight_transit_id;
+
+
+--
+-- TOC entry 230 (class 1259 OID 16511)
+-- Name: passenger; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.passenger (
+    passenger_id integer NOT NULL,
+    full_name character varying(30) NOT NULL,
+    address character varying(50) NOT NULL,
+    birth_date date NOT NULL
+);
+
+
+ALTER TABLE public.passenger OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 16510)
+-- Name: passenger_passenger_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.passenger_passenger_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.passenger_passenger_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4053 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: passenger_passenger_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.passenger_passenger_id_seq OWNED BY public.passenger.passenger_id;
+
+
+--
+-- TOC entry 233 (class 1259 OID 16568)
+-- Name: passenger_passport; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.passenger_passport (
+    country character varying(30) NOT NULL,
+    passport_number_and_series character varying(11) NOT NULL,
+    passenger_id integer NOT NULL,
+    issue_by character varying(30) NOT NULL,
+    issue_date date NOT NULL,
+    issue_place character varying(30) NOT NULL,
+    passport_type character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public.passenger_passport OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 16521)
+-- Name: route; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.route (
+    distance integer NOT NULL,
+    airplane_type character varying(10) NOT NULL,
+    route_number character varying(10) NOT NULL,
+    departure_time timestamp without time zone NOT NULL,
+    arrival_time timestamp without time zone NOT NULL,
+    company_id integer NOT NULL,
+    departure_airport_code character varying(3) NOT NULL,
+    arrival_airport_code character varying(3) NOT NULL,
+    CONSTRAINT route_check CHECK ((arrival_time > departure_time)),
+    CONSTRAINT route_distance_check CHECK ((distance > 0))
+);
+
+
+ALTER TABLE public.route OWNER TO postgres;
+
+--
+-- TOC entry 244 (class 1259 OID 16826)
+-- Name: seat; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.seat (
+    seat_number character varying(4) NOT NULL,
+    seat_type_id integer NOT NULL,
+    flight_id integer NOT NULL,
+    status character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public.seat OWNER TO postgres;
+
+--
+-- TOC entry 248 (class 1259 OID 16877)
+-- Name: seat_price_history; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.seat_price_history (
+    record_id integer NOT NULL,
+    seat_type_id integer NOT NULL,
+    price numeric(10,2) NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
+    CONSTRAINT seat_price_history_check CHECK ((end_date > start_date)),
+    CONSTRAINT seat_price_history_price_check CHECK ((price > (0)::numeric))
+);
+
+
+ALTER TABLE public.seat_price_history OWNER TO postgres;
+
+--
+-- TOC entry 247 (class 1259 OID 16876)
+-- Name: seat_price_history_record_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.seat_price_history_record_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.seat_price_history_record_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4054 (class 0 OID 0)
+-- Dependencies: 247
+-- Name: seat_price_history_record_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.seat_price_history_record_id_seq OWNED BY public.seat_price_history.record_id;
+
+
+--
+-- TOC entry 243 (class 1259 OID 16811)
+-- Name: seat_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.seat_type (
+    seat_type_id integer NOT NULL,
+    route_number character varying(10) NOT NULL,
+    base_price numeric(10,2) NOT NULL,
+    CONSTRAINT seat_type_base_price_check CHECK ((base_price > (0)::numeric))
+);
+
+
+ALTER TABLE public.seat_type OWNER TO postgres;
+
+--
+-- TOC entry 242 (class 1259 OID 16810)
+-- Name: seat_type_seat_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.seat_type_seat_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.seat_type_seat_type_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4055 (class 0 OID 0)
+-- Dependencies: 242
+-- Name: seat_type_seat_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.seat_type_seat_type_id_seq OWNED BY public.seat_type.seat_type_id;
+
+
+--
+-- TOC entry 252 (class 1259 OID 16916)
+-- Name: service_price_history; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.service_price_history (
+    record_id integer NOT NULL,
+    service_id integer NOT NULL,
+    price numeric(10,2) NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
+    CONSTRAINT service_price_history_check CHECK ((end_date > start_date)),
+    CONSTRAINT service_price_history_price_check CHECK ((price > (0)::numeric))
+);
+
+
+ALTER TABLE public.service_price_history OWNER TO postgres;
+
+--
+-- TOC entry 251 (class 1259 OID 16915)
+-- Name: service_price_history_record_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.service_price_history_record_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.service_price_history_record_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4056 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: service_price_history_record_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.service_price_history_record_id_seq OWNED BY public.service_price_history.record_id;
+
+
+--
+-- TOC entry 246 (class 1259 OID 16846)
+-- Name: ticket; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ticket (
+    ticket_id integer NOT NULL,
+    seat_number character varying(4),
+    payment_status character varying(10) NOT NULL,
+    cash_desk_id integer,
+    passport_number character varying(11) NOT NULL,
+    total_amount numeric(10,2),
+    payment_date timestamp without time zone,
+    seat_type_id integer NOT NULL
+);
+
+
+ALTER TABLE public.ticket OWNER TO postgres;
+
+--
+-- TOC entry 250 (class 1259 OID 16896)
+-- Name: ticket_service; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ticket_service (
+    ticket_service_id integer NOT NULL,
+    ticket_id integer NOT NULL,
+    service_id integer NOT NULL
+);
+
+
+ALTER TABLE public.ticket_service OWNER TO postgres;
+
+--
+-- TOC entry 249 (class 1259 OID 16895)
+-- Name: ticket_service_ticket_service_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ticket_service_ticket_service_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.ticket_service_ticket_service_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4057 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: ticket_service_ticket_service_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ticket_service_ticket_service_id_seq OWNED BY public.ticket_service.ticket_service_id;
+
+
+--
+-- TOC entry 245 (class 1259 OID 16845)
+-- Name: ticket_ticket_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ticket_ticket_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.ticket_ticket_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4058 (class 0 OID 0)
+-- Dependencies: 245
+-- Name: ticket_ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ticket_ticket_id_seq OWNED BY public.ticket.ticket_id;
+
+
+--
+-- TOC entry 237 (class 1259 OID 16722)
+-- Name: transit_stop; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.transit_stop (
+    transit_id integer NOT NULL,
+    route_number character varying(10) NOT NULL,
+    airport_code character varying(3) NOT NULL,
+    arrival_time timestamp without time zone NOT NULL,
+    departure_time timestamp without time zone NOT NULL,
+    stop_duration integer NOT NULL,
+    CONSTRAINT transit_stop_check CHECK ((departure_time > arrival_time)),
+    CONSTRAINT transit_stop_stop_duration_check CHECK ((stop_duration > 0))
+);
+
+
+ALTER TABLE public.transit_stop OWNER TO postgres;
+
+--
+-- TOC entry 236 (class 1259 OID 16721)
+-- Name: transit_stop_transit_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.transit_stop_transit_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.transit_stop_transit_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4059 (class 0 OID 0)
+-- Dependencies: 236
+-- Name: transit_stop_transit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.transit_stop_transit_id_seq OWNED BY public.transit_stop.transit_id;
+
+
+--
+-- TOC entry 3761 (class 2604 OID 16428)
+-- Name: additional_service service_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.additional_service ALTER COLUMN service_id SET DEFAULT nextval('public.additional_service_service_id_seq'::regclass);
+
+
+--
+-- TOC entry 3759 (class 2604 OID 16396)
+-- Name: aviacompany company_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.aviacompany ALTER COLUMN company_id SET DEFAULT nextval('public.aviacompany_company_id_seq'::regclass);
+
+
+--
+-- TOC entry 3760 (class 2604 OID 16418)
+-- Name: cash_desk cash_desk_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cash_desk ALTER COLUMN cash_desk_id SET DEFAULT nextval('public.cash_desk_cash_desk_id_seq'::regclass);
+
+
+--
+-- TOC entry 3767 (class 2604 OID 16792)
+-- Name: crew crew_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.crew ALTER COLUMN crew_id SET DEFAULT nextval('public.crew_crew_id_seq'::regclass);
+
+
+--
+-- TOC entry 3762 (class 2604 OID 16498)
+-- Name: employee employee_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employee ALTER COLUMN employee_id SET DEFAULT nextval('public.employee_employee_id_seq'::regclass);
+
+
+--
+-- TOC entry 3764 (class 2604 OID 16649)
+-- Name: flight flight_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flight ALTER COLUMN flight_id SET DEFAULT nextval('public.flight_flight_id_seq'::regclass);
+
+
+--
+-- TOC entry 3766 (class 2604 OID 16751)
+-- Name: flight_transit flight_transit_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flight_transit ALTER COLUMN flight_transit_id SET DEFAULT nextval('public.flight_transit_flight_transit_id_seq'::regclass);
+
+
+--
+-- TOC entry 3763 (class 2604 OID 16514)
+-- Name: passenger passenger_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.passenger ALTER COLUMN passenger_id SET DEFAULT nextval('public.passenger_passenger_id_seq'::regclass);
+
+
+--
+-- TOC entry 3770 (class 2604 OID 16880)
+-- Name: seat_price_history record_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat_price_history ALTER COLUMN record_id SET DEFAULT nextval('public.seat_price_history_record_id_seq'::regclass);
+
+
+--
+-- TOC entry 3768 (class 2604 OID 16814)
+-- Name: seat_type seat_type_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat_type ALTER COLUMN seat_type_id SET DEFAULT nextval('public.seat_type_seat_type_id_seq'::regclass);
+
+
+--
+-- TOC entry 3772 (class 2604 OID 16919)
+-- Name: service_price_history record_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.service_price_history ALTER COLUMN record_id SET DEFAULT nextval('public.service_price_history_record_id_seq'::regclass);
+
+
+--
+-- TOC entry 3769 (class 2604 OID 16849)
+-- Name: ticket ticket_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket ALTER COLUMN ticket_id SET DEFAULT nextval('public.ticket_ticket_id_seq'::regclass);
+
+
+--
+-- TOC entry 3771 (class 2604 OID 16899)
+-- Name: ticket_service ticket_service_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket_service ALTER COLUMN ticket_service_id SET DEFAULT nextval('public.ticket_service_ticket_service_id_seq'::regclass);
+
+
+--
+-- TOC entry 3765 (class 2604 OID 16725)
+-- Name: transit_stop transit_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transit_stop ALTER COLUMN transit_id SET DEFAULT nextval('public.transit_stop_transit_id_seq'::regclass);
+
+
+--
+-- TOC entry 4012 (class 0 OID 16425)
+-- Dependencies: 225
+-- Data for Name: additional_service; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+-- пример скрипта для заполнения таблицы данными
+
+INSERT INTO public.additional_service VALUES (1, 'Extra Baggage', 'Additional luggage up to 23kg');
+INSERT INTO public.additional_service VALUES (2, 'Priority Board', 'Early boarding privilege');
+INSERT INTO public.additional_service VALUES (3, 'Meal Upgrade', 'Premium meal selection');
+INSERT INTO public.additional_service VALUES (4, 'Lounge Access', 'Access to VIP lounge');
+INSERT INTO public.additional_service VALUES (5, 'Seat Selection', 'Choose preferred seat');
+INSERT INTO public.additional_service VALUES (6, 'Travel Insurance', 'Flight insurance coverage');
+INSERT INTO public.additional_service VALUES (7, 'Pet Transport', 'Pet transportation service');
+INSERT INTO public.additional_service VALUES (8, 'Wheelchair', 'Wheelchair assistance');
+INSERT INTO public.additional_service VALUES (9, 'Fast Track', 'Fast security check');
+INSERT INTO public.additional_service VALUES (10, 'Wi-Fi Package', 'In-flight internet access');
+
+
+--
+-- TOC entry 4013 (class 0 OID 16464)
+-- Dependencies: 226
+-- Data for Name: airplane; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.airplane VALUES ('B737', 'RA-73001', 1, 180, 'USA', 20000, 95, 'Passenger', 850, '2024-01-15', '2020-05-10', 15000, 2500);
+INSERT INTO public.airplane VALUES ('A320', 'RA-32002', 1, 160, 'France', 18000, 90, 'Passenger', 820, '2024-02-20', '2019-08-15', 18000, 2400);
+INSERT INTO public.airplane VALUES ('B777', 'RA-77003', 1, 350, 'USA', 50000, 98, 'Passenger', 900, '2024-03-10', '2018-03-20', 22000, 5000);
+INSERT INTO public.airplane VALUES ('A350', 'RA-35004', 2, 300, 'France', 45000, 97, 'Passenger', 890, '2024-01-25', '2021-06-01', 10000, 4500);
+INSERT INTO public.airplane VALUES ('B737', 'RA-73005', 2, 180, 'USA', 20000, 94, 'Passenger', 850, '2023-12-05', '2020-11-10', 14000, 2500);
+INSERT INTO public.airplane VALUES ('B777', 'A6-E001', 3, 380, 'USA', 55000, 99, 'Passenger', 910, '2024-02-15', '2017-09-25', 28000, 5200);
+INSERT INTO public.airplane VALUES ('A320', 'D-AI001', 4, 165, 'Germany', 18500, 92, 'Passenger', 830, '2024-03-01', '2019-04-12', 17000, 2450);
+INSERT INTO public.airplane VALUES ('A330', 'TC-J001', 5, 280, 'France', 40000, 96, 'Passenger', 870, '2024-01-30', '2018-07-20', 20000, 4200);
+INSERT INTO public.airplane VALUES ('A380', 'F-HP001', 6, 550, 'France', 70000, 99, 'Passenger', 920, '2024-02-28', '2016-12-05', 32000, 7000);
+INSERT INTO public.airplane VALUES ('B787', 'A7-B001', 7, 280, 'USA', 42000, 98, 'Passenger', 900, '2024-03-05', '2020-02-18', 12000, 4300);
+INSERT INTO public.airplane VALUES ('B737', 'RA-73006', 1, 180, 'USA', 20000, 93, 'Cargo', 850, '2023-11-20', '2019-10-30', 16000, 2600);
+INSERT INTO public.airplane VALUES ('A321', 'RA-32101', 2, 200, 'France', 22000, 94, 'Passenger', 840, '2024-01-10', '2020-07-22', 13000, 2700);
+INSERT INTO public.airplane VALUES ('B747', 'RA-74001', 1, 450, 'USA', 65000, 97, 'Passenger', 910, '2024-02-10', '2015-05-15', 35000, 6500);
+INSERT INTO public.airplane VALUES ('A380', 'A6-E002', 3, 520, 'France', 68000, 99, 'Passenger', 920, '2024-03-12', '2017-01-08', 30000, 6800);
+INSERT INTO public.airplane VALUES ('B737', 'TC-J002', 5, 175, 'USA', 19500, 93, 'Passenger', 845, '2023-12-15', '2021-03-10', 11000, 2550);
+
+
+--
+-- TOC entry 4008 (class 0 OID 16404)
+-- Dependencies: 221
+-- Data for Name: airport; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.airport VALUES ('SVO', 'Sheremetyevo', 'Russia', 'Moscow, Sheremetyevo Intl', 'Aeroflot');
+INSERT INTO public.airport VALUES ('DME', 'Domodedovo', 'Russia', 'Moscow, Domodedovo Intl', 'S7 Airlines');
+INSERT INTO public.airport VALUES ('DXB', 'Dubai Intl', 'UAE', 'Dubai, Garhoud', 'Emirates');
+INSERT INTO public.airport VALUES ('FRA', 'Frankfurt', 'Germany', 'Frankfurt, Hugo-Eckener-Ring', 'Lufthansa');
+INSERT INTO public.airport VALUES ('IST', 'Istanbul Airport', 'Turkey', 'Istanbul, Tayakadin', 'Turkish Airlines');
+INSERT INTO public.airport VALUES ('CDG', 'Charles de Gaulle', 'France', 'Paris, Roissy', 'Air France');
+INSERT INTO public.airport VALUES ('DOH', 'Hamad Intl', 'Qatar', 'Doha, Airport Road', 'Qatar Airways');
+INSERT INTO public.airport VALUES ('LED', 'Pulkovo', 'Russia', 'St. Petersburg, Pulkovo', 'Aeroflot');
+INSERT INTO public.airport VALUES ('OVB', 'Tolmachevo', 'Russia', 'Novosibirsk, Tolmachevo', 'S7 Airlines');
+INSERT INTO public.airport VALUES ('VKO', 'Vnukovo', 'Russia', 'Moscow, Vnukovo', 'Aeroflot');
+
+
+--
+-- TOC entry 4007 (class 0 OID 16393)
+-- Dependencies: 220
+-- Data for Name: aviacompany; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.aviacompany VALUES (1, 'Aeroflot', 'Russia', 'Moscow, Leningradsky pr., 37', '74952235555', 'info@aeroflot.ru');
+INSERT INTO public.aviacompany VALUES (2, 'S7 Airlines', 'Russia', 'Novosibirsk, Komsomolskaya, 55', '73832299999', 'support@s7.ru');
+INSERT INTO public.aviacompany VALUES (3, 'Emirates', 'UAE', 'Dubai, Airport Road', '97142144444', 'contact@emirates.com');
+INSERT INTO public.aviacompany VALUES (4, 'Lufthansa', 'Germany', 'Cologne, Venloer Str., 100', '49221598000', 'service@lufthansa.de');
+INSERT INTO public.aviacompany VALUES (5, 'Turkish Airlines', 'Turkey', 'Istanbul, Yesilkoy', '90212444084', 'info@thy.com');
+INSERT INTO public.aviacompany VALUES (6, 'Air France', 'France', 'Paris, Rue du Commandant', '3314156780', 'contact@airfrance.fr');
+INSERT INTO public.aviacompany VALUES (7, 'Qatar Airways', 'Qatar', 'Doha, Airport Road', '9744454444', 'support@qatarairways.com');
+
+
+--
+-- TOC entry 4010 (class 0 OID 16415)
+-- Dependencies: 223
+-- Data for Name: cash_desk; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.cash_desk VALUES (1, 'Moscow, SVO Terminal D', 'active');
+INSERT INTO public.cash_desk VALUES (2, 'Moscow, DME Terminal A', 'active');
+INSERT INTO public.cash_desk VALUES (3, 'St. Petersburg, LED Terminal 1', 'active');
+INSERT INTO public.cash_desk VALUES (4, 'Novosibirsk, OVB Terminal A', 'active');
+INSERT INTO public.cash_desk VALUES (5, 'Dubai, DXB Terminal 3', 'active');
+INSERT INTO public.cash_desk VALUES (6, 'Frankfurt, FRA Terminal 1', 'active');
+INSERT INTO public.cash_desk VALUES (7, 'Istanbul, IST Main Hall', 'active');
+INSERT INTO public.cash_desk VALUES (8, 'Paris, CDG Terminal 2F', 'inactive');
+INSERT INTO public.cash_desk VALUES (9, 'Doha, DOH Terminal 1', 'active');
+INSERT INTO public.cash_desk VALUES (10, 'Moscow, VKO Terminal A', 'active');
+
+
+--
+-- TOC entry 4028 (class 0 OID 16789)
+-- Dependencies: 241
+-- Data for Name: crew; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.crew VALUES (1, 1, '12345678901', 'approved', '2024-12-01 10:00:00', NULL);
+INSERT INTO public.crew VALUES (2, 1, '12345678902', 'approved', '2024-12-01 10:00:00', NULL);
+INSERT INTO public.crew VALUES (3, 2, '12345678903', 'approved', '2024-12-02 10:00:00', NULL);
+INSERT INTO public.crew VALUES (4, 2, '12345678904', 'approved', '2024-12-02 10:00:00', NULL);
+INSERT INTO public.crew VALUES (5, 3, '12345678905', 'approved', '2024-12-03 10:00:00', NULL);
+INSERT INTO public.crew VALUES (6, 3, '12345678906', 'approved', '2024-12-03 10:00:00', NULL);
+INSERT INTO public.crew VALUES (7, 4, '12345678907', 'approved', '2024-12-04 10:00:00', NULL);
+INSERT INTO public.crew VALUES (8, 4, '12345678908', 'approved', '2024-12-04 10:00:00', NULL);
+INSERT INTO public.crew VALUES (9, 5, '12345678909', 'approved', '2024-12-05 10:00:00', NULL);
+INSERT INTO public.crew VALUES (10, 5, '12345678910', 'approved', '2024-12-05 10:00:00', NULL);
+INSERT INTO public.crew VALUES (11, 6, 'A123456789', 'approved', '2024-12-06 10:00:00', NULL);
+INSERT INTO public.crew VALUES (12, 6, 'B123456789', 'approved', '2024-12-06 10:00:00', NULL);
+INSERT INTO public.crew VALUES (13, 7, 'C123456789', 'approved', '2024-12-07 10:00:00', NULL);
+INSERT INTO public.crew VALUES (14, 7, 'D123456789', 'approved', '2024-12-07 10:00:00', NULL);
+INSERT INTO public.crew VALUES (15, 8, 'E123456789', 'approved', '2024-12-08 10:00:00', NULL);
+INSERT INTO public.crew VALUES (16, 8, 'F123456789', 'approved', '2024-12-08 10:00:00', NULL);
+INSERT INTO public.crew VALUES (17, 9, 'G123456789', 'approved', '2024-12-09 10:00:00', NULL);
+INSERT INTO public.crew VALUES (18, 9, 'H123456789', 'approved', '2024-12-09 10:00:00', NULL);
+INSERT INTO public.crew VALUES (19, 10, '12345678911', 'approved', '2024-12-10 10:00:00', NULL);
+INSERT INTO public.crew VALUES (20, 10, '12345678912', 'approved', '2024-12-10 10:00:00', NULL);
+
+
+--
+-- TOC entry 4015 (class 0 OID 16495)
+-- Dependencies: 228
+-- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.employee VALUES ('Ivan Petrov', 'Pilot', 1, 1);
+INSERT INTO public.employee VALUES ('Anna Smirnova', 'Flight Attendant', 1, 2);
+INSERT INTO public.employee VALUES ('Dmitry Volkov', 'Mechanic', 1, 3);
+INSERT INTO public.employee VALUES ('Elena Kozlova', 'Dispatcher', 2, 4);
+INSERT INTO public.employee VALUES ('Alexey Novikov', 'Pilot', 2, 5);
+INSERT INTO public.employee VALUES ('Maria Sokolova', 'Flight Attendant', 3, 6);
+INSERT INTO public.employee VALUES ('Ahmed Hassan', 'Pilot', 3, 7);
+INSERT INTO public.employee VALUES ('Hans Mueller', 'Mechanic', 4, 8);
+INSERT INTO public.employee VALUES ('Ayse Yilmaz', 'Flight Attendant', 5, 9);
+INSERT INTO public.employee VALUES ('Mehmet Demir', 'Pilot', 5, 10);
+INSERT INTO public.employee VALUES ('Pierre Dubois', 'Dispatcher', 6, 11);
+INSERT INTO public.employee VALUES ('Jean Martin', 'Pilot', 6, 12);
+INSERT INTO public.employee VALUES ('Fatima Al-Thani', 'Flight Attendant', 7, 13);
+INSERT INTO public.employee VALUES ('Omar Khalid', 'Mechanic', 7, 14);
+INSERT INTO public.employee VALUES ('Sergey Ivanov', 'Pilot', 1, 15);
+INSERT INTO public.employee VALUES ('Olga Morozova', 'Flight Attendant', 2, 16);
+INSERT INTO public.employee VALUES ('Pavel Kuznetsov', 'Mechanic', 1, 17);
+INSERT INTO public.employee VALUES ('Natalia Lebedeva', 'Dispatcher', 4, 18);
+INSERT INTO public.employee VALUES ('Andrey Popov', 'Pilot', 5, 19);
+INSERT INTO public.employee VALUES ('Victoria Romanova', 'Flight Attendant', 6, 20);
+
+
+--
+-- TOC entry 4019 (class 0 OID 16551)
+-- Dependencies: 232
+-- Data for Name: employee_passport; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.employee_passport VALUES ('12345678901', 1, 'Internal', 'Russia', 'MVD Russia', '2015-05-10', 'Moscow');
+INSERT INTO public.employee_passport VALUES ('12345678902', 2, 'Internal', 'Russia', 'MVD Russia', '2016-06-15', 'St. Petersburg');
+INSERT INTO public.employee_passport VALUES ('12345678903', 3, 'Internal', 'Russia', 'MVD Russia', '2014-03-20', 'Moscow');
+INSERT INTO public.employee_passport VALUES ('12345678904', 4, 'Internal', 'Russia', 'MVD Russia', '2017-08-10', 'Novosibirsk');
+INSERT INTO public.employee_passport VALUES ('12345678905', 5, 'Internal', 'Russia', 'MVD Russia', '2015-11-25', 'Moscow');
+INSERT INTO public.employee_passport VALUES ('12345678906', 6, 'Internat', 'Russia', 'MVD Russia', '2018-02-14', 'Moscow');
+INSERT INTO public.employee_passport VALUES ('A123456789', 7, 'Internat', 'UAE', 'Dubai Immig', '2017-05-20', 'Dubai');
+INSERT INTO public.employee_passport VALUES ('B123456789', 8, 'Internat', 'Germany', 'Berlin Police', '2016-09-10', 'Berlin');
+INSERT INTO public.employee_passport VALUES ('C123456789', 9, 'Internat', 'Turkey', 'Ankara Police', '2018-01-15', 'Istanbul');
+INSERT INTO public.employee_passport VALUES ('D123456789', 10, 'Internat', 'Turkey', 'Ankara Police', '2017-07-22', 'Ankara');
+INSERT INTO public.employee_passport VALUES ('E123456789', 11, 'Internat', 'France', 'Paris Prefect', '2016-04-18', 'Paris');
+INSERT INTO public.employee_passport VALUES ('F123456789', 12, 'Internat', 'France', 'Paris Prefect', '2015-12-05', 'Lyon');
+INSERT INTO public.employee_passport VALUES ('G123456789', 13, 'Internat', 'Qatar', 'Doha Immig', '2018-03-10', 'Doha');
+INSERT INTO public.employee_passport VALUES ('H123456789', 14, 'Internat', 'Qatar', 'Doha Immig', '2017-11-20', 'Doha');
+INSERT INTO public.employee_passport VALUES ('12345678907', 15, 'Internal', 'Russia', 'MVD Russia', '2016-08-15', 'Moscow');
+INSERT INTO public.employee_passport VALUES ('12345678908', 16, 'Internal', 'Russia', 'MVD Russia', '2017-02-28', 'St. Petersburg');
+INSERT INTO public.employee_passport VALUES ('12345678909', 17, 'Internal', 'Russia', 'MVD Russia', '2015-09-10', 'Moscow');
+INSERT INTO public.employee_passport VALUES ('12345678910', 18, 'Internal', 'Russia', 'MVD Russia', '2018-05-05', 'Novosibirsk');
+INSERT INTO public.employee_passport VALUES ('12345678911', 19, 'Internal', 'Russia', 'MVD Russia', '2016-12-20', 'Moscow');
+INSERT INTO public.employee_passport VALUES ('12345678912', 20, 'Internal', 'Russia', 'MVD Russia', '2017-04-15', 'St. Petersburg');
+
+
+--
+-- TOC entry 4022 (class 0 OID 16646)
+-- Dependencies: 235
+-- Data for Name: flight; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.flight VALUES ('SU-101', 'RA-73001', 'completed', 1, '2025-01-15 08:05:00', '2025-01-15 11:35:00', '2025-01-15 08:00:00', '2025-01-15 11:30:00');
+INSERT INTO public.flight VALUES ('SU-102', 'RA-32002', 'completed', 2, '2025-01-15 10:10:00', '2025-01-15 14:05:00', '2025-01-15 10:00:00', '2025-01-15 14:00:00');
+INSERT INTO public.flight VALUES ('SU-103', 'RA-77003', 'progress', 3, '2025-01-15 14:00:00', NULL, '2025-01-15 14:00:00', '2025-01-15 20:00:00');
+INSERT INTO public.flight VALUES ('S7-201', 'RA-35004', 'scheduled', 4, NULL, NULL, '2025-01-16 07:00:00', '2025-01-16 10:30:00');
+INSERT INTO public.flight VALUES ('S7-202', 'RA-73005', 'scheduled', 5, NULL, NULL, '2025-01-16 09:00:00', '2025-01-16 13:00:00');
+INSERT INTO public.flight VALUES ('EK-301', 'A6-E001', 'scheduled', 6, NULL, NULL, '2025-01-17 02:00:00', '2025-01-17 08:30:00');
+INSERT INTO public.flight VALUES ('LH-401', 'D-AI001', 'scheduled', 7, NULL, NULL, '2025-01-17 11:00:00', '2025-01-17 15:00:00');
+INSERT INTO public.flight VALUES ('TK-501', 'TC-J001', 'scheduled', 8, NULL, NULL, '2025-01-18 06:00:00', '2025-01-18 10:30:00');
+INSERT INTO public.flight VALUES ('AF-601', 'F-HP001', 'scheduled', 9, NULL, NULL, '2025-01-18 13:00:00', '2025-01-18 21:00:00');
+INSERT INTO public.flight VALUES ('QR-701', 'A7-B001', 'scheduled', 10, NULL, NULL, '2025-01-19 01:00:00', '2025-01-19 07:30:00');
+INSERT INTO public.flight VALUES ('SU-104', 'RA-73006', 'scheduled', 11, NULL, NULL, '2025-01-19 12:00:00', '2025-01-19 15:30:00');
+INSERT INTO public.flight VALUES ('S7-203', 'RA-32101', 'scheduled', 12, NULL, NULL, '2025-01-20 08:00:00', '2025-01-20 13:00:00');
+INSERT INTO public.flight VALUES ('SU-105', 'RA-74001', 'scheduled', 13, NULL, NULL, '2025-01-20 22:00:00', '2025-01-21 06:00:00');
+INSERT INTO public.flight VALUES ('EK-302', 'A6-E002', 'scheduled', 14, NULL, NULL, '2025-01-21 03:00:00', '2025-01-21 10:00:00');
+INSERT INTO public.flight VALUES ('TK-502', 'TC-J002', 'scheduled', 15, NULL, NULL, '2025-01-21 15:00:00', '2025-01-21 18:30:00');
+
+
+--
+-- TOC entry 4026 (class 0 OID 16748)
+-- Dependencies: 239
+-- Data for Name: flight_transit; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.flight_transit VALUES (1, 3, 1, '2025-01-15 16:00:00', '2025-01-15 17:00:00', NULL, NULL);
+INSERT INTO public.flight_transit VALUES (2, 3, 2, '2025-01-15 18:00:00', '2025-01-15 19:00:00', NULL, NULL);
+INSERT INTO public.flight_transit VALUES (3, 5, 3, '2025-01-16 11:00:00', '2025-01-16 12:00:00', NULL, NULL);
+INSERT INTO public.flight_transit VALUES (4, 6, 4, '2025-01-17 05:00:00', '2025-01-17 06:30:00', NULL, NULL);
+INSERT INTO public.flight_transit VALUES (5, 9, 5, '2025-01-18 17:00:00', '2025-01-18 18:30:00', NULL, NULL);
+INSERT INTO public.flight_transit VALUES (6, 10, 6, '2025-01-19 04:00:00', '2025-01-19 05:30:00', NULL, NULL);
+INSERT INTO public.flight_transit VALUES (7, 13, 7, '2025-01-21 02:00:00', '2025-01-21 03:30:00', NULL, NULL);
+INSERT INTO public.flight_transit VALUES (8, 14, 8, '2025-01-21 06:00:00', '2025-01-21 07:30:00', NULL, NULL);
+
+
+--
+-- TOC entry 4017 (class 0 OID 16511)
+-- Dependencies: 230
+-- Data for Name: passenger; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.passenger VALUES (1, 'Alexey Smirnov', 'Moscow, Lenina st., 10-5', '1985-03-15');
+INSERT INTO public.passenger VALUES (2, 'Maria Ivanova', 'St. Petersburg, Nevsky pr., 25-12', '1990-07-22');
+INSERT INTO public.passenger VALUES (3, 'Dmitry Petrov', 'Novosibirsk, Krasny pr., 50-8', '1988-11-30');
+INSERT INTO public.passenger VALUES (4, 'Elena Kozlova', 'Moscow, Tverskaya st., 15-20', '1992-05-18');
+INSERT INTO public.passenger VALUES (5, 'Andrey Volkov', 'Kazan, Bauman st., 30-15', '1987-09-05');
+INSERT INTO public.passenger VALUES (6, 'Olga Morozova', 'Moscow, Arbat st., 8-3', '1995-01-25');
+INSERT INTO public.passenger VALUES (7, 'Sergey Lebedev', 'St. Petersburg, Sadovaya st., 40-7', '1983-12-10');
+INSERT INTO public.passenger VALUES (8, 'Natalia Sokolova', 'Yekaterinburg, Lenina st., 60-22', '1991-06-14');
+INSERT INTO public.passenger VALUES (9, 'Pavel Novikov', 'Moscow, Kutuzovsky pr., 100-45', '1989-04-08');
+INSERT INTO public.passenger VALUES (10, 'Victoria Romanova', 'Sochi, Kurortny pr., 20-11', '1993-08-20');
+INSERT INTO public.passenger VALUES (11, 'Igor Kuznetsov', 'Moscow, Mira pr., 75-30', '1986-02-28');
+INSERT INTO public.passenger VALUES (12, 'Anna Popova', 'St. Petersburg, Ligovsky pr., 55-18', '1994-10-12');
+INSERT INTO public.passenger VALUES (13, 'Maxim Fedorov', 'Novosibirsk, Mira st., 12-6', '1982-07-03');
+INSERT INTO public.passenger VALUES (14, 'Ekaterina Orlova', 'Moscow, Sadovnicheskaya, 35-9', '1996-03-17');
+INSERT INTO public.passenger VALUES (15, 'Alexander Titov', 'Vladivostok, Svetlanskaya, 80-25', '1984-11-22');
+INSERT INTO public.passenger VALUES (16, 'Julia Belyaeva', 'Moscow, Oktyabrskaya, 18-4', '1997-05-09');
+INSERT INTO public.passenger VALUES (17, 'Roman Grigoriev', 'St. Petersburg, Gorokhovaya, 22-13', '1981-09-30');
+INSERT INTO public.passenger VALUES (18, 'Kristina Pavlova', 'Krasnodar, Krasnaya st., 45-16', '1998-01-14');
+INSERT INTO public.passenger VALUES (19, 'Viktor Stepanov', 'Moscow, Profsoyuznaya, 90-50', '1980-06-25');
+INSERT INTO public.passenger VALUES (20, 'Tatiana Nikitina', 'Sochi, Navaginskaya, 15-8', '1999-12-05');
+
+
+--
+-- TOC entry 4020 (class 0 OID 16568)
+-- Dependencies: 233
+-- Data for Name: passenger_passport; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456780', 1, 'MVD Russia', '2020-01-15', 'Moscow', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456781', 2, 'MVD Russia', '2019-03-20', 'St. Petersburg', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456782', 3, 'MVD Russia', '2021-05-10', 'Novosibirsk', 'Internal');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456783', 4, 'MVD Russia', '2018-07-25', 'Moscow', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456784', 5, 'MVD Russia', '2020-09-12', 'Kazan', 'Internal');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456785', 6, 'MVD Russia', '2019-11-30', 'Moscow', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456786', 7, 'MVD Russia', '2017-02-18', 'St. Petersburg', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456787', 8, 'MVD Russia', '2020-04-05', 'Yekaterinburg', 'Internal');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456788', 9, 'MVD Russia', '2018-06-22', 'Moscow', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456789', 10, 'MVD Russia', '2021-08-14', 'Sochi', 'Internal');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456790', 11, 'MVD Russia', '2019-10-28', 'Moscow', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456791', 12, 'MVD Russia', '2020-12-03', 'St. Petersburg', 'Internal');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456792', 13, 'MVD Russia', '2017-01-19', 'Novosibirsk', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456793', 14, 'MVD Russia', '2021-03-27', 'Moscow', 'Internal');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456794', 15, 'MVD Russia', '2018-05-11', 'Vladivostok', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456795', 16, 'MVD Russia', '2020-07-08', 'Moscow', 'Internal');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456796', 17, 'MVD Russia', '2019-09-16', 'St. Petersburg', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456797', 18, 'MVD Russia', '2021-11-24', 'Krasnodar', 'Internal');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456798', 19, 'MVD Russia', '2017-04-02', 'Moscow', 'Internat');
+INSERT INTO public.passenger_passport VALUES ('Russia', 'P123456799', 20, 'MVD Russia', '2020-06-30', 'Sochi', 'Internal');
+
+
+--
+-- TOC entry 4018 (class 0 OID 16521)
+-- Dependencies: 231
+-- Data for Name: route; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.route VALUES (2500, 'B737', 'SU-101', '2025-01-15 08:00:00', '2025-01-15 11:30:00', 1, 'SVO', 'LED');
+INSERT INTO public.route VALUES (3200, 'A320', 'SU-102', '2025-01-15 10:00:00', '2025-01-15 14:00:00', 1, 'SVO', 'OVB');
+INSERT INTO public.route VALUES (5500, 'B777', 'SU-103', '2025-01-15 14:00:00', '2025-01-15 20:00:00', 1, 'SVO', 'DXB');
+INSERT INTO public.route VALUES (2800, 'A350', 'S7-201', '2025-01-16 07:00:00', '2025-01-16 10:30:00', 2, 'DME', 'LED');
+INSERT INTO public.route VALUES (3500, 'B737', 'S7-202', '2025-01-16 09:00:00', '2025-01-16 13:00:00', 2, 'DME', 'OVB');
+INSERT INTO public.route VALUES (6000, 'B777', 'EK-301', '2025-01-17 02:00:00', '2025-01-17 08:30:00', 3, 'DXB', 'FRA');
+INSERT INTO public.route VALUES (4200, 'A320', 'LH-401', '2025-01-17 11:00:00', '2025-01-17 15:00:00', 4, 'FRA', 'IST');
+INSERT INTO public.route VALUES (3800, 'A330', 'TK-501', '2025-01-18 06:00:00', '2025-01-18 10:30:00', 5, 'IST', 'CDG');
+INSERT INTO public.route VALUES (7000, 'A380', 'AF-601', '2025-01-18 13:00:00', '2025-01-18 21:00:00', 6, 'CDG', 'DOH');
+INSERT INTO public.route VALUES (5800, 'B787', 'QR-701', '2025-01-19 01:00:00', '2025-01-19 07:30:00', 7, 'DOH', 'SVO');
+INSERT INTO public.route VALUES (2600, 'B737', 'SU-104', '2025-01-19 12:00:00', '2025-01-19 15:30:00', 1, 'LED', 'VKO');
+INSERT INTO public.route VALUES (4500, 'A321', 'S7-203', '2025-01-20 08:00:00', '2025-01-20 13:00:00', 2, 'OVB', 'DXB');
+INSERT INTO public.route VALUES (8000, 'B747', 'SU-105', '2025-01-20 22:00:00', '2025-01-21 06:00:00', 1, 'SVO', 'CDG');
+INSERT INTO public.route VALUES (6500, 'A380', 'EK-302', '2025-01-21 03:00:00', '2025-01-21 10:00:00', 3, 'DXB', 'IST');
+INSERT INTO public.route VALUES (3000, 'B737', 'TK-502', '2025-01-21 15:00:00', '2025-01-21 18:30:00', 5, 'IST', 'FRA');
+
+
+--
+-- TOC entry 4031 (class 0 OID 16826)
+-- Dependencies: 244
+-- Data for Name: seat; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.seat VALUES ('1A', 1, 1, 'occupied');
+INSERT INTO public.seat VALUES ('1B', 1, 1, 'occupied');
+INSERT INTO public.seat VALUES ('1C', 1, 1, 'available');
+INSERT INTO public.seat VALUES ('2A', 1, 1, 'available');
+INSERT INTO public.seat VALUES ('2B', 1, 1, 'occupied');
+INSERT INTO public.seat VALUES ('3A', 2, 2, 'occupied');
+INSERT INTO public.seat VALUES ('3B', 2, 2, 'available');
+INSERT INTO public.seat VALUES ('3C', 2, 2, 'occupied');
+INSERT INTO public.seat VALUES ('4A', 2, 2, 'available');
+INSERT INTO public.seat VALUES ('4B', 2, 2, 'occupied');
+INSERT INTO public.seat VALUES ('5A', 3, 3, 'available');
+INSERT INTO public.seat VALUES ('5B', 3, 3, 'available');
+INSERT INTO public.seat VALUES ('5C', 3, 3, 'occupied');
+INSERT INTO public.seat VALUES ('6A', 3, 3, 'available');
+INSERT INTO public.seat VALUES ('6B', 3, 3, 'available');
+INSERT INTO public.seat VALUES ('7A', 4, 4, 'available');
+INSERT INTO public.seat VALUES ('7B', 4, 4, 'available');
+INSERT INTO public.seat VALUES ('8A', 5, 5, 'available');
+INSERT INTO public.seat VALUES ('8B', 5, 5, 'occupied');
+INSERT INTO public.seat VALUES ('9A', 6, 6, 'available');
+
+
+--
+-- TOC entry 4035 (class 0 OID 16877)
+-- Dependencies: 248
+-- Data for Name: seat_price_history; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.seat_price_history VALUES (16, 1, 5000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (17, 2, 6500.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (18, 3, 15000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (19, 4, 4800.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (20, 5, 6000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (21, 6, 25000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (22, 7, 12000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (23, 8, 10000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (24, 9, 30000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (25, 10, 28000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (26, 11, 5200.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (27, 12, 8000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (28, 13, 20000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (29, 14, 27000.00, '2024-06-01', '2025-06-01');
+INSERT INTO public.seat_price_history VALUES (30, 15, 9500.00, '2024-06-01', '2025-06-01');
+
+
+--
+-- TOC entry 4030 (class 0 OID 16811)
+-- Dependencies: 243
+-- Data for Name: seat_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.seat_type VALUES (1, 'SU-101', 5000.00);
+INSERT INTO public.seat_type VALUES (2, 'SU-102', 6500.00);
+INSERT INTO public.seat_type VALUES (3, 'SU-103', 15000.00);
+INSERT INTO public.seat_type VALUES (4, 'S7-201', 4800.00);
+INSERT INTO public.seat_type VALUES (5, 'S7-202', 6000.00);
+INSERT INTO public.seat_type VALUES (6, 'EK-301', 25000.00);
+INSERT INTO public.seat_type VALUES (7, 'LH-401', 12000.00);
+INSERT INTO public.seat_type VALUES (8, 'TK-501', 10000.00);
+INSERT INTO public.seat_type VALUES (9, 'AF-601', 30000.00);
+INSERT INTO public.seat_type VALUES (10, 'QR-701', 28000.00);
+INSERT INTO public.seat_type VALUES (11, 'SU-104', 5200.00);
+INSERT INTO public.seat_type VALUES (12, 'S7-203', 8000.00);
+INSERT INTO public.seat_type VALUES (13, 'SU-105', 20000.00);
+INSERT INTO public.seat_type VALUES (14, 'EK-302', 27000.00);
+INSERT INTO public.seat_type VALUES (15, 'TK-502', 9500.00);
+
+
+--
+-- TOC entry 4039 (class 0 OID 16916)
+-- Dependencies: 252
+-- Data for Name: service_price_history; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.service_price_history VALUES (29, 1, 1500.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (30, 2, 2000.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (31, 3, 1000.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (32, 4, 5000.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (33, 5, 500.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (34, 6, 3000.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (35, 7, 4000.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (36, 8, 100.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (37, 9, 1500.00, '2024-01-01', '2025-12-31');
+INSERT INTO public.service_price_history VALUES (38, 10, 800.00, '2024-01-01', '2025-12-31');
+
+
+--
+-- TOC entry 4033 (class 0 OID 16846)
+-- Dependencies: 246
+-- Data for Name: ticket; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.ticket VALUES (1, '1A', 'paid', 1, 'P123456780', 5000.00, '2025-01-10 14:30:00', 1);
+INSERT INTO public.ticket VALUES (2, '1B', 'paid', 1, 'P123456781', 5000.00, '2025-01-10 15:00:00', 1);
+INSERT INTO public.ticket VALUES (3, '2B', 'paid', 2, 'P123456782', 5000.00, '2025-01-11 10:00:00', 1);
+INSERT INTO public.ticket VALUES (4, '3A', 'paid', 2, 'P123456783', 6500.00, '2025-01-11 11:30:00', 2);
+INSERT INTO public.ticket VALUES (5, '3C', 'paid', 3, 'P123456784', 6500.00, '2025-01-11 12:00:00', 2);
+INSERT INTO public.ticket VALUES (6, '4B', 'paid', 3, 'P123456785', 6500.00, '2025-01-12 09:00:00', 2);
+INSERT INTO public.ticket VALUES (7, '5C', 'paid', 4, 'P123456786', 15000.00, '2025-01-12 10:30:00', 3);
+INSERT INTO public.ticket VALUES (8, '8B', 'paid', 5, 'P123456787', 6000.00, '2025-01-13 14:00:00', 5);
+INSERT INTO public.ticket VALUES (9, '1A', 'pending', 6, 'P123456788', 25000.00, NULL, 6);
+INSERT INTO public.ticket VALUES (10, '3A', 'paid', 7, 'P123456789', 10000.00, '2025-01-14 16:00:00', 8);
+
+
+--
+-- TOC entry 4037 (class 0 OID 16896)
+-- Dependencies: 250
+-- Data for Name: ticket_service; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.ticket_service VALUES (1, 1, 1);
+INSERT INTO public.ticket_service VALUES (2, 1, 5);
+INSERT INTO public.ticket_service VALUES (3, 2, 2);
+INSERT INTO public.ticket_service VALUES (4, 3, 1);
+INSERT INTO public.ticket_service VALUES (5, 4, 3);
+INSERT INTO public.ticket_service VALUES (6, 4, 5);
+INSERT INTO public.ticket_service VALUES (7, 5, 4);
+INSERT INTO public.ticket_service VALUES (8, 6, 6);
+INSERT INTO public.ticket_service VALUES (9, 7, 1);
+INSERT INTO public.ticket_service VALUES (10, 7, 2);
+INSERT INTO public.ticket_service VALUES (11, 8, 5);
+INSERT INTO public.ticket_service VALUES (12, 9, 4);
+INSERT INTO public.ticket_service VALUES (13, 9, 10);
+INSERT INTO public.ticket_service VALUES (14, 10, 1);
+
+
+--
+-- TOC entry 4024 (class 0 OID 16722)
+-- Dependencies: 237
+-- Data for Name: transit_stop; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.transit_stop VALUES (1, 'SU-103', 'LED', '2025-01-15 16:00:00', '2025-01-15 17:00:00', 60);
+INSERT INTO public.transit_stop VALUES (2, 'SU-103', 'OVB', '2025-01-15 18:00:00', '2025-01-15 19:00:00', 60);
+INSERT INTO public.transit_stop VALUES (3, 'S7-202', 'LED', '2025-01-16 11:00:00', '2025-01-16 12:00:00', 60);
+INSERT INTO public.transit_stop VALUES (4, 'EK-301', 'IST', '2025-01-17 05:00:00', '2025-01-17 06:30:00', 90);
+INSERT INTO public.transit_stop VALUES (5, 'AF-601', 'FRA', '2025-01-18 17:00:00', '2025-01-18 18:30:00', 90);
+INSERT INTO public.transit_stop VALUES (6, 'QR-701', 'DXB', '2025-01-19 04:00:00', '2025-01-19 05:30:00', 90);
+INSERT INTO public.transit_stop VALUES (7, 'SU-105', 'LED', '2025-01-21 02:00:00', '2025-01-21 03:30:00', 90);
+INSERT INTO public.transit_stop VALUES (8, 'EK-302', 'FRA', '2025-01-21 06:00:00', '2025-01-21 07:30:00', 90);
+
+
+--
+-- TOC entry 4060 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: additional_service_service_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.additional_service_service_id_seq', 11, false);
+
+
+--
+-- TOC entry 4061 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: aviacompany_company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.aviacompany_company_id_seq', 8, false);
+
+
+--
+-- TOC entry 4062 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: cash_desk_cash_desk_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cash_desk_cash_desk_id_seq', 11, false);
+
+
+--
+-- TOC entry 4063 (class 0 OID 0)
+-- Dependencies: 240
+-- Name: crew_crew_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.crew_crew_id_seq', 21, false);
+
+
+--
+-- TOC entry 4064 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: employee_employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.employee_employee_id_seq', 21, false);
+
+
+--
+-- TOC entry 4065 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: flight_flight_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.flight_flight_id_seq', 16, false);
+
+
+--
+-- TOC entry 4066 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: flight_transit_flight_transit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.flight_transit_flight_transit_id_seq', 9, false);
+
+
+--
+-- TOC entry 4067 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: passenger_passenger_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.passenger_passenger_id_seq', 21, false);
+
+
+--
+-- TOC entry 4068 (class 0 OID 0)
+-- Dependencies: 247
+-- Name: seat_price_history_record_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.seat_price_history_record_id_seq', 30, true);
+
+
+--
+-- TOC entry 4069 (class 0 OID 0)
+-- Dependencies: 242
+-- Name: seat_type_seat_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.seat_type_seat_type_id_seq', 16, false);
+
+
+--
+-- TOC entry 4070 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: service_price_history_record_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.service_price_history_record_id_seq', 38, true);
+
+
+--
+-- TOC entry 4071 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: ticket_service_ticket_service_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.ticket_service_ticket_service_id_seq', 15, false);
+
+
+--
+-- TOC entry 4072 (class 0 OID 0)
+-- Dependencies: 245
+-- Name: ticket_ticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.ticket_ticket_id_seq', 11, false);
+
+
+--
+-- TOC entry 4073 (class 0 OID 0)
+-- Dependencies: 236
+-- Name: transit_stop_transit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.transit_stop_transit_id_seq', 9, false);
+
+
+--
+-- TOC entry 3800 (class 2606 OID 16433)
+-- Name: additional_service additional_service_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.additional_service
+    ADD CONSTRAINT additional_service_pkey PRIMARY KEY (service_id);
+
+
+--
+-- TOC entry 3802 (class 2606 OID 16488)
+-- Name: airplane airplane_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.airplane
+    ADD CONSTRAINT airplane_pkey PRIMARY KEY (board_number);
+
+
+--
+-- TOC entry 3796 (class 2606 OID 16413)
+-- Name: airport airport_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.airport
+    ADD CONSTRAINT airport_pkey PRIMARY KEY (airport_code);
+
+
+--
+-- TOC entry 3794 (class 2606 OID 16403)
+-- Name: aviacompany aviacompany_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.aviacompany
+    ADD CONSTRAINT aviacompany_pkey PRIMARY KEY (company_id);
+
+
+--
+-- TOC entry 3798 (class 2606 OID 16423)
+-- Name: cash_desk cash_desk_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cash_desk
+    ADD CONSTRAINT cash_desk_pkey PRIMARY KEY (cash_desk_id);
+
+
+--
+-- TOC entry 3820 (class 2606 OID 16799)
+-- Name: crew crew_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.crew
+    ADD CONSTRAINT crew_pkey PRIMARY KEY (crew_id);
+
+
+--
+-- TOC entry 3810 (class 2606 OID 16562)
+-- Name: employee_passport employee_passport_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employee_passport
+    ADD CONSTRAINT employee_passport_pkey PRIMARY KEY (passport_number_and_series);
+
+
+--
+-- TOC entry 3804 (class 2606 OID 16504)
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (employee_id);
+
+
+--
+-- TOC entry 3814 (class 2606 OID 16659)
+-- Name: flight flight_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flight
+    ADD CONSTRAINT flight_pkey PRIMARY KEY (flight_id);
+
+
+--
+-- TOC entry 3818 (class 2606 OID 16760)
+-- Name: flight_transit flight_transit_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flight_transit
+    ADD CONSTRAINT flight_transit_pkey PRIMARY KEY (flight_transit_id);
+
+
+--
+-- TOC entry 3812 (class 2606 OID 16579)
+-- Name: passenger_passport passenger_passport_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.passenger_passport
+    ADD CONSTRAINT passenger_passport_pkey PRIMARY KEY (passport_number_and_series);
+
+
+--
+-- TOC entry 3806 (class 2606 OID 16520)
+-- Name: passenger passenger_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.passenger
+    ADD CONSTRAINT passenger_pkey PRIMARY KEY (passenger_id);
+
+
+--
+-- TOC entry 3808 (class 2606 OID 16535)
+-- Name: route route_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.route
+    ADD CONSTRAINT route_pkey PRIMARY KEY (route_number);
+
+
+--
+-- TOC entry 3824 (class 2606 OID 16834)
+-- Name: seat seat_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat
+    ADD CONSTRAINT seat_pkey PRIMARY KEY (seat_number);
+
+
+--
+-- TOC entry 3828 (class 2606 OID 16889)
+-- Name: seat_price_history seat_price_history_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat_price_history
+    ADD CONSTRAINT seat_price_history_pkey PRIMARY KEY (record_id);
+
+
+--
+-- TOC entry 3822 (class 2606 OID 16820)
+-- Name: seat_type seat_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat_type
+    ADD CONSTRAINT seat_type_pkey PRIMARY KEY (seat_type_id);
+
+
+--
+-- TOC entry 3832 (class 2606 OID 16928)
+-- Name: service_price_history service_price_history_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.service_price_history
+    ADD CONSTRAINT service_price_history_pkey PRIMARY KEY (record_id);
+
+
+--
+-- TOC entry 3826 (class 2606 OID 16855)
+-- Name: ticket ticket_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket
+    ADD CONSTRAINT ticket_pkey PRIMARY KEY (ticket_id);
+
+
+--
+-- TOC entry 3830 (class 2606 OID 16904)
+-- Name: ticket_service ticket_service_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket_service
+    ADD CONSTRAINT ticket_service_pkey PRIMARY KEY (ticket_service_id);
+
+
+--
+-- TOC entry 3816 (class 2606 OID 16735)
+-- Name: transit_stop transit_stop_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transit_stop
+    ADD CONSTRAINT transit_stop_pkey PRIMARY KEY (transit_id);
+
+
+--
+-- TOC entry 3833 (class 2606 OID 16489)
+-- Name: airplane airplane_company_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.airplane
+    ADD CONSTRAINT airplane_company_id_fkey FOREIGN KEY (company_id) REFERENCES public.aviacompany(company_id);
+
+
+--
+-- TOC entry 3846 (class 2606 OID 16800)
+-- Name: crew crew_flight_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.crew
+    ADD CONSTRAINT crew_flight_id_fkey FOREIGN KEY (flight_id) REFERENCES public.flight(flight_id);
+
+
+--
+-- TOC entry 3847 (class 2606 OID 16805)
+-- Name: crew crew_passport_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.crew
+    ADD CONSTRAINT crew_passport_number_fkey FOREIGN KEY (passport_number) REFERENCES public.employee_passport(passport_number_and_series);
+
+
+--
+-- TOC entry 3834 (class 2606 OID 16505)
+-- Name: employee employee_company_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employee
+    ADD CONSTRAINT employee_company_id_fkey FOREIGN KEY (company_id) REFERENCES public.aviacompany(company_id);
+
+
+--
+-- TOC entry 3838 (class 2606 OID 16563)
+-- Name: employee_passport employee_passport_employee_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employee_passport
+    ADD CONSTRAINT employee_passport_employee_id_fkey FOREIGN KEY (employee_id) REFERENCES public.employee(employee_id);
+
+
+--
+-- TOC entry 3840 (class 2606 OID 16665)
+-- Name: flight flight_board_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flight
+    ADD CONSTRAINT flight_board_number_fkey FOREIGN KEY (board_number) REFERENCES public.airplane(board_number);
+
+
+--
+-- TOC entry 3841 (class 2606 OID 16660)
+-- Name: flight flight_route_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flight
+    ADD CONSTRAINT flight_route_number_fkey FOREIGN KEY (route_number) REFERENCES public.route(route_number);
+
+
+--
+-- TOC entry 3844 (class 2606 OID 16761)
+-- Name: flight_transit flight_transit_flight_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flight_transit
+    ADD CONSTRAINT flight_transit_flight_id_fkey FOREIGN KEY (flight_id) REFERENCES public.flight(flight_id);
+
+
+--
+-- TOC entry 3845 (class 2606 OID 16766)
+-- Name: flight_transit flight_transit_transit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.flight_transit
+    ADD CONSTRAINT flight_transit_transit_id_fkey FOREIGN KEY (transit_id) REFERENCES public.transit_stop(transit_id);
+
+
+--
+-- TOC entry 3839 (class 2606 OID 16580)
+-- Name: passenger_passport passenger_passport_passenger_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.passenger_passport
+    ADD CONSTRAINT passenger_passport_passenger_id_fkey FOREIGN KEY (passenger_id) REFERENCES public.passenger(passenger_id);
+
+
+--
+-- TOC entry 3835 (class 2606 OID 16546)
+-- Name: route route_arrival_airport_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.route
+    ADD CONSTRAINT route_arrival_airport_code_fkey FOREIGN KEY (arrival_airport_code) REFERENCES public.airport(airport_code);
+
+
+--
+-- TOC entry 3836 (class 2606 OID 16536)
+-- Name: route route_company_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.route
+    ADD CONSTRAINT route_company_id_fkey FOREIGN KEY (company_id) REFERENCES public.aviacompany(company_id);
+
+
+--
+-- TOC entry 3837 (class 2606 OID 16541)
+-- Name: route route_departure_airport_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.route
+    ADD CONSTRAINT route_departure_airport_code_fkey FOREIGN KEY (departure_airport_code) REFERENCES public.airport(airport_code);
+
+
+--
+-- TOC entry 3849 (class 2606 OID 16840)
+-- Name: seat seat_flight_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat
+    ADD CONSTRAINT seat_flight_id_fkey FOREIGN KEY (flight_id) REFERENCES public.flight(flight_id);
+
+
+--
+-- TOC entry 3855 (class 2606 OID 16890)
+-- Name: seat_price_history seat_price_history_seat_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat_price_history
+    ADD CONSTRAINT seat_price_history_seat_type_id_fkey FOREIGN KEY (seat_type_id) REFERENCES public.seat_type(seat_type_id);
+
+
+--
+-- TOC entry 3850 (class 2606 OID 16835)
+-- Name: seat seat_seat_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat
+    ADD CONSTRAINT seat_seat_type_id_fkey FOREIGN KEY (seat_type_id) REFERENCES public.seat_type(seat_type_id);
+
+
+--
+-- TOC entry 3848 (class 2606 OID 16821)
+-- Name: seat_type seat_type_route_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.seat_type
+    ADD CONSTRAINT seat_type_route_number_fkey FOREIGN KEY (route_number) REFERENCES public.route(route_number);
+
+
+--
+-- TOC entry 3858 (class 2606 OID 16929)
+-- Name: service_price_history service_price_history_service_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.service_price_history
+    ADD CONSTRAINT service_price_history_service_id_fkey FOREIGN KEY (service_id) REFERENCES public.additional_service(service_id);
+
+
+--
+-- TOC entry 3851 (class 2606 OID 16861)
+-- Name: ticket ticket_cash_desk_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket
+    ADD CONSTRAINT ticket_cash_desk_id_fkey FOREIGN KEY (cash_desk_id) REFERENCES public.cash_desk(cash_desk_id);
+
+
+--
+-- TOC entry 3852 (class 2606 OID 16866)
+-- Name: ticket ticket_passport_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket
+    ADD CONSTRAINT ticket_passport_number_fkey FOREIGN KEY (passport_number) REFERENCES public.passenger_passport(passport_number_and_series);
+
+
+--
+-- TOC entry 3853 (class 2606 OID 16856)
+-- Name: ticket ticket_seat_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket
+    ADD CONSTRAINT ticket_seat_number_fkey FOREIGN KEY (seat_number) REFERENCES public.seat(seat_number);
+
+
+--
+-- TOC entry 3854 (class 2606 OID 16871)
+-- Name: ticket ticket_seat_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket
+    ADD CONSTRAINT ticket_seat_type_id_fkey FOREIGN KEY (seat_type_id) REFERENCES public.seat_type(seat_type_id);
+
+
+--
+-- TOC entry 3856 (class 2606 OID 16910)
+-- Name: ticket_service ticket_service_service_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket_service
+    ADD CONSTRAINT ticket_service_service_id_fkey FOREIGN KEY (service_id) REFERENCES public.additional_service(service_id);
+
+
+--
+-- TOC entry 3857 (class 2606 OID 16905)
+-- Name: ticket_service ticket_service_ticket_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ticket_service
+    ADD CONSTRAINT ticket_service_ticket_id_fkey FOREIGN KEY (ticket_id) REFERENCES public.ticket(ticket_id);
+
+
+--
+-- TOC entry 3842 (class 2606 OID 16741)
+-- Name: transit_stop transit_stop_airport_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transit_stop
+    ADD CONSTRAINT transit_stop_airport_code_fkey FOREIGN KEY (airport_code) REFERENCES public.airport(airport_code);
+
+
+--
+-- TOC entry 3843 (class 2606 OID 16736)
+-- Name: transit_stop transit_stop_route_number_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transit_stop
+    ADD CONSTRAINT transit_stop_route_number_fkey FOREIGN KEY (route_number) REFERENCES public.route(route_number);
+
+
+-- Completed on 2026-04-13 16:59:21 MSK
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict dc65dhPu03okhsaTRn37d9SlTu7UrJlh7hj5jyoaPkrP0gjLy3rc47PhbZeyyPF
+
