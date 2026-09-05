@@ -1,0 +1,2199 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict hRaFYkouTu0jW9jNzpl5UgMHxKdaB34mAIygNhMuio5mtcbsYqenP6rxVqXPcdC
+
+-- Dumped from database version 18.2
+-- Dumped by pg_dump version 18.2
+
+-- Started on 2026-08-03 10:34:32
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 5291 (class 1262 OID 17327)
+-- Name: railway_transportation; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE railway_transportation WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'Russian_Russia.1251';
+
+
+ALTER DATABASE railway_transportation OWNER TO postgres;
+
+\unrestrict hRaFYkouTu0jW9jNzpl5UgMHxKdaB34mAIygNhMuio5mtcbsYqenP6rxVqXPcdC
+\connect railway_transportation
+\restrict hRaFYkouTu0jW9jNzpl5UgMHxKdaB34mAIygNhMuio5mtcbsYqenP6rxVqXPcdC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 6 (class 2615 OID 17328)
+-- Name: railway_schema; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA railway_schema;
+
+
+ALTER SCHEMA railway_schema OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 225 (class 1259 OID 17431)
+-- Name: Cashdesk; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Cashdesk" (
+    id_cashdesk integer NOT NULL,
+    id_address integer NOT NULL,
+    desk_number integer NOT NULL,
+    CONSTRAINT "Cashdesk_desk_number_check" CHECK ((desk_number > 0))
+);
+
+
+ALTER TABLE railway_schema."Cashdesk" OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 17339)
+-- Name: Cashdesk_Address; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Cashdesk_Address" (
+    id_address integer CONSTRAINT cashdesk_address_id_address_not_null NOT NULL,
+    id_city integer CONSTRAINT cashdesk_address_id_city_not_null NOT NULL,
+    address character varying(100) CONSTRAINT cashdesk_address_address_not_null NOT NULL
+);
+
+
+ALTER TABLE railway_schema."Cashdesk_Address" OWNER TO postgres;
+
+--
+-- TOC entry 5292 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: TABLE "Cashdesk_Address"; Type: COMMENT; Schema: railway_schema; Owner: postgres
+--
+
+COMMENT ON TABLE railway_schema."Cashdesk_Address" IS 'Адрес кассы';
+
+
+--
+-- TOC entry 224 (class 1259 OID 17430)
+-- Name: Cashdesk_id_cashdesk_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Cashdesk_id_cashdesk_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Cashdesk_id_cashdesk_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5293 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: Cashdesk_id_cashdesk_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Cashdesk_id_cashdesk_seq" OWNED BY railway_schema."Cashdesk".id_cashdesk;
+
+
+--
+-- TOC entry 221 (class 1259 OID 17330)
+-- Name: City; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."City" (
+    id_city integer NOT NULL,
+    city_name character varying(100) NOT NULL
+);
+
+
+ALTER TABLE railway_schema."City" OWNER TO postgres;
+
+--
+-- TOC entry 5294 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: TABLE "City"; Type: COMMENT; Schema: railway_schema; Owner: postgres
+--
+
+COMMENT ON TABLE railway_schema."City" IS 'Город кассы';
+
+
+--
+-- TOC entry 220 (class 1259 OID 17329)
+-- Name: City_id_city_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."City_id_city_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."City_id_city_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5295 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: City_id_city_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."City_id_city_seq" OWNED BY railway_schema."City".id_city;
+
+
+--
+-- TOC entry 245 (class 1259 OID 17585)
+-- Name: Flight; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Flight" (
+    id_flight integer NOT NULL,
+    id_train integer NOT NULL,
+    id_route integer NOT NULL,
+    dep_date date NOT NULL
+);
+
+
+ALTER TABLE railway_schema."Flight" OWNER TO postgres;
+
+--
+-- TOC entry 265 (class 1259 OID 17808)
+-- Name: Flight_Status; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Flight_Status" (
+    id_flight_status integer NOT NULL,
+    id_flight integer NOT NULL,
+    change_date date NOT NULL,
+    status character varying(10) NOT NULL,
+    CONSTRAINT "Flight_Status_status_check" CHECK (((status)::text = ANY ((ARRAY['Активен'::character varying, 'Задержан'::character varying, 'Отменен'::character varying, 'Завершен'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Flight_Status" OWNER TO postgres;
+
+--
+-- TOC entry 264 (class 1259 OID 17807)
+-- Name: Flight_Status_id_flight_status_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Flight_Status_id_flight_status_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Flight_Status_id_flight_status_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5296 (class 0 OID 0)
+-- Dependencies: 264
+-- Name: Flight_Status_id_flight_status_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Flight_Status_id_flight_status_seq" OWNED BY railway_schema."Flight_Status".id_flight_status;
+
+
+--
+-- TOC entry 244 (class 1259 OID 17584)
+-- Name: Flight_id_flight_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Flight_id_flight_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Flight_id_flight_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5297 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: Flight_id_flight_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Flight_id_flight_seq" OWNED BY railway_schema."Flight".id_flight;
+
+
+--
+-- TOC entry 253 (class 1259 OID 17682)
+-- Name: ID_Document; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."ID_Document" (
+    id_doc integer NOT NULL,
+    id_passenger integer NOT NULL,
+    doc_type character varying(30) NOT NULL,
+    doc_number character varying(30) NOT NULL,
+    add_date date NOT NULL,
+    CONSTRAINT "ID_Document_doc_type_check" CHECK (((doc_type)::text = ANY ((ARRAY['Паспорт'::character varying, 'Свидетельство о рождении'::character varying, 'Загранпаспорт'::character varying, 'Временное удостоверение'::character varying, 'Военный билет'::character varying, 'Справка об освобождении'::character varying, 'Вид на жительство'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."ID_Document" OWNER TO postgres;
+
+--
+-- TOC entry 259 (class 1259 OID 17757)
+-- Name: ID_Document_Status; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."ID_Document_Status" (
+    id_doc_status integer NOT NULL,
+    id_doc integer NOT NULL,
+    change_date date NOT NULL,
+    usage_status character varying(8) NOT NULL,
+    CONSTRAINT "ID_Document_Status_usage_status_check" CHECK (((usage_status)::text = ANY ((ARRAY['Разрешен'::character varying, 'Запрещен'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."ID_Document_Status" OWNER TO postgres;
+
+--
+-- TOC entry 258 (class 1259 OID 17756)
+-- Name: ID_Document_Status_id_doc_status_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."ID_Document_Status_id_doc_status_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."ID_Document_Status_id_doc_status_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5298 (class 0 OID 0)
+-- Dependencies: 258
+-- Name: ID_Document_Status_id_doc_status_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."ID_Document_Status_id_doc_status_seq" OWNED BY railway_schema."ID_Document_Status".id_doc_status;
+
+
+--
+-- TOC entry 252 (class 1259 OID 17681)
+-- Name: ID_Document_id_doc_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."ID_Document_id_doc_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."ID_Document_id_doc_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5299 (class 0 OID 0)
+-- Dependencies: 252
+-- Name: ID_Document_id_doc_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."ID_Document_id_doc_seq" OWNED BY railway_schema."ID_Document".id_doc;
+
+
+--
+-- TOC entry 235 (class 1259 OID 17493)
+-- Name: Passenger; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Passenger" (
+    id_passenger integer NOT NULL,
+    last_name character varying(50) NOT NULL,
+    first_name character varying(50) NOT NULL,
+    middle_name character varying(50),
+    birth_date date NOT NULL
+);
+
+
+ALTER TABLE railway_schema."Passenger" OWNER TO postgres;
+
+--
+-- TOC entry 234 (class 1259 OID 17492)
+-- Name: Passenger_id_passenger_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Passenger_id_passenger_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Passenger_id_passenger_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5300 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: Passenger_id_passenger_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Passenger_id_passenger_seq" OWNED BY railway_schema."Passenger".id_passenger;
+
+
+--
+-- TOC entry 241 (class 1259 OID 17535)
+-- Name: Route; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Route" (
+    id_route integer NOT NULL,
+    id_dep_station integer NOT NULL,
+    id_arr_station integer NOT NULL,
+    dep_time time without time zone NOT NULL,
+    arr_time time without time zone NOT NULL
+);
+
+
+ALTER TABLE railway_schema."Route" OWNER TO postgres;
+
+--
+-- TOC entry 243 (class 1259 OID 17557)
+-- Name: Route_Schedule; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Route_Schedule" (
+    id_schedule integer NOT NULL,
+    id_route integer NOT NULL,
+    id_station integer NOT NULL,
+    order_num integer NOT NULL,
+    arr_time time without time zone NOT NULL,
+    dep_time time without time zone NOT NULL,
+    CONSTRAINT "Route_Schedule_order_num_check" CHECK ((order_num > 0))
+);
+
+
+ALTER TABLE railway_schema."Route_Schedule" OWNER TO postgres;
+
+--
+-- TOC entry 242 (class 1259 OID 17556)
+-- Name: Route_Schedule_id_schedule_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Route_Schedule_id_schedule_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Route_Schedule_id_schedule_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5301 (class 0 OID 0)
+-- Dependencies: 242
+-- Name: Route_Schedule_id_schedule_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Route_Schedule_id_schedule_seq" OWNED BY railway_schema."Route_Schedule".id_schedule;
+
+
+--
+-- TOC entry 240 (class 1259 OID 17534)
+-- Name: Route_id_route_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Route_id_route_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Route_id_route_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5302 (class 0 OID 0)
+-- Dependencies: 240
+-- Name: Route_id_route_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Route_id_route_seq" OWNED BY railway_schema."Route".id_route;
+
+
+--
+-- TOC entry 233 (class 1259 OID 17477)
+-- Name: Seat_Type; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Seat_Type" (
+    id_seat_type integer NOT NULL,
+    id_wagon_type integer NOT NULL,
+    seat_type character varying(30) NOT NULL,
+    CONSTRAINT "Seat_Type_seat_type_check" CHECK (((seat_type)::text = ANY ((ARRAY['Сидячее'::character varying, 'Верхнее купе'::character varying, 'Нижнее купе'::character varying, 'Боковое верхнее'::character varying, 'Боковое нижнее'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Seat_Type" OWNER TO postgres;
+
+--
+-- TOC entry 232 (class 1259 OID 17476)
+-- Name: Seat_Type_id_seat_type_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Seat_Type_id_seat_type_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Seat_Type_id_seat_type_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5303 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: Seat_Type_id_seat_type_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Seat_Type_id_seat_type_seq" OWNED BY railway_schema."Seat_Type".id_seat_type;
+
+
+--
+-- TOC entry 249 (class 1259 OID 17632)
+-- Name: Seat_in_Flight; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Seat_in_Flight" (
+    id_seat_in_flight integer NOT NULL,
+    id_wagon_in_flight integer NOT NULL,
+    seat_num integer NOT NULL,
+    id_seat_type integer NOT NULL,
+    status character varying(14) NOT NULL,
+    CONSTRAINT "Seat_in_Flight_seat_num_check" CHECK ((seat_num > 0)),
+    CONSTRAINT "Seat_in_Flight_status_check" CHECK (((status)::text = ANY ((ARRAY['Свободно'::character varying, 'Забронировано'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Seat_in_Flight" OWNER TO postgres;
+
+--
+-- TOC entry 248 (class 1259 OID 17631)
+-- Name: Seat_in_Flight_id_seat_in_flight_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Seat_in_Flight_id_seat_in_flight_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Seat_in_Flight_id_seat_in_flight_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5304 (class 0 OID 0)
+-- Dependencies: 248
+-- Name: Seat_in_Flight_id_seat_in_flight_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Seat_in_Flight_id_seat_in_flight_seq" OWNED BY railway_schema."Seat_in_Flight".id_seat_in_flight;
+
+
+--
+-- TOC entry 227 (class 1259 OID 17447)
+-- Name: Station; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Station" (
+    id_station integer NOT NULL,
+    station_name character varying(50) NOT NULL,
+    settlement_type character varying(30),
+    CONSTRAINT "Station_settlement_type_check" CHECK (((settlement_type)::text = ANY ((ARRAY['Город'::character varying, 'ПГТ'::character varying, 'Село'::character varying, 'Деревня'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Station" OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 17446)
+-- Name: Station_id_station_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Station_id_station_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Station_id_station_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5305 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: Station_id_station_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Station_id_station_seq" OWNED BY railway_schema."Station".id_station;
+
+
+--
+-- TOC entry 251 (class 1259 OID 17658)
+-- Name: Tariff; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Tariff" (
+    id_tariff integer NOT NULL,
+    id_route integer NOT NULL,
+    id_seat_type integer NOT NULL,
+    dep_station_order integer NOT NULL,
+    arr_station_order integer NOT NULL,
+    CONSTRAINT "Tariff_arr_station_order_check" CHECK ((arr_station_order > 0)),
+    CONSTRAINT "Tariff_dep_station_order_check" CHECK ((dep_station_order > 0))
+);
+
+
+ALTER TABLE railway_schema."Tariff" OWNER TO postgres;
+
+--
+-- TOC entry 250 (class 1259 OID 17657)
+-- Name: Tariff_id_tariff_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Tariff_id_tariff_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Tariff_id_tariff_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5306 (class 0 OID 0)
+-- Dependencies: 250
+-- Name: Tariff_id_tariff_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Tariff_id_tariff_seq" OWNED BY railway_schema."Tariff".id_tariff;
+
+
+--
+-- TOC entry 255 (class 1259 OID 17700)
+-- Name: Ticket; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Ticket" (
+    id_ticket integer NOT NULL,
+    id_wagon_in_flight integer NOT NULL,
+    seat_num integer NOT NULL,
+    id_dep_station integer NOT NULL,
+    id_arr_station integer NOT NULL,
+    id_passenger integer NOT NULL,
+    id_cashdesk integer,
+    payment_type character varying(10) NOT NULL,
+    CONSTRAINT "Ticket_payment_type_check" CHECK (((payment_type)::text = ANY ((ARRAY['Сайт'::character varying, 'Приложение'::character varying, 'Касса'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Ticket" OWNER TO postgres;
+
+--
+-- TOC entry 257 (class 1259 OID 17740)
+-- Name: Ticket_Status; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Ticket_Status" (
+    id_status integer NOT NULL,
+    id_ticket integer NOT NULL,
+    change_date date NOT NULL,
+    status character varying(11) NOT NULL,
+    CONSTRAINT "Ticket_Status_status_check" CHECK (((status)::text = ANY ((ARRAY['Активен'::character varying, 'Использован'::character varying, 'Просрочен'::character varying, 'Сдан'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Ticket_Status" OWNER TO postgres;
+
+--
+-- TOC entry 256 (class 1259 OID 17739)
+-- Name: Ticket_Status_id_status_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Ticket_Status_id_status_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Ticket_Status_id_status_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5307 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: Ticket_Status_id_status_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Ticket_Status_id_status_seq" OWNED BY railway_schema."Ticket_Status".id_status;
+
+
+--
+-- TOC entry 254 (class 1259 OID 17699)
+-- Name: Ticket_id_ticket_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Ticket_id_ticket_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Ticket_id_ticket_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5308 (class 0 OID 0)
+-- Dependencies: 254
+-- Name: Ticket_id_ticket_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Ticket_id_ticket_seq" OWNED BY railway_schema."Ticket".id_ticket;
+
+
+--
+-- TOC entry 237 (class 1259 OID 17504)
+-- Name: Train; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Train" (
+    id_train integer NOT NULL,
+    id_train_type integer NOT NULL,
+    train_index character varying(20) NOT NULL
+);
+
+
+ALTER TABLE railway_schema."Train" OWNER TO postgres;
+
+--
+-- TOC entry 261 (class 1259 OID 17774)
+-- Name: Train_Status; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Train_Status" (
+    id_train_status integer NOT NULL,
+    id_train integer NOT NULL,
+    change_date date NOT NULL,
+    status character varying(20) NOT NULL,
+    CONSTRAINT "Train_Status_status_check" CHECK (((status)::text = ANY ((ARRAY['Используется'::character varying, 'На ремонте'::character varying, 'Списан'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Train_Status" OWNER TO postgres;
+
+--
+-- TOC entry 260 (class 1259 OID 17773)
+-- Name: Train_Status_id_train_status_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Train_Status_id_train_status_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Train_Status_id_train_status_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5309 (class 0 OID 0)
+-- Dependencies: 260
+-- Name: Train_Status_id_train_status_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Train_Status_id_train_status_seq" OWNED BY railway_schema."Train_Status".id_train_status;
+
+
+--
+-- TOC entry 229 (class 1259 OID 17457)
+-- Name: Train_Type; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Train_Type" (
+    id_train_type integer NOT NULL,
+    train_type character varying(30) NOT NULL,
+    CONSTRAINT "Train_Type_train_type_check" CHECK (((train_type)::text = ANY ((ARRAY['Сапсан'::character varying, 'Электричка'::character varying, 'Скорый'::character varying, 'Пассажирский'::character varying, 'Фирменный'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Train_Type" OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 17456)
+-- Name: Train_Type_id_train_type_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Train_Type_id_train_type_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Train_Type_id_train_type_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5310 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: Train_Type_id_train_type_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Train_Type_id_train_type_seq" OWNED BY railway_schema."Train_Type".id_train_type;
+
+
+--
+-- TOC entry 236 (class 1259 OID 17503)
+-- Name: Train_id_train_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Train_id_train_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Train_id_train_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5311 (class 0 OID 0)
+-- Dependencies: 236
+-- Name: Train_id_train_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Train_id_train_seq" OWNED BY railway_schema."Train".id_train;
+
+
+--
+-- TOC entry 239 (class 1259 OID 17519)
+-- Name: Wagon; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Wagon" (
+    id_wagon integer NOT NULL,
+    id_wagon_type integer NOT NULL,
+    seat_count integer NOT NULL,
+    CONSTRAINT "Wagon_seat_count_check" CHECK ((seat_count > 0))
+);
+
+
+ALTER TABLE railway_schema."Wagon" OWNER TO postgres;
+
+--
+-- TOC entry 263 (class 1259 OID 17791)
+-- Name: Wagon_Status; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Wagon_Status" (
+    id_wagon_status integer NOT NULL,
+    id_wagon integer NOT NULL,
+    change_date date NOT NULL,
+    status character varying(20) NOT NULL,
+    CONSTRAINT "Wagon_Status_status_check" CHECK (((status)::text = ANY ((ARRAY['Используется'::character varying, 'На ремонте'::character varying, 'Списан'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Wagon_Status" OWNER TO postgres;
+
+--
+-- TOC entry 262 (class 1259 OID 17790)
+-- Name: Wagon_Status_id_wagon_status_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Wagon_Status_id_wagon_status_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Wagon_Status_id_wagon_status_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5312 (class 0 OID 0)
+-- Dependencies: 262
+-- Name: Wagon_Status_id_wagon_status_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Wagon_Status_id_wagon_status_seq" OWNED BY railway_schema."Wagon_Status".id_wagon_status;
+
+
+--
+-- TOC entry 231 (class 1259 OID 17467)
+-- Name: Wagon_Type; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Wagon_Type" (
+    id_wagon_type integer NOT NULL,
+    wagon_type character varying(20) NOT NULL,
+    CONSTRAINT "Wagon_Type_wagon_type_check" CHECK (((wagon_type)::text = ANY ((ARRAY['Сидячий'::character varying, 'Плацкартный'::character varying, 'Купейный'::character varying, 'СВ'::character varying, 'Багажный'::character varying, 'Почтовый'::character varying, 'Вагон-ресторан'::character varying])::text[])))
+);
+
+
+ALTER TABLE railway_schema."Wagon_Type" OWNER TO postgres;
+
+--
+-- TOC entry 230 (class 1259 OID 17466)
+-- Name: Wagon_Type_id_wagon_type_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Wagon_Type_id_wagon_type_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Wagon_Type_id_wagon_type_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5313 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: Wagon_Type_id_wagon_type_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Wagon_Type_id_wagon_type_seq" OWNED BY railway_schema."Wagon_Type".id_wagon_type;
+
+
+--
+-- TOC entry 238 (class 1259 OID 17518)
+-- Name: Wagon_id_wagon_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Wagon_id_wagon_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Wagon_id_wagon_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5314 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: Wagon_id_wagon_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Wagon_id_wagon_seq" OWNED BY railway_schema."Wagon".id_wagon;
+
+
+--
+-- TOC entry 247 (class 1259 OID 17606)
+-- Name: Wagon_in_Flight; Type: TABLE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE TABLE railway_schema."Wagon_in_Flight" (
+    id_wagon_in_flight integer NOT NULL,
+    id_flight integer NOT NULL,
+    id_wagon integer NOT NULL,
+    wagon_order integer NOT NULL,
+    CONSTRAINT "Wagon_in_Flight_wagon_order_check" CHECK ((wagon_order > 0))
+);
+
+
+ALTER TABLE railway_schema."Wagon_in_Flight" OWNER TO postgres;
+
+--
+-- TOC entry 246 (class 1259 OID 17605)
+-- Name: Wagon_in_Flight_id_wagon_in_flight_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema."Wagon_in_Flight_id_wagon_in_flight_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema."Wagon_in_Flight_id_wagon_in_flight_seq" OWNER TO postgres;
+
+--
+-- TOC entry 5315 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: Wagon_in_Flight_id_wagon_in_flight_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema."Wagon_in_Flight_id_wagon_in_flight_seq" OWNED BY railway_schema."Wagon_in_Flight".id_wagon_in_flight;
+
+
+--
+-- TOC entry 222 (class 1259 OID 17338)
+-- Name: cashdesk_address_id_address_seq; Type: SEQUENCE; Schema: railway_schema; Owner: postgres
+--
+
+CREATE SEQUENCE railway_schema.cashdesk_address_id_address_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE railway_schema.cashdesk_address_id_address_seq OWNER TO postgres;
+
+--
+-- TOC entry 5316 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: cashdesk_address_id_address_seq; Type: SEQUENCE OWNED BY; Schema: railway_schema; Owner: postgres
+--
+
+ALTER SEQUENCE railway_schema.cashdesk_address_id_address_seq OWNED BY railway_schema."Cashdesk_Address".id_address;
+
+
+--
+-- TOC entry 4969 (class 2604 OID 17434)
+-- Name: Cashdesk id_cashdesk; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Cashdesk" ALTER COLUMN id_cashdesk SET DEFAULT nextval('railway_schema."Cashdesk_id_cashdesk_seq"'::regclass);
+
+
+--
+-- TOC entry 4968 (class 2604 OID 17342)
+-- Name: Cashdesk_Address id_address; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Cashdesk_Address" ALTER COLUMN id_address SET DEFAULT nextval('railway_schema.cashdesk_address_id_address_seq'::regclass);
+
+
+--
+-- TOC entry 4967 (class 2604 OID 17333)
+-- Name: City id_city; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."City" ALTER COLUMN id_city SET DEFAULT nextval('railway_schema."City_id_city_seq"'::regclass);
+
+
+--
+-- TOC entry 4979 (class 2604 OID 17588)
+-- Name: Flight id_flight; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Flight" ALTER COLUMN id_flight SET DEFAULT nextval('railway_schema."Flight_id_flight_seq"'::regclass);
+
+
+--
+-- TOC entry 4989 (class 2604 OID 17811)
+-- Name: Flight_Status id_flight_status; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Flight_Status" ALTER COLUMN id_flight_status SET DEFAULT nextval('railway_schema."Flight_Status_id_flight_status_seq"'::regclass);
+
+
+--
+-- TOC entry 4983 (class 2604 OID 17685)
+-- Name: ID_Document id_doc; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."ID_Document" ALTER COLUMN id_doc SET DEFAULT nextval('railway_schema."ID_Document_id_doc_seq"'::regclass);
+
+
+--
+-- TOC entry 4986 (class 2604 OID 17760)
+-- Name: ID_Document_Status id_doc_status; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."ID_Document_Status" ALTER COLUMN id_doc_status SET DEFAULT nextval('railway_schema."ID_Document_Status_id_doc_status_seq"'::regclass);
+
+
+--
+-- TOC entry 4974 (class 2604 OID 17496)
+-- Name: Passenger id_passenger; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Passenger" ALTER COLUMN id_passenger SET DEFAULT nextval('railway_schema."Passenger_id_passenger_seq"'::regclass);
+
+
+--
+-- TOC entry 4977 (class 2604 OID 17538)
+-- Name: Route id_route; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route" ALTER COLUMN id_route SET DEFAULT nextval('railway_schema."Route_id_route_seq"'::regclass);
+
+
+--
+-- TOC entry 4978 (class 2604 OID 17560)
+-- Name: Route_Schedule id_schedule; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route_Schedule" ALTER COLUMN id_schedule SET DEFAULT nextval('railway_schema."Route_Schedule_id_schedule_seq"'::regclass);
+
+
+--
+-- TOC entry 4973 (class 2604 OID 17480)
+-- Name: Seat_Type id_seat_type; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Seat_Type" ALTER COLUMN id_seat_type SET DEFAULT nextval('railway_schema."Seat_Type_id_seat_type_seq"'::regclass);
+
+
+--
+-- TOC entry 4981 (class 2604 OID 17635)
+-- Name: Seat_in_Flight id_seat_in_flight; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Seat_in_Flight" ALTER COLUMN id_seat_in_flight SET DEFAULT nextval('railway_schema."Seat_in_Flight_id_seat_in_flight_seq"'::regclass);
+
+
+--
+-- TOC entry 4970 (class 2604 OID 17450)
+-- Name: Station id_station; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Station" ALTER COLUMN id_station SET DEFAULT nextval('railway_schema."Station_id_station_seq"'::regclass);
+
+
+--
+-- TOC entry 4982 (class 2604 OID 17661)
+-- Name: Tariff id_tariff; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Tariff" ALTER COLUMN id_tariff SET DEFAULT nextval('railway_schema."Tariff_id_tariff_seq"'::regclass);
+
+
+--
+-- TOC entry 4984 (class 2604 OID 17703)
+-- Name: Ticket id_ticket; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket" ALTER COLUMN id_ticket SET DEFAULT nextval('railway_schema."Ticket_id_ticket_seq"'::regclass);
+
+
+--
+-- TOC entry 4985 (class 2604 OID 17743)
+-- Name: Ticket_Status id_status; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket_Status" ALTER COLUMN id_status SET DEFAULT nextval('railway_schema."Ticket_Status_id_status_seq"'::regclass);
+
+
+--
+-- TOC entry 4975 (class 2604 OID 17507)
+-- Name: Train id_train; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Train" ALTER COLUMN id_train SET DEFAULT nextval('railway_schema."Train_id_train_seq"'::regclass);
+
+
+--
+-- TOC entry 4987 (class 2604 OID 17777)
+-- Name: Train_Status id_train_status; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Train_Status" ALTER COLUMN id_train_status SET DEFAULT nextval('railway_schema."Train_Status_id_train_status_seq"'::regclass);
+
+
+--
+-- TOC entry 4971 (class 2604 OID 17460)
+-- Name: Train_Type id_train_type; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Train_Type" ALTER COLUMN id_train_type SET DEFAULT nextval('railway_schema."Train_Type_id_train_type_seq"'::regclass);
+
+
+--
+-- TOC entry 4976 (class 2604 OID 17522)
+-- Name: Wagon id_wagon; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon" ALTER COLUMN id_wagon SET DEFAULT nextval('railway_schema."Wagon_id_wagon_seq"'::regclass);
+
+
+--
+-- TOC entry 4988 (class 2604 OID 17794)
+-- Name: Wagon_Status id_wagon_status; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_Status" ALTER COLUMN id_wagon_status SET DEFAULT nextval('railway_schema."Wagon_Status_id_wagon_status_seq"'::regclass);
+
+
+--
+-- TOC entry 4972 (class 2604 OID 17470)
+-- Name: Wagon_Type id_wagon_type; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_Type" ALTER COLUMN id_wagon_type SET DEFAULT nextval('railway_schema."Wagon_Type_id_wagon_type_seq"'::regclass);
+
+
+--
+-- TOC entry 4980 (class 2604 OID 17609)
+-- Name: Wagon_in_Flight id_wagon_in_flight; Type: DEFAULT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_in_Flight" ALTER COLUMN id_wagon_in_flight SET DEFAULT nextval('railway_schema."Wagon_in_Flight_id_wagon_in_flight_seq"'::regclass);
+
+
+--
+-- TOC entry 5245 (class 0 OID 17431)
+-- Dependencies: 225
+-- Data for Name: Cashdesk; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Cashdesk" (id_cashdesk, id_address, desk_number) FROM stdin;
+3	3	5
+4	4	12
+\.
+
+
+--
+-- TOC entry 5243 (class 0 OID 17339)
+-- Dependencies: 223
+-- Data for Name: Cashdesk_Address; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Cashdesk_Address" (id_address, id_city, address) FROM stdin;
+3	16	Невский пр., 100
+4	17	Комсомольская пл., 1
+\.
+
+
+--
+-- TOC entry 5241 (class 0 OID 17330)
+-- Dependencies: 221
+-- Data for Name: City; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."City" (id_city, city_name) FROM stdin;
+16	Санкт-Петербург
+17	Москва
+18	Тверь
+\.
+
+
+--
+-- TOC entry 5265 (class 0 OID 17585)
+-- Dependencies: 245
+-- Data for Name: Flight; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Flight" (id_flight, id_train, id_route, dep_date) FROM stdin;
+2	13	2	2026-07-20
+\.
+
+
+--
+-- TOC entry 5285 (class 0 OID 17808)
+-- Dependencies: 265
+-- Data for Name: Flight_Status; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Flight_Status" (id_flight_status, id_flight, change_date, status) FROM stdin;
+3	2	2026-07-20	Активен
+4	2	2026-07-20	Завершен
+\.
+
+
+--
+-- TOC entry 5273 (class 0 OID 17682)
+-- Dependencies: 253
+-- Data for Name: ID_Document; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."ID_Document" (id_doc, id_passenger, doc_type, doc_number, add_date) FROM stdin;
+5	3	Паспорт	4500 123456	2023-01-10
+6	4	Паспорт	4501 654321	2023-02-15
+\.
+
+
+--
+-- TOC entry 5279 (class 0 OID 17757)
+-- Dependencies: 259
+-- Data for Name: ID_Document_Status; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."ID_Document_Status" (id_doc_status, id_doc, change_date, usage_status) FROM stdin;
+3	5	2026-01-10	Разрешен
+4	6	2026-02-15	Разрешен
+\.
+
+
+--
+-- TOC entry 5255 (class 0 OID 17493)
+-- Dependencies: 235
+-- Data for Name: Passenger; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Passenger" (id_passenger, last_name, first_name, middle_name, birth_date) FROM stdin;
+3	Иванов	Иван	Иванович	1990-05-15
+4	Петрова	Анна	\N	1995-11-22
+\.
+
+
+--
+-- TOC entry 5261 (class 0 OID 17535)
+-- Dependencies: 241
+-- Data for Name: Route; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Route" (id_route, id_dep_station, id_arr_station, dep_time, arr_time) FROM stdin;
+2	16	18	08:00:00	12:00:00
+\.
+
+
+--
+-- TOC entry 5263 (class 0 OID 17557)
+-- Dependencies: 243
+-- Data for Name: Route_Schedule; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Route_Schedule" (id_schedule, id_route, id_station, order_num, arr_time, dep_time) FROM stdin;
+4	2	16	1	08:00:00	08:10:00
+5	2	17	2	09:50:00	09:55:00
+6	2	18	3	11:55:00	12:00:00
+\.
+
+
+--
+-- TOC entry 5253 (class 0 OID 17477)
+-- Dependencies: 233
+-- Data for Name: Seat_Type; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Seat_Type" (id_seat_type, id_wagon_type, seat_type) FROM stdin;
+4	3	Сидячее
+5	4	Нижнее купе
+6	4	Верхнее купе
+\.
+
+
+--
+-- TOC entry 5269 (class 0 OID 17632)
+-- Dependencies: 249
+-- Data for Name: Seat_in_Flight; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Seat_in_Flight" (id_seat_in_flight, id_wagon_in_flight, seat_num, id_seat_type, status) FROM stdin;
+4	3	1	4	Свободно
+5	3	2	4	Забронировано
+6	4	1	5	Свободно
+\.
+
+
+--
+-- TOC entry 5247 (class 0 OID 17447)
+-- Dependencies: 227
+-- Data for Name: Station; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Station" (id_station, station_name, settlement_type) FROM stdin;
+16	Москва Ленинградская	Город
+17	Тверь	Город
+18	СПб Главный	Город
+\.
+
+
+--
+-- TOC entry 5271 (class 0 OID 17658)
+-- Dependencies: 251
+-- Data for Name: Tariff; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Tariff" (id_tariff, id_route, id_seat_type, dep_station_order, arr_station_order) FROM stdin;
+2	2	4	1	3
+\.
+
+
+--
+-- TOC entry 5275 (class 0 OID 17700)
+-- Dependencies: 255
+-- Data for Name: Ticket; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Ticket" (id_ticket, id_wagon_in_flight, seat_num, id_dep_station, id_arr_station, id_passenger, id_cashdesk, payment_type) FROM stdin;
+2	3	2	16	17	3	\N	Сайт
+\.
+
+
+--
+-- TOC entry 5277 (class 0 OID 17740)
+-- Dependencies: 257
+-- Data for Name: Ticket_Status; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Ticket_Status" (id_status, id_ticket, change_date, status) FROM stdin;
+1	2	2026-07-15	Активен
+2	2	2026-07-20	Использован
+\.
+
+
+--
+-- TOC entry 5257 (class 0 OID 17504)
+-- Dependencies: 237
+-- Data for Name: Train; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Train" (id_train, id_train_type, train_index) FROM stdin;
+13	11	754А
+14	12	016А
+\.
+
+
+--
+-- TOC entry 5281 (class 0 OID 17774)
+-- Dependencies: 261
+-- Data for Name: Train_Status; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Train_Status" (id_train_status, id_train, change_date, status) FROM stdin;
+3	13	2026-07-01	Используется
+4	14	2026-07-15	На ремонте
+\.
+
+
+--
+-- TOC entry 5249 (class 0 OID 17457)
+-- Dependencies: 229
+-- Data for Name: Train_Type; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Train_Type" (id_train_type, train_type) FROM stdin;
+11	Сапсан
+12	Скорый
+\.
+
+
+--
+-- TOC entry 5259 (class 0 OID 17519)
+-- Dependencies: 239
+-- Data for Name: Wagon; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Wagon" (id_wagon, id_wagon_type, seat_count) FROM stdin;
+5	3	60
+6	4	36
+\.
+
+
+--
+-- TOC entry 5283 (class 0 OID 17791)
+-- Dependencies: 263
+-- Data for Name: Wagon_Status; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Wagon_Status" (id_wagon_status, id_wagon, change_date, status) FROM stdin;
+5	5	2026-07-01	Используется
+6	6	2026-07-20	Списан
+\.
+
+
+--
+-- TOC entry 5251 (class 0 OID 17467)
+-- Dependencies: 231
+-- Data for Name: Wagon_Type; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Wagon_Type" (id_wagon_type, wagon_type) FROM stdin;
+3	Сидячий
+4	Купейный
+\.
+
+
+--
+-- TOC entry 5267 (class 0 OID 17606)
+-- Dependencies: 247
+-- Data for Name: Wagon_in_Flight; Type: TABLE DATA; Schema: railway_schema; Owner: postgres
+--
+
+COPY railway_schema."Wagon_in_Flight" (id_wagon_in_flight, id_flight, id_wagon, wagon_order) FROM stdin;
+3	2	5	1
+4	2	6	2
+\.
+
+
+--
+-- TOC entry 5317 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: Cashdesk_id_cashdesk_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Cashdesk_id_cashdesk_seq"', 4, true);
+
+
+--
+-- TOC entry 5318 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: City_id_city_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."City_id_city_seq"', 18, true);
+
+
+--
+-- TOC entry 5319 (class 0 OID 0)
+-- Dependencies: 264
+-- Name: Flight_Status_id_flight_status_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Flight_Status_id_flight_status_seq"', 4, true);
+
+
+--
+-- TOC entry 5320 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: Flight_id_flight_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Flight_id_flight_seq"', 2, true);
+
+
+--
+-- TOC entry 5321 (class 0 OID 0)
+-- Dependencies: 258
+-- Name: ID_Document_Status_id_doc_status_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."ID_Document_Status_id_doc_status_seq"', 4, true);
+
+
+--
+-- TOC entry 5322 (class 0 OID 0)
+-- Dependencies: 252
+-- Name: ID_Document_id_doc_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."ID_Document_id_doc_seq"', 6, true);
+
+
+--
+-- TOC entry 5323 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: Passenger_id_passenger_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Passenger_id_passenger_seq"', 6, true);
+
+
+--
+-- TOC entry 5324 (class 0 OID 0)
+-- Dependencies: 242
+-- Name: Route_Schedule_id_schedule_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Route_Schedule_id_schedule_seq"', 6, true);
+
+
+--
+-- TOC entry 5325 (class 0 OID 0)
+-- Dependencies: 240
+-- Name: Route_id_route_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Route_id_route_seq"', 2, true);
+
+
+--
+-- TOC entry 5326 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: Seat_Type_id_seat_type_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Seat_Type_id_seat_type_seq"', 6, true);
+
+
+--
+-- TOC entry 5327 (class 0 OID 0)
+-- Dependencies: 248
+-- Name: Seat_in_Flight_id_seat_in_flight_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Seat_in_Flight_id_seat_in_flight_seq"', 6, true);
+
+
+--
+-- TOC entry 5328 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: Station_id_station_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Station_id_station_seq"', 18, true);
+
+
+--
+-- TOC entry 5329 (class 0 OID 0)
+-- Dependencies: 250
+-- Name: Tariff_id_tariff_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Tariff_id_tariff_seq"', 2, true);
+
+
+--
+-- TOC entry 5330 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: Ticket_Status_id_status_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Ticket_Status_id_status_seq"', 2, true);
+
+
+--
+-- TOC entry 5331 (class 0 OID 0)
+-- Dependencies: 254
+-- Name: Ticket_id_ticket_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Ticket_id_ticket_seq"', 2, true);
+
+
+--
+-- TOC entry 5332 (class 0 OID 0)
+-- Dependencies: 260
+-- Name: Train_Status_id_train_status_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Train_Status_id_train_status_seq"', 4, true);
+
+
+--
+-- TOC entry 5333 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: Train_Type_id_train_type_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Train_Type_id_train_type_seq"', 12, true);
+
+
+--
+-- TOC entry 5334 (class 0 OID 0)
+-- Dependencies: 236
+-- Name: Train_id_train_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Train_id_train_seq"', 14, true);
+
+
+--
+-- TOC entry 5335 (class 0 OID 0)
+-- Dependencies: 262
+-- Name: Wagon_Status_id_wagon_status_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Wagon_Status_id_wagon_status_seq"', 6, true);
+
+
+--
+-- TOC entry 5336 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: Wagon_Type_id_wagon_type_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Wagon_Type_id_wagon_type_seq"', 4, true);
+
+
+--
+-- TOC entry 5337 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: Wagon_id_wagon_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Wagon_id_wagon_seq"', 6, true);
+
+
+--
+-- TOC entry 5338 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: Wagon_in_Flight_id_wagon_in_flight_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema."Wagon_in_Flight_id_wagon_in_flight_seq"', 4, true);
+
+
+--
+-- TOC entry 5339 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: cashdesk_address_id_address_seq; Type: SEQUENCE SET; Schema: railway_schema; Owner: postgres
+--
+
+SELECT pg_catalog.setval('railway_schema.cashdesk_address_id_address_seq', 4, true);
+
+
+--
+-- TOC entry 5014 (class 2606 OID 17440)
+-- Name: Cashdesk Cashdesk_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Cashdesk"
+    ADD CONSTRAINT "Cashdesk_pkey" PRIMARY KEY (id_cashdesk);
+
+
+--
+-- TOC entry 5010 (class 2606 OID 17337)
+-- Name: City City_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."City"
+    ADD CONSTRAINT "City_pkey" PRIMARY KEY (id_city);
+
+
+--
+-- TOC entry 5064 (class 2606 OID 17818)
+-- Name: Flight_Status Flight_Status_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Flight_Status"
+    ADD CONSTRAINT "Flight_Status_pkey" PRIMARY KEY (id_flight_status);
+
+
+--
+-- TOC entry 5038 (class 2606 OID 17594)
+-- Name: Flight Flight_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Flight"
+    ADD CONSTRAINT "Flight_pkey" PRIMARY KEY (id_flight);
+
+
+--
+-- TOC entry 5058 (class 2606 OID 17767)
+-- Name: ID_Document_Status ID_Document_Status_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."ID_Document_Status"
+    ADD CONSTRAINT "ID_Document_Status_pkey" PRIMARY KEY (id_doc_status);
+
+
+--
+-- TOC entry 5052 (class 2606 OID 17693)
+-- Name: ID_Document ID_Document_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."ID_Document"
+    ADD CONSTRAINT "ID_Document_pkey" PRIMARY KEY (id_doc);
+
+
+--
+-- TOC entry 5024 (class 2606 OID 17502)
+-- Name: Passenger Passenger_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Passenger"
+    ADD CONSTRAINT "Passenger_pkey" PRIMARY KEY (id_passenger);
+
+
+--
+-- TOC entry 5032 (class 2606 OID 17569)
+-- Name: Route_Schedule Route_Schedule_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route_Schedule"
+    ADD CONSTRAINT "Route_Schedule_pkey" PRIMARY KEY (id_schedule);
+
+
+--
+-- TOC entry 5030 (class 2606 OID 17545)
+-- Name: Route Route_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route"
+    ADD CONSTRAINT "Route_pkey" PRIMARY KEY (id_route);
+
+
+--
+-- TOC entry 5022 (class 2606 OID 17486)
+-- Name: Seat_Type Seat_Type_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Seat_Type"
+    ADD CONSTRAINT "Seat_Type_pkey" PRIMARY KEY (id_seat_type);
+
+
+--
+-- TOC entry 5046 (class 2606 OID 17644)
+-- Name: Seat_in_Flight Seat_in_Flight_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Seat_in_Flight"
+    ADD CONSTRAINT "Seat_in_Flight_pkey" PRIMARY KEY (id_seat_in_flight);
+
+
+--
+-- TOC entry 5016 (class 2606 OID 17455)
+-- Name: Station Station_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Station"
+    ADD CONSTRAINT "Station_pkey" PRIMARY KEY (id_station);
+
+
+--
+-- TOC entry 5050 (class 2606 OID 17670)
+-- Name: Tariff Tariff_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Tariff"
+    ADD CONSTRAINT "Tariff_pkey" PRIMARY KEY (id_tariff);
+
+
+--
+-- TOC entry 5056 (class 2606 OID 17750)
+-- Name: Ticket_Status Ticket_Status_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket_Status"
+    ADD CONSTRAINT "Ticket_Status_pkey" PRIMARY KEY (id_status);
+
+
+--
+-- TOC entry 5054 (class 2606 OID 17713)
+-- Name: Ticket Ticket_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket"
+    ADD CONSTRAINT "Ticket_pkey" PRIMARY KEY (id_ticket);
+
+
+--
+-- TOC entry 5060 (class 2606 OID 17784)
+-- Name: Train_Status Train_Status_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Train_Status"
+    ADD CONSTRAINT "Train_Status_pkey" PRIMARY KEY (id_train_status);
+
+
+--
+-- TOC entry 5018 (class 2606 OID 17465)
+-- Name: Train_Type Train_Type_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Train_Type"
+    ADD CONSTRAINT "Train_Type_pkey" PRIMARY KEY (id_train_type);
+
+
+--
+-- TOC entry 5026 (class 2606 OID 17512)
+-- Name: Train Train_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Train"
+    ADD CONSTRAINT "Train_pkey" PRIMARY KEY (id_train);
+
+
+--
+-- TOC entry 5062 (class 2606 OID 17801)
+-- Name: Wagon_Status Wagon_Status_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_Status"
+    ADD CONSTRAINT "Wagon_Status_pkey" PRIMARY KEY (id_wagon_status);
+
+
+--
+-- TOC entry 5020 (class 2606 OID 17475)
+-- Name: Wagon_Type Wagon_Type_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_Type"
+    ADD CONSTRAINT "Wagon_Type_pkey" PRIMARY KEY (id_wagon_type);
+
+
+--
+-- TOC entry 5040 (class 2606 OID 17616)
+-- Name: Wagon_in_Flight Wagon_in_Flight_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_in_Flight"
+    ADD CONSTRAINT "Wagon_in_Flight_pkey" PRIMARY KEY (id_wagon_in_flight);
+
+
+--
+-- TOC entry 5028 (class 2606 OID 17528)
+-- Name: Wagon Wagon_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon"
+    ADD CONSTRAINT "Wagon_pkey" PRIMARY KEY (id_wagon);
+
+
+--
+-- TOC entry 5012 (class 2606 OID 17347)
+-- Name: Cashdesk_Address cashdesk_address_pkey; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Cashdesk_Address"
+    ADD CONSTRAINT cashdesk_address_pkey PRIMARY KEY (id_address);
+
+
+--
+-- TOC entry 5048 (class 2606 OID 17646)
+-- Name: Seat_in_Flight unique_seat_per_wagon; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Seat_in_Flight"
+    ADD CONSTRAINT unique_seat_per_wagon UNIQUE (id_wagon_in_flight, seat_num);
+
+
+--
+-- TOC entry 5034 (class 2606 OID 17573)
+-- Name: Route_Schedule unique_station_order_per_route; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route_Schedule"
+    ADD CONSTRAINT unique_station_order_per_route UNIQUE (id_route, order_num);
+
+
+--
+-- TOC entry 5036 (class 2606 OID 17571)
+-- Name: Route_Schedule unique_station_per_route; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route_Schedule"
+    ADD CONSTRAINT unique_station_per_route UNIQUE (id_route, id_station);
+
+
+--
+-- TOC entry 5042 (class 2606 OID 17620)
+-- Name: Wagon_in_Flight unique_wagon_order_per_flight; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_in_Flight"
+    ADD CONSTRAINT unique_wagon_order_per_flight UNIQUE (id_flight, wagon_order);
+
+
+--
+-- TOC entry 5044 (class 2606 OID 17618)
+-- Name: Wagon_in_Flight unique_wagon_per_flight; Type: CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_in_Flight"
+    ADD CONSTRAINT unique_wagon_per_flight UNIQUE (id_flight, id_wagon);
+
+
+--
+-- TOC entry 5065 (class 2606 OID 17348)
+-- Name: Cashdesk_Address fk_address_city; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Cashdesk_Address"
+    ADD CONSTRAINT fk_address_city FOREIGN KEY (id_city) REFERENCES railway_schema."City"(id_city) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5066 (class 2606 OID 17441)
+-- Name: Cashdesk fk_cashdesk_address; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Cashdesk"
+    ADD CONSTRAINT fk_cashdesk_address FOREIGN KEY (id_address) REFERENCES railway_schema."Cashdesk_Address"(id_address) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5082 (class 2606 OID 17694)
+-- Name: ID_Document fk_doc_passenger; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."ID_Document"
+    ADD CONSTRAINT fk_doc_passenger FOREIGN KEY (id_passenger) REFERENCES railway_schema."Passenger"(id_passenger) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5089 (class 2606 OID 17768)
+-- Name: ID_Document_Status fk_docstatus_doc; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."ID_Document_Status"
+    ADD CONSTRAINT fk_docstatus_doc FOREIGN KEY (id_doc) REFERENCES railway_schema."ID_Document"(id_doc) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5074 (class 2606 OID 17600)
+-- Name: Flight fk_flight_route; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Flight"
+    ADD CONSTRAINT fk_flight_route FOREIGN KEY (id_route) REFERENCES railway_schema."Route"(id_route) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5075 (class 2606 OID 17595)
+-- Name: Flight fk_flight_train; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Flight"
+    ADD CONSTRAINT fk_flight_train FOREIGN KEY (id_train) REFERENCES railway_schema."Train"(id_train) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5092 (class 2606 OID 17819)
+-- Name: Flight_Status fk_flightstatus_flight; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Flight_Status"
+    ADD CONSTRAINT fk_flightstatus_flight FOREIGN KEY (id_flight) REFERENCES railway_schema."Flight"(id_flight) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5070 (class 2606 OID 17551)
+-- Name: Route fk_route_arr; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route"
+    ADD CONSTRAINT fk_route_arr FOREIGN KEY (id_arr_station) REFERENCES railway_schema."Station"(id_station) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5071 (class 2606 OID 17546)
+-- Name: Route fk_route_dep; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route"
+    ADD CONSTRAINT fk_route_dep FOREIGN KEY (id_dep_station) REFERENCES railway_schema."Station"(id_station) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5072 (class 2606 OID 17574)
+-- Name: Route_Schedule fk_schedule_route; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route_Schedule"
+    ADD CONSTRAINT fk_schedule_route FOREIGN KEY (id_route) REFERENCES railway_schema."Route"(id_route) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5073 (class 2606 OID 17579)
+-- Name: Route_Schedule fk_schedule_station; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Route_Schedule"
+    ADD CONSTRAINT fk_schedule_station FOREIGN KEY (id_station) REFERENCES railway_schema."Station"(id_station) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5067 (class 2606 OID 17487)
+-- Name: Seat_Type fk_seat_wagon_type; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Seat_Type"
+    ADD CONSTRAINT fk_seat_wagon_type FOREIGN KEY (id_wagon_type) REFERENCES railway_schema."Wagon_Type"(id_wagon_type) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5078 (class 2606 OID 17652)
+-- Name: Seat_in_Flight fk_sif_type; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Seat_in_Flight"
+    ADD CONSTRAINT fk_sif_type FOREIGN KEY (id_seat_type) REFERENCES railway_schema."Seat_Type"(id_seat_type) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5079 (class 2606 OID 17647)
+-- Name: Seat_in_Flight fk_sif_wagon_in_flight; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Seat_in_Flight"
+    ADD CONSTRAINT fk_sif_wagon_in_flight FOREIGN KEY (id_wagon_in_flight) REFERENCES railway_schema."Wagon_in_Flight"(id_wagon_in_flight) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5080 (class 2606 OID 17671)
+-- Name: Tariff fk_tariff_route; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Tariff"
+    ADD CONSTRAINT fk_tariff_route FOREIGN KEY (id_route) REFERENCES railway_schema."Route"(id_route) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5081 (class 2606 OID 17676)
+-- Name: Tariff fk_tariff_seat; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Tariff"
+    ADD CONSTRAINT fk_tariff_seat FOREIGN KEY (id_seat_type) REFERENCES railway_schema."Seat_Type"(id_seat_type) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5083 (class 2606 OID 17724)
+-- Name: Ticket fk_ticket_arr; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket"
+    ADD CONSTRAINT fk_ticket_arr FOREIGN KEY (id_arr_station) REFERENCES railway_schema."Station"(id_station) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5084 (class 2606 OID 17734)
+-- Name: Ticket fk_ticket_cash; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket"
+    ADD CONSTRAINT fk_ticket_cash FOREIGN KEY (id_cashdesk) REFERENCES railway_schema."Cashdesk"(id_cashdesk) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- TOC entry 5085 (class 2606 OID 17719)
+-- Name: Ticket fk_ticket_dep; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket"
+    ADD CONSTRAINT fk_ticket_dep FOREIGN KEY (id_dep_station) REFERENCES railway_schema."Station"(id_station) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5086 (class 2606 OID 17729)
+-- Name: Ticket fk_ticket_pass; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket"
+    ADD CONSTRAINT fk_ticket_pass FOREIGN KEY (id_passenger) REFERENCES railway_schema."Passenger"(id_passenger) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5087 (class 2606 OID 17714)
+-- Name: Ticket fk_ticket_wagon_in_flight; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket"
+    ADD CONSTRAINT fk_ticket_wagon_in_flight FOREIGN KEY (id_wagon_in_flight) REFERENCES railway_schema."Wagon_in_Flight"(id_wagon_in_flight) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5068 (class 2606 OID 17513)
+-- Name: Train fk_train_type; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Train"
+    ADD CONSTRAINT fk_train_type FOREIGN KEY (id_train_type) REFERENCES railway_schema."Train_Type"(id_train_type) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5090 (class 2606 OID 17785)
+-- Name: Train_Status fk_trainstatus_train; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Train_Status"
+    ADD CONSTRAINT fk_trainstatus_train FOREIGN KEY (id_train) REFERENCES railway_schema."Train"(id_train) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5088 (class 2606 OID 17751)
+-- Name: Ticket_Status fk_tstatus_ticket; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Ticket_Status"
+    ADD CONSTRAINT fk_tstatus_ticket FOREIGN KEY (id_ticket) REFERENCES railway_schema."Ticket"(id_ticket) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5069 (class 2606 OID 17529)
+-- Name: Wagon fk_wagon_type; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon"
+    ADD CONSTRAINT fk_wagon_type FOREIGN KEY (id_wagon_type) REFERENCES railway_schema."Wagon_Type"(id_wagon_type) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 5091 (class 2606 OID 17802)
+-- Name: Wagon_Status fk_wagonstatus_wagon; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_Status"
+    ADD CONSTRAINT fk_wagonstatus_wagon FOREIGN KEY (id_wagon) REFERENCES railway_schema."Wagon"(id_wagon) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5076 (class 2606 OID 17621)
+-- Name: Wagon_in_Flight fk_wif_flight; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_in_Flight"
+    ADD CONSTRAINT fk_wif_flight FOREIGN KEY (id_flight) REFERENCES railway_schema."Flight"(id_flight) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 5077 (class 2606 OID 17626)
+-- Name: Wagon_in_Flight fk_wif_wagon; Type: FK CONSTRAINT; Schema: railway_schema; Owner: postgres
+--
+
+ALTER TABLE ONLY railway_schema."Wagon_in_Flight"
+    ADD CONSTRAINT fk_wif_wagon FOREIGN KEY (id_wagon) REFERENCES railway_schema."Wagon"(id_wagon) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+-- Completed on 2026-08-03 10:34:33
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict hRaFYkouTu0jW9jNzpl5UgMHxKdaB34mAIygNhMuio5mtcbsYqenP6rxVqXPcdC
+
