@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: biblio_db
+    restart: always
+    environment:
+      POSTGRES_USER: polina_mitrofanova
+      POSTGRES_PASSWORD: pstg1234
+      POSTGRES_DB: lab3
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: 
