@@ -1,0 +1,1579 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict wM96tMIVekC04YxgAZzNHuX3LhcoxbsVtJ7S4wQFoFBZOvFPTQmOTYDq7CPa0W5
+
+-- Dumped from database version 14.22
+-- Dumped by pg_dump version 14.22
+
+-- Started on 2026-03-30 13:03:29 MSK
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 16554)
+-- Name: schema; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA schema;
+
+
+ALTER SCHEMA schema OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 210 (class 1259 OID 16560)
+-- Name: airline; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.airline (
+    id_airline uuid NOT NULL,
+    name character varying(20) NOT NULL,
+    country_reg character varying(30) NOT NULL,
+    address character varying(50) NOT NULL,
+    email character varying(30) NOT NULL,
+    phone_number character varying(14)
+);
+
+
+ALTER TABLE schema.airline OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 16595)
+-- Name: airport; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.airport (
+    id_airport uuid NOT NULL,
+    name character varying(20) NOT NULL,
+    code_name character varying(3) NOT NULL,
+    address character varying(60) NOT NULL,
+    country character varying(30) NOT NULL,
+    company_owner character varying(20) NOT NULL
+);
+
+
+ALTER TABLE schema.airport OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16762)
+-- Name: cashbox; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.cashbox (
+    id_cashbox uuid NOT NULL,
+    status character varying(10) NOT NULL,
+    address character varying(50) NOT NULL
+);
+
+
+ALTER TABLE schema.cashbox OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 16570)
+-- Name: employee; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.employee (
+    id_employee uuid NOT NULL,
+    id_airline uuid NOT NULL,
+    full_name character varying(30) NOT NULL,
+    "position" character varying(40) NOT NULL
+);
+
+
+ALTER TABLE schema.employee OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 16580)
+-- Name: employee_passport; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.employee_passport (
+    id_employee_passport uuid NOT NULL,
+    id_employee uuid NOT NULL,
+    number_seria character varying(11) NOT NULL,
+    type character varying(10) NOT NULL,
+    country character varying(30) NOT NULL,
+    issued_by character varying(30) NOT NULL,
+    issued_date date NOT NULL,
+    issued_address character varying(30) NOT NULL
+);
+
+
+ALTER TABLE schema.employee_passport OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16640)
+-- Name: flight; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.flight (
+    id_flight uuid NOT NULL,
+    id_route uuid NOT NULL,
+    id_plane uuid NOT NULL,
+    status character varying(10) NOT NULL,
+    actual_departure date NOT NULL,
+    actual_arrival date NOT NULL,
+    planned_departure date NOT NULL,
+    planned_arrival date NOT NULL
+);
+
+
+ALTER TABLE schema.flight OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 16590)
+-- Name: flight_crew; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.flight_crew (
+    id_flight_crew uuid NOT NULL,
+    id_flight uuid NOT NULL,
+    id_employee_passport uuid NOT NULL,
+    medical_status character varying(10) NOT NULL,
+    medical_check_date date NOT NULL,
+    rejection_reason character varying(40)
+);
+
+
+ALTER TABLE schema.flight_crew OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16680)
+-- Name: flight_transit_stop; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.flight_transit_stop (
+    id_flight_transit_stop uuid NOT NULL,
+    id_flight uuid NOT NULL,
+    id_transit_stop uuid NOT NULL,
+    id_route uuid NOT NULL,
+    planned_departure date NOT NULL,
+    planned_arrival date NOT NULL,
+    actual_departure date,
+    actual_arrival date
+);
+
+
+ALTER TABLE schema.flight_transit_stop OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16700)
+-- Name: passenger; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.passenger (
+    id_passenger uuid NOT NULL,
+    full_name character varying(30) NOT NULL,
+    address character varying(50) NOT NULL,
+    birth_date date NOT NULL
+);
+
+
+ALTER TABLE schema.passenger OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16705)
+-- Name: passenger_passport; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.passenger_passport (
+    id_passenger_passport uuid NOT NULL,
+    id_passenger uuid NOT NULL,
+    type character varying(10) NOT NULL,
+    country character varying(30) NOT NULL,
+    issued_by character varying(30) NOT NULL,
+    issued_date date NOT NULL,
+    issued_address character varying(30) NOT NULL,
+    number_seria character varying(11) NOT NULL
+);
+
+
+ALTER TABLE schema.passenger_passport OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1259 OID 16555)
+-- Name: plane; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.plane (
+    id_plane uuid NOT NULL,
+    id_airline uuid NOT NULL,
+    type character varying(10) NOT NULL,
+    seat_count integer NOT NULL,
+    country character varying(30) NOT NULL,
+    lifting_capacity integer NOT NULL,
+    performance integer NOT NULL,
+    purpose character varying(20) NOT NULL,
+    speed integer NOT NULL,
+    last_repair_date date,
+    manufacture_date date NOT NULL,
+    flight_hours integer NOT NULL,
+    fuel_consumption integer NOT NULL
+);
+
+
+ALTER TABLE schema.plane OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16620)
+-- Name: route; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.route (
+    id_route uuid NOT NULL,
+    id_airline uuid NOT NULL,
+    id_departure_airport uuid NOT NULL,
+    id_arrival_airport uuid NOT NULL,
+    distance integer NOT NULL,
+    plane_type character varying(10) NOT NULL,
+    departure_time date NOT NULL,
+    arrival_time date NOT NULL
+);
+
+
+ALTER TABLE schema.route OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16715)
+-- Name: seat; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.seat (
+    id_seat uuid NOT NULL,
+    id_flight uuid NOT NULL,
+    status character varying(10) NOT NULL,
+    id_seat_type uuid NOT NULL
+);
+
+
+ALTER TABLE schema.seat OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16747)
+-- Name: seat_price_history; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.seat_price_history (
+    id_seat_record uuid NOT NULL,
+    id_seat_type uuid NOT NULL,
+    price numeric(10,2) NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL
+);
+
+
+ALTER TABLE schema.seat_price_history OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 16720)
+-- Name: seat_type; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.seat_type (
+    id_seat_type uuid NOT NULL,
+    id_route uuid NOT NULL,
+    base_price numeric(10,2) NOT NULL
+);
+
+
+ALTER TABLE schema.seat_type OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 16787)
+-- Name: service; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.service (
+    id_service uuid NOT NULL,
+    name character varying(20) NOT NULL,
+    description character varying(200) NOT NULL
+);
+
+
+ALTER TABLE schema.service OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 16810)
+-- Name: service_price_history; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.service_price_history (
+    id_service_record uuid NOT NULL,
+    id_service uuid NOT NULL,
+    price numeric(10,2) NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL
+);
+
+
+ALTER TABLE schema.service_price_history OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16757)
+-- Name: ticket; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.ticket (
+    id_ticket uuid NOT NULL,
+    id_cashbox uuid NOT NULL,
+    id_passenger_passport uuid NOT NULL,
+    id_seat uuid NOT NULL,
+    id_seat_type uuid NOT NULL,
+    payment_status character varying(10) NOT NULL,
+    total_price numeric(10,2) NOT NULL,
+    payment_date date NOT NULL
+);
+
+
+ALTER TABLE schema.ticket OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 16792)
+-- Name: ticket_service; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.ticket_service (
+    id_ticket_service uuid NOT NULL,
+    id_service uuid NOT NULL,
+    id_ticket uuid NOT NULL
+);
+
+
+ALTER TABLE schema.ticket_service OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16665)
+-- Name: transit_stop; Type: TABLE; Schema: schema; Owner: postgres
+--
+
+CREATE TABLE schema.transit_stop (
+    id_transit_stop uuid NOT NULL,
+    id_route uuid NOT NULL,
+    id_airport uuid NOT NULL,
+    arrival_time date NOT NULL,
+    departure_time date NOT NULL,
+    stop_time integer NOT NULL
+);
+
+
+ALTER TABLE schema.transit_stop OWNER TO postgres;
+
+--
+-- TOC entry 3774 (class 0 OID 16560)
+-- Dependencies: 210
+-- Data for Name: airline; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.airline (id_airline, name, country_reg, address, email, phone_number) FROM stdin;
+7b9c4945-82ab-4544-93e7-17fed61c9c25	Победа	Россия	Ул. Пушкина, д. 23к2	email@mail.ru	+799999999999
+5364618a-04d1-45df-819c-67529239a73c	Победа	Россия	Москва ул. Пушкина, д. 23к2	email@mail.ru	+799999999999
+4604ccbe-3324-48e2-be4d-7b56fd065fc2	Победа	Россия	Москва, ул. Пушкина, д. 23к2	email@mail.ru	+799999999999
+417d352a-c149-4106-9c2a-b9e97364b61b	Победа	Россия	Москва, ул. Пушкина, д. 23/2	email@mail.ru	+799999999999
+21777d1f-bc73-491f-854e-ab25dfd8119a	Победа	Россия	Москва, ул. Пушкина, д. 23/2	email@mail.ru	+799999999999
+886be670-cd06-4a70-86c5-5720bfee3fff	Победа	Россия	Москва, ул. Пушкина, д. 23/2	email@mail.ru	+799999999999
+9c1abe78-0799-401d-9670-8635c3d9931d	Победа	Россия	Москва, ул. Пушкина, д. 23/2	email@mail.ru	+799999999999
+223da672-4bac-4eca-813a-68fbd14112f8	Победа	Россия	Москва, ул. Пушкина, д. 23/2	email@mail.ru	\N
+f0e9da01-534f-4b18-a79b-4580c94c0ec2	Победа	Россия	Москва, ул. Пушкина, д. 23/2	email@mail.ru	\N
+6dda3482-df1f-4ef0-8b1b-9d9ef8742063	name	coun	address	sdf@adsf.rsdvf	\N
+5ec05804-4997-4e89-afb3-712cc4694541	name	coun	address	sdf@adsf.rsdvf	\N
+78ba690c-a979-4683-aa51-2d3626099ca0	name	coun	address	sdf@adsf.rsdvf	\N
+\.
+
+
+--
+-- TOC entry 3778 (class 0 OID 16595)
+-- Dependencies: 214
+-- Data for Name: airport; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.airport (id_airport, name, code_name, address, country, company_owner) FROM stdin;
+4665fe02-292a-4561-b283-c97cf7261903	name	NMA	address	country	owner
+bb876138-9607-4f52-b1cd-99f2a530b102	name	NMA	address	country	owner
+\.
+
+
+--
+-- TOC entry 3789 (class 0 OID 16762)
+-- Dependencies: 225
+-- Data for Name: cashbox; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.cashbox (id_cashbox, status, address) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3775 (class 0 OID 16570)
+-- Dependencies: 211
+-- Data for Name: employee; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.employee (id_employee, id_airline, full_name, "position") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3776 (class 0 OID 16580)
+-- Dependencies: 212
+-- Data for Name: employee_passport; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.employee_passport (id_employee_passport, id_employee, number_seria, type, country, issued_by, issued_date, issued_address) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3780 (class 0 OID 16640)
+-- Dependencies: 216
+-- Data for Name: flight; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.flight (id_flight, id_route, id_plane, status, actual_departure, actual_arrival, planned_departure, planned_arrival) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3777 (class 0 OID 16590)
+-- Dependencies: 213
+-- Data for Name: flight_crew; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.flight_crew (id_flight_crew, id_flight, id_employee_passport, medical_status, medical_check_date, rejection_reason) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3782 (class 0 OID 16680)
+-- Dependencies: 218
+-- Data for Name: flight_transit_stop; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.flight_transit_stop (id_flight_transit_stop, id_flight, id_transit_stop, id_route, planned_departure, planned_arrival, actual_departure, actual_arrival) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3783 (class 0 OID 16700)
+-- Dependencies: 219
+-- Data for Name: passenger; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.passenger (id_passenger, full_name, address, birth_date) FROM stdin;
+b767047f-eb20-4017-bc24-fc75182a6d64	dfsd sdf	sdfsdf	2020-02-20
+\.
+
+
+--
+-- TOC entry 3784 (class 0 OID 16705)
+-- Dependencies: 220
+-- Data for Name: passenger_passport; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.passenger_passport (id_passenger_passport, id_passenger, type, country, issued_by, issued_date, issued_address, number_seria) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3773 (class 0 OID 16555)
+-- Dependencies: 209
+-- Data for Name: plane; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.plane (id_plane, id_airline, type, seat_count, country, lifting_capacity, performance, purpose, speed, last_repair_date, manufacture_date, flight_hours, fuel_consumption) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3779 (class 0 OID 16620)
+-- Dependencies: 215
+-- Data for Name: route; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.route (id_route, id_airline, id_departure_airport, id_arrival_airport, distance, plane_type, departure_time, arrival_time) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3785 (class 0 OID 16715)
+-- Dependencies: 221
+-- Data for Name: seat; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.seat (id_seat, id_flight, status, id_seat_type) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3787 (class 0 OID 16747)
+-- Dependencies: 223
+-- Data for Name: seat_price_history; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.seat_price_history (id_seat_record, id_seat_type, price, start_date, end_date) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3786 (class 0 OID 16720)
+-- Dependencies: 222
+-- Data for Name: seat_type; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.seat_type (id_seat_type, id_route, base_price) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3790 (class 0 OID 16787)
+-- Dependencies: 226
+-- Data for Name: service; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.service (id_service, name, description) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3792 (class 0 OID 16810)
+-- Dependencies: 228
+-- Data for Name: service_price_history; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.service_price_history (id_service_record, id_service, price, start_date, end_date) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3788 (class 0 OID 16757)
+-- Dependencies: 224
+-- Data for Name: ticket; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.ticket (id_ticket, id_cashbox, id_passenger_passport, id_seat, id_seat_type, payment_status, total_price, payment_date) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3791 (class 0 OID 16792)
+-- Dependencies: 227
+-- Data for Name: ticket_service; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.ticket_service (id_ticket_service, id_service, id_ticket) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3781 (class 0 OID 16665)
+-- Dependencies: 217
+-- Data for Name: transit_stop; Type: TABLE DATA; Schema: schema; Owner: postgres
+--
+
+COPY schema.transit_stop (id_transit_stop, id_route, id_airport, arrival_time, departure_time, stop_time) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3578 (class 2606 OID 16599)
+-- Name: airport airport_pkey; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.airport
+    ADD CONSTRAINT airport_pkey PRIMARY KEY (id_airport);
+
+
+--
+-- TOC entry 3522 (class 2606 OID 16870)
+-- Name: employee_passport chech_country; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.employee_passport
+    ADD CONSTRAINT chech_country CHECK (((country)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3538 (class 2606 OID 16876)
+-- Name: flight check_actual_dates; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.flight
+    ADD CONSTRAINT check_actual_dates CHECK ((actual_departure < actual_arrival)) NOT VALID;
+
+
+--
+-- TOC entry 3543 (class 2606 OID 16879)
+-- Name: flight_transit_stop check_actual_dates; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.flight_transit_stop
+    ADD CONSTRAINT check_actual_dates CHECK ((actual_departure < actual_arrival)) NOT VALID;
+
+
+--
+-- TOC entry 3530 (class 2606 OID 16861)
+-- Name: airport check_address; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airport
+    ADD CONSTRAINT check_address CHECK (((address)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3561 (class 2606 OID 16865)
+-- Name: cashbox check_address; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.cashbox
+    ADD CONSTRAINT check_address CHECK (((address)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3545 (class 2606 OID 16883)
+-- Name: passenger check_address; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger
+    ADD CONSTRAINT check_address CHECK (((address)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3515 (class 2606 OID 16858)
+-- Name: airline check_adress; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airline
+    ADD CONSTRAINT check_adress CHECK (((address)::text ~ '^[А-Яа-яA-Za-z0-9 .,\-/]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3555 (class 2606 OID 16917)
+-- Name: seat_type check_base_price; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.seat_type
+    ADD CONSTRAINT check_base_price CHECK ((base_price > (0)::numeric)) NOT VALID;
+
+
+--
+-- TOC entry 3546 (class 2606 OID 16885)
+-- Name: passenger check_birth_date; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger
+    ADD CONSTRAINT check_birth_date CHECK ((birth_date <= CURRENT_DATE)) NOT VALID;
+
+
+--
+-- TOC entry 3531 (class 2606 OID 16860)
+-- Name: airport check_code_name; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airport
+    ADD CONSTRAINT check_code_name CHECK (((code_name)::text ~ '^[A-Z]{3,3}'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3532 (class 2606 OID 16863)
+-- Name: airport check_company_owner; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airport
+    ADD CONSTRAINT check_company_owner CHECK (((company_owner)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3533 (class 2606 OID 16862)
+-- Name: airport check_country; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airport
+    ADD CONSTRAINT check_country CHECK (((country)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3548 (class 2606 OID 16887)
+-- Name: passenger_passport check_country; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger_passport
+    ADD CONSTRAINT check_country CHECK (((country)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3505 (class 2606 OID 16902)
+-- Name: plane check_country; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_country CHECK (((country)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3516 (class 2606 OID 16856)
+-- Name: airline check_country_reg; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airline
+    ADD CONSTRAINT check_country_reg CHECK (((country_reg)::text ~ '^[А-Яа-яA-Za-z .\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3556 (class 2606 OID 16916)
+-- Name: seat_price_history check_dates; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.seat_price_history
+    ADD CONSTRAINT check_dates CHECK ((start_date < end_date)) NOT VALID;
+
+
+--
+-- TOC entry 3565 (class 2606 OID 16921)
+-- Name: service_price_history check_dates; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.service_price_history
+    ADD CONSTRAINT check_dates CHECK ((start_date < end_date)) NOT VALID;
+
+
+--
+-- TOC entry 3541 (class 2606 OID 16925)
+-- Name: transit_stop check_dates; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.transit_stop
+    ADD CONSTRAINT check_dates CHECK ((departure_time < arrival_time)) NOT VALID;
+
+
+--
+-- TOC entry 3563 (class 2606 OID 16919)
+-- Name: service check_description; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.service
+    ADD CONSTRAINT check_description CHECK (((description)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3535 (class 2606 OID 16911)
+-- Name: route check_distance; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.route
+    ADD CONSTRAINT check_distance CHECK ((distance > 0)) NOT VALID;
+
+
+--
+-- TOC entry 3517 (class 2606 OID 16846)
+-- Name: airline check_email; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airline
+    ADD CONSTRAINT check_email CHECK (((email)::text ~ '^[A-Za-z0-9]+@[A-Za-z]+\.[a-z]{2,}$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3506 (class 2606 OID 16908)
+-- Name: plane check_flight_hours; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_flight_hours CHECK ((flight_hours >= 0)) NOT VALID;
+
+
+--
+-- TOC entry 3507 (class 2606 OID 16909)
+-- Name: plane check_fuel_consumption; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_fuel_consumption CHECK ((fuel_consumption > 0)) NOT VALID;
+
+
+--
+-- TOC entry 3520 (class 2606 OID 16866)
+-- Name: employee check_full_name; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.employee
+    ADD CONSTRAINT check_full_name CHECK (((full_name)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3547 (class 2606 OID 16882)
+-- Name: passenger check_full_name; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger
+    ADD CONSTRAINT check_full_name CHECK (((full_name)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3523 (class 2606 OID 16872)
+-- Name: employee_passport check_issued_address; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.employee_passport
+    ADD CONSTRAINT check_issued_address CHECK (((issued_address)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3549 (class 2606 OID 16889)
+-- Name: passenger_passport check_issued_address; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger_passport
+    ADD CONSTRAINT check_issued_address CHECK (((issued_address)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3524 (class 2606 OID 16871)
+-- Name: employee_passport check_issued_by; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.employee_passport
+    ADD CONSTRAINT check_issued_by CHECK (((issued_by)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3550 (class 2606 OID 16888)
+-- Name: passenger_passport check_issued_by; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger_passport
+    ADD CONSTRAINT check_issued_by CHECK (((issued_by)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3525 (class 2606 OID 16891)
+-- Name: employee_passport check_issued_date; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.employee_passport
+    ADD CONSTRAINT check_issued_date CHECK ((issued_date <= CURRENT_DATE)) NOT VALID;
+
+
+--
+-- TOC entry 3551 (class 2606 OID 16890)
+-- Name: passenger_passport check_issued_date; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger_passport
+    ADD CONSTRAINT check_issued_date CHECK ((issued_date <= CURRENT_DATE)) NOT VALID;
+
+
+--
+-- TOC entry 3508 (class 2606 OID 16907)
+-- Name: plane check_last_repair_date; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_last_repair_date CHECK ((last_repair_date <= CURRENT_DATE)) NOT VALID;
+
+
+--
+-- TOC entry 3509 (class 2606 OID 16903)
+-- Name: plane check_lifting_capacity; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_lifting_capacity CHECK ((lifting_capacity > 0)) NOT VALID;
+
+
+--
+-- TOC entry 3528 (class 2606 OID 16877)
+-- Name: flight_crew check_medical_status; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.flight_crew
+    ADD CONSTRAINT check_medical_status CHECK (((medical_status)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3518 (class 2606 OID 16852)
+-- Name: airline check_name; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airline
+    ADD CONSTRAINT check_name CHECK (((name)::text ~ '^[А-Яа-яA-Za-z .\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3534 (class 2606 OID 16859)
+-- Name: airport check_name; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airport
+    ADD CONSTRAINT check_name CHECK (((name)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3564 (class 2606 OID 16918)
+-- Name: service check_name; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.service
+    ADD CONSTRAINT check_name CHECK (((name)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3526 (class 2606 OID 16873)
+-- Name: employee_passport check_number_seria; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.employee_passport
+    ADD CONSTRAINT check_number_seria CHECK (((number_seria)::text ~ '^[0-9]{6,6}+[0-9]{4,4}$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3552 (class 2606 OID 16892)
+-- Name: passenger_passport check_number_seria; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger_passport
+    ADD CONSTRAINT check_number_seria CHECK (((number_seria)::text ~ '^[0-9]{6,6}+[0-9]{4,4}$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3558 (class 2606 OID 16924)
+-- Name: ticket check_payment_date; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.ticket
+    ADD CONSTRAINT check_payment_date CHECK ((payment_date <= CURRENT_DATE)) NOT VALID;
+
+
+--
+-- TOC entry 3559 (class 2606 OID 16922)
+-- Name: ticket check_payment_status; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.ticket
+    ADD CONSTRAINT check_payment_status CHECK (((payment_status)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3510 (class 2606 OID 16904)
+-- Name: plane check_performance; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_performance CHECK ((performance > 0)) NOT VALID;
+
+
+--
+-- TOC entry 3519 (class 2606 OID 16845)
+-- Name: airline check_phone_number; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.airline
+    ADD CONSTRAINT check_phone_number CHECK ((((phone_number)::text ~~ '+%'::text) AND ((phone_number)::text !~~ '%+'::text) AND ((phone_number)::text ~ '^[0-9+]{12,14}$'::text))) NOT VALID;
+
+
+--
+-- TOC entry 3536 (class 2606 OID 16912)
+-- Name: route check_plane_type; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.route
+    ADD CONSTRAINT check_plane_type CHECK (((plane_type)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3539 (class 2606 OID 16875)
+-- Name: flight check_planned_dates; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.flight
+    ADD CONSTRAINT check_planned_dates CHECK ((planned_departure < planned_arrival)) NOT VALID;
+
+
+--
+-- TOC entry 3544 (class 2606 OID 16880)
+-- Name: flight_transit_stop check_planned_dates; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.flight_transit_stop
+    ADD CONSTRAINT check_planned_dates CHECK ((planned_departure < planned_arrival)) NOT VALID;
+
+
+--
+-- TOC entry 3521 (class 2606 OID 16867)
+-- Name: employee check_position; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.employee
+    ADD CONSTRAINT check_position CHECK ((("position")::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3557 (class 2606 OID 16915)
+-- Name: seat_price_history check_price; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.seat_price_history
+    ADD CONSTRAINT check_price CHECK ((price >= (0)::numeric)) NOT VALID;
+
+
+--
+-- TOC entry 3566 (class 2606 OID 16920)
+-- Name: service_price_history check_price; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.service_price_history
+    ADD CONSTRAINT check_price CHECK ((price >= (0)::numeric)) NOT VALID;
+
+
+--
+-- TOC entry 3511 (class 2606 OID 16905)
+-- Name: plane check_purpose; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_purpose CHECK (((purpose)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3529 (class 2606 OID 16878)
+-- Name: flight_crew check_rejection_reason; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.flight_crew
+    ADD CONSTRAINT check_rejection_reason CHECK (((rejection_reason)::text ~ '^[А-Яа-яA-Za-z .,\-%]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3512 (class 2606 OID 16901)
+-- Name: plane check_seat_count; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_seat_count CHECK ((seat_count >= 0)) NOT VALID;
+
+
+--
+-- TOC entry 3513 (class 2606 OID 16906)
+-- Name: plane check_speed; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_speed CHECK ((speed > 0)) NOT VALID;
+
+
+--
+-- TOC entry 3562 (class 2606 OID 16864)
+-- Name: cashbox check_status; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.cashbox
+    ADD CONSTRAINT check_status CHECK (((status)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3540 (class 2606 OID 16874)
+-- Name: flight check_status; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.flight
+    ADD CONSTRAINT check_status CHECK (((status)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3554 (class 2606 OID 16914)
+-- Name: seat check_status; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.seat
+    ADD CONSTRAINT check_status CHECK (((status)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3542 (class 2606 OID 16926)
+-- Name: transit_stop check_stop_time; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.transit_stop
+    ADD CONSTRAINT check_stop_time CHECK ((stop_time > 0)) NOT VALID;
+
+
+--
+-- TOC entry 3537 (class 2606 OID 16913)
+-- Name: route check_times; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.route
+    ADD CONSTRAINT check_times CHECK ((departure_time < arrival_time)) NOT VALID;
+
+
+--
+-- TOC entry 3560 (class 2606 OID 16923)
+-- Name: ticket check_total_price; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.ticket
+    ADD CONSTRAINT check_total_price CHECK ((total_price > (0)::numeric)) NOT VALID;
+
+
+--
+-- TOC entry 3527 (class 2606 OID 16869)
+-- Name: employee_passport check_type; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.employee_passport
+    ADD CONSTRAINT check_type CHECK (((type)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3553 (class 2606 OID 16886)
+-- Name: passenger_passport check_type; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.passenger_passport
+    ADD CONSTRAINT check_type CHECK (((type)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3514 (class 2606 OID 16900)
+-- Name: plane check_type; Type: CHECK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE schema.plane
+    ADD CONSTRAINT check_type CHECK (((type)::text ~ '^[А-Яа-яA-Za-z .,\-]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 3570 (class 2606 OID 16564)
+-- Name: airline id_airline; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.airline
+    ADD CONSTRAINT id_airline PRIMARY KEY (id_airline);
+
+
+--
+-- TOC entry 3600 (class 2606 OID 16766)
+-- Name: cashbox id_cashbox; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.cashbox
+    ADD CONSTRAINT id_cashbox PRIMARY KEY (id_cashbox);
+
+
+--
+-- TOC entry 3572 (class 2606 OID 16574)
+-- Name: employee id_employee; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.employee
+    ADD CONSTRAINT id_employee PRIMARY KEY (id_employee);
+
+
+--
+-- TOC entry 3574 (class 2606 OID 16584)
+-- Name: employee_passport id_employee_passport; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.employee_passport
+    ADD CONSTRAINT id_employee_passport PRIMARY KEY (id_employee_passport);
+
+
+--
+-- TOC entry 3582 (class 2606 OID 16644)
+-- Name: flight id_flight; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight
+    ADD CONSTRAINT id_flight PRIMARY KEY (id_flight);
+
+
+--
+-- TOC entry 3576 (class 2606 OID 16594)
+-- Name: flight_crew id_flight_crew; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight_crew
+    ADD CONSTRAINT id_flight_crew PRIMARY KEY (id_flight_crew);
+
+
+--
+-- TOC entry 3586 (class 2606 OID 16684)
+-- Name: flight_transit_stop id_flight_transit_stop; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight_transit_stop
+    ADD CONSTRAINT id_flight_transit_stop PRIMARY KEY (id_flight_transit_stop);
+
+
+--
+-- TOC entry 3590 (class 2606 OID 16709)
+-- Name: passenger_passport id_passenger_passport; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.passenger_passport
+    ADD CONSTRAINT id_passenger_passport PRIMARY KEY (id_passenger_passport);
+
+
+--
+-- TOC entry 3580 (class 2606 OID 16624)
+-- Name: route id_route; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.route
+    ADD CONSTRAINT id_route PRIMARY KEY (id_route);
+
+
+--
+-- TOC entry 3592 (class 2606 OID 16741)
+-- Name: seat id_seat; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.seat
+    ADD CONSTRAINT id_seat PRIMARY KEY (id_seat);
+
+
+--
+-- TOC entry 3596 (class 2606 OID 16751)
+-- Name: seat_price_history id_seat_record; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.seat_price_history
+    ADD CONSTRAINT id_seat_record PRIMARY KEY (id_seat_record);
+
+
+--
+-- TOC entry 3594 (class 2606 OID 16724)
+-- Name: seat_type id_seat_type; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.seat_type
+    ADD CONSTRAINT id_seat_type PRIMARY KEY (id_seat_type);
+
+
+--
+-- TOC entry 3602 (class 2606 OID 16791)
+-- Name: service id_service; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.service
+    ADD CONSTRAINT id_service PRIMARY KEY (id_service);
+
+
+--
+-- TOC entry 3606 (class 2606 OID 16814)
+-- Name: service_price_history id_service_record; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.service_price_history
+    ADD CONSTRAINT id_service_record PRIMARY KEY (id_service_record);
+
+
+--
+-- TOC entry 3598 (class 2606 OID 16761)
+-- Name: ticket id_ticket; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.ticket
+    ADD CONSTRAINT id_ticket PRIMARY KEY (id_ticket);
+
+
+--
+-- TOC entry 3604 (class 2606 OID 16796)
+-- Name: ticket_service id_ticket_service; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.ticket_service
+    ADD CONSTRAINT id_ticket_service PRIMARY KEY (id_ticket_service);
+
+
+--
+-- TOC entry 3584 (class 2606 OID 16669)
+-- Name: transit_stop id_transit_stop; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.transit_stop
+    ADD CONSTRAINT id_transit_stop PRIMARY KEY (id_transit_stop);
+
+
+--
+-- TOC entry 3588 (class 2606 OID 16704)
+-- Name: passenger passenger_pkey; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.passenger
+    ADD CONSTRAINT passenger_pkey PRIMARY KEY (id_passenger);
+
+
+--
+-- TOC entry 3568 (class 2606 OID 16559)
+-- Name: plane plane_pkey; Type: CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.plane
+    ADD CONSTRAINT plane_pkey PRIMARY KEY (id_plane);
+
+
+--
+-- TOC entry 3608 (class 2606 OID 16575)
+-- Name: employee id_airline; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.employee
+    ADD CONSTRAINT id_airline FOREIGN KEY (id_airline) REFERENCES schema.airline(id_airline);
+
+
+--
+-- TOC entry 3607 (class 2606 OID 16565)
+-- Name: plane id_airline; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.plane
+    ADD CONSTRAINT id_airline FOREIGN KEY (id_airline) REFERENCES schema.airline(id_airline) NOT VALID;
+
+
+--
+-- TOC entry 3612 (class 2606 OID 16625)
+-- Name: route id_airline; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.route
+    ADD CONSTRAINT id_airline FOREIGN KEY (id_airline) REFERENCES schema.airline(id_airline);
+
+
+--
+-- TOC entry 3618 (class 2606 OID 16675)
+-- Name: transit_stop id_airport; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.transit_stop
+    ADD CONSTRAINT id_airport FOREIGN KEY (id_airport) REFERENCES schema.airport(id_airport);
+
+
+--
+-- TOC entry 3614 (class 2606 OID 16635)
+-- Name: route id_arrival_airport; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.route
+    ADD CONSTRAINT id_arrival_airport FOREIGN KEY (id_arrival_airport) REFERENCES schema.airport(id_airport);
+
+
+--
+-- TOC entry 3627 (class 2606 OID 16767)
+-- Name: ticket id_cashbox; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.ticket
+    ADD CONSTRAINT id_cashbox FOREIGN KEY (id_cashbox) REFERENCES schema.cashbox(id_cashbox) NOT VALID;
+
+
+--
+-- TOC entry 3613 (class 2606 OID 16630)
+-- Name: route id_departure_airport; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.route
+    ADD CONSTRAINT id_departure_airport FOREIGN KEY (id_departure_airport) REFERENCES schema.airport(id_airport);
+
+
+--
+-- TOC entry 3609 (class 2606 OID 16585)
+-- Name: employee_passport id_employee; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.employee_passport
+    ADD CONSTRAINT id_employee FOREIGN KEY (id_employee) REFERENCES schema.employee(id_employee);
+
+
+--
+-- TOC entry 3611 (class 2606 OID 16660)
+-- Name: flight_crew id_employee_passport; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight_crew
+    ADD CONSTRAINT id_employee_passport FOREIGN KEY (id_employee_passport) REFERENCES schema.employee_passport(id_employee_passport) NOT VALID;
+
+
+--
+-- TOC entry 3610 (class 2606 OID 16655)
+-- Name: flight_crew id_flight; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight_crew
+    ADD CONSTRAINT id_flight FOREIGN KEY (id_flight) REFERENCES schema.flight(id_flight) NOT VALID;
+
+
+--
+-- TOC entry 3619 (class 2606 OID 16685)
+-- Name: flight_transit_stop id_flight; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight_transit_stop
+    ADD CONSTRAINT id_flight FOREIGN KEY (id_flight) REFERENCES schema.flight(id_flight);
+
+
+--
+-- TOC entry 3623 (class 2606 OID 16730)
+-- Name: seat id_flight; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.seat
+    ADD CONSTRAINT id_flight FOREIGN KEY (id_flight) REFERENCES schema.flight(id_flight) NOT VALID;
+
+
+--
+-- TOC entry 3622 (class 2606 OID 16710)
+-- Name: passenger_passport id_passenger; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.passenger_passport
+    ADD CONSTRAINT id_passenger FOREIGN KEY (id_passenger) REFERENCES schema.passenger(id_passenger);
+
+
+--
+-- TOC entry 3628 (class 2606 OID 16772)
+-- Name: ticket id_passenger_passport; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.ticket
+    ADD CONSTRAINT id_passenger_passport FOREIGN KEY (id_passenger_passport) REFERENCES schema.passenger_passport(id_passenger_passport) NOT VALID;
+
+
+--
+-- TOC entry 3616 (class 2606 OID 16650)
+-- Name: flight id_plane; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight
+    ADD CONSTRAINT id_plane FOREIGN KEY (id_plane) REFERENCES schema.plane(id_plane);
+
+
+--
+-- TOC entry 3615 (class 2606 OID 16645)
+-- Name: flight id_route; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight
+    ADD CONSTRAINT id_route FOREIGN KEY (id_route) REFERENCES schema.route(id_route);
+
+
+--
+-- TOC entry 3621 (class 2606 OID 16695)
+-- Name: flight_transit_stop id_route; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight_transit_stop
+    ADD CONSTRAINT id_route FOREIGN KEY (id_route) REFERENCES schema.route(id_route);
+
+
+--
+-- TOC entry 3625 (class 2606 OID 16735)
+-- Name: seat_type id_route; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.seat_type
+    ADD CONSTRAINT id_route FOREIGN KEY (id_route) REFERENCES schema.route(id_route) NOT VALID;
+
+
+--
+-- TOC entry 3617 (class 2606 OID 16670)
+-- Name: transit_stop id_route; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.transit_stop
+    ADD CONSTRAINT id_route FOREIGN KEY (id_route) REFERENCES schema.route(id_route);
+
+
+--
+-- TOC entry 3629 (class 2606 OID 16777)
+-- Name: ticket id_seat; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.ticket
+    ADD CONSTRAINT id_seat FOREIGN KEY (id_seat) REFERENCES schema.seat(id_seat) NOT VALID;
+
+
+--
+-- TOC entry 3624 (class 2606 OID 16742)
+-- Name: seat id_seat_type; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.seat
+    ADD CONSTRAINT id_seat_type FOREIGN KEY (id_seat_type) REFERENCES schema.seat_type(id_seat_type) NOT VALID;
+
+
+--
+-- TOC entry 3626 (class 2606 OID 16752)
+-- Name: seat_price_history id_seat_type; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.seat_price_history
+    ADD CONSTRAINT id_seat_type FOREIGN KEY (id_seat_type) REFERENCES schema.seat_type(id_seat_type);
+
+
+--
+-- TOC entry 3630 (class 2606 OID 16782)
+-- Name: ticket id_seat_type; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.ticket
+    ADD CONSTRAINT id_seat_type FOREIGN KEY (id_seat_type) REFERENCES schema.seat_type(id_seat_type) NOT VALID;
+
+
+--
+-- TOC entry 3633 (class 2606 OID 16815)
+-- Name: service_price_history id_service; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.service_price_history
+    ADD CONSTRAINT id_service FOREIGN KEY (id_service) REFERENCES schema.service(id_service);
+
+
+--
+-- TOC entry 3631 (class 2606 OID 16797)
+-- Name: ticket_service id_service; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.ticket_service
+    ADD CONSTRAINT id_service FOREIGN KEY (id_service) REFERENCES schema.service(id_service);
+
+
+--
+-- TOC entry 3632 (class 2606 OID 16802)
+-- Name: ticket_service id_ticket; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.ticket_service
+    ADD CONSTRAINT id_ticket FOREIGN KEY (id_ticket) REFERENCES schema.ticket(id_ticket);
+
+
+--
+-- TOC entry 3620 (class 2606 OID 16690)
+-- Name: flight_transit_stop id_transit_stop; Type: FK CONSTRAINT; Schema: schema; Owner: postgres
+--
+
+ALTER TABLE ONLY schema.flight_transit_stop
+    ADD CONSTRAINT id_transit_stop FOREIGN KEY (id_transit_stop) REFERENCES schema.transit_stop(id_transit_stop);
+
+
+-- Completed on 2026-03-30 13:03:29 MSK
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict wM96tMIVekC04YxgAZzNHuX3LhcoxbsVtJ7S4wQFoFBZOvFPTQmOTYDq7CPa0W5
+
