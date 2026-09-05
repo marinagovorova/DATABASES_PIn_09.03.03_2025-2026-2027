@@ -1,0 +1,1362 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict EI5UlqA1xehyiIQRwYJVXq9Siaw64DN7drfCHVbXj79akfveedIdy7fNI8h8XmU
+
+-- Dumped from database version 15.17 (Homebrew)
+-- Dumped by pg_dump version 18.2
+
+-- Started on 2026-03-30 11:39:22 MSK
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 6 (class 2615 OID 16389)
+-- Name: autoservice; Type: SCHEMA; Schema: -; Owner: bareckijmaksim
+--
+
+CREATE SCHEMA autoservice;
+
+
+ALTER SCHEMA autoservice OWNER TO bareckijmaksim;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 228 (class 1259 OID 16458)
+-- Name: car; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.car (
+    car_id integer NOT NULL,
+    client_id integer NOT NULL,
+    model_id integer NOT NULL,
+    license_plate character varying(20) NOT NULL,
+    engine_power_hp integer NOT NULL,
+    manufacture_year integer NOT NULL,
+    color character varying(30) NOT NULL,
+    vin_code character varying(30),
+    CONSTRAINT chk_car_power CHECK ((engine_power_hp > 0)),
+    CONSTRAINT chk_car_year CHECK (((manufacture_year >= 1950) AND (manufacture_year <= 2100)))
+);
+
+
+ALTER TABLE autoservice.car OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 227 (class 1259 OID 16457)
+-- Name: car_car_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.car ALTER COLUMN car_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.car_car_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 226 (class 1259 OID 16450)
+-- Name: car_model; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.car_model (
+    model_id integer NOT NULL,
+    brand character varying(40) NOT NULL,
+    model_name character varying(40) NOT NULL,
+    manufacturer character varying(100) NOT NULL
+);
+
+
+ALTER TABLE autoservice.car_model OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 225 (class 1259 OID 16449)
+-- Name: car_model_model_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.car_model ALTER COLUMN model_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.car_model_model_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 224 (class 1259 OID 16440)
+-- Name: client; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.client (
+    client_id integer NOT NULL,
+    full_name character varying(100) NOT NULL,
+    phone character varying(20) NOT NULL,
+    email character varying(100)
+);
+
+
+ALTER TABLE autoservice.client OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 223 (class 1259 OID 16439)
+-- Name: client_client_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.client ALTER COLUMN client_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.client_client_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 230 (class 1259 OID 16480)
+-- Name: contract; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.contract (
+    contract_id integer NOT NULL,
+    workshop_id integer NOT NULL,
+    client_id integer NOT NULL,
+    car_id integer NOT NULL,
+    administrator_employee_id integer NOT NULL,
+    request_date date NOT NULL,
+    acceptance_date date NOT NULL,
+    planned_finish_date date,
+    actual_finish_date date,
+    contract_status character varying(20) NOT NULL,
+    payment_status character varying(20) NOT NULL,
+    CONSTRAINT chk_contract_dates CHECK (((acceptance_date >= request_date) AND ((planned_finish_date IS NULL) OR (planned_finish_date >= acceptance_date)) AND ((actual_finish_date IS NULL) OR (actual_finish_date >= acceptance_date)))),
+    CONSTRAINT chk_contract_status CHECK (((contract_status)::text = ANY ((ARRAY['новый'::character varying, 'в работе'::character varying, 'завершён'::character varying, 'отменён'::character varying])::text[]))),
+    CONSTRAINT chk_payment_status CHECK (((payment_status)::text = ANY ((ARRAY['не оплачено'::character varying, 'частично'::character varying, 'оплачено'::character varying])::text[])))
+);
+
+
+ALTER TABLE autoservice.contract OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 229 (class 1259 OID 16479)
+-- Name: contract_contract_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.contract ALTER COLUMN contract_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.contract_contract_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 238 (class 1259 OID 16547)
+-- Name: contract_line; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.contract_line (
+    line_id integer NOT NULL,
+    contract_id integer NOT NULL,
+    employee_id integer NOT NULL,
+    service_type_id integer NOT NULL,
+    labor_price numeric(10,2) NOT NULL,
+    CONSTRAINT chk_contract_line_price CHECK ((labor_price >= (0)::numeric))
+);
+
+
+ALTER TABLE autoservice.contract_line OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 237 (class 1259 OID 16546)
+-- Name: contract_line_line_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.contract_line ALTER COLUMN line_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.contract_line_line_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 220 (class 1259 OID 16408)
+-- Name: employee; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.employee (
+    employee_id integer NOT NULL,
+    personnel_number character varying(20) NOT NULL,
+    workshop_id integer NOT NULL,
+    full_name character varying(100) NOT NULL,
+    rate_count numeric(4,2) DEFAULT 1.00 NOT NULL,
+    CONSTRAINT chk_employee_rate CHECK (((rate_count > (0)::numeric) AND (rate_count <= (3)::numeric)))
+);
+
+
+ALTER TABLE autoservice.employee OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 222 (class 1259 OID 16423)
+-- Name: employee_assignment; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.employee_assignment (
+    assignment_id integer NOT NULL,
+    employee_id integer NOT NULL,
+    category_id integer NOT NULL,
+    appointment_date date NOT NULL,
+    dismissal_date date,
+    CONSTRAINT chk_assignment_dates CHECK (((dismissal_date IS NULL) OR (dismissal_date >= appointment_date)))
+);
+
+
+ALTER TABLE autoservice.employee_assignment OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 221 (class 1259 OID 16422)
+-- Name: employee_assignment_assignment_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.employee_assignment ALTER COLUMN assignment_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.employee_assignment_assignment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 218 (class 1259 OID 16400)
+-- Name: employee_category; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.employee_category (
+    category_id integer NOT NULL,
+    position_name character varying(50) NOT NULL,
+    specialization character varying(50),
+    grade character varying(20)
+);
+
+
+ALTER TABLE autoservice.employee_category OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 217 (class 1259 OID 16399)
+-- Name: employee_category_category_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.employee_category ALTER COLUMN category_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.employee_category_category_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 219 (class 1259 OID 16407)
+-- Name: employee_employee_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.employee ALTER COLUMN employee_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.employee_employee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 244 (class 1259 OID 16591)
+-- Name: normative_consumption; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.normative_consumption (
+    consumption_id integer NOT NULL,
+    service_type_id integer NOT NULL,
+    part_id integer NOT NULL,
+    part_qty numeric(10,2) NOT NULL,
+    unit_name character varying(10) NOT NULL,
+    CONSTRAINT chk_normative_qty CHECK ((part_qty > (0)::numeric))
+);
+
+
+ALTER TABLE autoservice.normative_consumption OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 243 (class 1259 OID 16590)
+-- Name: normative_consumption_consumption_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.normative_consumption ALTER COLUMN consumption_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.normative_consumption_consumption_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 240 (class 1259 OID 16569)
+-- Name: part; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.part (
+    part_id integer NOT NULL,
+    part_name character varying(100) NOT NULL,
+    catalog_number character varying(50) NOT NULL,
+    price numeric(10,2) NOT NULL,
+    manufacturer character varying(100) NOT NULL,
+    country_of_origin character varying(40) NOT NULL,
+    CONSTRAINT chk_part_price CHECK ((price >= (0)::numeric))
+);
+
+
+ALTER TABLE autoservice.part OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 242 (class 1259 OID 16578)
+-- Name: part_origin; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.part_origin (
+    origin_id integer NOT NULL,
+    part_id integer NOT NULL,
+    manufacturer character varying(100) NOT NULL,
+    country_of_origin character varying(40) NOT NULL
+);
+
+
+ALTER TABLE autoservice.part_origin OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 241 (class 1259 OID 16577)
+-- Name: part_origin_origin_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.part_origin ALTER COLUMN origin_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.part_origin_origin_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 239 (class 1259 OID 16568)
+-- Name: part_part_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.part ALTER COLUMN part_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.part_part_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 236 (class 1259 OID 16530)
+-- Name: price_period; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.price_period (
+    period_id integer NOT NULL,
+    service_type_id integer NOT NULL,
+    price_id integer NOT NULL,
+    start_date date NOT NULL,
+    end_date date,
+    CONSTRAINT chk_price_period_dates CHECK (((end_date IS NULL) OR (end_date >= start_date)))
+);
+
+
+ALTER TABLE autoservice.price_period OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 235 (class 1259 OID 16529)
+-- Name: price_period_period_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.price_period ALTER COLUMN period_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.price_period_period_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 234 (class 1259 OID 16517)
+-- Name: service_price; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.service_price (
+    price_id integer NOT NULL,
+    service_type_id integer NOT NULL,
+    hour_price numeric(10,2) NOT NULL,
+    norm_hours numeric(10,2) NOT NULL,
+    CONSTRAINT chk_service_price_hour CHECK ((hour_price > (0)::numeric)),
+    CONSTRAINT chk_service_price_norm CHECK ((norm_hours > (0)::numeric))
+);
+
+
+ALTER TABLE autoservice.service_price OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 233 (class 1259 OID 16516)
+-- Name: service_price_price_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.service_price ALTER COLUMN price_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.service_price_price_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 232 (class 1259 OID 16509)
+-- Name: service_type; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.service_type (
+    service_type_id integer NOT NULL,
+    service_name character varying(50) NOT NULL,
+    description character varying(200)
+);
+
+
+ALTER TABLE autoservice.service_type OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 231 (class 1259 OID 16508)
+-- Name: service_type_service_type_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.service_type ALTER COLUMN service_type_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.service_type_service_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 246 (class 1259 OID 16610)
+-- Name: used_part; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.used_part (
+    used_part_id integer NOT NULL,
+    line_id integer NOT NULL,
+    part_id integer NOT NULL,
+    quantity integer NOT NULL,
+    supply_source character varying(20) NOT NULL,
+    price_at_repair numeric(10,2) NOT NULL,
+    CONSTRAINT chk_used_part_price CHECK ((price_at_repair >= (0)::numeric)),
+    CONSTRAINT chk_used_part_qty CHECK ((quantity > 0)),
+    CONSTRAINT chk_used_part_source CHECK (((supply_source)::text = ANY ((ARRAY['клиент'::character varying, 'автомастерская'::character varying])::text[])))
+);
+
+
+ALTER TABLE autoservice.used_part OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 245 (class 1259 OID 16609)
+-- Name: used_part_used_part_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.used_part ALTER COLUMN used_part_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.used_part_used_part_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 247 (class 1259 OID 16628)
+-- Name: vw_employee_salary; Type: VIEW; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE VIEW autoservice.vw_employee_salary AS
+ SELECT cl.line_id,
+    cl.contract_id,
+    cl.employee_id,
+    e.full_name,
+    cl.labor_price,
+    round((cl.labor_price * 0.50), 2) AS salary_amount
+   FROM (autoservice.contract_line cl
+     JOIN autoservice.employee e ON ((e.employee_id = cl.employee_id)));
+
+
+ALTER VIEW autoservice.vw_employee_salary OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 216 (class 1259 OID 16391)
+-- Name: workshop; Type: TABLE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+CREATE TABLE autoservice.workshop (
+    workshop_id integer NOT NULL,
+    phone character varying(20) NOT NULL,
+    email character varying(100),
+    address character varying(200) NOT NULL,
+    status character varying(20) NOT NULL,
+    CONSTRAINT chk_workshop_status CHECK (((status)::text = ANY ((ARRAY['действует'::character varying, 'в ремонте'::character varying, 'закрыта'::character varying])::text[])))
+);
+
+
+ALTER TABLE autoservice.workshop OWNER TO bareckijmaksim;
+
+--
+-- TOC entry 215 (class 1259 OID 16390)
+-- Name: workshop_workshop_id_seq; Type: SEQUENCE; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE autoservice.workshop ALTER COLUMN workshop_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME autoservice.workshop_workshop_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 3999 (class 0 OID 16458)
+-- Dependencies: 228
+-- Data for Name: car; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.car (car_id, client_id, model_id, license_plate, engine_power_hp, manufacture_year, color, vin_code) FROM stdin;
+1	1	1	А111АА77	181	2018	черный	VIN00000000000001
+2	2	2	В222ВВ77	123	2020	белый	VIN00000000000002
+\.
+
+
+--
+-- TOC entry 3997 (class 0 OID 16450)
+-- Dependencies: 226
+-- Data for Name: car_model; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.car_model (model_id, brand, model_name, manufacturer) FROM stdin;
+1	Toyota	Camry	Toyota Motor Corporation
+2	Kia	Rio	Kia Corporation
+\.
+
+
+--
+-- TOC entry 3995 (class 0 OID 16440)
+-- Dependencies: 224
+-- Data for Name: client; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.client (client_id, full_name, phone, email) FROM stdin;
+1	Смирнов Андрей Викторович	+7-999-111-22-33	smirnov@mail.ru
+2	Егорова Ольга Петровна	+7-999-222-33-44	egorova@mail.ru
+\.
+
+
+--
+-- TOC entry 4001 (class 0 OID 16480)
+-- Dependencies: 230
+-- Data for Name: contract; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.contract (contract_id, workshop_id, client_id, car_id, administrator_employee_id, request_date, acceptance_date, planned_finish_date, actual_finish_date, contract_status, payment_status) FROM stdin;
+1	1	1	1	1	2025-03-01	2025-03-02	2025-03-03	2025-03-03	завершён	оплачено
+2	1	2	2	1	2025-03-05	2025-03-06	2025-03-08	\N	в работе	частично
+\.
+
+
+--
+-- TOC entry 4009 (class 0 OID 16547)
+-- Dependencies: 238
+-- Data for Name: contract_line; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.contract_line (line_id, contract_id, employee_id, service_type_id, labor_price) FROM stdin;
+1	1	2	1	1800.00
+2	2	3	2	7700.00
+3	2	4	3	1800.00
+\.
+
+
+--
+-- TOC entry 3991 (class 0 OID 16408)
+-- Dependencies: 220
+-- Data for Name: employee; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.employee (employee_id, personnel_number, workshop_id, full_name, rate_count) FROM stdin;
+1	T-001	1	Иванова Марина Сергеевна	1.00
+2	T-002	1	Петров Алексей Николаевич	1.00
+3	T-003	1	Сидоров Максим Олегович	1.50
+4	T-004	2	Кузнецов Илья Павлович	1.00
+\.
+
+
+--
+-- TOC entry 3993 (class 0 OID 16423)
+-- Dependencies: 222
+-- Data for Name: employee_assignment; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.employee_assignment (assignment_id, employee_id, category_id, appointment_date, dismissal_date) FROM stdin;
+1	1	1	2024-01-10	\N
+2	2	2	2024-01-12	\N
+3	3	3	2024-02-01	\N
+4	4	4	2024-02-10	\N
+\.
+
+
+--
+-- TOC entry 3989 (class 0 OID 16400)
+-- Dependencies: 218
+-- Data for Name: employee_category; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.employee_category (category_id, position_name, specialization, grade) FROM stdin;
+1	Администратор	Оформление договоров	\N
+2	Мастер	Двигатель	5
+3	Мастер	Ходовая часть	4
+4	Мастер	Диагностика	5
+\.
+
+
+--
+-- TOC entry 4015 (class 0 OID 16591)
+-- Dependencies: 244
+-- Data for Name: normative_consumption; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.normative_consumption (consumption_id, service_type_id, part_id, part_qty, unit_name) FROM stdin;
+1	1	1	1.00	шт
+2	1	2	1.00	шт
+3	2	3	2.00	шт
+\.
+
+
+--
+-- TOC entry 4011 (class 0 OID 16569)
+-- Dependencies: 240
+-- Data for Name: part; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.part (part_id, part_name, catalog_number, price, manufacturer, country_of_origin) FROM stdin;
+1	Масляный фильтр	OF-1001	650.00	Mann	Германия
+2	Моторное масло 5W-30	OIL-5W30	3200.00	Shell	Нидерланды
+3	Стойка стабилизатора	ST-2002	2400.00	Lemforder	Германия
+\.
+
+
+--
+-- TOC entry 4013 (class 0 OID 16578)
+-- Dependencies: 242
+-- Data for Name: part_origin; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.part_origin (origin_id, part_id, manufacturer, country_of_origin) FROM stdin;
+1	1	Mann	Германия
+2	2	Shell	Нидерланды
+3	3	Lemforder	Германия
+\.
+
+
+--
+-- TOC entry 4007 (class 0 OID 16530)
+-- Dependencies: 236
+-- Data for Name: price_period; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.price_period (period_id, service_type_id, price_id, start_date, end_date) FROM stdin;
+1	1	1	2025-01-01	\N
+2	2	2	2025-01-01	\N
+3	3	3	2025-01-01	\N
+\.
+
+
+--
+-- TOC entry 4005 (class 0 OID 16517)
+-- Dependencies: 234
+-- Data for Name: service_price; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.service_price (price_id, service_type_id, hour_price, norm_hours) FROM stdin;
+1	1	1500.00	1.20
+2	2	2200.00	3.50
+3	3	1800.00	1.00
+\.
+
+
+--
+-- TOC entry 4003 (class 0 OID 16509)
+-- Dependencies: 232
+-- Data for Name: service_type; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.service_type (service_type_id, service_name, description) FROM stdin;
+1	Замена масла	Плановая замена моторного масла и фильтра
+2	Ремонт подвески	Ремонт элементов подвески
+3	Компьютерная диагностика	Проверка электронных систем автомобиля
+\.
+
+
+--
+-- TOC entry 4017 (class 0 OID 16610)
+-- Dependencies: 246
+-- Data for Name: used_part; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.used_part (used_part_id, line_id, part_id, quantity, supply_source, price_at_repair) FROM stdin;
+1	1	1	1	автомастерская	650.00
+2	1	2	1	автомастерская	3200.00
+3	2	3	2	клиент	0.00
+\.
+
+
+--
+-- TOC entry 3987 (class 0 OID 16391)
+-- Dependencies: 216
+-- Data for Name: workshop; Type: TABLE DATA; Schema: autoservice; Owner: bareckijmaksim
+--
+
+COPY autoservice.workshop (workshop_id, phone, email, address, status) FROM stdin;
+1	+7-495-111-11-11	central@autoservice.ru	г. Москва, ул. Ленина, 10	действует
+2	+7-495-222-22-22	south@autoservice.ru	г. Москва, ул. Южная, 15	действует
+\.
+
+
+--
+-- TOC entry 4023 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: car_car_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.car_car_id_seq', 2, true);
+
+
+--
+-- TOC entry 4024 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: car_model_model_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.car_model_model_id_seq', 2, true);
+
+
+--
+-- TOC entry 4025 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: client_client_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.client_client_id_seq', 2, true);
+
+
+--
+-- TOC entry 4026 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: contract_contract_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.contract_contract_id_seq', 2, true);
+
+
+--
+-- TOC entry 4027 (class 0 OID 0)
+-- Dependencies: 237
+-- Name: contract_line_line_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.contract_line_line_id_seq', 3, true);
+
+
+--
+-- TOC entry 4028 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: employee_assignment_assignment_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.employee_assignment_assignment_id_seq', 4, true);
+
+
+--
+-- TOC entry 4029 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: employee_category_category_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.employee_category_category_id_seq', 4, true);
+
+
+--
+-- TOC entry 4030 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: employee_employee_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.employee_employee_id_seq', 4, true);
+
+
+--
+-- TOC entry 4031 (class 0 OID 0)
+-- Dependencies: 243
+-- Name: normative_consumption_consumption_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.normative_consumption_consumption_id_seq', 3, true);
+
+
+--
+-- TOC entry 4032 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: part_origin_origin_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.part_origin_origin_id_seq', 3, true);
+
+
+--
+-- TOC entry 4033 (class 0 OID 0)
+-- Dependencies: 239
+-- Name: part_part_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.part_part_id_seq', 3, true);
+
+
+--
+-- TOC entry 4034 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: price_period_period_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.price_period_period_id_seq', 3, true);
+
+
+--
+-- TOC entry 4035 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: service_price_price_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.service_price_price_id_seq', 3, true);
+
+
+--
+-- TOC entry 4036 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: service_type_service_type_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.service_type_service_type_id_seq', 3, true);
+
+
+--
+-- TOC entry 4037 (class 0 OID 0)
+-- Dependencies: 245
+-- Name: used_part_used_part_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.used_part_used_part_id_seq', 3, true);
+
+
+--
+-- TOC entry 4038 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: workshop_workshop_id_seq; Type: SEQUENCE SET; Schema: autoservice; Owner: bareckijmaksim
+--
+
+SELECT pg_catalog.setval('autoservice.workshop_workshop_id_seq', 2, true);
+
+
+--
+-- TOC entry 3792 (class 2606 OID 16466)
+-- Name: car car_license_plate_key; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.car
+    ADD CONSTRAINT car_license_plate_key UNIQUE (license_plate);
+
+
+--
+-- TOC entry 3788 (class 2606 OID 16454)
+-- Name: car_model car_model_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.car_model
+    ADD CONSTRAINT car_model_pkey PRIMARY KEY (model_id);
+
+
+--
+-- TOC entry 3794 (class 2606 OID 16464)
+-- Name: car car_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.car
+    ADD CONSTRAINT car_pkey PRIMARY KEY (car_id);
+
+
+--
+-- TOC entry 3796 (class 2606 OID 16468)
+-- Name: car car_vin_code_key; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.car
+    ADD CONSTRAINT car_vin_code_key UNIQUE (vin_code);
+
+
+--
+-- TOC entry 3782 (class 2606 OID 16444)
+-- Name: client client_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.client
+    ADD CONSTRAINT client_pkey PRIMARY KEY (client_id);
+
+
+--
+-- TOC entry 3808 (class 2606 OID 16552)
+-- Name: contract_line contract_line_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract_line
+    ADD CONSTRAINT contract_line_pkey PRIMARY KEY (line_id);
+
+
+--
+-- TOC entry 3798 (class 2606 OID 16487)
+-- Name: contract contract_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract
+    ADD CONSTRAINT contract_pkey PRIMARY KEY (contract_id);
+
+
+--
+-- TOC entry 3780 (class 2606 OID 16428)
+-- Name: employee_assignment employee_assignment_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.employee_assignment
+    ADD CONSTRAINT employee_assignment_pkey PRIMARY KEY (assignment_id);
+
+
+--
+-- TOC entry 3772 (class 2606 OID 16404)
+-- Name: employee_category employee_category_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.employee_category
+    ADD CONSTRAINT employee_category_pkey PRIMARY KEY (category_id);
+
+
+--
+-- TOC entry 3776 (class 2606 OID 16416)
+-- Name: employee employee_personnel_number_key; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.employee
+    ADD CONSTRAINT employee_personnel_number_key UNIQUE (personnel_number);
+
+
+--
+-- TOC entry 3778 (class 2606 OID 16414)
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (employee_id);
+
+
+--
+-- TOC entry 3818 (class 2606 OID 16596)
+-- Name: normative_consumption normative_consumption_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.normative_consumption
+    ADD CONSTRAINT normative_consumption_pkey PRIMARY KEY (consumption_id);
+
+
+--
+-- TOC entry 3810 (class 2606 OID 16576)
+-- Name: part part_catalog_number_key; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.part
+    ADD CONSTRAINT part_catalog_number_key UNIQUE (catalog_number);
+
+
+--
+-- TOC entry 3814 (class 2606 OID 16584)
+-- Name: part_origin part_origin_part_id_key; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.part_origin
+    ADD CONSTRAINT part_origin_part_id_key UNIQUE (part_id);
+
+
+--
+-- TOC entry 3816 (class 2606 OID 16582)
+-- Name: part_origin part_origin_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.part_origin
+    ADD CONSTRAINT part_origin_pkey PRIMARY KEY (origin_id);
+
+
+--
+-- TOC entry 3812 (class 2606 OID 16574)
+-- Name: part part_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.part
+    ADD CONSTRAINT part_pkey PRIMARY KEY (part_id);
+
+
+--
+-- TOC entry 3806 (class 2606 OID 16535)
+-- Name: price_period price_period_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.price_period
+    ADD CONSTRAINT price_period_pkey PRIMARY KEY (period_id);
+
+
+--
+-- TOC entry 3804 (class 2606 OID 16523)
+-- Name: service_price service_price_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.service_price
+    ADD CONSTRAINT service_price_pkey PRIMARY KEY (price_id);
+
+
+--
+-- TOC entry 3800 (class 2606 OID 16513)
+-- Name: service_type service_type_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.service_type
+    ADD CONSTRAINT service_type_pkey PRIMARY KEY (service_type_id);
+
+
+--
+-- TOC entry 3802 (class 2606 OID 16515)
+-- Name: service_type service_type_service_name_key; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.service_type
+    ADD CONSTRAINT service_type_service_name_key UNIQUE (service_name);
+
+
+--
+-- TOC entry 3790 (class 2606 OID 16456)
+-- Name: car_model uq_car_model; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.car_model
+    ADD CONSTRAINT uq_car_model UNIQUE (brand, model_name, manufacturer);
+
+
+--
+-- TOC entry 3784 (class 2606 OID 16448)
+-- Name: client uq_client_email; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.client
+    ADD CONSTRAINT uq_client_email UNIQUE (email);
+
+
+--
+-- TOC entry 3786 (class 2606 OID 16446)
+-- Name: client uq_client_phone; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.client
+    ADD CONSTRAINT uq_client_phone UNIQUE (phone);
+
+
+--
+-- TOC entry 3774 (class 2606 OID 16406)
+-- Name: employee_category uq_employee_category; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.employee_category
+    ADD CONSTRAINT uq_employee_category UNIQUE (position_name, specialization, grade);
+
+
+--
+-- TOC entry 3820 (class 2606 OID 16598)
+-- Name: normative_consumption uq_normative; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.normative_consumption
+    ADD CONSTRAINT uq_normative UNIQUE (service_type_id, part_id);
+
+
+--
+-- TOC entry 3822 (class 2606 OID 16617)
+-- Name: used_part used_part_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.used_part
+    ADD CONSTRAINT used_part_pkey PRIMARY KEY (used_part_id);
+
+
+--
+-- TOC entry 3768 (class 2606 OID 16398)
+-- Name: workshop workshop_email_key; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.workshop
+    ADD CONSTRAINT workshop_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 3770 (class 2606 OID 16396)
+-- Name: workshop workshop_pkey; Type: CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.workshop
+    ADD CONSTRAINT workshop_pkey PRIMARY KEY (workshop_id);
+
+
+--
+-- TOC entry 3824 (class 2606 OID 16434)
+-- Name: employee_assignment fk_assignment_category; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.employee_assignment
+    ADD CONSTRAINT fk_assignment_category FOREIGN KEY (category_id) REFERENCES autoservice.employee_category(category_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3825 (class 2606 OID 16429)
+-- Name: employee_assignment fk_assignment_employee; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.employee_assignment
+    ADD CONSTRAINT fk_assignment_employee FOREIGN KEY (employee_id) REFERENCES autoservice.employee(employee_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3826 (class 2606 OID 16469)
+-- Name: car fk_car_client; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.car
+    ADD CONSTRAINT fk_car_client FOREIGN KEY (client_id) REFERENCES autoservice.client(client_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3827 (class 2606 OID 16474)
+-- Name: car fk_car_model; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.car
+    ADD CONSTRAINT fk_car_model FOREIGN KEY (model_id) REFERENCES autoservice.car_model(model_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3828 (class 2606 OID 16503)
+-- Name: contract fk_contract_admin; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract
+    ADD CONSTRAINT fk_contract_admin FOREIGN KEY (administrator_employee_id) REFERENCES autoservice.employee(employee_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3829 (class 2606 OID 16498)
+-- Name: contract fk_contract_car; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract
+    ADD CONSTRAINT fk_contract_car FOREIGN KEY (car_id) REFERENCES autoservice.car(car_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3830 (class 2606 OID 16493)
+-- Name: contract fk_contract_client; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract
+    ADD CONSTRAINT fk_contract_client FOREIGN KEY (client_id) REFERENCES autoservice.client(client_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3835 (class 2606 OID 16553)
+-- Name: contract_line fk_contract_line_contract; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract_line
+    ADD CONSTRAINT fk_contract_line_contract FOREIGN KEY (contract_id) REFERENCES autoservice.contract(contract_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3836 (class 2606 OID 16558)
+-- Name: contract_line fk_contract_line_employee; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract_line
+    ADD CONSTRAINT fk_contract_line_employee FOREIGN KEY (employee_id) REFERENCES autoservice.employee(employee_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3837 (class 2606 OID 16563)
+-- Name: contract_line fk_contract_line_service; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract_line
+    ADD CONSTRAINT fk_contract_line_service FOREIGN KEY (service_type_id) REFERENCES autoservice.service_type(service_type_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3831 (class 2606 OID 16488)
+-- Name: contract fk_contract_workshop; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.contract
+    ADD CONSTRAINT fk_contract_workshop FOREIGN KEY (workshop_id) REFERENCES autoservice.workshop(workshop_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3823 (class 2606 OID 16417)
+-- Name: employee fk_employee_workshop; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.employee
+    ADD CONSTRAINT fk_employee_workshop FOREIGN KEY (workshop_id) REFERENCES autoservice.workshop(workshop_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3839 (class 2606 OID 16604)
+-- Name: normative_consumption fk_normative_part; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.normative_consumption
+    ADD CONSTRAINT fk_normative_part FOREIGN KEY (part_id) REFERENCES autoservice.part(part_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3840 (class 2606 OID 16599)
+-- Name: normative_consumption fk_normative_service; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.normative_consumption
+    ADD CONSTRAINT fk_normative_service FOREIGN KEY (service_type_id) REFERENCES autoservice.service_type(service_type_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3838 (class 2606 OID 16585)
+-- Name: part_origin fk_part_origin_part; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.part_origin
+    ADD CONSTRAINT fk_part_origin_part FOREIGN KEY (part_id) REFERENCES autoservice.part(part_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3833 (class 2606 OID 16541)
+-- Name: price_period fk_price_period_price; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.price_period
+    ADD CONSTRAINT fk_price_period_price FOREIGN KEY (price_id) REFERENCES autoservice.service_price(price_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3834 (class 2606 OID 16536)
+-- Name: price_period fk_price_period_service; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.price_period
+    ADD CONSTRAINT fk_price_period_service FOREIGN KEY (service_type_id) REFERENCES autoservice.service_type(service_type_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3832 (class 2606 OID 16524)
+-- Name: service_price fk_service_price_service; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.service_price
+    ADD CONSTRAINT fk_service_price_service FOREIGN KEY (service_type_id) REFERENCES autoservice.service_type(service_type_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3841 (class 2606 OID 16618)
+-- Name: used_part fk_used_part_line; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.used_part
+    ADD CONSTRAINT fk_used_part_line FOREIGN KEY (line_id) REFERENCES autoservice.contract_line(line_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3842 (class 2606 OID 16623)
+-- Name: used_part fk_used_part_part; Type: FK CONSTRAINT; Schema: autoservice; Owner: bareckijmaksim
+--
+
+ALTER TABLE ONLY autoservice.used_part
+    ADD CONSTRAINT fk_used_part_part FOREIGN KEY (part_id) REFERENCES autoservice.part(part_id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+-- Completed on 2026-03-30 11:39:22 MSK
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict EI5UlqA1xehyiIQRwYJVXq9Siaw64DN7drfCHVbXj79akfveedIdy7fNI8h8XmU
+
