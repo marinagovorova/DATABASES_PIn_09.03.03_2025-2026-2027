@@ -1,0 +1,203 @@
+digraph Variant7_Courses_Chen_WithAttrs {
+  graph [
+    rankdir=LR,
+    splines=true,
+    nodesep=0.45,
+    ranksep=0.95,
+    fontsize=12
+  ];
+  node [fontname="Arial", fontsize=12];
+  edge [fontname="Arial", fontsize=10];
+
+  // ===== Entities (rectangles) =====
+  Program     [shape=box, label="Программа"];
+  Discipline  [shape=box, label="Дисциплина"];
+  Plan        [shape=box, label="Учебный_план"];
+  GroupE      [shape=box, label="Группа"];
+  Student     [shape=box, label="Слушатель"];
+  Enrollment  [shape=box, label="Зачисление"];
+  Lesson      [shape=box, label="Занятие"];
+  Attest      [shape=box, label="Аттестация"];
+  Document    [shape=box, label="Документ"];
+  Teacher     [shape=box, label="Преподаватель"];
+  Room        [shape=box, label="Аудитория"];
+  Subdivision [shape=box, label="Подразделение"];
+
+  // ===== Relationships (diamonds) =====
+  R_contains  [shape=diamond, label="содержит"];
+  R_includes  [shape=diamond, label="входит"];
+  R_intake    [shape=diamond, label="набор"];
+  R_has_enr   [shape=diamond, label="имеет"];
+  R_enrolled  [shape=diamond, label="зачислен"];
+  R_schedule  [shape=diamond, label="расписание"];
+  R_byplan    [shape=diamond, label="по плану"];
+  R_teaches   [shape=diamond, label="ведёт"];
+  R_inroom    [shape=diamond, label="в аудитории"];
+  R_att_by    [shape=diamond, label="аттестация по"];
+  R_att_of    [shape=diamond, label="результаты"];
+  R_issued    [shape=diamond, label="выдан"];
+  R_supT      [shape=diamond, label="обеспечивает\nпреподавателей"];
+  R_supR      [shape=diamond, label="обеспечивает\nаудитории"];
+
+  // ===== Layout hints =====
+  { rank=same; Subdivision; Program; Student; }
+  { rank=same; Teacher; Plan; Enrollment; }
+  { rank=same; Room; Discipline; GroupE; }
+  { rank=same; Lesson; Attest; Document; }
+
+  // ===== Cardinalities =====
+  Program     -> R_contains [dir=none, taillabel="1..N", labeldistance=1.5, labelangle=25];
+  R_contains  -> Plan       [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Discipline  -> R_includes [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_includes  -> Plan       [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Program     -> R_intake   [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_intake    -> GroupE     [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  GroupE      -> R_has_enr  [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_has_enr   -> Enrollment [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Student     -> R_enrolled [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_enrolled  -> Enrollment [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  GroupE      -> R_schedule [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_schedule  -> Lesson     [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Plan        -> R_byplan   [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_byplan    -> Lesson     [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Teacher     -> R_teaches  [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_teaches   -> Lesson     [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Room        -> R_inroom   [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_inroom    -> Lesson     [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Plan        -> R_att_by   [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_att_by    -> Attest     [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Enrollment  -> R_att_of   [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_att_of    -> Attest     [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Enrollment  -> R_issued   [dir=none, taillabel="0..1", labeldistance=1.5, labelangle=25];
+  R_issued    -> Document   [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Subdivision -> R_supT     [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_supT      -> Teacher    [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  Subdivision -> R_supR     [dir=none, taillabel="0..N", labeldistance=1.5, labelangle=25];
+  R_supR      -> Room       [dir=none, headlabel="1..1", labeldistance=1.5, labelangle=-25];
+
+  // ===== Attributes (ovals) =====
+  node [shape=ellipse];
+
+  // Program
+  P_program_id     [label="PK: program_id"];
+  P_name           [label="name"];
+  P_duration_hours [label="duration_hours"];
+  Program -> P_program_id     [dir=none];
+  Program -> P_name           [dir=none];
+  Program -> P_duration_hours [dir=none];
+
+  // Discipline
+  D_discipline_id  [label="PK: discipline_id"];
+  D_name           [label="name"];
+  Discipline -> D_discipline_id [dir=none];
+  Discipline -> D_name          [dir=none];
+
+  // Plan
+  PL_plan_id          [label="PK: plan_id"];
+  PL_lecture_hours    [label="lecture_hours"];
+  PL_lab_hours        [label="lab_hours"];
+  PL_practice_hours   [label="practice_hours"];
+  PL_attestation_type [label="attestation_type"];
+  Plan -> PL_plan_id          [dir=none];
+  Plan -> PL_lecture_hours    [dir=none];
+  Plan -> PL_lab_hours        [dir=none];
+  Plan -> PL_practice_hours   [dir=none];
+  Plan -> PL_attestation_type [dir=none];
+
+  // Group
+  G_group_id   [label="PK: group_id"];
+  G_code       [label="code"];
+  G_start_date [label="start_date"];
+  G_end_date   [label="end_date"];
+  GroupE -> G_group_id   [dir=none];
+  GroupE -> G_code       [dir=none];
+  GroupE -> G_start_date [dir=none];
+  GroupE -> G_end_date   [dir=none];
+
+  // Student
+  S_student_id [label="PK: student_id"];
+  S_fio        [label="fio"];
+  S_phone      [label="phone"];
+  S_email      [label="email"];
+  Student -> S_student_id [dir=none];
+  Student -> S_fio        [dir=none];
+  Student -> S_phone      [dir=none];
+  Student -> S_email      [dir=none];
+
+  // Enrollment
+  E_enroll_id   [label="PK: enroll_id"];
+  E_enroll_date [label="enroll_date"];
+  E_status      [label="status"];
+  Enrollment -> E_enroll_id   [dir=none];
+  Enrollment -> E_enroll_date [dir=none];
+  Enrollment -> E_status      [dir=none];
+
+  // Lesson
+  L_lesson_id [label="PK: lesson_id"];
+  L_dt_start  [label="dt_start"];
+  L_dt_end    [label="dt_end"];
+  L_pair_no   [label="pair_no"];
+  Lesson -> L_lesson_id [dir=none];
+  Lesson -> L_dt_start  [dir=none];
+  Lesson -> L_dt_end    [dir=none];
+  Lesson -> L_pair_no   [dir=none];
+
+  // Attestation
+  A_attestation_id [label="PK: attestation_id"];
+  A_att_date       [label="att_date"];
+  A_attempt_no     [label="attempt_no"];
+  A_grade          [label="grade"];
+  A_result         [label="result"];
+  Attest -> A_attestation_id [dir=none];
+  Attest -> A_att_date       [dir=none];
+  Attest -> A_attempt_no     [dir=none];
+  Attest -> A_grade          [dir=none];
+  Attest -> A_result         [dir=none];
+
+  // Document
+  DOC_doc_id     [label="PK: doc_id"];
+  DOC_doc_number [label="doc_number"];
+  DOC_issue_date [label="issue_date"];
+  Document -> DOC_doc_id     [dir=none];
+  Document -> DOC_doc_number [dir=none];
+  Document -> DOC_issue_date [dir=none];
+
+  // Teacher
+  T_teacher_id [label="PK: teacher_id"];
+  T_fio        [label="fio"];
+  T_phone      [label="phone"];
+  Teacher -> T_teacher_id [dir=none];
+  Teacher -> T_fio        [dir=none];
+  Teacher -> T_phone      [dir=none];
+
+  // Room
+  RM_room_id     [label="PK: room_id"];
+  RM_room_number [label="room_number"];
+  RM_capacity    [label="capacity"];
+  RM_room_type   [label="room_type"];
+  Room -> RM_room_id     [dir=none];
+  Room -> RM_room_number [dir=none];
+  Room -> RM_capacity    [dir=none];
+  Room -> RM_room_type   [dir=none];
+
+  // Subdivision
+  SD_subdivision_id [label="PK: subdivision_id"];
+  SD_name           [label="name"];
+  SD_address        [label="address"];
+  Subdivision -> SD_subdivision_id [dir=none];
+  Subdivision -> SD_name           [dir=none];
+  Subdivision -> SD_address        [dir=none];
+}
