@@ -1,0 +1,190 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.2.2">
+  <diagram name="Страница — 1" id="aD7ePUybKJ056y50gdOh">
+    <mxGraphModel dx="1823" dy="1822" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-77" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;fontFamily=Helvetica;" value="Заказ" vertex="1">
+          <mxGeometry height="310" width="300" x="170" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-78" parent="-zi2Ie0mMBQNflNbXnP6-77" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-weight: 700; text-decoration-line: underline;&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;идентификатор_заказа: INTEGER&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="300" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-79" parent="-zi2Ie0mMBQNflNbXnP6-77" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="индентификатор_пассажира: INTEGER (FK)&lt;div&gt;индентификатор_автомобиля: INTEGER (FK)&lt;/div&gt;&lt;div&gt;индентификатор_водителя: INTEGER (FK)&lt;/div&gt;&lt;div&gt;индентификатор_тарифа: INTEGER (FK)&lt;/div&gt;&lt;div&gt;индентификатор_администратора: INTEGER (FK)&lt;/div&gt;&lt;div&gt;индентификатор_карты: INTEGER (FK)&lt;br&gt;&lt;div&gt;статус_заказа: VARCHAR(10)&lt;/div&gt;&lt;div&gt;дата_время_вызова:&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;DATETIME&lt;/span&gt;&lt;/div&gt;&lt;div&gt;время_посадки_фактическое:&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;DATETIME&lt;/span&gt;&lt;/div&gt;&lt;div&gt;время_посадки_планируемое: DATETIME&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;время_высадки:&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;DATETIME&lt;/span&gt;&lt;/div&gt;&lt;div&gt;адрес_откуда: VARCHAR(50)&lt;div&gt;адрес_куда: VARCHAR(50)&lt;/div&gt;&lt;/div&gt;&lt;div&gt;расстояние_км: DECIMAL(10, 2)&lt;/div&gt;&lt;div&gt;стоимость_заказа: DECIMAL(10, 2)&lt;/div&gt;&lt;/div&gt;&lt;div&gt;тип_оплаты:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;VARCHAR(10)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;отзыв_клиента_на_вызов: VARCHAR(255)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="254" width="300" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-93" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" value="Тариф" vertex="1">
+          <mxGeometry height="130" width="290" x="-380" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-94" parent="-zi2Ie0mMBQNflNbXnP6-93" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;u&gt;идентификатор_тарифа: INTEGER&lt;/u&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="290" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-95" parent="-zi2Ie0mMBQNflNbXnP6-93" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="класс_авто: VARCHAR(50)&lt;div&gt;цена_за_км: DECIMAL(10, 2)&lt;/div&gt;&lt;div&gt;наименование_тарифа: VARCHAR(30)&lt;br&gt;шраф_за_ожидание_в_минуту:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;DECIMAL(10, 2)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="74" width="290" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-98" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=oval;endFill=1;dashed=1;dashPattern=8 8;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="10" y="380" />
+              <mxPoint x="10" y="377" />
+              <mxPoint x="30" y="377" />
+              <mxPoint x="30" y="410" />
+            </Array>
+            <mxPoint x="-90" y="379.9411764705883" as="sourcePoint" />
+            <mxPoint x="170" y="409.99999999999955" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-101" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" value="Автомобиль" vertex="1">
+          <mxGeometry height="170" width="270" x="730" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-102" parent="-zi2Ie0mMBQNflNbXnP6-101" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;u&gt;идентификатор_автомобиля: INTEGER&lt;/u&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="270" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-103" parent="-zi2Ie0mMBQNflNbXnP6-101" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="идентификатор_владельца: INTEGER (FK)&lt;div&gt;идентификатор_модели: INTEGER (FK)&lt;br&gt;&lt;div&gt;дата_последнего_то:&amp;nbsp;&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;DATE&lt;/span&gt;&lt;/div&gt;&lt;div&gt;статус_автомобиля: VARCHAR(50)&lt;br&gt;госномер:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;VARCHAR(20)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;стоимость: DECIMAL(10,2)&lt;/div&gt;&lt;div&gt;пробег: INTEGER(10)&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="114" width="270" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-137" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" value="Пассажир" vertex="1">
+          <mxGeometry height="130" width="270" x="-20" y="-67" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-138" parent="-zi2Ie0mMBQNflNbXnP6-137" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;u&gt;идентификатор_пассажира: INTEGER&lt;/u&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="270" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-139" parent="-zi2Ie0mMBQNflNbXnP6-137" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;div&gt;имя: VARCHAR(50)&lt;/div&gt;&lt;div&gt;телефон:&amp;nbsp;VARCHAR(20)&amp;nbsp;&lt;/div&gt;&lt;div&gt;email:&amp;nbsp;VARCHAR(50)&lt;/div&gt;&lt;div&gt;примечания: VARCHAR(100)&amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="74" width="270" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-149" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" value="Платежная карта" vertex="1">
+          <mxGeometry height="140" width="270" x="414" y="-67" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-150" parent="-zi2Ie0mMBQNflNbXnP6-149" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;u&gt;идентификатор_карты: INTEGER&lt;/u&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="270" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-151" parent="-zi2Ie0mMBQNflNbXnP6-149" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="идентификатор_пассажира: INTEGER (FK)&lt;div&gt;&lt;div&gt;номер_карты: INTEGER(16)&lt;/div&gt;&lt;div&gt;cvv_карты: INTEGER(3)&lt;/div&gt;&lt;div&gt;дата_окончания: DATE&lt;/div&gt;&lt;div&gt;имя_держателя: VARCHAR(50)&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="84" width="270" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-153" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;fontFamily=Helvetica;" value="Сотрудник" vertex="1">
+          <mxGeometry height="170" width="260" x="190" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-154" parent="-zi2Ie0mMBQNflNbXnP6-153" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-weight: 700; text-decoration-line: underline;&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;идентификатор_сотрудника: INTEGER&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="260" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-155" parent="-zi2Ie0mMBQNflNbXnP6-153" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="код_категории_сотрудника: INTEGER (FK)&lt;div&gt;код_должности_сотрудника: INTEGER (FK)&lt;/div&gt;&lt;div&gt;&lt;div&gt;телефон:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;VARCHAR(20)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;адрес:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;VARCHAR(50)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;фио:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;VARCHAR(50)&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;паспортные_данные:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;VARCHAR(50)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;статус:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;VARCHAR(20)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="114" width="260" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-160" edge="1" parent="1" source="-zi2Ie0mMBQNflNbXnP6-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=oval;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;dashPattern=8 8;" target="-zi2Ie0mMBQNflNbXnP6-153">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-161" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;fontFamily=Helvetica;" value="Должность" vertex="1">
+          <mxGeometry height="100" width="260" x="180" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-162" parent="-zi2Ie0mMBQNflNbXnP6-161" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-weight: 700; text-decoration-line: underline;&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;идентификатор_должности: INTEGER&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="260" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="-zi2Ie0mMBQNflNbXnP6-163" parent="-zi2Ie0mMBQNflNbXnP6-161" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="наименование_должности: VARCHAR(50)&lt;div&gt;описание_обязанностей: VARCHAR(255)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="44" width="260" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-4" edge="1" parent="1" source="U9cVC_-9I0Pf_PKBwxEo-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startArrow=oval;startFill=1;dashed=1;dashPattern=8 8;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-170" y="800" />
+              <mxPoint x="320" y="800" />
+            </Array>
+            <mxPoint x="320" y="769.9999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;fontFamily=Helvetica;" value="Категория сотрудника" vertex="1">
+          <mxGeometry height="100" width="320" x="-330" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-2" parent="U9cVC_-9I0Pf_PKBwxEo-1" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-weight: 700; text-decoration-line: underline;&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;идентификатор_категории_сотрудника: INTEGER&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-3" parent="U9cVC_-9I0Pf_PKBwxEo-1" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="наименование_категории: VARCHAR(50)&lt;div&gt;описание: VARCHAR(255)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="44" width="320" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-5" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;fontFamily=Helvetica;" value="График работы сотрудника" vertex="1">
+          <mxGeometry height="150" width="290" x="580" y="830" as="geometry">
+            <mxRectangle height="30" width="220" x="580" y="830" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-6" parent="U9cVC_-9I0Pf_PKBwxEo-5" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-weight: 700; text-decoration-line: underline;&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;идентификатор_графика_работы: INTEGER&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="290" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-7" parent="U9cVC_-9I0Pf_PKBwxEo-5" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="индентификатор_сотрудника: INTEGER (FK)&lt;div&gt;индентификатор_автомобиля: INTEGER (FK)&lt;br&gt;&lt;div&gt;дата: DATE&lt;/div&gt;&lt;div&gt;время_начала: DATETIME&lt;/div&gt;&lt;div&gt;время_окончания: DATETIME&lt;/div&gt;&lt;div&gt;статус: VARCHAR(20)&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="94" width="290" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-9" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.615;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;startArrow=oval;startFill=1;dashed=1;dashPattern=8 8;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="730" y="830" />
+              <mxPoint x="730" y="800" />
+              <mxPoint x="320" y="800" />
+            </Array>
+            <mxPoint x="730" y="830" as="sourcePoint" />
+            <mxPoint x="319.9999999999999" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-10" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;fontFamily=Helvetica;" value="Надбавка к тарифу" vertex="1">
+          <mxGeometry height="140" width="310" x="-390" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-11" parent="U9cVC_-9I0Pf_PKBwxEo-10" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-weight: 700; text-decoration-line: underline;&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;идентификатор_надбавка_к_тарифу: INTEGER&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="310" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-12" parent="U9cVC_-9I0Pf_PKBwxEo-10" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="индентификатор_тарифа: INTEGER (FK))&lt;div&gt;время_начала: DATETIME&lt;/div&gt;&lt;div&gt;время_окончания: DATETIME&lt;/div&gt;&lt;div&gt;комментарий: VARCHAR(100)&lt;br&gt;коэффициент_к_цене_за_км: DECIMAL(5,2)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="84" width="310" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="U9cVC_-9I0Pf_PKBwxEo-19" edge="1" parent="1" source="U9cVC_-9I0Pf_PKBwxEo-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.513;entryY=1.012;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=oval;endFill=1;dashed=1;dashPattern=8 8;" target="-zi2Ie0mMBQNflNbXnP6-95">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-2" edge="1" parent="1" source="-zi2Ie0mMBQNflNbXnP6-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=oval;endFill=1;dashed=1;dashPattern=8 8;" target="-zi2Ie0mMBQNflNbXnP6-103">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-3" edge="1" parent="1" source="-zi2Ie0mMBQNflNbXnP6-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.535;entryY=1.01;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=oval;endFill=1;dashed=1;dashPattern=8 8;" target="-zi2Ie0mMBQNflNbXnP6-139">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="160" />
+              <mxPoint x="124" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-4" edge="1" parent="1" source="-zi2Ie0mMBQNflNbXnP6-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.521;entryY=1.009;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;dashPattern=8 8;endArrow=oval;endFill=1;" target="-zi2Ie0mMBQNflNbXnP6-151">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-5" edge="1" parent="1" source="-zi2Ie0mMBQNflNbXnP6-139" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.008;entryY=0.311;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;dashPattern=8 8;endArrow=none;endFill=0;exitX=1.01;exitY=0.347;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=oval;startFill=1;" target="-zi2Ie0mMBQNflNbXnP6-151">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-6" edge="1" parent="1" source="-zi2Ie0mMBQNflNbXnP6-101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.709;entryY=0.024;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;startArrow=oval;startFill=1;dashed=1;dashPattern=8 8;" target="U9cVC_-9I0Pf_PKBwxEo-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-7" edge="1" parent="1" source="-zi2Ie0mMBQNflNbXnP6-155" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.01;entryY=0.718;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;dashed=1;dashPattern=8 8;startArrow=oval;startFill=1;" target="-zi2Ie0mMBQNflNbXnP6-103">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-8" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" value="Модель" vertex="1">
+          <mxGeometry height="160" width="270" x="1106" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-9" parent="MeM5HkTHLt1wKmxf1a38-8" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;b&gt;&lt;u&gt;идентификатор_модели: INTEGER&lt;/u&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="270" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-10" parent="MeM5HkTHLt1wKmxf1a38-8" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;тех_характеристики: VARCHAR(255)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;страна_производитель:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;VARCHAR(50)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;год_выпуска: DATE&lt;/div&gt;&lt;div&gt;марка: VARCHAR(50)&lt;/div&gt;&lt;div&gt;название_модели: VARCHAR(50)&lt;/div&gt;&lt;div&gt;тип_кузова: VARCHAR(20)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="104" width="270" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-11" edge="1" parent="1" source="-zi2Ie0mMBQNflNbXnP6-103" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.01;entryY=0.44;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=oval;endFill=1;dashed=1;dashPattern=8 8;" target="MeM5HkTHLt1wKmxf1a38-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-16" edge="1" parent="1" source="MeM5HkTHLt1wKmxf1a38-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;startArrow=oval;startFill=1;dashed=1;dashPattern=8 8;" target="-zi2Ie0mMBQNflNbXnP6-161">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-12" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;fontFamily=Helvetica;" value="Должность сотрудника" vertex="1">
+          <mxGeometry height="140" width="340" x="140" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-13" parent="MeM5HkTHLt1wKmxf1a38-12" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-weight: 700; text-decoration-line: underline;&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;номер_договора: INTEGER&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="340" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-14" parent="MeM5HkTHLt1wKmxf1a38-12" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="индентификатор_сотрудника: INTEGER (FK)&lt;div&gt;индентификатор_должности: INTEGER (FK)&lt;br&gt;дата_начала: DATE&lt;div&gt;дата_окончания: DATE&lt;/div&gt;&lt;/div&gt;&lt;div&gt;тип_договора: VARCHAR(50)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="84" width="340" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="MeM5HkTHLt1wKmxf1a38-15" edge="1" parent="1" source="MeM5HkTHLt1wKmxf1a38-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.499;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;startArrow=oval;startFill=1;dashed=1;dashPattern=8 8;" target="-zi2Ie0mMBQNflNbXnP6-155">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
