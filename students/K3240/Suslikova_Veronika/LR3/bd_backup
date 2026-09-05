@@ -1,0 +1,2799 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict 85MIEUWSvhFJfwlEX25mSJrT1jNF1YxgT4OGLGqWabhc8bs6xSUFwY5wxCZNK43
+
+-- Dumped from database version 13.23
+-- Dumped by pg_dump version 13.23
+
+-- Started on 2026-04-10 16:09:29
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 6 (class 2615 OID 16395)
+-- Name: project_management_sheme; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA project_management_sheme;
+
+
+ALTER SCHEMA project_management_sheme OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 204 (class 1259 OID 16446)
+-- Name: check; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme."check" (
+    order_id integer NOT NULL,
+    check_id integer NOT NULL,
+    pay_date date,
+    check_status character varying(18) NOT NULL,
+    check_type character varying(11) NOT NULL,
+    place_date date NOT NULL,
+    check_sum numeric(15,2) NOT NULL
+);
+
+
+ALTER TABLE project_management_sheme."check" OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 16663)
+-- Name: check_check_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."check" ALTER COLUMN check_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.check_check_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 202 (class 1259 OID 16433)
+-- Name: client; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.client (
+    client_id integer NOT NULL,
+    client_name character varying(80) NOT NULL,
+    client_adress character varying(80) NOT NULL,
+    repre_name character varying(80) NOT NULL,
+    repre_phone character varying(18) NOT NULL,
+    repre_email character varying(40)
+);
+
+
+ALTER TABLE project_management_sheme.client OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16634)
+-- Name: client_client_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.client ALTER COLUMN client_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.client_client_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 10
+);
+
+
+--
+-- TOC entry 213 (class 1259 OID 16600)
+-- Name: control_graph; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.control_graph (
+    graph_id integer NOT NULL,
+    task_id integer NOT NULL,
+    complet_status character varying(18) NOT NULL,
+    compl_due_date integer,
+    resp_employee character varying(80) NOT NULL,
+    control_date date NOT NULL
+);
+
+
+ALTER TABLE project_management_sheme.control_graph OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16670)
+-- Name: control_graph_graph_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.control_graph ALTER COLUMN graph_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.control_graph_graph_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 206 (class 1259 OID 16466)
+-- Name: division; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.division (
+    division_id integer NOT NULL,
+    division_name character varying(100) NOT NULL,
+    division_phone character varying(18) NOT NULL
+);
+
+
+ALTER TABLE project_management_sheme.division OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16656)
+-- Name: division_division_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.division ALTER COLUMN division_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.division_division_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 207 (class 1259 OID 16471)
+-- Name: employee; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.employee (
+    employee_passport character varying(14) NOT NULL,
+    employee_name character varying(100) NOT NULL,
+    pass_start_date date NOT NULL,
+    pass_who_gave character varying(100) NOT NULL,
+    pass_code character varying(8) NOT NULL,
+    employee_descr character varying(1000)
+);
+
+
+ALTER TABLE project_management_sheme.employee OWNER TO postgres;
+
+--
+-- TOC entry 208 (class 1259 OID 16479)
+-- Name: employee_in_division; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.employee_in_division (
+    employee_id integer NOT NULL,
+    work_start_date date NOT NULL,
+    work_end_date date,
+    work_type character varying(30) NOT NULL,
+    division_id integer NOT NULL,
+    job_name character varying(80) NOT NULL,
+    employee_passport character varying(14) NOT NULL
+);
+
+
+ALTER TABLE project_management_sheme.employee_in_division OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16642)
+-- Name: employee_in_division_employee_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_division ALTER COLUMN employee_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.employee_in_division_employee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 210 (class 1259 OID 16505)
+-- Name: employee_in_project; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.employee_in_project (
+    employee_id integer NOT NULL,
+    order_id integer NOT NULL,
+    proj_work_act_id integer NOT NULL,
+    start_date date,
+    end_date date,
+    act_status character varying(18) NOT NULL,
+    role character varying(80) NOT NULL,
+    role_descript character varying(500) NOT NULL
+);
+
+
+ALTER TABLE project_management_sheme.employee_in_project OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16652)
+-- Name: employee_in_project_proj_work_act_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_project ALTER COLUMN proj_work_act_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.employee_in_project_proj_work_act_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 214 (class 1259 OID 16611)
+-- Name: employee_in_task; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.employee_in_task (
+    employee_task_id integer NOT NULL,
+    task_id integer,
+    task_payment numeric(12,2),
+    task_compl_status character varying(18) NOT NULL,
+    proj_work_act_id integer
+);
+
+
+ALTER TABLE project_management_sheme.employee_in_task OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16678)
+-- Name: employee_in_task_employee_task_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_task ALTER COLUMN employee_task_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.employee_in_task_employee_task_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 203 (class 1259 OID 16438)
+-- Name: order; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme."order" (
+    client_id integer NOT NULL,
+    order_id integer NOT NULL,
+    oredr_status character varying(18) NOT NULL,
+    project_name character varying(200) NOT NULL,
+    project_start date NOT NULL,
+    project_end_exp date NOT NULL,
+    project_end_real date,
+    delay_reason character varying(500)
+);
+
+
+ALTER TABLE project_management_sheme."order" OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16626)
+-- Name: order_order_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."order" ALTER COLUMN order_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.order_order_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 201 (class 1259 OID 16413)
+-- Name: position; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme."position" (
+    salary numeric(10,2) DEFAULT 0 NOT NULL,
+    job_name character varying(80) DEFAULT 'Undefined'::character varying NOT NULL,
+    job_description character varying(500) DEFAULT 'none'::character varying NOT NULL,
+    rate_num numeric(3,2) DEFAULT 1 NOT NULL,
+    salary_rate numeric GENERATED ALWAYS AS ((((salary)::numeric)::double precision / (NULLIF((rate_num * (40)::numeric), (0)::numeric))::double precision)) STORED
+);
+
+
+ALTER TABLE project_management_sheme."position" OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1259 OID 16492)
+-- Name: project_manager; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.project_manager (
+    employee_id integer NOT NULL,
+    order_id integer NOT NULL,
+    manager_id integer NOT NULL,
+    hire_date date NOT NULL,
+    layoff_date date
+);
+
+
+ALTER TABLE project_management_sheme.project_manager OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16674)
+-- Name: project_manager_manager_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.project_manager ALTER COLUMN manager_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.project_manager_manager_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 211 (class 1259 OID 16519)
+-- Name: project_paym; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.project_paym (
+    proj_work_act_id integer NOT NULL,
+    trans_id integer NOT NULL,
+    pay_date_type character varying(11) NOT NULL,
+    pay_status character varying(18) NOT NULL,
+    pay_date date,
+    pay_sum numeric(12,2) NOT NULL
+);
+
+
+ALTER TABLE project_management_sheme.project_paym OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 17577)
+-- Name: project_paym_trans_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.project_paym ALTER COLUMN trans_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.project_paym_trans_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    MAXVALUE 123456709
+    CACHE 1
+);
+
+
+--
+-- TOC entry 212 (class 1259 OID 16532)
+-- Name: task; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.task (
+    task_id integer NOT NULL,
+    task_name character varying(200) NOT NULL,
+    task_descript character varying(2000),
+    task_cost numeric(15,2) NOT NULL,
+    start_day date NOT NULL,
+    complete_day_exp date NOT NULL,
+    complete_day_real date,
+    delay_reason character varying(500),
+    order_id integer NOT NULL,
+    status character varying(18) NOT NULL
+);
+
+
+ALTER TABLE project_management_sheme.task OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16636)
+-- Name: task_task_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.task ALTER COLUMN task_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.task_task_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 205 (class 1259 OID 16458)
+-- Name: work_compl_cert; Type: TABLE; Schema: project_management_sheme; Owner: postgres
+--
+
+CREATE TABLE project_management_sheme.work_compl_cert (
+    cert_id integer NOT NULL,
+    cert_stat character varying(18) NOT NULL,
+    cert_notes character varying(1000),
+    place_date date NOT NULL,
+    accept_date date,
+    order_id integer NOT NULL
+);
+
+
+ALTER TABLE project_management_sheme.work_compl_cert OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16658)
+-- Name: work_compl_cert_cert_id_seq; Type: SEQUENCE; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.work_compl_cert ALTER COLUMN cert_id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME project_management_sheme.work_compl_cert_cert_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 3155 (class 0 OID 16446)
+-- Dependencies: 204
+-- Data for Name: check; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme."check" (order_id, check_id, pay_date, check_status, check_type, place_date, check_sum) FROM stdin;
+1	1	\N	отклонен	остаток	2025-08-18	74422629054.00
+2	2	\N	выставлен	остаток	2025-09-01	98621687833.00
+3	3	\N	выставлен	предоплата	2026-03-26	1117892422.00
+4	4	\N	отклонен	остаток	2025-05-01	27933066568.00
+5	5	\N	выставлен	остаток	2026-04-30	25107862667.00
+6	6	\N	отклонен	предоплата	2025-12-18	47835830941.00
+7	7	\N	отклонен	остаток	2026-03-23	47979815278.00
+8	8	\N	отклонен	предоплата	2026-04-09	50319210320.00
+9	9	\N	выставлен	предоплата	2026-02-24	38564251710.00
+10	10	\N	отклонен	предоплата	2025-12-02	77203189756.00
+11	11	\N	отклонен	остаток	2025-05-31	2530072382.00
+12	12	\N	выставлен	предоплата	2025-09-02	35207592362.00
+13	13	\N	выставлен	предоплата	2026-02-16	33486192709.00
+14	14	\N	отклонен	предоплата	2025-10-31	8325029037.00
+15	15	\N	отклонен	предоплата	2025-08-27	23302614838.00
+16	16	\N	отклонен	предоплата	2025-12-09	69087681341.00
+17	17	\N	отклонен	предоплата	2026-03-29	26649124062.00
+18	18	\N	выставлен	остаток	2026-02-18	59165539611.00
+19	19	\N	выставлен	остаток	2026-04-15	20159935088.00
+20	20	\N	отклонен	остаток	2025-05-06	56706374616.00
+21	21	\N	выставлен	предоплата	2025-06-03	70167769603.00
+22	22	\N	выставлен	остаток	2025-05-08	72925377343.00
+23	23	\N	отклонен	предоплата	2025-09-24	24611002858.00
+24	24	\N	отклонен	предоплата	2025-08-21	23675057724.00
+25	25	\N	отклонен	предоплата	2025-08-22	74502673174.00
+26	26	\N	выставлен	остаток	2025-05-14	3073649369.00
+27	27	\N	отклонен	остаток	2025-05-09	88260304614.00
+28	28	\N	выставлен	предоплата	2025-11-02	45742923636.00
+29	29	\N	отклонен	предоплата	2026-03-30	8230649218.00
+30	30	\N	отклонен	предоплата	2025-07-13	1803972602.00
+31	31	\N	выставлен	предоплата	2025-05-21	12903611538.00
+32	32	\N	выставлен	предоплата	2025-05-01	64502176759.00
+33	33	\N	выставлен	остаток	2026-01-06	90594774388.00
+34	34	\N	отклонен	предоплата	2025-05-02	84180229498.00
+35	35	\N	отклонен	остаток	2026-01-24	40786101021.00
+36	36	\N	выставлен	остаток	2025-08-30	74290746715.00
+37	37	\N	выставлен	предоплата	2025-09-03	17849545171.00
+38	38	\N	отклонен	предоплата	2025-09-19	65237646091.00
+39	39	\N	отклонен	предоплата	2026-03-28	58538456663.00
+40	40	\N	отклонен	предоплата	2025-08-30	90058136883.00
+41	41	\N	выставлен	предоплата	2025-10-02	89416826524.00
+42	42	\N	выставлен	остаток	2026-04-06	92304817289.00
+43	43	\N	выставлен	остаток	2026-01-19	93306571801.00
+44	44	\N	выставлен	остаток	2025-11-01	30960032703.00
+45	45	\N	отклонен	предоплата	2026-01-31	24868216530.00
+46	46	\N	отклонен	остаток	2025-10-15	19812304441.00
+47	47	\N	выставлен	предоплата	2025-08-04	4590481543.00
+48	48	\N	отклонен	остаток	2026-02-05	79447294750.00
+49	49	\N	отклонен	предоплата	2026-04-27	87749452070.00
+50	50	\N	выставлен	остаток	2026-02-11	98853430170.00
+51	51	\N	отклонен	остаток	2025-06-23	308148322.00
+52	52	\N	выставлен	предоплата	2026-04-30	614961574.00
+53	53	\N	отклонен	предоплата	2026-03-21	57262480506.00
+54	54	\N	отклонен	предоплата	2026-01-08	78762895461.00
+55	55	\N	отклонен	предоплата	2025-10-29	30599725964.00
+56	56	\N	выставлен	остаток	2026-04-23	31576887302.00
+57	57	\N	отклонен	остаток	2025-08-29	13820822383.00
+58	58	\N	отклонен	остаток	2025-09-04	42978844033.00
+59	59	\N	отклонен	остаток	2026-02-09	37887927273.00
+60	60	\N	отклонен	предоплата	2026-01-03	75631639004.00
+61	61	\N	выставлен	предоплата	2025-07-22	29493850148.00
+62	62	\N	выставлен	остаток	2026-01-13	26453998955.00
+63	63	\N	отклонен	предоплата	2025-09-30	66710120129.00
+64	64	\N	выставлен	предоплата	2026-04-20	60985278836.00
+65	65	\N	отклонен	предоплата	2026-02-28	79355607881.00
+66	66	\N	выставлен	предоплата	2026-01-01	86881496550.00
+67	67	\N	выставлен	остаток	2025-07-22	61837777109.00
+68	68	\N	отклонен	остаток	2025-07-27	48796655934.00
+69	69	\N	выставлен	остаток	2025-06-20	14753797042.00
+70	70	\N	выставлен	предоплата	2025-05-13	27001042544.00
+71	71	\N	отклонен	остаток	2026-04-29	8198903608.00
+72	72	\N	выставлен	предоплата	2025-10-10	310833080.00
+73	73	\N	выставлен	предоплата	2025-08-24	64514553238.00
+74	74	\N	выставлен	предоплата	2025-09-28	90251015496.00
+75	75	\N	отклонен	остаток	2026-03-02	91119069498.00
+76	76	\N	отклонен	остаток	2025-12-15	37846273141.00
+77	77	\N	выставлен	предоплата	2025-09-18	55098639000.00
+78	78	\N	отклонен	предоплата	2026-02-21	77032142486.00
+79	79	\N	выставлен	предоплата	2025-05-25	80396669279.00
+80	80	\N	выставлен	остаток	2026-03-26	59401410259.00
+81	81	\N	отклонен	остаток	2025-12-12	65724677581.00
+82	82	\N	выставлен	остаток	2025-10-19	53848372067.00
+83	83	\N	выставлен	остаток	2026-02-14	66728035765.00
+84	84	\N	выставлен	остаток	2025-10-09	91646230815.00
+85	85	\N	выставлен	предоплата	2025-09-07	59475052762.00
+86	86	\N	отклонен	предоплата	2025-05-24	52590569494.00
+87	87	\N	выставлен	предоплата	2025-10-08	3998032274.00
+88	88	\N	отклонен	остаток	2026-04-23	91064489164.00
+89	89	\N	отклонен	остаток	2025-07-02	56400099684.00
+90	90	\N	выставлен	остаток	2025-11-18	82228659201.00
+91	91	\N	выставлен	остаток	2026-03-15	35951748338.00
+92	92	\N	отклонен	предоплата	2026-03-02	28012183121.00
+93	93	\N	выставлен	остаток	2025-12-24	39636211685.00
+94	94	\N	выставлен	предоплата	2025-06-13	177839560.00
+95	95	\N	выставлен	предоплата	2026-04-03	10762923928.00
+96	96	\N	отклонен	предоплата	2025-11-09	13457914227.00
+97	97	\N	выставлен	предоплата	2025-07-04	10553488163.00
+98	98	\N	выставлен	предоплата	2025-05-27	15604494898.00
+99	99	\N	выставлен	остаток	2025-09-15	12014727193.00
+100	100	\N	выставлен	предоплата	2025-09-24	53170757773.00
+\.
+
+
+--
+-- TOC entry 3153 (class 0 OID 16433)
+-- Dependencies: 202
+-- Data for Name: client; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.client (client_id, client_name, client_adress, repre_name, repre_phone, repre_email) FROM stdin;
+1	ООО "ТехноПром"	ул. Ленина, 15, Москва, Россия	Иванов Иван Иванович	+7 (495) 123-45-67	ivanov.ii@technoprom.ru
+2	ООО "Информационные Системы"	пр. Мира, 5, Санкт-Петербург, Россия	Петрова Анна Сергеевна	+7 (812) 987-65-43	petrova.as@is.ru
+3	ООО "СтройИнвест"	ул. Пушкина, 20, Казань, Россия	Сидоров Петр Николаевич	+7 (843) 112-33-44	sidorov.pn@stroyinvest.ru
+4	ИП "Кузнецова М.И."	ул. Гагарина, 33, Екатеринбург, Россия	Кузнецова Мария Ивановна	+7 (343) 234-56-78	kuznetsova.mi@avtomir.ru
+5	ООО "ЭнергоСбыт"	ул. Энергетиков, 1, Томск, Россия	Васильев Александр Петрович	+7 (382) 555-11-22	vasiliev.ap@energosbyt.ru
+6	ООО "Ритейл Групп"	ул. Торговая, 8, Новосибирск, Россия	Морозова Елена Викторовна	+7 (383) 123-45-67	morozova.ev@retailgroup.ru
+7	ООО "Финанс Консалтинг"	ул. Банковская, 3, Москва, Россия	Лебедев Сергей Иванович	+7 (499) 789-01-23	lebedev.si@financeconsulting.ru
+8	ООО "Логистик Плюс"	ул. Складская, 12, Москва, Россия	Волкова Ирина Александровна	+7 (495) 345-67-89	volkova.ia@logisticplus.ru
+9	ООО "Медицина Будущего"	ул. Здоровья, 7, Москва, Россия	Козлова Ольга Петровна	+7 (499) 101-23-45	kozlova.op@medfuture.ru
+10	ООО "IT-Решения"	ул. Программистов, 10, Москва, Россия	Смирнов Дмитрий Евгеньевич	+7 (495) 876-54-32	smirnov.de@it-resheniya.ru
+11	ООО "Креатив Дизайн"	ул. Художников, 18, Санкт-Петербург, Россия	Белова Екатерина Николаевна	+7 (812) 111-22-33	belova.en@creativedesign.ru
+12	ООО "Недвижимость Плюс"	ул. Строителей, 40, Москва, Россия	Попов Артем Игоревич	+7 (499) 654-32-10	popov.ai@nedvizhimostplus.ru
+13	ООО "Ресторанный Сервис"	ул. Гастрономия, 5, Москва, Россия	Зайцева Светлана Игоревна	+7 (495) 246-80-13	zaitseva.si@restaurant.ru
+14	ООО "Развлечения XXI век"	ул. Кино, 1, Москва, Россия	Соловьев Михаил Васильевич	+7 (499) 777-88-99	soloviev.mv@entertainment.ru
+15	ООО "ФармаПром"	ул. Химиков, 15, Москва, Россия	Соколова Юлия Викторовна	+7 (495) 123-00-11	sokolova.yv@farmaprom.ru
+16	ООО "ГазНефтьСервис"	ул. Нефтяников, 50, Москва, Россия	Захаров Алексей Юрьевич	+7 (499) 444-55-66	zakharov.ay@gazneftservice.ru
+17	ООО "Розничные Сети"	ул. Торговая, 1, Санкт-Петербург, Россия	Павлова Наталья Сергеевна	+7 (812) 777-88-99	pavlova.ns@retailnetworks.ru
+18	АО "Питание и Здоровье"	ул. Здоровый Образ Жизни, 10, Москва, Россия	Егорова Вероника Артемовна	+7 (495) 987-11-22	egorova.va@healthfood.ru
+19	ООО "АвтоСервис"	ул. Сервисная, 12, Москва, Россия	Чернов Игорь Витальевич	+7 (495) 456-78-90	chernov.iv@autoservice.ru
+20	ООО "Домашний Уют"	ул. Мебельщиков, 3, Москва, Россия	Лебедева София Дмитриевна	+7 (495) 567-89-01	lebedeva.sd@homedesign.ru
+21	ООО "Спортивные Товары"	ул. Спортсменов, 1, Москва, Россия	Тихонов Евгений Игоревич	+7 (499) 222-33-44	tihonov.ei@sportgoods.ru
+22	ООО "Образовательный Центр"	ул. Знаний, 10, Москва, Россия	Федорова Марина Алексеевна	+7 (495) 432-10-98	fedorova.ma@educationcenter.ru
+23	ООО "Туристическое Агентство"	ул. Путешественников, 5, Москва, Россия	Николаев Виталий Петрович	+7 (499) 333-66-99	nikolaev.vp@travelagency.ru
+24	ООО "Продуктовый Магазин"	ул. Продуктовая, 1, Москва, Россия	Григорьева Анна Сергеевна	+7 (495) 888-77-66	grigorieva.as@foodstore.ru
+25	ООО "Медицинские Центры"	ул. Врачебная, 2, Москва, Россия	Жукова Елена Игоревна	+7 (499) 123-55-77	zhukova.ei@medicalcenters.ru
+26	ИП "Виноградова О.П."	ул. Здоровое Питание, 3, Москва, Россия	Виноградова Ольга Петровна	+7 (495) 678-90-12	vinogradova.op@healthrecipes.ru
+27	ООО "Мебель для Офиса"	ул. Офисная, 10, Москва, Россия	Лебедев Сергей Иванович	+7 (499) 789-01-23	lebedev.si@officefurniture.ru
+28	ООО "Спортивное Питание"	ул. Фитнес, 7, Москва, Россия	Волкова Ирина Александровна	+7 (495) 345-67-89	volkova.ia@sportnutrition.ru
+29	ООО "АвтоРемонт"	ул. Сервисная, 12, Москва, Россия	Морозова Елена Викторовна	+7 (499) 654-32-10	morozova.ev@autorepair.ru
+30	ООО "Металлоконструкции"	ул. Металлургов, 10, Екатеринбург, Россия	Сидоров Алексей Сергеевич	+7 (343) 765-43-21	sidorov.as@metallkonstruktsii.ru
+31	ООО "Канцтовары"	ул. Письменная, 3, Москва, Россия	Иванова Ольга Петровна	+7 (495) 123-45-67	ivanova.op@stationery.ru
+32	ООО "Электроника"	ул. Микросхем, 1, Москва, Россия	Петров Иван Васильевич	+7 (495) 876-54-32	petrov.iv@electronics.ru
+33	ООО "Одежда и Стиль"	ул. Моды, 12, Москва, Россия	Волкова Анастасия Игоревна	+7 (499) 789-11-22	volkova.ai@fashionstyle.ru
+34	ООО "Строительные Материалы"	ул. Стройка, 2, Москва, Россия	Соколов Дмитрий Алексеевич	+7 (495) 112-33-44	sokolov.da@buildmaterials.ru
+35	ООО "Косметика"	ул. Красоты, 2, Москва, Россия	Кузнецова Анна Сергеевна	+7 (495) 987-65-43	kuznetsova.as@cosmetics.ru
+36	ООО "Мебель для Дома"	ул. Дизайнеров, 8, Москва, Россия	Полякова Анна Дмитриевна	+7 (499) 101-01-01	polyakova.ad@homemebel.ru
+37	ООО "АвтоЗапчасти"	ул. Запчастей, 7, Москва, Россия	Чернов Игорь Витальевич	+7 (495) 456-78-90	chernov.iv@autozapchasti.ru
+38	ООО "IT-Решения для Бизнеса"	ул. Инновационная, 1, Москва, Россия	Зайцев Михаил Андреевич	+7 (495) 678-90-12	zaitsev.ma@businessit.ru
+39	ООО "Проектный Альянс"	ул. Архитекторов, 3, Санкт-Петербург, Россия	Беляева Ирина Петровна	+7 (812) 234-56-78	belyaeva.ip@projectalliance.ru
+40	ООО "Логистик Экспресс"	ул. Грузовая, 15, Москва, Россия	Новиков Олег Владимирович	+7 (499) 111-00-99	novikov.ov@logisticexpress.ru
+41	ООО "Финансовый Консультант"	ул. Финансистов, 5, Москва, Россия	Виноградов Алексей Игоревич	+7 (495) 432-10-98	vinogradov.ai@financeconsult.ru
+42	ООО "Медицинский Диагностический Центр"	ул. Здравия, 8, Москва, Россия	Петрова Екатерина Васильевна	+7 (499) 555-11-22	petrova.ev@diagnostika.ru
+43	ООО "ТехноМир"	ул. Инноваций, 10, Москва, Россия	Иванов Сергей Петрович	+7 (495) 678-90-12	ivanov.sp@technomir.ru
+44	ООО "Строительная Компания"	ул. Строительная, 25, Москва, Россия	Сидоров Андрей Николаевич	+7 (499) 789-01-23	sidorov.an@buildcompany.ru
+45	ООО "Развитие"	ул. Роста, 5, Москва, Россия	Кузнецова Ольга Игоревна	+7 (495) 101-23-45	kuznetsova.oi@razvitie.ru
+46	ИП "Смирнов"	ул. Сетевая, 1, Москва, Россия	Смирнов Павел Дмитриевич	+7 (499) 444-55-66	smirnov.pd@infoservice.ru
+47	ООО "АгроПродукт"	ул. Полевая, 10, Краснодар, Россия	Федоров Иван Петрович	+7 (861) 234-56-78	fedorov.ip@agroproduct.ru
+48	ООО "ТрансЛогистика"	ул. Транспортная, 15, Москва, Россия	Волков Сергей Петрович	+7 (495) 345-67-89	volkov.sp@translogistic.ru
+49	ООО "Торговый Дом"	ул. Коммерческая, 20, Москва, Россия	Лебедева Мария Александровна	+7 (499) 654-32-10	lebedeva.ma@tradinghouse.ru
+50	ООО "РегионСервис"	ул. Центральная, 1, Нижний Новгород, Россия	Петров Алексей Игоревич	+7 (831) 123-45-67	petrov.ai@regionservice.ru
+\.
+
+
+--
+-- TOC entry 3164 (class 0 OID 16600)
+-- Dependencies: 213
+-- Data for Name: control_graph; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.control_graph (graph_id, task_id, complet_status, compl_due_date, resp_employee, control_date) FROM stdin;
+1	132	выполнен	67	Иван Miller	2025-12-18
+2	96	приостановлен	42	John Иванова	2025-08-29
+3	20	приостановлен	6	Алексей Johnson	2025-05-24
+4	125	в работе	77	Anna Smith	2026-01-09
+5	46	отклонен	81	Алексей Williams	2025-08-21
+6	77	отклонен	3	Сергей Кузнецова	2026-02-11
+7	77	выполнен	60	Иван Smith	2026-01-08
+8	103	выполнен	83	Anna Brown	2026-01-09
+9	74	в работе	17	Ольга Петров	2025-08-09
+10	143	принят	3	Сергей Brown	2026-05-02
+11	40	приостановлен	21	Michael Miller	2026-03-17
+12	110	выполнен	77	David Miller	2026-02-27
+13	92	выполнен	43	Ольга Кузнецова	2026-02-12
+14	55	отклонен	57	John Williams	2025-12-26
+15	40	в работе	35	Мария Кузнецова	2025-10-02
+16	1	выполнен	6	John Williams	2026-03-02
+17	24	приостановлен	41	Алексей Смирнов	2026-04-21
+18	94	принят	61	Anna Smith	2025-07-18
+19	93	отклонен	31	Anna Иванова	2026-03-30
+20	133	выполнен	90	Алексей Williams	2026-05-25
+21	141	принят	3	John Иванова	2025-06-10
+22	91	отклонен	84	Ольга Смирнов	2026-05-04
+23	78	приостановлен	50	Anna Смирнов	2026-07-22
+24	66	выполнен	91	John Смирнов	2025-09-26
+25	52	выполнен	37	Сергей Johnson	2026-03-07
+26	28	в работе	81	Мария Иванова	2025-11-04
+27	132	выполнен	28	David Петров	2025-10-31
+28	134	отклонен	95	Elena Davis	2025-11-15
+29	6	приостановлен	7	Anna Johnson	2026-01-06
+30	41	выполнен	27	David Brown	2025-06-12
+31	130	выполнен	62	Elena Smith	2026-06-13
+32	20	в работе	67	Иван Smith	2025-12-31
+33	120	в работе	55	Michael Петров	2025-10-19
+34	23	отклонен	97	Ольга Davis	2026-04-06
+35	73	приостановлен	48	Elena Smith	2026-03-20
+36	90	приостановлен	20	Anna Смирнов	2025-06-10
+37	54	приостановлен	3	Elena Brown	2025-08-24
+38	15	отклонен	35	Michael Brown	2026-01-13
+39	94	выполнен	50	John Brown	2026-08-21
+40	90	приостановлен	90	Мария Smith	2025-12-13
+41	66	приостановлен	5	Сергей Иванова	2025-12-31
+42	81	принят	94	Elena Brown	2026-02-15
+43	27	принят	58	Anna Петров	2025-12-03
+44	73	выполнен	35	Elena Miller	2026-01-01
+45	110	отклонен	1	Anna Кузнецова	2026-06-14
+46	93	в работе	45	Алексей Miller	2026-04-29
+47	96	приостановлен	28	Алексей Brown	2026-05-07
+48	94	выполнен	96	Elena Brown	2026-09-23
+49	56	приостановлен	49	Иван Кузнецова	2026-06-08
+50	17	принят	49	Ольга Johnson	2025-09-21
+51	148	выполнен	28	Мария Williams	2025-12-02
+52	53	в работе	30	Мария Davis	2026-08-05
+53	54	в работе	11	Ольга Miller	2026-02-14
+54	32	принят	49	Сергей Петров	2025-10-20
+55	10	принят	9	Мария Смирнов	2026-07-17
+56	121	принят	83	Сергей Davis	2025-08-20
+57	92	приостановлен	63	Anna Williams	2025-10-18
+58	7	выполнен	45	Сергей Johnson	2025-11-06
+59	110	в работе	91	Michael Смирнов	2025-11-20
+60	34	в работе	7	Иван Johnson	2026-07-05
+61	137	в работе	29	Anna Кузнецова	2025-10-22
+62	131	в работе	77	Мария Кузнецова	2025-07-11
+63	147	приостановлен	88	Мария Williams	2025-12-23
+64	83	в работе	47	Michael Кузнецова	2026-09-18
+65	99	принят	18	Алексей Miller	2025-12-20
+66	110	в работе	84	Ольга Miller	2025-05-27
+67	141	выполнен	74	Мария Иванова	2025-11-29
+68	24	принят	73	Michael Smith	2025-09-16
+69	104	принят	79	Мария Петров	2025-09-29
+70	6	выполнен	22	Алексей Brown	2026-01-02
+71	146	приостановлен	3	David Смирнов	2026-06-06
+72	141	выполнен	20	Мария Miller	2026-02-15
+73	21	в работе	8	Ольга Williams	2025-08-09
+74	42	принят	93	John Иванова	2026-07-06
+75	37	отклонен	40	Elena Иванова	2025-09-03
+76	26	выполнен	19	Алексей Смирнов	2026-05-28
+77	140	приостановлен	61	Иван Miller	2026-02-19
+78	71	принят	67	Anna Johnson	2025-09-29
+79	117	в работе	20	Michael Smith	2026-09-23
+80	18	отклонен	68	John Смирнов	2025-12-22
+81	21	отклонен	59	Michael Williams	2025-08-09
+82	32	принят	38	Elena Davis	2026-05-10
+83	105	в работе	29	Ольга Петров	2026-02-19
+84	98	приостановлен	9	John Петров	2025-09-06
+85	20	приостановлен	32	Сергей Williams	2026-04-06
+86	2	приостановлен	42	Ольга Miller	2026-05-23
+87	20	принят	83	Anna Smith	2025-04-30
+88	53	принят	60	Мария Williams	2025-07-08
+89	90	в работе	22	Иван Смирнов	2025-09-09
+90	138	принят	33	David Смирнов	2026-06-26
+91	90	выполнен	15	John Johnson	2026-06-04
+92	139	отклонен	97	Ольга Williams	2026-02-09
+93	55	отклонен	77	Сергей Johnson	2026-05-22
+94	26	в работе	94	David Smith	2026-03-20
+95	68	приостановлен	10	Алексей Williams	2026-02-15
+96	149	выполнен	45	Мария Смирнов	2026-01-08
+97	2	в работе	85	Michael Miller	2025-08-27
+98	101	приостановлен	36	Мария Петров	2026-01-23
+99	5	отклонен	87	Ольга Smith	2025-10-06
+100	89	принят	66	Сергей Johnson	2026-01-14
+101	96	выполнен	53	Elena Davis	2026-02-16
+102	131	приостановлен	67	John Смирнов	2026-06-18
+103	38	отклонен	44	Anna Петров	2025-12-02
+104	22	отклонен	58	Алексей Смирнов	2025-08-04
+105	60	выполнен	47	Алексей Иванова	2025-08-05
+106	135	в работе	85	Иван Miller	2026-03-26
+107	113	в работе	23	Алексей Петров	2025-09-21
+108	108	принят	69	Мария Johnson	2026-02-21
+109	78	отклонен	97	Иван Miller	2026-02-10
+110	19	выполнен	28	Иван Williams	2026-02-11
+111	73	в работе	49	Алексей Иванова	2025-07-17
+112	125	выполнен	54	Сергей Smith	2025-06-10
+113	3	отклонен	21	Мария Miller	2026-05-17
+114	93	в работе	37	David Williams	2025-08-26
+115	96	приостановлен	94	Сергей Смирнов	2025-10-13
+116	115	выполнен	54	Сергей Смирнов	2026-08-29
+117	103	принят	85	Сергей Иванова	2026-03-05
+118	36	в работе	34	Иван Brown	2026-06-01
+119	126	выполнен	88	Алексей Кузнецова	2025-07-16
+120	125	выполнен	32	David Davis	2026-01-28
+121	77	приостановлен	67	Elena Петров	2026-03-30
+122	89	приостановлен	22	Мария Brown	2025-12-30
+123	128	приостановлен	58	Мария Смирнов	2026-04-28
+124	64	принят	21	Мария Williams	2026-04-18
+125	23	выполнен	14	Мария Miller	2025-07-25
+126	16	выполнен	63	Сергей Davis	2025-11-06
+127	61	выполнен	55	John Smith	2026-04-03
+128	73	приостановлен	57	Elena Miller	2026-02-05
+129	81	отклонен	24	Мария Иванова	2026-05-31
+130	56	в работе	23	Иван Smith	2026-03-12
+131	42	выполнен	72	Michael Смирнов	2026-01-23
+132	63	принят	20	Anna Smith	2025-11-12
+133	4	принят	6	Иван Williams	2026-02-15
+134	52	приостановлен	84	John Johnson	2025-11-29
+135	145	приостановлен	11	Michael Smith	2025-10-01
+136	148	отклонен	52	Michael Smith	2026-01-22
+137	125	приостановлен	13	Michael Смирнов	2026-03-02
+138	51	принят	55	Elena Кузнецова	2025-10-16
+139	35	принят	67	Michael Miller	2025-07-03
+140	95	приостановлен	44	Алексей Кузнецова	2026-01-28
+141	32	принят	60	Алексей Brown	2025-07-12
+142	62	приостановлен	23	Иван Johnson	2026-03-02
+143	3	выполнен	11	Мария Иванова	2026-02-14
+144	91	приостановлен	54	Иван Davis	2025-08-04
+145	100	выполнен	13	Ольга Brown	2025-11-17
+146	4	выполнен	78	Elena Brown	2025-12-04
+147	127	выполнен	3	Иван Smith	2026-07-27
+148	55	выполнен	6	Michael Johnson	2026-07-01
+149	79	выполнен	80	Michael Смирнов	2026-06-29
+150	87	выполнен	21	Michael Brown	2026-04-13
+\.
+
+
+--
+-- TOC entry 3157 (class 0 OID 16466)
+-- Dependencies: 206
+-- Data for Name: division; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.division (division_id, division_name, division_phone) FROM stdin;
+1	Отдел продаж	+7 (495) 123-45-67
+2	Отдел маркетинга	+7 (812) 987-65-43
+3	Финансовый отдел	+7 (343) 555-11-22
+4	Отдел кадров (HR)	+7 (800) 200-06-00
+5	IT-отдел	+7 (499) 777-88-99
+6	Отдел разработки	+7 (383) 222-33-44
+7	Отдел тестирования	+7 (351) 444-55-66
+8	Отдел технической поддержки	+7 (916) 111-22-33
+9	Юридический отдел	+7 (301) 666-77-88
+10	Административно-хозяйственный отдел	+7 (495) 101-01-01
+11	Отдел закупок	+7 (812) 202-02-02
+12	Отдел логистики	+7 (343) 303-03-03
+13	Отдел контроля качества	+7 (800) 404-04-04
+14	Отдел исследований и разработок (R&D)	+7 (499) 505-05-05
+15	Отдел по связям с общественностью (PR)	+7 (383) 606-06-06
+16	Отдел внутренних коммуникаций	+7 (351) 707-07-07
+17	Отдел по работе с партнерами	+7 (916) 808-08-08
+18	Отдел корпоративной безопасности	+7 (301) 909-09-09
+19	Отдел управления проектами	+7 (495) 121-21-21
+20	Отдел стратегического развития	+7 (812) 232-32-32
+\.
+
+
+--
+-- TOC entry 3158 (class 0 OID 16471)
+-- Dependencies: 207
+-- Data for Name: employee; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.employee (employee_passport, employee_name, pass_start_date, pass_who_gave, pass_code, employee_descr) FROM stdin;
+1015 123456	Иванов Иван Иванович	2005-03-15	ОВИР УВД г. Москвы	770-001	Опытный разработчик, работает над ключевыми проектами.
+1116 789012	Петрова Анна Сергеевна	2010-07-22	Отделение УФМС России по Санкт-Петербургу	780-002	Маркетолог, отвечает за SMM-кампании.
+0508 345678	Сидоров Алексей Петрович	1998-11-01	ОВИР УВД г. Новосибирска	540-003	Финансовый аналитик, следит за бюджетом.
+4501 987654	Кузнецова Ольга Викторовна	2015-01-30	Отдел УФМС по Свердловской области	660-004	HR-специалист, занимается подбором персонала.
+7707 112233	Смирнов Дмитрий Николаевич	2008-05-10	УФМС России по г. Москве	770-005	Системный администратор, поддерживает IT-инфраструктуру.
+2500 445566	Васильева Екатерина Андреевна	2018-09-01	ОВИР УФМС России по г. Казани	160-006	Frontend-разработчик, создает пользовательские интерфейсы.
+3601 778899	Михайлов Павел Дмитриевич	2012-04-20	Отдел УФМС по Нижегородской обл.	520-007	Backend-разработчик, работает с базами данных.
+6603 101010	Фёдорова Мария Ивановна	2019-11-11	УФМС России по Самарской области	630-008	Тестировщик, обеспечивает качество ПО.
+7804 202020	Морозов Андрей Владимирович	2000-02-14	УФМС России по г. Санкт-Петербургу	780-009	Руководитель отдела продаж, управляет командой.
+5005 303030	Соколова Юлия Николаевна	2017-06-25	ОВИР УФМС России по Челябинской обл.	740-010	Менеджер по продажам, работает с клиентами.
+0206 404040	Лебедев Сергей Алексеевич	1995-08-08	УФМС России по Республике Башкортостан	020-011	IT-специалист, занимается поддержкой пользователей.
+4007 505050	Волкова Ирина Петровна	2011-12-01	УФМС России по Краснодарскому краю	230-012	UX/UI дизайнер, разрабатывает интерфейсы.
+6308 606060	Козлов Евгений Андреевич	2016-03-19	ОВИР УФМС России по Саратовской обл.	640-013	DevOps-инженер, автоматизирует развертывание.
+7709 707070	Новикова Светлана Михайловна	2003-09-12	УФМС России по г. Москве	770-014	Юрист, сопровождает договорную работу.
+3901 808080	Егоров Владимир Сергеевич	2020-01-15	УФМС России по Пензенской обл.	580-015	Специалист по маркетингу, занимается контент-стратегией.
+8602 909090	Ковальчук Елена Петровна	2013-07-07	УФМС России по Приморскому краю	250-016	Бухгалтер, ведет учет.
+7703 001122	Белов Павел Иванович	2021-04-05	УФМС России по г. Москве	770-017	Специалист технической поддержки, помогает пользователям.
+6105 334455	Тихонова Марина Николаевна	2006-10-28	УФМС России по Сахалинской обл.	650-018	PR-менеджер, занимается связями с общественностью.
+3108 667788	Жуков Олег Александрович	2014-02-20	УФМС России по Пермскому краю	590-019	Аналитик данных, формирует отчеты.
+7701 990011	Зайцева Елена Владимировна	1999-12-12	УФМС России по г. Москве	770-020	Руководитель отдела маркетинга, разрабатывает стратегии.
+5406 112233	Григорьев Антон Сергеевич	2018-07-10	УФМС России по Томской обл.	700-021	Специалист по информационной безопасности.
+0702 445566	Ильина Ольга Дмитриевна	2009-05-05	УФМС России по Республике Алтай	040-022	UX-дизайнер, исследует пользовательский опыт.
+4203 778899	Павлов Алексей Игоревич	2022-01-01	УФМС России по Челябинской обл.	740-023	Junior Frontend-разработчик, учится и помогает.
+7704 001010	Степанова Ирина Викторовна	2010-03-25	УФМС России по г. Москве	770-024	Специалист по закупкам, ищет лучших поставщиков.
+6707 202020	Попов Сергей Александрович	1990-11-30	УФМС России по Оренбургской обл.	560-025	Руководитель отдела R&D, занимается инновациями.
+3008 303030	Ковалева Анна Павловна	2019-08-15	УФМС России по Иркутской обл.	380-026	Технический писатель, создает инструкции.
+7705 404040	Новиков Андрей Дмитриевич	2015-04-10	УФМС России по г. Москве	770-027	Специалист по охране труда.
+5509 505050	Николаева Елена Игоревна	2020-11-22	УФМС России по Воронежской обл.	360-028	HR-специалист по обучению и развитию.
+2301 606060	Макаров Дмитрий Владимирович	2008-06-01	УФМС России по Удмуртской Республике	180-029	Frontend-разработчик.
+7706 707070	Орлова Светлана Андреевна	2017-09-18	УФМС России по г. Москве	770-030	Backend-разработчик.
+4702 808080	Сергеев Павел Александрович	2013-02-14	УФМС России по Ставропольскому краю	260-031	Тестировщик.
+8903 909090	Давыдова Ольга Викторовна	2021-07-01	УФМС России по Владимирской обл.	330-032	Аналитик данных.
+7707 000111	Киселев Алексей Петрович	1997-03-15	УФМС России по г. Москве	770-033	IT-специалист.
+3404 223344	Куликова Анна Сергеевна	2016-10-01	УФМС России по Самарской обл.	630-034	UX/UI дизайнер.
+6805 556677	Тимофеев Евгений Николаевич	2019-05-20	УФМС России по Республике Татарстан	160-035	DevOps-инженер.
+7708 889900	Захарова Екатерина Владимировна	2004-12-10	УФМС России по г. Москве	770-036	Юрист.
+3506 112233	Семенов Павел Андреевич	2020-09-01	УФМС России по Пензенской обл.	580-037	Специалист по маркетингу.
+8707 445566	Алексеева Ирина Петровна	2011-04-25	УФМС России по Калининградской обл.	390-038	Бухгалтер.
+7709 778899	Виноградов Сергей Михайлович	2022-01-15	УФМС России по г. Москве	770-039	Специалист технической поддержки.
+4808 001010	Романова Светлана Игоревна	1998-08-08	УФМС России по Астраханской обл.	300-040	PR-менеджер.
+\.
+
+
+--
+-- TOC entry 3159 (class 0 OID 16479)
+-- Dependencies: 208
+-- Data for Name: employee_in_division; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.employee_in_division (employee_id, work_start_date, work_end_date, work_type, division_id, job_name, employee_passport) FROM stdin;
+1	2026-04-10	2030-05-10	основная	5	Backend-разработчик	0206 404040
+2	2026-04-12	2035-04-12	основная	12	DevOps-инженер	0508 345678
+3	2026-04-15	2029-06-20	внутреннее совместительство	3	Frontend-разработчик	0702 445566
+4	2026-04-18	2032-11-15	основная	1	HR-менеджер	1015 123456
+5	2026-04-20	2031-01-01	основная	18	Аналитик данных	1116 789012
+6	2026-04-22	2038-04-22	ГПХ	7	Копирайтер	2301 606060
+7	2026-04-11	2036-12-30	основная	9	UX/UI дизайнер	2500 445566
+8	2026-04-14	2030-04-14	основная	2	Системный администратор	3008 303030
+9	2026-04-19	2034-08-19	внешнее совместительство	15	Бухгалтер	3108 667788
+10	2026-04-23	2040-04-23	основная	4	Руководитель отдела продаж	3404 223344
+11	2026-04-10	2032-05-20	основная	20	Специалист по информационной безопасности	3506 112233
+12	2026-04-13	2028-04-13	основная	8	Менеджер проектов (IT)	3601 778899
+13	2026-04-17	2035-09-17	основная	6	Тестировщик (QA Engineer)	3901 808080
+14	2026-04-21	2033-02-10	внутреннее совместительство	11	Маркетолог	4007 505050
+15	2026-04-11	2040-04-11	основная	14	Финансовый директор	4203 778899
+16	2026-04-16	2030-12-16	основная	19	Юрист	4501 987654
+17	2026-04-20	2035-04-20	основная	10	Администратор базы данных (DBA)	4702 808080
+18	2026-04-23	2027-04-23	ГПХ	13	Курьер (доставка мелких посылок)	4808 001010
+19	2026-04-12	2036-04-12	основная	5	Руководитель отдела R&D	5005 303030
+20	2026-04-15	2031-07-15	основная	2	Специалист технической поддержки	5406 112233
+21	2026-04-19	2032-04-19	основная	17	Контент-менеджер	5509 505050
+22	2026-04-21	2039-01-01	основная	6	Ведущий разработчик	6105 334455
+23	2026-04-10	2034-10-10	основная	3	Специалист по кадровому делопроизводству	6308 606060
+24	2026-04-14	2028-06-14	внутреннее совместительство	1	Ассистент HR	6603 101010
+25	2026-04-17	2035-12-17	основная	4	Менеджер по продажам	6707 202020
+26	2026-04-22	2031-04-22	основная	8	Технический писатель	6805 556677
+27	2026-04-11	2030-04-11	основная	16	PR-менеджер	7701 990011
+28	2026-04-16	2029-04-16	внешнее совместительство	9	Копирайтер	7703 001122
+29	2026-04-19	2033-04-19	основная	12	Специалист по информационной безопасности (сетевая безопасность)	7704 001010
+30	2026-04-23	2034-04-23	основная	7	Специалист по логистике	7705 404040
+31	2026-04-12	2038-04-12	основная	14	Главный бухгалтер	7706 707070
+32	2026-04-15	2036-04-15	основная	3	HR-специалист по подбору персонала	7707 000111
+33	2026-04-18	2027-04-18	ГПХ	11	Стажер в IT-отдел	7707 112233
+34	2026-04-20	2035-04-20	основная	10	Администратор IT-поддержки	7708 889900
+35	2026-04-21	2040-04-21	основная	19	Юрист по договорной работе	7709 707070
+36	2026-04-10	2032-04-10	внутреннее совместительство	2	Тестировщик (QA Engineer)	7709 778899
+37	2026-04-13	2036-04-13	основная	5	Инженер-исследователь	7804 202020
+38	2026-04-17	2040-04-17	основная	15	Руководитель отдела маркетинга	8602 909090
+39	2026-04-21	2030-04-21	основная	8	Проектный менеджер	8707 445566
+40	2026-04-23	2037-04-23	основная	4	Специалист по работе с ключевыми клиентами	8903 909090
+41	2026-04-11	2027-04-11	внутреннее совместительство	2	Стажер в IT-отдел	0206 404040
+42	2026-04-15	2028-04-15	внутреннее совместительство	15	Технический писатель	0508 345678
+43	2026-04-12	2030-04-12	внутреннее совместительство	5	Менеджер проектов (IT)	3404 223344
+44	2026-04-20	2031-04-20	внутреннее совместительство	1	Специалист по внутренним коммуникациям	3506 112233
+45	2026-04-19	2027-04-19	ГПХ	10	Младший тестировщик	3901 808080
+46	2026-04-14	2030-04-14	внутреннее совместительство	13	Специалист по тендерам	5005 303030
+47	2026-04-22	2032-04-22	внутреннее совместительство	3	HR-специалист по обучению и развитию	6105 334455
+48	2026-04-10	2035-04-10	внутреннее совместительство	19	Ассистент отдела закупок	7706 707070
+49	2026-04-23	2038-04-23	внутреннее совместительство	20	Юрист по претензионной работе	7709 707070
+50	2026-04-16	2029-04-16	внутреннее совместительство	7	Ассистент маркетолога	8903 909090
+\.
+
+
+--
+-- TOC entry 3161 (class 0 OID 16505)
+-- Dependencies: 210
+-- Data for Name: employee_in_project; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.employee_in_project (employee_id, order_id, proj_work_act_id, start_date, end_date, act_status, role, role_descript) FROM stdin;
+39	72	3	2026-05-05	\N	приостановлен	Стажёр	1258dd07945010441d9ec809d0b19803
+15	30	4	2026-04-30	\N	выполнен	Рядовой сотрудник	5c5be7c9fbf46cf553fdadb07e3fa72f
+15	2	5	2026-04-20	\N	выполнен	Руководитель проекта	300215360effc5154bd94f02012642cc
+19	44	6	2026-05-10	\N	выполнен	Стажёр	8cca29783b81931b7c8f7a9e53d2612d
+29	98	7	2026-04-30	\N	приостановлен	Стажёр	e8df3f12c596242ce101b9066618550b
+42	9	8	2026-05-30	\N	принят	Стажёр	6ee9645197c4050dba636ea6ab4389e7
+4	98	9	2026-06-14	\N	в работе	Стажёр	03c967af4bcef54c42e0c8eb724cd5eb
+35	5	10	2026-06-09	\N	отклонен	Руководитель проекта	134ecad7c2c56b36ff40c02263dfb29a
+38	95	11	2026-06-14	\N	принят	Руководитель проекта	4b8fda8debcc24f8ee36ad2a8d161a15
+4	84	12	2026-05-30	\N	в работе	Руководитель проекта	03fc1c88127814e5f7bec2edec83be95
+40	10	13	2026-04-10	\N	принят	Стажёр	c1348c047aaa35b4a40b91075d24f5bb
+22	59	14	2026-04-25	\N	принят	Рядовой сотрудник	61d9982a2d3277a7499709740d86336d
+7	79	15	2026-06-14	\N	отклонен	Руководитель проекта	a137171ed88d8b88a1f9fb447fd2822e
+9	66	16	2026-06-04	\N	в работе	Рядовой сотрудник	fc71adf195e635bdeb3c89664d010f12
+33	98	17	2026-04-30	\N	отклонен	Руководитель проекта	66ae8867fcf82bc59019a54a4ac08b82
+50	48	18	2026-04-25	\N	приостановлен	Стажёр	d2bf4e1604c360a9c2b6d80edfb9ffae
+15	9	19	2026-06-04	\N	принят	Рядовой сотрудник	b48fd05449f041300f1deb5d2feddc05
+14	70	20	2026-05-25	\N	приостановлен	Рядовой сотрудник	cfa7a8dd2a84d8f13cf5325da59f786d
+2	46	21	2026-04-15	\N	принят	Стажёр	bdedb41d65fd2ee408df414f56415059
+48	31	22	2026-05-25	\N	приостановлен	Стажёр	a54e6d78cf30cadc33ece58f1a6e0556
+3	80	23	2026-05-20	\N	принят	Руководитель проекта	a1927ceceea859027fa308231c3eacc2
+46	90	24	2026-04-15	\N	выполнен	Руководитель проекта	83d7fde7f40cf6b285b869dac4fa9f38
+44	51	25	2026-05-30	\N	приостановлен	Руководитель проекта	2fe301c32b3c003e50b81e58652eff5b
+47	61	26	2026-04-25	\N	в работе	Рядовой сотрудник	5fb2c23c0fcc5b7eb82b3571e38a1397
+23	78	27	2026-04-10	\N	принят	Руководитель проекта	5c64c2d7cd7b4c0d95089592a0bebb42
+28	100	28	2026-04-15	\N	в работе	Стажёр	e058b3764fba35b8fb66d0a65e9fb954
+37	45	29	2026-06-14	\N	приостановлен	Рядовой сотрудник	5d0dd6e78661b3235996a7feb7ccb573
+46	89	30	2026-05-20	\N	отклонен	Руководитель проекта	e9d793312aed5e7ec034db6e5b93f393
+27	84	31	2026-04-15	\N	в работе	Руководитель проекта	2db8d2cd712417273f51ce38b23d5fde
+19	85	32	2026-04-25	\N	в работе	Руководитель проекта	34e70e82526569f68f941b09c3732248
+35	76	33	2026-05-20	\N	в работе	Стажёр	f2cc4e3a3efb5b8a707dbb7f38fe81f7
+18	6	34	2026-05-05	\N	приостановлен	Стажёр	d328eb63cd2e944c1dcac6bb68b03541
+22	46	35	2026-04-15	\N	принят	Стажёр	2e7214ad6aa02fe2f9104967c4c8e89e
+24	67	36	2026-05-25	\N	в работе	Стажёр	7c49be7a0a725a4f8e23b4c46adae1d8
+13	100	37	2026-05-15	\N	принят	Руководитель проекта	0038e0a0693d1ff3bee5ececa17ec55c
+11	87	38	2026-05-30	\N	отклонен	Рядовой сотрудник	b77c601faba0d5434e78d50f49ddc664
+17	55	39	2026-05-15	\N	отклонен	Стажёр	c4e015813441492bffba21a816d01717
+21	30	40	2026-04-20	\N	в работе	Рядовой сотрудник	c773aa552c39ec8712dcdc7944674091
+37	93	41	2026-05-20	\N	выполнен	Стажёр	58deeca60ada8bf167787647ff2d4484
+35	81	42	2026-06-14	\N	приостановлен	Руководитель проекта	28367657909a84fd1c524c4ffa6a3db3
+36	87	43	2026-04-10	\N	в работе	Руководитель проекта	85379a77eec0689b1c45640f99da76ad
+47	58	44	2026-05-15	\N	принят	Руководитель проекта	6ffa37ec4f96404ebb48c77fe801c3fb
+10	76	45	2026-06-14	\N	принят	Стажёр	c33e9fb3081359abdc3bdf0fb880e014
+40	82	46	2026-05-25	\N	приостановлен	Рядовой сотрудник	99ca6bdde1fad41d45dd92393447ec11
+38	43	47	2026-04-15	\N	отклонен	Руководитель проекта	ab1792c9ad6217fa0b042728bbda5787
+37	89	48	2026-05-05	\N	отклонен	Рядовой сотрудник	55e72a45e65ae4f772cd860ce6bfbe87
+29	64	49	2026-04-25	\N	в работе	Руководитель проекта	0bf27aabc6d8178b7af74937cd37cf8f
+35	82	50	2026-05-15	\N	выполнен	Рядовой сотрудник	9ee4d035fe2b9cb148cf056679c03c4c
+20	21	51	2026-05-25	\N	приостановлен	Руководитель проекта	52d6a86af5e2c144dd1e32e5944219be
+44	39	52	2026-05-30	\N	принят	Рядовой сотрудник	b40673ab9ffc2bb1f32f9a2d99c3e3a4
+32	11	53	2026-06-04	\N	в работе	Рядовой сотрудник	ca004f3ec530eaa91c5624d27ecf3ad3
+17	96	54	2026-06-09	\N	приостановлен	Руководитель проекта	415940bd06e7cc4c77d7d81921145ba4
+1	85	55	2026-05-25	\N	отклонен	Стажёр	3880dd7d1ca9b443f92ce87efa6b27d9
+14	15	56	2026-05-05	\N	отклонен	Стажёр	68705c6542bbb7202494436ddab5ea41
+10	22	57	2026-05-05	\N	в работе	Стажёр	d39a6c2e83f29f23bff3efeadae30004
+10	23	58	2026-05-30	\N	отклонен	Руководитель проекта	ae2e45f393d56e2d09a4c0a05102cd9f
+23	67	59	2026-05-10	\N	отклонен	Рядовой сотрудник	14f822231658d2d536b8fbdb7c02a6e7
+19	27	60	2026-05-15	\N	выполнен	Руководитель проекта	30baccc4cd9a5324fe52436881f72a1d
+11	100	61	2026-06-14	\N	в работе	Стажёр	519697ffb9dfc3d8d4bcb2415f30d467
+15	10	62	2026-05-10	\N	отклонен	Стажёр	1d5ec1eb7ab2643ae3247bda3e752d05
+23	62	63	2026-05-20	\N	выполнен	Рядовой сотрудник	03daa5fbadf69838f8f8315435fb4236
+16	8	64	2026-04-30	\N	принят	Руководитель проекта	9afa1beb8d800c45144d47bd0ddf4b22
+35	100	65	2026-05-25	\N	принят	Стажёр	41cb7df7c64a34a9a67db78c3653ab9e
+47	13	66	2026-06-09	\N	приостановлен	Рядовой сотрудник	52017b4b22fb5ccbce2c0b110464d8b9
+43	77	67	2026-04-15	\N	выполнен	Рядовой сотрудник	2bf78613a2f5a3a11a5a8dfc7080fa08
+42	24	68	2026-05-20	\N	в работе	Рядовой сотрудник	0103d32d745e4ea81a8bb8fe5f13d454
+21	5	69	2026-05-25	\N	отклонен	Стажёр	3d990e82457270caf2fb20e097a95b5c
+37	48	70	2026-05-15	\N	принят	Руководитель проекта	b004285fd9442dd7c191b991bc0d0440
+45	6	71	2026-06-09	\N	в работе	Стажёр	742dd0c0da661692cd8f61ca7a8d81e8
+28	3	72	2026-05-10	\N	приостановлен	Рядовой сотрудник	fcb81707a4ff939c45d978d4e2d86409
+30	13	73	2026-05-25	\N	принят	Руководитель проекта	159e2da7f8e601c62e9e9ff159ddaccb
+2	43	74	2026-04-10	\N	принят	Рядовой сотрудник	8ca4644acb99e0e3b438428ee01c8dc4
+41	91	75	2026-05-20	\N	принят	Рядовой сотрудник	94678c6692189617158d94d49661b72e
+45	6	76	2026-05-10	\N	отклонен	Рядовой сотрудник	5af3f7b830450432467c105d280b190c
+8	49	77	2026-06-04	\N	выполнен	Стажёр	02c4eac88dbe5626432a9363a872e017
+18	79	78	2026-04-15	\N	в работе	Рядовой сотрудник	74036502c5ded6df3627b2b18c4b0a8f
+15	69	79	2026-04-25	\N	приостановлен	Стажёр	4cf4af37e3d504b56e54badb5842861e
+30	93	80	2026-05-10	\N	выполнен	Рядовой сотрудник	983040ed4dd0ef10529ca960d8fb90d7
+33	50	81	2026-05-10	\N	принят	Стажёр	d72795bed012aaf26a3f71e33f4c0281
+38	9	82	2026-04-15	\N	отклонен	Руководитель проекта	04ed38097ba510aef7cb8b87a942417e
+26	4	83	2026-04-25	\N	в работе	Руководитель проекта	8ef0d4752f9d6ce8aca4a7d26f3f240b
+45	92	84	2026-05-20	\N	принят	Руководитель проекта	cbbf6a70b70c5435356b8a08d0ca21be
+47	63	85	2026-04-15	\N	в работе	Руководитель проекта	b5a373167e5ce8e8abeaa49d4e9fddb4
+33	27	86	2026-06-04	\N	приостановлен	Руководитель проекта	781d846bd6caea2310eae9657bb3ae7a
+25	84	87	2026-06-04	\N	выполнен	Рядовой сотрудник	496c481d46763210a8b2e370ab9b93ba
+46	14	88	2026-06-14	\N	принят	Рядовой сотрудник	1fe36423cbfbd84baf68eb5a7b76b16f
+24	91	89	2026-05-05	\N	приостановлен	Руководитель проекта	465624c4bca8d955d37fff380db55655
+16	13	90	2026-05-20	\N	приостановлен	Руководитель проекта	e125004c58096b59fd827bbe5dd18baf
+49	23	91	2026-06-14	\N	принят	Рядовой сотрудник	4b0171f51b40a91385249633058ca4b8
+12	11	92	2026-06-14	\N	выполнен	Руководитель проекта	42ec5c0cce4f4bd92dce6208b2eb8959
+1	17	93	2026-04-15	\N	отклонен	Рядовой сотрудник	e704a569d0d6dec80cead6773b71b990
+45	61	94	2026-06-09	\N	в работе	Рядовой сотрудник	7da2c6af469ba1181441f024c9da5e3d
+22	2	95	2026-06-14	\N	в работе	Руководитель проекта	0eadb3b527f6bb58908320c807fbdf0b
+1	52	96	2026-04-15	\N	в работе	Стажёр	a9a100ce30d5c935223524bec7ab738d
+31	49	97	2026-04-25	\N	в работе	Руководитель проекта	796014b45a81525461e16f246b2a3a47
+49	77	98	2026-05-20	\N	приостановлен	Руководитель проекта	96fd361cd87a823a69269bcf2b5435e8
+50	66	99	2026-06-04	\N	выполнен	Руководитель проекта	2d548c9fdbe3200ff7cbb298324bcd64
+4	62	100	2026-05-25	\N	выполнен	Стажёр	2d35c8bc898173656e4c3673bb6f3810
+25	39	101	2026-05-30	\N	отклонен	Рядовой сотрудник	9bd4f6712cca7cd83465d2135129e8c1
+39	23	102	2026-06-09	\N	выполнен	Стажёр	522fc7740671e061ff7f4a1eba40059d
+24	69	103	2026-05-20	\N	отклонен	Руководитель проекта	c2902d700036416b0ee4e9215941eddb
+49	46	104	2026-06-09	\N	выполнен	Рядовой сотрудник	2996adb76e42994b043ad05c9be5d866
+16	88	105	2026-06-09	\N	приостановлен	Руководитель проекта	764be8f6ff2fc6b72619a0e76d50a21c
+46	91	106	2026-05-10	\N	выполнен	Руководитель проекта	3abe78646c61f0f2233cb701689fceca
+31	29	107	2026-05-05	\N	принят	Стажёр	dcfc1dd0d05f7af4d0647da61056e4a0
+7	39	108	2026-06-04	\N	принят	Стажёр	15afab365af178728d0055fc9d0e7f74
+47	8	109	2026-05-20	\N	приостановлен	Руководитель проекта	b71a01509aa35ad9fdf68c3f98ec9cb3
+32	7	110	2026-05-20	\N	в работе	Рядовой сотрудник	41554e99f2101277d54a335bad65990f
+30	78	111	2026-05-10	\N	в работе	Руководитель проекта	fcb667f42313e4a1b85ee8b0b792cf41
+12	92	112	2026-06-09	\N	отклонен	Руководитель проекта	c31a5af80ecbad27e70b7d016c1fbc6b
+17	1	113	2026-06-09	\N	выполнен	Стажёр	d1e5b35d6cdbf85e4125debfd10ed08e
+19	72	114	2026-05-30	\N	в работе	Стажёр	ffa080d2d5ea84162258da52abfdd511
+48	32	115	2026-05-15	\N	отклонен	Стажёр	286531bead318b92475c343278b0910b
+22	50	116	2026-05-05	\N	в работе	Рядовой сотрудник	da03a4571e312156287cf2d90bffbc21
+16	76	117	2026-05-15	\N	в работе	Стажёр	121002eaf3976027100a29dbdea74a7b
+22	94	118	2026-05-15	\N	приостановлен	Руководитель проекта	25fed06d980811e82cb556df9fa3194e
+19	19	119	2026-04-25	\N	выполнен	Рядовой сотрудник	df5e5c10dd9c0ed96d59e1c2feb2c727
+12	82	120	2026-04-25	\N	принят	Рядовой сотрудник	70502143065b4d7506d1f1c63026b838
+4	18	121	2026-04-25	\N	отклонен	Руководитель проекта	5808d9da2876f1d2a8c0b40cc8402ffa
+1	91	122	2026-04-15	\N	выполнен	Рядовой сотрудник	8d7a1c65d1bb98767f09d99a30067ba1
+\.
+
+
+--
+-- TOC entry 3165 (class 0 OID 16611)
+-- Dependencies: 214
+-- Data for Name: employee_in_task; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.employee_in_task (employee_task_id, task_id, task_payment, task_compl_status, proj_work_act_id) FROM stdin;
+1	137	835808.00	выполнен	102
+2	131	653010.00	выполнен	73
+3	79	617277.00	принят	32
+4	51	395569.00	в работе	57
+5	44	448960.00	приостановлен	11
+6	94	335919.00	приостановлен	44
+7	10	973966.00	приостановлен	7
+8	66	737849.00	выполнен	116
+9	124	966579.00	принят	109
+10	143	256090.00	принят	57
+11	110	888317.00	в работе	25
+12	92	654115.00	принят	53
+13	84	882154.00	выполнен	108
+14	38	608010.00	приостановлен	7
+15	117	878864.00	приостановлен	79
+16	140	265004.00	приостановлен	67
+17	82	767815.00	приостановлен	116
+18	117	706722.00	принят	90
+19	125	519055.00	отклонен	53
+20	116	104911.00	принят	108
+21	70	734400.00	приостановлен	47
+22	124	151328.00	принят	49
+23	84	352293.00	принят	26
+24	116	293697.00	приостановлен	60
+25	99	134485.00	отклонен	45
+26	117	416045.00	приостановлен	36
+27	71	122230.00	принят	5
+28	106	864474.00	в работе	52
+29	29	465437.00	приостановлен	90
+30	19	138338.00	в работе	116
+31	112	900333.00	в работе	38
+32	84	141979.00	принят	23
+33	137	679510.00	приостановлен	38
+34	2	623674.00	приостановлен	47
+35	9	942764.00	отклонен	43
+36	66	316077.00	принят	3
+37	97	358013.00	выполнен	3
+38	138	336418.00	отклонен	27
+39	109	358592.00	в работе	26
+40	17	604932.00	приостановлен	101
+41	137	456582.00	выполнен	14
+42	97	396396.00	отклонен	22
+43	101	921386.00	принят	65
+44	51	652368.00	приостановлен	16
+45	128	578592.00	выполнен	98
+46	87	350686.00	приостановлен	93
+47	8	606211.00	выполнен	84
+48	48	53944.00	приостановлен	121
+49	41	983742.00	в работе	14
+50	137	740128.00	выполнен	17
+51	72	684044.00	выполнен	45
+52	122	156297.00	в работе	47
+53	143	788829.00	приостановлен	112
+54	66	230115.00	выполнен	66
+55	43	455677.00	выполнен	50
+56	130	524261.00	выполнен	112
+57	94	67763.00	отклонен	71
+58	139	325178.00	отклонен	97
+59	25	957093.00	отклонен	84
+60	20	720305.00	отклонен	24
+61	50	807834.00	отклонен	36
+62	45	936913.00	принят	93
+63	22	218397.00	приостановлен	16
+64	40	290825.00	отклонен	17
+65	149	929289.00	отклонен	38
+66	7	324767.00	в работе	62
+67	129	908274.00	отклонен	22
+68	123	103803.00	отклонен	115
+69	60	825215.00	в работе	87
+70	102	179210.00	выполнен	4
+71	54	446069.00	выполнен	61
+72	105	432392.00	выполнен	100
+73	7	128786.00	в работе	21
+74	14	866850.00	в работе	53
+75	14	913462.00	принят	77
+76	10	428928.00	в работе	25
+77	65	664901.00	выполнен	116
+78	27	106995.00	приостановлен	120
+79	116	347819.00	в работе	86
+80	27	883928.00	приостановлен	59
+81	113	793238.00	в работе	39
+82	6	599204.00	принят	70
+83	29	249206.00	выполнен	84
+84	111	414585.00	отклонен	48
+85	21	599752.00	принят	84
+86	93	371364.00	отклонен	32
+87	38	383133.00	выполнен	81
+88	77	477296.00	приостановлен	41
+89	134	643660.00	выполнен	63
+90	100	867807.00	в работе	20
+91	115	211041.00	выполнен	11
+92	70	848765.00	приостановлен	70
+93	43	216940.00	в работе	88
+94	46	47028.00	в работе	105
+95	122	530562.00	отклонен	10
+96	90	470205.00	выполнен	119
+97	144	323366.00	в работе	113
+98	93	8494.00	в работе	105
+99	95	157594.00	отклонен	20
+100	38	799151.00	выполнен	83
+101	145	834122.00	принят	15
+102	5	918114.00	в работе	115
+103	73	732211.00	в работе	3
+104	83	63463.00	отклонен	109
+105	141	527029.00	приостановлен	16
+106	65	251888.00	в работе	61
+107	116	980452.00	принят	16
+108	34	61995.00	приостановлен	96
+109	2	966389.00	принят	68
+110	36	627242.00	приостановлен	4
+111	72	14007.00	принят	56
+112	15	406498.00	в работе	14
+113	67	430524.00	приостановлен	67
+114	146	741631.00	выполнен	65
+115	114	499833.00	в работе	59
+116	127	349284.00	приостановлен	109
+117	5	343993.00	приостановлен	83
+118	134	187885.00	выполнен	52
+119	9	781751.00	в работе	29
+120	128	591161.00	приостановлен	85
+121	119	921549.00	принят	19
+122	129	165876.00	отклонен	11
+123	39	286021.00	в работе	20
+124	46	714193.00	приостановлен	95
+125	85	980861.00	отклонен	74
+126	77	360008.00	отклонен	49
+127	105	792955.00	принят	118
+128	127	133812.00	принят	71
+129	57	131024.00	в работе	72
+130	43	502070.00	отклонен	90
+131	146	406590.00	принят	104
+132	57	714800.00	выполнен	33
+133	130	793892.00	приостановлен	44
+134	146	388993.00	принят	39
+135	148	304446.00	выполнен	62
+136	136	445691.00	в работе	4
+137	148	765277.00	принят	58
+138	123	375018.00	в работе	95
+139	88	599410.00	в работе	16
+140	65	816104.00	приостановлен	78
+141	127	273026.00	в работе	75
+142	58	607840.00	принят	68
+143	115	895769.00	выполнен	23
+144	55	791562.00	приостановлен	53
+145	69	739013.00	приостановлен	30
+146	90	528225.00	выполнен	41
+147	40	371432.00	приостановлен	73
+148	141	530307.00	в работе	59
+149	90	702100.00	выполнен	38
+150	115	402655.00	отклонен	65
+151	9	468361.00	выполнен	86
+152	83	236649.00	в работе	112
+153	37	609053.00	выполнен	8
+154	78	908523.00	выполнен	108
+155	16	523253.00	приостановлен	122
+156	14	795389.00	выполнен	69
+157	15	430491.00	выполнен	63
+158	128	41412.00	выполнен	39
+159	35	920502.00	отклонен	105
+160	93	81838.00	принят	23
+161	50	308866.00	отклонен	46
+162	125	863978.00	приостановлен	88
+163	21	599465.00	принят	37
+164	145	91959.00	приостановлен	34
+165	72	695526.00	выполнен	28
+166	91	865999.00	приостановлен	60
+167	133	998066.00	выполнен	94
+168	26	287179.00	принят	6
+169	10	683878.00	приостановлен	59
+170	105	955076.00	приостановлен	88
+171	43	764784.00	приостановлен	70
+172	114	798387.00	отклонен	3
+173	76	495689.00	выполнен	46
+174	138	347556.00	принят	68
+175	10	821029.00	выполнен	8
+176	38	383655.00	отклонен	47
+177	45	327561.00	приостановлен	90
+178	25	879191.00	выполнен	10
+179	128	605963.00	приостановлен	16
+180	88	284219.00	приостановлен	24
+181	89	14596.00	в работе	97
+182	5	505070.00	выполнен	69
+183	23	585777.00	выполнен	54
+184	14	373237.00	в работе	93
+185	78	218303.00	в работе	98
+186	14	8341.00	принят	46
+187	3	359477.00	приостановлен	38
+188	54	241872.00	в работе	20
+189	8	95758.00	выполнен	56
+190	14	187279.00	приостановлен	41
+191	9	943183.00	выполнен	46
+192	28	117220.00	выполнен	44
+193	33	657063.00	отклонен	58
+194	82	40211.00	принят	79
+195	128	65003.00	принят	56
+196	33	756612.00	отклонен	85
+197	129	268128.00	принят	63
+198	68	717835.00	приостановлен	99
+199	22	552477.00	отклонен	11
+200	35	712841.00	приостановлен	73
+\.
+
+
+--
+-- TOC entry 3154 (class 0 OID 16438)
+-- Dependencies: 203
+-- Data for Name: order; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme."order" (client_id, order_id, oredr_status, project_name, project_start, project_end_exp, project_end_real, delay_reason) FROM stdin;
+1	1	в работе	Разработка модуля авторизации v1.2	2026-04-10	2026-09-10	\N	\N
+5	2	принят	Внедрение CRM системы "Клиент+".	2026-04-20	2027-04-20	\N	\N
+10	3	в работе	Реализация онлайн-оплаты для сайта	2026-05-01	2026-11-01	\N	\N
+15	4	отклонен	Исследование рынка новых приложений	2026-05-15	2026-11-15	\N	Рынок слишком конкурентен.
+20	5	приостановлен	Разработка мобильной версии приложения	2026-06-01	2027-06-01	\N	Ожидание доработки дизайна.
+25	6	в работе	Создание модуля отчетности	2026-06-10	2027-03-10	\N	\N
+30	7	принят	Обновление корпоративного сайта v2	2026-07-01	2026-10-01	\N	\N
+35	8	в работе	Интеграция с внешними сервисами	2026-07-15	2027-01-15	\N	\N
+40	9	отклонен	Разработка игры "Космические Войны"	2026-08-01	2026-12-01	\N	Не соответствует интересам целевой аудитории.
+45	10	приостановлен	Автоматизация документооборота	2026-08-10	2027-02-10	\N	Необходима доработка ТЗ.
+50	11	в работе	Реализация функции "Умный поиск" v2	2026-09-01	2027-05-01	\N	\N
+1	12	принят	Оптимизация базы данных	2026-09-15	2027-03-15	\N	\N
+2	13	в работе	Развертывание нового кластера серверов	2026-10-01	2027-04-01	\N	\N
+3	14	отклонен	Разработка обучающей платформы	2026-10-10	2028-10-10	\N	Изменение приоритетов компании.
+4	15	приостановлен	Улучшение пользовательского интерфейса v3	2026-11-01	2027-05-01	\N	Ожидание обратной связи.
+5	16	в работе	Реализация модуля модерации контента	2026-11-15	2027-08-15	\N	\N
+6	17	принят	Подключение к новому платежному шлюзу	2026-12-01	2027-03-01	\N	\N
+7	18	в работе	Тестирование производительности API Gateway	2026-12-10	2027-03-10	\N	\N
+8	19	отклонен	Разработка игры "Космические Войны v2"	2027-01-01	2029-01-01	\N	Неудачная концепция.
+9	20	приостановлен	Оптимизация SEO-стратегии 2027-2028	2027-01-15	2027-07-15	\N	Ожидание результатов аудита.
+10	21	в работе	Создание библиотеки UI компонентов v2	2027-02-01	2027-11-01	\N	\N
+11	22	принят	Анализ данных пользователей v2	2026-04-15	2026-09-15	\N	\N
+12	23	в работе	Интеграция системы оповещений v2	2026-05-05	2026-08-05	\N	\N
+13	24	отклонен	Разработка игры "Космические Герои"	2027-02-10	2029-02-10	\N	Неудачное тестирование.
+14	25	приостановлен	Перенос данных на новые сервера v2	2026-11-01	2027-02-01	\N	Ожидание оборудования.
+15	26	в работе	Разработка модуля отчетности v3	2026-07-01	2027-03-01	\N	\N
+16	27	принят	Создание API для партнеров v2	2026-08-01	2026-11-01	\N	\N
+17	28	в работе	Тестирование безопасности системы v4	2026-09-01	2026-12-01	\N	\N
+18	29	отклонен	Система управления контентом v3	2027-03-01	2028-03-01	\N	Изменились требования.
+19	30	приостановлен	Локализация продукта на испанский язык v2	2026-10-01	2027-01-01	\N	Ожидание бюджета.
+20	31	в работе	Разработка модуля чата v3	2026-10-15	2027-04-15	\N	\N
+21	32	принят	Создание интерактивных форм v2	2026-07-01	2026-11-01	\N	\N
+22	33	в работе	Интеграция с системой ERP v2	2026-09-01	2027-03-01	\N	\N
+23	34	отклонен	VR-приложение для обучения v2	2027-04-01	2029-04-01	\N	Высокая стоимость.
+24	35	приостановлен	Оптимизация работы с базами данных v2	2026-12-01	2027-03-01	\N	Ожидание тестирования.
+25	36	в работе	Разработка модуля статистики v3	2027-01-01	2027-07-01	\N	\N
+26	37	принят	Создание интерактивных опросов v2	2026-08-01	2026-12-01	\N	\N
+27	38	в работе	Разработка рекомендательного движка v2	2026-10-01	2027-04-01	\N	\N
+28	39	отклонен	Разработка игры "Космические пираты"	2027-05-01	2029-05-01	\N	Недостаточная поддержка пользователей.
+29	40	приостановлен	Интеграция с социальной сетью X v2	2026-11-15	2027-03-15	\N	Изменение API.
+30	41	в работе	Разработка модуля уведомлений v3	2026-12-01	2027-03-01	\N	\N
+31	42	принят	Создание интерактивных опросов v3	2027-01-01	2027-05-01	\N	\N
+32	43	в работе	Тестирование пользовательского опыта (UX) v2	2027-01-10	2027-04-10	\N	\N
+33	44	отклонен	Разработка игры "Галактические Империи"	2027-06-01	2029-06-01	\N	Несоответствие ожиданиям целевой аудитории.
+34	45	приостановлен	Локализация продукта на китайский язык v2	2027-02-01	2027-06-01	\N	Задержка с поставкой контента.
+35	46	в работе	Разработка модуля синхронизации v2	2027-03-01	2027-09-01	\N	\N
+36	47	принят	Создание интерактивных презентаций v2	2026-09-01	2027-01-01	\N	\N
+37	48	в работе	Интеграция с платежным шлюзом v2	2026-11-01	2027-05-01	\N	\N
+38	49	отклонен	Разработка игры "Звездный патруль v2"	2027-07-01	2029-07-01	\N	Невыгодные условия партнерства.
+39	50	приостановлен	Оптимизация скорости загрузки страниц v2	2027-01-15	2027-07-15	\N	Зависимость от сторонних сервисов.
+40	51	в работе	Разработка модуля управления пользователями v2	2027-04-01	2027-10-01	\N	\N
+41	52	принят	Создание интерактивных руководств v2	2026-10-01	2027-02-01	\N	\N
+42	53	в работе	Тестирование производительности API v2	2027-02-01	2027-05-01	\N	\N
+43	54	отклонен	Разработка игры "Киберпанк Город v2"	2027-08-01	2030-08-01	\N	Изменение рынка.
+44	55	приостановлен	Локализация на немецкий язык v2	2027-03-01	2027-07-01	\N	Ожидание утверждения.
+45	56	в работе	Разработка модуля обратной связи v2	2027-05-01	2027-11-01	\N	\N
+46	57	принят	Создание интерактивных калькуляторов v2	2026-11-01	2027-03-01	\N	\N
+47	58	в работе	Интеграция с системой аналитики v2	2027-04-01	2027-08-01	\N	\N
+48	59	отклонен	Разработка игры "Мегаполис v2"	2027-09-01	2030-09-01	\N	Слишком амбициозно.
+49	60	приостановлен	Локализация на французский язык v2	2027-04-15	2027-08-15	\N	Ожидание утверждения.
+50	61	в работе	Разработка модуля управления контентом v2	2027-06-01	2027-12-01	\N	\N
+1	62	принят	Создание интерактивных руководств для разработчиков v2	2026-10-01	2027-02-01	\N	\N
+2	63	в работе	Тестирование масштабируемости системы v2	2027-05-01	2027-08-01	\N	\N
+3	64	отклонен	Разработка игры "Космические исследователи v2"	2027-10-01	2030-10-01	\N	Недостаточное финансирование.
+4	65	приостановлен	Локализация на итальянский язык v2	2027-06-01	2027-10-01	\N	Ожидание терминологии.
+5	66	в работе	Интеграция с системой ERP v3	2027-07-01	2028-01-01	\N	\N
+6	67	принят	Создание интерактивных инструкций v2	2027-01-01	2027-05-01	\N	\N
+7	68	в работе	Тестирование безопасности API v2	2027-04-01	2027-07-01	\N	\N
+8	69	отклонен	Разработка игры "Галактический Завоеватель v2"	2027-11-01	2030-11-01	\N	Неудачная концепция.
+9	70	приостановлен	Локализация на португальский язык v2	2027-05-01	2027-09-01	\N	Ожидание перевода.
+10	71	в работе	Разработка модуля управления запасами v2	2027-06-01	2028-01-01	\N	\N
+11	72	принят	Создание интерактивных брошюр v2	2027-02-01	2027-04-01	\N	\N
+12	73	в работе	Тестирование безопасности сети v2	2027-05-01	2027-08-01	\N	\N
+13	74	отклонен	Разработка игры "Звездный патруль v2"	2027-12-01	2030-12-01	\N	Неясные цели.
+14	75	приостановлен	Локализация на испанский язык v2	2027-06-15	2027-10-15	\N	Ожидание утверждения.
+15	76	в работе	Разработка модуля управления проектами	2027-07-01	2028-01-01	\N	\N
+16	77	принят	Создание интерактивных инструкций по установке	2027-03-01	2027-05-01	\N	\N
+17	78	в работе	Интеграция с системой управления проектами	2027-05-01	2027-08-01	\N	\N
+18	79	отклонен	Разработка игры "Звездные Воины v3"	2027-12-01	2030-12-01	\N	Неудачная маркетинговая стратегия.
+19	80	приостановлен	Локализация на китайский язык v2	2027-06-15	2027-10-15	\N	Ожидание финализации.
+20	81	в работе	Разработка модуля управления маркетингом	2027-07-01	2028-01-01	\N	\N
+21	82	принят	Создание интерактивных таблиц	2027-03-01	2027-05-01	\N	\N
+22	83	в работе	Тестирование интеграции с внешними системами	2027-05-01	2027-08-01	\N	\N
+23	84	отклонен	Разработка игры "Галактическая Оборона"	2027-12-01	2030-12-01	\N	Недостаток инноваций.
+24	85	приостановлен	Локализация на немецкий язык v2	2027-07-01	2027-11-01	\N	Ожидание утверждения.
+25	86	в работе	Разработка модуля управления аналитикой v2	2027-08-01	2028-02-01	\N	\N
+26	87	принят	Создание интерактивных инфографик v2	2027-04-01	2027-06-01	\N	\N
+27	88	в работе	Тестирование стабильности системы v2	2027-06-01	2027-09-01	\N	\N
+28	89	отклонен	Разработка игры "Космические рейдеры"	2027-12-01	2030-12-01	\N	Неудачная игровая концепция.
+29	90	приостановлен	Локализация на испанский язык v2	2027-07-01	2027-11-01	\N	Ожидание утверждения.
+30	91	в работе	Разработка модуля управления данными	2027-08-01	2028-02-01	\N	\N
+31	92	принят	Создание интерактивных руководств пользователя	2027-04-01	2027-06-01	\N	\N
+32	93	в работе	Тестирование производительности системы	2027-06-01	2027-09-01	\N	\N
+33	94	отклонен	Разработка игры "Космическая одиссея v2"	2027-12-01	2030-12-01	\N	Непривлекательная механика.
+34	95	приостановлен	Локализация на китайский язык v2	2027-07-15	2027-11-15	\N	Ожидание финализации.
+35	96	в работе	Разработка модуля управления качеством	2027-08-01	2028-02-01	\N	\N
+36	97	принят	Создание интерактивных графиков v2	2027-04-01	2027-06-01	\N	\N
+37	98	в работе	Тестирование безопасности мобильных приложений v2	2027-06-01	2027-09-01	\N	\N
+38	99	отклонен	Разработка игры "Галактические Войны v3"	2028-01-01	2031-01-01	\N	Неудачная игровая механика.
+39	100	приостановлен	Локализация на русский язык v2	2028-01-10	2028-04-10	\N	Ожидание перевода.
+\.
+
+
+--
+-- TOC entry 3152 (class 0 OID 16413)
+-- Dependencies: 201
+-- Data for Name: position; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme."position" (salary, job_name, job_description, rate_num) FROM stdin;
+68000.00	Специалист по работе с ключевыми клиентами	Развитие и поддержание отношений с самыми важными клиентами компании, выполнение индивидуальных планов продаж.	1.00
+58000.00	Аналитик данных	Сбор, обработка и анализ данных для поддержки принятия управленческих решений. Построение отчетов и дашбордов.	1.00
+72000.00	Backend-разработчик	Разработка серверной части приложений, работа с базами данных, API.	1.00
+70000.00	Frontend-разработчик	Разработка пользовательских интерфейсов, верстка, интеграция с backend-частью.	1.00
+48000.00	Junior Frontend-разработчик	Помощь в разработке пользовательских интерфейсов под руководством старшего разработчика.	0.75
+85000.00	DevOps-инженер	Автоматизация процессов разработки, развертывания и эксплуатации ПО. Управление облачной инфраструктурой.	1.00
+63000.00	Специалист по информационной безопасности	Обеспечение защиты информационных систем и данных компании от угроз.	1.00
+45000.00	Стажер в IT-отдел	Помощь IT-специалистам в решении повседневных задач, обучение основам администрирования и поддержки.	0.50
+55000.00	Специалист по работе с поставщиками	Поиск и выбор поставщиков, заключение договоров, контроль поставок и оплат.	1.00
+35000.00	Ассистент отдела закупок	Подготовка документов для закупок, мониторинг цен, помощь в обработке заказов.	0.75
+60000.00	Специалист по логистике	Планирование и организация грузоперевозок, оптимизация маршрутов, контроль складских остатков.	1.00
+40000.00	Ассистент логиста	Подготовка транспортных документов, отслеживание грузов, помощь в складских операциях.	0.50
+78000.00	UX/UI дизайнер	Разработка пользовательских интерфейсов с учетом потребностей пользователей и бизнес-целей.	1.00
+42000.00	Junior UX/UI дизайнер	Создание прототипов и макетов интерфейсов под руководством опытного дизайнера.	0.75
+100000.00	Руководитель отдела R&D	Организация исследований и разработок новых продуктов и технологий, формирование стратегии инноваций.	1.00
+75000.00	Инженер-исследователь	Проведение научных и технических исследований, разработка новых решений.	1.00
+50000.00	Технический писатель	Создание технической документации, инструкций, руководств пользователя.	1.00
+82000.00	PR-менеджер	Формирование позитивного имиджа компании, взаимодействие со СМИ, организация публичных мероприятий.	1.00
+55000.00	Контент-менеджер	Создание и публикация контента для различных платформ (сайт, соцсети, блоги).	1.00
+65000.00	HR-специалист по подбору персонала	Поиск и привлечение кандидатов на открытые вакансии, проведение первичных собеседований.	1.00
+52000.00	HR-специалист по обучению и развитию	Разработка и организация программ обучения сотрудников, оценка эффективности обучения.	1.00
+38000.00	Специалист по кадровому делопроизводству	Ведение кадрового учета, оформление трудовых договоров, отпусков, больничных.	1.00
+70000.00	Юрист по договорной работе	Разработка и согласование договоров, экспертиза юридической документации.	1.00
+50000.00	Юрист по претензионной работе	Работа с претензиями, подготовка исков, представление интересов компании в суде.	1.00
+40000.00	Юрисконсульт (часть ставки)	Консультирование по общим правовым вопросам, подготовка небольших документов.	0.50
+58000.00	Специалист по охране труда	Обеспечение соблюдения норм охраны труда, проведение инструктажей, оценка рисков.	1.00
+25000.00	Уборщик офисных помещений	Поддержание чистоты и порядка в офисе.	0.25
+20000.00	Охранник (ночная смена)	Обеспечение безопасности объекта в ночное время.	0.25
+60000.00	Администратор IT-поддержки	Первая линия поддержки пользователей, решение типовых проблем, постановка задач профильным специалистам.	1.00
+75000.00	Специалист по информационной безопасности (сетевая безопасность)	Настройка и мониторинг сетевых средств защиты, анализ сетевого трафика.	1.00
+30000.00	Стажер-аналитик	Помощь аналитикам в сборе и первичной обработке данных, подготовка простых отчетов.	0.50
+40000.00	Копирайтер	Написание продающих текстов, рекламных статей, описаний товаров/услуг.	1.00
+28000.00	Корректор	Вычитка и исправление текстов на предмет орфографических, пунктуационных и стилистических ошибок.	0.75
+55000.00	Специалист по внутренним коммуникациям	Организация мероприятий для сотрудников, развитие корпоративной культуры, поддержка информационных ресурсов для персонала.	1.00
+45000.00	HR-специалист по компенсациям и льготам	Разработка и администрирование систем оплаты труда, льгот и бонусов.	1.00
+35000.00	Специалист по тендерам	Поиск и анализ тендерных закупок, подготовка документации для участия в торгах.	1.00
+22000.00	Водитель (развозка документов)	Доставка корреспонденции и документов между офисами и партнерами.	0.25
+18000.00	Курьер (доставка мелких посылок)	Доставка небольших посылок в пределах города.	0.25
+50000.00	Администратор базы данных (DBA)	Установка, настройка, резервное копирование и восстановление баз данных.	1.00
+65000.00	Специалист по автоматизации бизнес-процессов	Анализ и оптимизация бизнес-процессов с использованием специализированного ПО.	1.00
+48000.00	Специалист по работе с обращениями граждан	Обработка входящих запросов и обращений от физических лиц, предоставление информации.	1.00
+53000.00	Менеджер проектов (IT)	Управление IT-проектами, координация работы IT-специалистов, взаимодействие с заказчиками.	1.00
+30000.00	Стажер-маркетолог	Помощь в проведении маркетинговых исследований, подготовке презентаций, мониторинге конкурентов.	0.50
+20000.00	Помощник руководителя	Выполнение поручений руководителя, организация встреч, подготовка документов.	0.25
+75000.00	Проектный менеджер	Планирование, выполнение и закрытие проектов. Управление ресурсами, бюджетом и сроками. Взаимодействие с заказчиками и командой.	1.00
+95000.00	Ведущий разработчик	Разработка сложных программных модулей, наставничество младших разработчиков, участие в проектировании архитектуры системы.	1.00
+60000.00	Разработчик	Участие в разработке программных продуктов, написание кода, исправление ошибок, тестирование своих модулей.	1.00
+55000.00	Тестировщик (QA Engineer)	Разработка тест-кейсов, выполнение ручного и автоматизированного тестирования, документирование дефектов.	1.00
+40000.00	Младший тестировщик	Выполнение простых тестов, документирование обнаруженных дефектов под руководством старшего тестировщика.	0.75
+80000.00	Системный администратор	Установка, настройка и поддержка серверов и сетевого оборудования. Обеспечение бесперебойной работы IT-инфраструктуры.	1.00
+70000.00	Специалист технической поддержки	Консультирование пользователей по вопросам использования программного обеспечения и оборудования, решение технических проблем.	1.00
+120000.00	Руководитель отдела продаж	Организация работы отдела продаж, постановка целей, контроль выполнения планов, обучение менеджеров.	1.00
+65000.00	Менеджер по продажам	Активный поиск и привлечение новых клиентов, проведение переговоров, заключение договоров, сопровождение сделок.	1.00
+50000.00	Менеджер по продажам (на неполный рабочий день)	Поддержка существующих клиентов, обработка входящих заявок, выполнение частичных задач отдела продаж.	0.50
+110000.00	Руководитель отдела маркетинга	Разработка и реализация маркетинговой стратегии, управление рекламными кампаниями, анализ эффективности.	1.00
+70000.00	Маркетолог	Подготовка рекламных материалов, проведение исследований рынка, участие в разработке новых продуктов.	1.00
+45000.00	Ассистент маркетолога	Помощь в организации маркетинговых мероприятий, сбор информации, подготовка отчетов.	0.75
+130000.00	Финансовый директор	Управление финансовыми потоками компании, бюджетирование, финансовое планирование и анализ.	1.00
+85000.00	Главный бухгалтер	Ведение бухгалтерского учета, составление отчетности, налоговое планирование.	1.00
+60000.00	Бухгалтер	Обработка первичной документации, учет расчетов с поставщиками и покупателями, подготовка части финансовой отчетности.	1.00
+90000.00	HR-менеджер	Подбор персонала, проведение собеседований, адаптация новых сотрудников, развитие корпоративной культуры.	1.00
+30000.00	Ассистент HR	Помощь в организации рекрутинговых мероприятий, ведение базы кандидатов, подготовка документов.	0.50
+70000.00	Юрист	Правовое сопровождение деятельности компании, подготовка договоров, консультации по законодательству.	1.00
+50000.00	Офис-менеджер	Обеспечение жизнедеятельности офиса, заказ канцтоваров, прием посетителей, координация работы младшего персонала.	1.00
+\.
+
+
+--
+-- TOC entry 3160 (class 0 OID 16492)
+-- Dependencies: 209
+-- Data for Name: project_manager; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.project_manager (employee_id, order_id, manager_id, hire_date, layoff_date) FROM stdin;
+13	13	1	2026-04-21	2031-03-18
+4	9	2	2026-04-18	\N
+2	33	3	2026-04-16	2034-05-27
+4	85	4	2026-04-11	\N
+33	97	5	2026-04-20	2028-06-12
+3	63	6	2026-04-17	2038-12-01
+23	19	7	2026-04-23	\N
+35	41	8	2026-04-12	2038-10-10
+16	67	9	2026-04-16	2032-07-18
+25	23	10	2026-04-12	2028-10-07
+49	31	11	2026-04-10	2030-10-27
+32	21	12	2026-04-20	\N
+43	28	13	2026-04-16	2031-08-11
+27	96	14	2026-04-19	2040-01-21
+4	67	15	2026-04-22	2033-10-05
+23	12	16	2026-04-17	2028-05-19
+9	47	17	2026-04-10	2026-07-05
+38	68	18	2026-04-21	2034-06-11
+11	78	19	2026-04-11	2032-08-14
+4	25	20	2026-04-19	2033-09-21
+21	47	21	2026-04-16	2040-03-03
+21	80	22	2026-04-11	2032-01-17
+39	50	23	2026-04-19	2034-10-26
+25	99	24	2026-04-13	2040-12-26
+22	17	25	2026-04-19	2031-03-05
+42	44	26	2026-04-21	2027-04-02
+15	67	27	2026-04-22	\N
+38	70	28	2026-04-22	2031-07-26
+48	16	29	2026-04-23	2032-01-14
+6	90	30	2026-04-17	\N
+33	42	31	2026-04-23	2033-07-31
+2	46	32	2026-04-20	2031-06-05
+26	61	33	2026-04-10	\N
+12	57	34	2026-04-19	2026-06-18
+50	20	35	2026-04-10	\N
+22	45	36	2026-04-12	\N
+32	17	37	2026-04-16	2031-04-07
+38	10	38	2026-04-16	2041-02-06
+27	73	39	2026-04-21	\N
+28	49	40	2026-04-14	\N
+19	78	41	2026-04-20	2039-06-24
+15	88	42	2026-04-13	2032-04-24
+9	80	43	2026-04-22	2031-08-09
+34	38	44	2026-04-11	2026-07-16
+15	38	45	2026-04-19	2029-12-16
+3	8	46	2026-04-16	2037-11-30
+7	87	47	2026-04-17	2034-10-24
+16	18	48	2026-04-23	2027-11-27
+46	58	49	2026-04-11	2026-06-27
+40	51	50	2026-04-19	\N
+31	59	51	2026-04-12	\N
+42	79	52	2026-04-19	\N
+1	12	53	2026-04-19	\N
+39	58	54	2026-04-13	\N
+25	56	55	2026-04-21	\N
+4	69	56	2026-04-11	2028-03-07
+34	94	57	2026-04-23	2029-02-20
+25	46	58	2026-04-22	2039-05-08
+21	8	59	2026-04-20	\N
+18	26	60	2026-04-18	2041-02-10
+23	63	61	2026-04-16	2031-08-24
+1	71	62	2026-04-11	2028-06-17
+21	54	63	2026-04-14	\N
+32	43	64	2026-04-10	2026-11-15
+7	64	65	2026-04-11	\N
+14	56	66	2026-04-23	\N
+48	7	67	2026-04-10	\N
+21	64	68	2026-04-23	\N
+14	78	69	2026-04-15	2028-07-19
+19	42	70	2026-04-18	\N
+14	63	71	2026-04-18	2031-02-03
+47	96	72	2026-04-12	2030-01-12
+23	40	73	2026-04-23	2035-07-29
+45	5	74	2026-04-22	2031-03-26
+28	12	75	2026-04-17	2038-06-24
+26	37	76	2026-04-22	2029-11-08
+7	89	77	2026-04-18	\N
+42	59	78	2026-04-16	2029-01-31
+2	88	79	2026-04-23	2031-11-07
+44	8	80	2026-04-19	2033-11-15
+8	89	81	2026-04-20	2030-08-13
+10	23	82	2026-04-14	2036-01-11
+44	88	83	2026-04-23	2028-10-18
+33	11	84	2026-04-11	\N
+29	63	85	2026-04-15	2040-03-30
+49	32	86	2026-04-16	\N
+3	2	87	2026-04-14	2027-10-19
+32	80	88	2026-04-16	2026-10-24
+5	53	89	2026-04-23	\N
+41	44	90	2026-04-10	2027-09-28
+12	69	91	2026-04-22	2032-07-17
+49	55	92	2026-04-16	2037-06-28
+43	47	93	2026-04-17	\N
+46	34	94	2026-04-10	\N
+17	80	95	2026-04-19	2031-12-18
+42	97	96	2026-04-21	2039-04-22
+16	71	97	2026-04-17	2029-08-16
+35	23	98	2026-04-15	2038-08-19
+36	37	99	2026-04-20	\N
+24	56	100	2026-04-18	2039-06-20
+29	13	101	2026-04-19	2033-05-15
+28	4	102	2026-04-23	\N
+13	63	103	2026-04-23	2037-10-18
+40	39	104	2026-04-16	2032-10-13
+30	85	105	2026-04-10	2038-07-08
+1	90	106	2026-04-10	\N
+42	71	107	2026-04-21	\N
+8	76	108	2026-04-22	2028-06-11
+1	25	109	2026-04-21	2028-04-19
+22	25	110	2026-04-11	2039-08-24
+6	94	111	2026-04-15	\N
+48	38	112	2026-04-20	\N
+22	77	113	2026-04-16	2037-10-03
+3	3	114	2026-04-21	\N
+4	90	115	2026-04-20	\N
+10	42	116	2026-04-15	\N
+2	1	117	2026-04-22	2040-07-22
+14	81	118	2026-04-13	2034-02-21
+16	58	119	2026-04-18	\N
+33	97	120	2026-04-21	\N
+\.
+
+
+--
+-- TOC entry 3162 (class 0 OID 16519)
+-- Dependencies: 211
+-- Data for Name: project_paym; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.project_paym (proj_work_act_id, trans_id, pay_date_type, pay_status, pay_date, pay_sum) FROM stdin;
+19	1	не оплачено	разовая	\N	8812797392.00
+25	2	не оплачено	разовая	\N	3074256687.00
+82	3	отклонено	разовая	\N	1764005099.00
+50	4	отклонено	ежемесячная	\N	331078584.00
+63	5	отклонено	разовая	\N	7314709995.00
+42	6	отклонено	разовая	\N	5985490572.00
+72	7	отклонено	ежемесячная	\N	5270539722.00
+23	8	отклонено	разовая	\N	861971753.00
+111	9	не оплачено	разовая	\N	6871639918.00
+89	10	не оплачено	разовая	\N	6260319110.00
+117	11	не оплачено	разовая	\N	3178736898.00
+55	12	не оплачено	ежемесячная	\N	6735006434.00
+16	13	отклонено	разовая	\N	6253132299.00
+39	14	отклонено	ежемесячная	\N	6296679549.00
+102	15	отклонено	разовая	\N	2367995405.00
+120	16	отклонено	разовая	\N	7805380138.00
+20	17	не оплачено	разовая	\N	9818397003.00
+13	18	не оплачено	разовая	\N	9436418569.00
+110	19	не оплачено	ежемесячная	\N	1290106753.00
+8	20	не оплачено	ежемесячная	\N	5273644251.00
+81	21	отклонено	разовая	\N	2202254137.00
+103	22	не оплачено	разовая	\N	9321190195.00
+97	23	не оплачено	ежемесячная	\N	1956531262.00
+108	24	отклонено	ежемесячная	\N	3523596558.00
+27	25	отклонено	ежемесячная	\N	4605693810.00
+30	26	не оплачено	разовая	\N	745546074.00
+18	27	отклонено	разовая	\N	9096694646.00
+36	28	отклонено	ежемесячная	\N	3086272417.00
+44	29	не оплачено	ежемесячная	\N	6948862666.00
+101	30	не оплачено	ежемесячная	\N	4390030650.00
+42	31	отклонено	ежемесячная	\N	6995117606.00
+119	32	не оплачено	ежемесячная	\N	3362847051.00
+60	33	отклонено	ежемесячная	\N	2644289669.00
+77	34	не оплачено	разовая	\N	317093716.00
+45	35	отклонено	ежемесячная	\N	7015190931.00
+39	36	не оплачено	разовая	\N	6239261483.00
+110	37	отклонено	разовая	\N	5248163640.00
+5	38	отклонено	ежемесячная	\N	7612632841.00
+4	39	отклонено	разовая	\N	1317408607.00
+61	40	отклонено	разовая	\N	4225384594.00
+83	41	не оплачено	ежемесячная	\N	8747475061.00
+48	42	отклонено	разовая	\N	55978201.00
+42	43	отклонено	ежемесячная	\N	779871430.00
+78	44	отклонено	разовая	\N	9251523826.00
+16	45	не оплачено	разовая	\N	5740834633.00
+77	46	не оплачено	разовая	\N	201132266.00
+23	47	не оплачено	разовая	\N	7628873636.00
+5	48	не оплачено	ежемесячная	\N	755097009.00
+6	49	не оплачено	разовая	\N	270781089.00
+57	50	отклонено	разовая	\N	6752076889.00
+21	51	отклонено	разовая	\N	5787385030.00
+72	52	не оплачено	ежемесячная	\N	4190277817.00
+118	53	отклонено	разовая	\N	4565390765.00
+32	54	отклонено	разовая	\N	2614960276.00
+58	55	не оплачено	ежемесячная	\N	4449241122.00
+45	56	не оплачено	ежемесячная	\N	3593427372.00
+31	57	не оплачено	разовая	\N	1447001442.00
+67	58	не оплачено	разовая	\N	3509976326.00
+27	59	не оплачено	ежемесячная	\N	2886853782.00
+63	60	отклонено	разовая	\N	4337124467.00
+47	61	отклонено	ежемесячная	\N	6665862920.00
+101	62	отклонено	разовая	\N	9525748869.00
+40	63	отклонено	ежемесячная	\N	7000254888.00
+28	64	отклонено	разовая	\N	4705606927.00
+38	65	не оплачено	разовая	\N	7916526878.00
+6	66	не оплачено	разовая	\N	4499033278.00
+32	67	отклонено	разовая	\N	615285498.00
+36	68	отклонено	ежемесячная	\N	7424436602.00
+45	69	не оплачено	ежемесячная	\N	9794788471.00
+99	70	не оплачено	разовая	\N	602547968.00
+106	71	отклонено	ежемесячная	\N	7038743010.00
+71	72	отклонено	разовая	\N	4777200495.00
+6	73	не оплачено	разовая	\N	6452992195.00
+80	74	отклонено	разовая	\N	8023748270.00
+40	75	отклонено	разовая	\N	8878298850.00
+61	76	отклонено	разовая	\N	3442060516.00
+119	77	не оплачено	ежемесячная	\N	6211514504.00
+40	78	отклонено	разовая	\N	2117355205.00
+101	79	не оплачено	ежемесячная	\N	6634999155.00
+118	80	отклонено	разовая	\N	7680964380.00
+76	81	не оплачено	ежемесячная	\N	4884235695.00
+28	82	не оплачено	разовая	\N	2914451617.00
+83	83	не оплачено	разовая	\N	9076160966.00
+116	84	отклонено	разовая	\N	2014330130.00
+75	85	отклонено	ежемесячная	\N	7075813537.00
+77	86	не оплачено	ежемесячная	\N	4370958212.00
+94	87	отклонено	ежемесячная	\N	896476435.00
+29	88	не оплачено	разовая	\N	7014016787.00
+88	89	не оплачено	разовая	\N	7208571168.00
+119	90	отклонено	ежемесячная	\N	3238301963.00
+70	91	отклонено	разовая	\N	5675137528.00
+115	92	не оплачено	разовая	\N	4347393653.00
+8	93	отклонено	разовая	\N	4536811746.00
+66	94	отклонено	разовая	\N	9939089404.00
+47	95	отклонено	разовая	\N	4636793751.00
+46	96	отклонено	ежемесячная	\N	9705320723.00
+79	97	не оплачено	разовая	\N	8906372358.00
+22	98	отклонено	ежемесячная	\N	6330597312.00
+14	99	отклонено	разовая	\N	4224155370.00
+83	100	отклонено	разовая	\N	4746852748.00
+107	101	не оплачено	ежемесячная	\N	6517229687.00
+19	102	не оплачено	разовая	\N	7738893262.00
+16	103	не оплачено	разовая	\N	7990054645.00
+99	104	не оплачено	ежемесячная	\N	1693479416.00
+16	105	не оплачено	разовая	\N	7446969937.00
+13	106	отклонено	ежемесячная	\N	9146398569.00
+101	107	не оплачено	разовая	\N	816777576.00
+71	108	не оплачено	ежемесячная	\N	6705714182.00
+85	109	отклонено	ежемесячная	\N	9192935516.00
+61	110	отклонено	ежемесячная	\N	7915706118.00
+110	111	отклонено	ежемесячная	\N	5970478643.00
+92	112	отклонено	разовая	\N	674844218.00
+10	113	не оплачено	ежемесячная	\N	2990860978.00
+56	114	отклонено	разовая	\N	7932465568.00
+67	115	отклонено	разовая	\N	7998491075.00
+90	116	отклонено	разовая	\N	8562653997.00
+83	117	отклонено	ежемесячная	\N	2167810716.00
+69	118	отклонено	ежемесячная	\N	2550148445.00
+13	119	отклонено	разовая	\N	6977345104.00
+117	120	не оплачено	ежемесячная	\N	921935019.00
+6	121	отклонено	разовая	\N	4287230927.00
+20	122	отклонено	ежемесячная	\N	6219505614.00
+95	123	отклонено	разовая	\N	2119306745.00
+27	124	не оплачено	разовая	\N	3730594160.00
+109	125	не оплачено	ежемесячная	\N	1343928316.00
+20	126	не оплачено	разовая	\N	7185529637.00
+71	127	не оплачено	разовая	\N	5245249569.00
+69	128	отклонено	ежемесячная	\N	5172173157.00
+73	129	отклонено	ежемесячная	\N	4766788077.00
+50	130	не оплачено	ежемесячная	\N	6134734512.00
+52	131	отклонено	разовая	\N	7131672002.00
+61	132	не оплачено	ежемесячная	\N	495591730.00
+120	133	отклонено	разовая	\N	4487043616.00
+26	134	отклонено	ежемесячная	\N	8175565295.00
+21	135	отклонено	ежемесячная	\N	2239672609.00
+52	136	не оплачено	разовая	\N	8586926827.00
+48	137	не оплачено	ежемесячная	\N	3829910541.00
+42	138	не оплачено	разовая	\N	8034750107.00
+14	139	отклонено	разовая	\N	9833695905.00
+97	140	отклонено	ежемесячная	\N	6386040515.00
+80	141	отклонено	разовая	\N	4487397407.00
+111	142	отклонено	ежемесячная	\N	852407017.00
+121	143	отклонено	разовая	\N	1997861168.00
+49	144	не оплачено	разовая	\N	9780868991.00
+24	145	не оплачено	ежемесячная	\N	8330105720.00
+93	146	не оплачено	разовая	\N	3458718317.00
+92	147	отклонено	разовая	\N	1557686752.00
+67	148	отклонено	ежемесячная	\N	2112185236.00
+57	149	не оплачено	разовая	\N	5315831698.00
+32	150	отклонено	ежемесячная	\N	3514984674.00
+49	151	не оплачено	ежемесячная	\N	5415022418.00
+31	152	не оплачено	разовая	\N	3921647791.00
+66	153	отклонено	разовая	\N	9252782284.00
+78	154	отклонено	разовая	\N	6401871667.00
+102	155	не оплачено	разовая	\N	1304002172.00
+83	156	не оплачено	ежемесячная	\N	75948180.00
+55	157	отклонено	ежемесячная	\N	5675217934.00
+54	158	отклонено	разовая	\N	2237661205.00
+76	159	отклонено	ежемесячная	\N	8475830101.00
+48	160	отклонено	разовая	\N	2899869453.00
+62	161	не оплачено	разовая	\N	8589334637.00
+64	162	не оплачено	ежемесячная	\N	7909320328.00
+91	163	отклонено	ежемесячная	\N	5320211730.00
+17	164	не оплачено	разовая	\N	2451068368.00
+6	165	отклонено	разовая	\N	5347197720.00
+80	166	отклонено	ежемесячная	\N	1499199896.00
+9	167	отклонено	ежемесячная	\N	9431243378.00
+35	168	отклонено	разовая	\N	7569393704.00
+111	169	не оплачено	разовая	\N	1406539892.00
+101	170	отклонено	разовая	\N	8990175649.00
+120	171	не оплачено	ежемесячная	\N	8125572023.00
+19	172	не оплачено	ежемесячная	\N	3833553210.00
+104	173	не оплачено	разовая	\N	9234236048.00
+91	174	не оплачено	ежемесячная	\N	5632044166.00
+57	175	не оплачено	ежемесячная	\N	9920638178.00
+91	176	отклонено	разовая	\N	7057941680.00
+84	177	отклонено	разовая	\N	8111267344.00
+8	178	не оплачено	разовая	\N	6851986192.00
+57	179	отклонено	ежемесячная	\N	9980814274.00
+95	180	отклонено	разовая	\N	3462442668.00
+86	181	отклонено	ежемесячная	\N	4096987012.00
+36	182	не оплачено	ежемесячная	\N	6091909855.00
+55	183	отклонено	разовая	\N	5039251046.00
+101	184	отклонено	ежемесячная	\N	148016333.00
+101	185	не оплачено	ежемесячная	\N	1910500445.00
+89	186	не оплачено	разовая	\N	9455486267.00
+58	187	отклонено	разовая	\N	5803244434.00
+24	188	не оплачено	разовая	\N	2010885914.00
+63	189	отклонено	разовая	\N	2986972036.00
+58	190	не оплачено	ежемесячная	\N	9547690005.00
+11	191	не оплачено	разовая	\N	7350935486.00
+78	192	отклонено	разовая	\N	3728135344.00
+37	193	отклонено	разовая	\N	6466671273.00
+59	194	отклонено	ежемесячная	\N	3389656973.00
+112	195	отклонено	разовая	\N	527155776.00
+25	196	отклонено	ежемесячная	\N	7947530490.00
+63	197	отклонено	разовая	\N	2374570597.00
+54	198	отклонено	разовая	\N	1791672150.00
+107	199	отклонено	разовая	\N	9846230815.00
+84	200	отклонено	разовая	\N	3314376534.00
+\.
+
+
+--
+-- TOC entry 3163 (class 0 OID 16532)
+-- Dependencies: 212
+-- Data for Name: task; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.task (task_id, task_name, task_descript, task_cost, start_day, complete_day_exp, complete_day_real, delay_reason, order_id, status) FROM stdin;
+1	Задача 001	2abf4cbde7525a014dc9d568734a0c69	958765.00	2026-04-10	2029-06-27	\N	4141a2f0ccb32cfecd49640dd64b5fa8	12	в работе
+2	Задача 002	a5bb74bab35d00a34d91a53305a9f9ce	265973.00	2026-04-14	2029-09-11	\N	12a65ae9a835e42fe92c7b19daad5f22	91	приостановлена
+3	Задача 003	2125e1c468a39e36283a57d087558d37	19316.00	2026-04-13	2035-08-26	\N	ba4283191d26e1cd4e3ce398cc4c78a5	17	отклонена
+4	Задача 004	0f6a9e06b264dab7b22995ddfb669a7a	783225.00	2026-04-12	2035-05-20	\N	\N	2	приостановлена
+5	Задача 005	9c9f4fe5068e629d81a3825a898bd2ac	807789.00	2026-04-10	2028-08-19	\N	8d23c9694585b6b1f465119693e687bf	16	не распределена
+6	Задача 006	6a1a57e048a661f2c22975a71090c366	389432.00	2026-04-10	2028-12-15	\N	\N	68	не распределена
+7	Задача 007	b98bc054927ec6b20feda26c82a864e3	63044.00	2026-04-10	2032-01-01	\N	815f36bfe2faf9911e81bbbb068c312a	14	не распределена
+8	Задача 008	2729f740acc8ca3a0f37f8a9f86f6266	184270.00	2026-04-10	2027-02-21	\N	4a39630ad7903fa4235388b2241d7279	71	не распределена
+9	Задача 009	f77090cc9115ab3e1d954dde288cad92	909195.00	2026-04-10	2033-07-11	\N	2293ba0242e5161b69f6bde3427dc2cd	13	не распределена
+10	Задача 010	b94a286dd7deff07da4403249bd877a9	913514.00	2026-04-11	2033-11-14	\N	4c58444e1bdfc8ed585556e3af0e9441	90	в работе
+11	Задача 011	3375b58e2d84d2831eb2e832e3064c77	393174.00	2026-04-14	2028-01-26	\N	89ef098ff4bac81cbe50f8d900a38d01	90	не распределена
+12	Задача 012	fb5b6c4a93807a9bbce40b7744823a17	223110.00	2026-04-13	2034-02-15	\N	5a2a654425633522b6e09337df74b1a7	38	приостановлена
+13	Задача 013	e5401a497d40fdbe21866f57e89508d4	848374.00	2026-04-13	2029-07-21	\N	95c3dc4ff7a46b20fd0c29dd832c61c6	49	не распределена
+14	Задача 014	1fba8d0db42685f793ce4b7f345fa4e1	4258.00	2026-04-14	2036-09-24	\N	49f09782a5295fa042d278851b39aa92	75	приостановлена
+15	Задача 015	d7bd5a355413afd51b27335e293e627c	392619.00	2026-04-13	2029-06-07	\N	5ce7573dd6893207ff7c6ce3a00a74bc	19	не распределена
+16	Задача 016	7c4fde08b08b2a422eaa68d446e05fed	33865.00	2026-04-12	2032-03-28	\N	18079e3a5e435e3c8771734ba77f6465	83	приостановлена
+17	Задача 017	bb5a4df7f469b3bf74f9a0d47e7c0bb3	536544.00	2026-04-13	2037-02-25	\N	e9d371180d124cbda83d4c516dafd395	73	в работе
+18	Задача 018	330311e61f2e380b02be6d1650ddd36a	166809.00	2026-04-14	2030-04-14	\N	\N	17	не распределена
+19	Задача 019	3223bc458953351f1bf89c7619f89b03	975216.00	2026-04-12	2038-04-05	\N	19b9f68af92e05f5c68f1a0ed44c8201	41	приостановлена
+20	Задача 020	fd160d5dc44592a37b02b1c6172e0f07	312285.00	2026-04-12	2033-10-26	\N	\N	72	отклонена
+21	Задача 021	ad4eb70af15befe7448d2742d50e8799	547522.00	2026-04-11	2029-07-08	\N	ee542cb7fd887eb42296c93664cc1bfe	93	приостановлена
+22	Задача 022	a7497da04e902584cb2c75fc877ccb2a	544541.00	2026-04-14	2030-09-14	\N	\N	9	не распределена
+23	Задача 023	335bc8a76048daad22edd68ea83cdd12	889556.00	2026-04-13	2033-11-16	\N	\N	9	в работе
+24	Задача 024	6a780fc3fbb4e860f6dcdd085a4ac532	938503.00	2026-04-12	2030-11-03	\N	\N	7	не распределена
+25	Задача 025	9b9fd56810c9ea2a66c25edaa51a3dfe	897108.00	2026-04-12	2030-08-16	\N	e7fe3e25755f164b27000d7bea9da39f	79	не распределена
+26	Задача 026	e153498a2a0746eea220e9b80ea435b5	370337.00	2026-04-12	2027-09-30	\N	519d225ace955564a3b56feb2d29d7be	51	приостановлена
+27	Задача 027	5c19c88697c41a0c2dee92dbecc6e8fb	783235.00	2026-04-14	2032-11-23	\N	\N	84	приостановлена
+28	Задача 028	03159912783c39a75bbcb806e7238318	230922.00	2026-04-14	2036-03-07	\N	d754da76a35dc1d1f00b443760df6dad	28	не распределена
+29	Задача 029	cb1f27c876de7ab2b3f552e72e884fcb	395077.00	2026-04-13	2026-11-30	\N	1d202891b1376fa7a190098a38bf3e81	62	в работе
+30	Задача 030	e02df11b59a525197bc08a61c59ff4d3	482067.00	2026-04-13	2033-05-19	\N	297a8bffb5197c2cdcacd395b4ef51f9	51	отклонена
+31	Задача 031	ebdcd1f8123f58213068eac8880dba70	18755.00	2026-04-13	2028-11-24	\N	bd3993fe3b29ad13f0778cf13d43e404	25	в работе
+32	Задача 032	c1187acbebb58a4c640a9d0f63f29cf6	345053.00	2026-04-13	2030-03-22	\N	\N	92	отклонена
+33	Задача 033	8fb58199a6a89ea3a6bc37e4969babd6	543749.00	2026-04-10	2027-02-23	\N	\N	97	в работе
+34	Задача 034	eb3578f8e8ad3bb3f63db5d7058ca55b	803336.00	2026-04-13	2031-05-22	\N	eee8c374cdf3b52c7f0eae17dbd07644	26	приостановлена
+35	Задача 035	04629764d73c216e8e1c51f6f36af03e	463919.00	2026-04-11	2027-10-02	\N	\N	79	в работе
+36	Задача 036	ed196c8d24c0a3a3a2809b790cba9380	792028.00	2026-04-13	2039-02-09	\N	dd85c7ae21edfb7803fd4fb1df4d0910	93	приостановлена
+37	Задача 037	0b5fbb263a8b4a3acf6e21b8e497d066	830022.00	2026-04-10	2032-12-30	\N	\N	2	отклонена
+38	Задача 038	55f52ebd4bc2444b0afbae39f1f2c12c	671011.00	2026-04-10	2031-07-06	\N	49e22653ea6ca6087ac4c5c89a70ccdf	57	в работе
+39	Задача 039	13151b10df67a2e539c4cd5af3f3f0dc	863980.00	2026-04-10	2037-03-02	\N	\N	77	приостановлена
+40	Задача 040	e6e72ef5c0deb76bc17dc80f68a51ba5	856594.00	2026-04-13	2034-04-13	\N	\N	100	отклонена
+41	Задача 041	a9e18e2e50d1d4496836138158255e1d	425506.00	2026-04-12	2035-07-18	\N	\N	63	отклонена
+42	Задача 042	79992bcb603e75a12ddfd2e2744aa4b4	609034.00	2026-04-13	2037-05-25	\N	7a2e46f4fa4f06ea3f295f0d9edca512	19	не распределена
+43	Задача 043	24be2846ee4f2de936e99f60995eb8f9	988960.00	2026-04-12	2037-01-29	\N	d6987ba9ad2ef8531664d8b67f9d79bc	57	в работе
+44	Задача 044	706e41e6ce4d7224e1f61c75f0a65fd9	89110.00	2026-04-11	2032-09-09	\N	bf50bab819aa14d48aa429120247fa28	48	отклонена
+45	Задача 045	b0b620d7159284b4f2dcd22a2758847b	736113.00	2026-04-11	2028-11-10	\N	5fbcee5d2b94e729a56e841883e4fcf9	58	не распределена
+46	Задача 046	e9cd1a052f05d6689285e069df0f71be	376169.00	2026-04-11	2033-05-28	\N	\N	2	в работе
+47	Задача 047	57b68894d431894411076cf3dd2bcfc0	335923.00	2026-04-13	2029-08-08	\N	\N	20	в работе
+48	Задача 048	b0008794d081d1e221fec6d0c01d6c84	723349.00	2026-04-14	2028-10-06	\N	\N	94	отклонена
+49	Задача 049	3ac44b4e5f00cfd99835e7f932747f77	271560.00	2026-04-14	2033-09-12	\N	\N	2	приостановлена
+50	Задача 050	8dc80dfe6d2d0a9fc90dfbfb70af3fa8	435757.00	2026-04-11	2031-08-09	\N	b398822ccc858c493a5806a7a15607d8	48	приостановлена
+51	Задача 051	e71991bb912af825529c2e957f019ab9	710302.00	2026-04-12	2035-03-26	\N	0a966f61e7141c621660038e658085df	44	приостановлена
+52	Задача 052	3454969bcfde27801bcaca1c3c6e5831	687627.00	2026-04-12	2035-06-09	\N	\N	68	отклонена
+53	Задача 053	3976501d07b96e86bc599e368374dd8f	660947.00	2026-04-13	2029-08-10	\N	736ba07eb1cace5328f20728bb0b805f	57	отклонена
+54	Задача 054	e304fdaa3d329ba1e5e80a3b00e274d7	846296.00	2026-04-10	2028-01-20	\N	f0fd3ea192b2e816d5ceb739ff3cb87c	29	не распределена
+55	Задача 055	6d455dddd00cadbf3cb77886b2c00f8d	494437.00	2026-04-14	2027-06-27	\N	\N	76	приостановлена
+56	Задача 056	e1572cd44a47ee63344d16c33957d18d	113441.00	2026-04-10	2034-01-09	\N	\N	69	приостановлена
+57	Задача 057	c4a803530820fd73fdbe321c62d39607	282259.00	2026-04-13	2032-01-15	\N	46b23d969fbb9d4f269d55fd3236d993	82	не распределена
+58	Задача 058	2c908c13e6d99abe8d07cd52ef8594b1	66868.00	2026-04-10	2028-06-14	\N	acf31f1919072831d8d280cc0c01eab1	59	отклонена
+59	Задача 059	43df072c4dc9ec5f31d474f31ea4201b	819380.00	2026-04-10	2034-04-08	\N	\N	92	приостановлена
+60	Задача 060	f1fa6b8f86f2f84051a8fd9091654c94	314666.00	2026-04-10	2029-08-13	\N	37e8371969cadef0273dbf19f4a4e7d2	70	отклонена
+61	Задача 061	e44d511cd5c38a57a6aef4a56d28116f	523948.00	2026-04-11	2033-04-08	\N	4561f6b07b1757329df9196703a4b836	23	отклонена
+62	Задача 062	ec7fbe19b9bac22a14bf0b543cf83854	179037.00	2026-04-13	2030-04-20	\N	\N	44	в работе
+63	Задача 063	2c72ec5d2c459c6b17e169808d56a535	495036.00	2026-04-14	2027-07-13	\N	\N	17	в работе
+64	Задача 064	80f2f07576537e7971218076d9db7ca7	656097.00	2026-04-10	2026-11-21	\N	\N	19	приостановлена
+65	Задача 065	a43e2126cf4a5fd8bf8db6f4bd93df78	167947.00	2026-04-10	2035-08-13	\N	95a0e0c6900b3c036ffcb3e79d511d35	12	отклонена
+66	Задача 066	813e775476ee81c492b581901a9d8940	74655.00	2026-04-10	2036-08-24	\N	\N	60	приостановлена
+67	Задача 067	22dc7f5ee98bba9953a582b492910f60	280067.00	2026-04-13	2037-06-16	\N	b1355c999935337abd58fb8af3324719	92	приостановлена
+68	Задача 068	5126f714c7243c41a8ee45e7f1948717	701264.00	2026-04-10	2034-01-18	\N	09a2a2413129baf94e33a364827ff5a3	50	в работе
+69	Задача 069	cff22078663c924e28c98d3b6deb5c47	591242.00	2026-04-11	2038-02-08	\N	79fc7d458344aa0d02f0871d67c001d2	93	отклонена
+70	Задача 070	d4a30725668c53bda3bf8f2f67e1e812	521578.00	2026-04-11	2034-06-02	\N	957bca5336bb2ee47ef2c4c12b48d8cf	42	отклонена
+71	Задача 071	e1b7bd81e3359e9016bff9d021603dab	743686.00	2026-04-14	2027-12-28	\N	\N	86	отклонена
+72	Задача 072	4975834fcd5cc8d3eb5d09718b014425	208534.00	2026-04-10	2030-09-13	\N	01693b7725d96f53d9ee150caf63fa27	80	не распределена
+73	Задача 073	2183fd9ab905e6a0703d0aaaca709b08	781698.00	2026-04-13	2029-08-30	\N	5b14c50e636a0d47c06e9de885ea7b5a	54	приостановлена
+74	Задача 074	16a7143b60c5914b33a6f43f1bc16171	305735.00	2026-04-13	2037-09-24	\N	29a6da3ef6436f354feec39195d52b28	70	не распределена
+75	Задача 075	b3788172a66ec844af48782ef160342f	287430.00	2026-04-10	2033-03-05	\N	fc294b0058aaaa7505d9796784361b17	51	не распределена
+76	Задача 076	d4bcee80aeb03bdadfec5d9fdb702b66	881678.00	2026-04-10	2028-02-03	\N	83fb460d732585a37f3dd12fdc96eda1	27	приостановлена
+77	Задача 077	23fc75fda1e03858a84916943c6cbd7d	856120.00	2026-04-13	2030-07-06	\N	e817219312be2352e688ef34f5503dce	90	в работе
+78	Задача 078	255b313b778b077999d247fcf37598fc	447799.00	2026-04-12	2030-10-02	\N	d90edf8f25b3d7685e76fa89c622f061	45	не распределена
+79	Задача 079	7a6e458665fd494438b157c2a9d2bd5a	501410.00	2026-04-12	2034-11-26	\N	2fb2904d4a2f0d35adec5df6797b45f5	87	в работе
+80	Задача 080	282fb135a174f5d4ab6dcc29301fd2dc	558315.00	2026-04-10	2030-04-30	\N	592a80ffcd85d103d3a7c850d4a6bd6e	51	приостановлена
+81	Задача 081	3b9593132f4a149b10daf1b35025f421	305781.00	2026-04-13	2030-03-07	\N	893cfbb699561e2e6ba0db4f408b35d2	80	отклонена
+82	Задача 082	d3a0a1534a46a53241a40637439298c1	571357.00	2026-04-14	2034-05-21	\N	8fffe0b333f6bfc4f7c8193e4fce93e9	95	приостановлена
+83	Задача 083	49d30e86651ae5ea1b7cb03b4c1f2b38	478792.00	2026-04-14	2037-10-14	\N	\N	100	отклонена
+84	Задача 084	192191a893a06e1098328e62e442b055	700697.00	2026-04-10	2036-08-09	\N	04f23854a341452e0d014106c39e429f	24	в работе
+85	Задача 085	e093926edc314723f63cd02dd3341f5e	270771.00	2026-04-14	2030-03-15	\N	0c57bafde6cca60e33db13ff4b177414	8	в работе
+86	Задача 086	a3f47433c144596f1e373334f6ff34a6	994460.00	2026-04-14	2033-06-01	\N	\N	13	в работе
+87	Задача 087	ab6d831579994d826ae7692778647d22	46762.00	2026-04-13	2035-01-18	\N	8390f348eef11f9c688802042c96fb6e	17	отклонена
+88	Задача 088	724cec81373e02717542c9f15c9b953c	538712.00	2026-04-14	2030-09-28	\N	b84fe5370da1f0e437cdac0e095836d8	92	не распределена
+89	Задача 089	1033f431bffa9ee4bed53efaebd3941b	719500.00	2026-04-14	2032-09-27	\N	c68b9a9e6d4577356c0e0f8a67895721	63	отклонена
+90	Задача 090	2d0a6d21cde5b336a4c95db05c876673	79831.00	2026-04-11	2038-01-16	\N	8b97f1305baab8c263284f4f5042cc07	68	в работе
+91	Задача 091	1725473f8a62826de964422c82b2e0e7	710.00	2026-04-14	2034-05-09	\N	c6149f3983efce96555ec1adb39a2227	70	приостановлена
+92	Задача 092	29b384edd142ada336d9baf75478a451	108426.00	2026-04-12	2038-11-16	\N	aae48e6966f1f2241e4ba6f9c4c168eb	15	приостановлена
+93	Задача 093	c6261de2ca99a00c71e23becc9d20f9c	788505.00	2026-04-10	2033-05-14	\N	69189e890a5d3aafe71d42acbcb33318	7	приостановлена
+94	Задача 094	86254bc3f2d0986506fb97ec0fd91f4b	297838.00	2026-04-11	2035-09-19	\N	84cde7051ba9a314a7b1e1160321ed91	81	в работе
+95	Задача 095	8c7f6ef10cb55b34430e369a04e2765d	93438.00	2026-04-13	2028-03-30	\N	24de3a3399143f6ac9cd05f4bfccb0c0	54	отклонена
+96	Задача 096	e8521b59386bd6eb0bad329f0adcdf15	884094.00	2026-04-10	2035-03-10	\N	7a41365b5b829ed30ee2855076b41ecc	100	в работе
+97	Задача 097	7ba659efe512b02c334699cd1add8cf0	711269.00	2026-04-10	2033-04-12	\N	c39b77676627f71cb1d123041844a045	12	отклонена
+98	Задача 098	5266590670aa92ac6914a0f224457242	689333.00	2026-04-10	2036-10-19	\N	ded335afe3c5c4fb663bac090ebe0130	50	приостановлена
+99	Задача 099	31f27f2d84b5c52687e81f20875a24c3	20931.00	2026-04-14	2033-10-10	\N	\N	49	отклонена
+100	Задача 100	b07237b32386795cddece786986f9800	299586.00	2026-04-11	2028-03-04	\N	6e587f281433ca0ebf782fb0be40849a	56	не распределена
+101	Задача 101	4e6c7ceec23b936ee9c74df3dc14aba0	812046.00	2026-04-12	2032-03-22	\N	86d026ef7d57b011591ebd9bb980d201	81	не распределена
+102	Задача 102	f3e8449fbb8b4cc67431a9df95940653	512057.00	2026-04-10	2031-03-09	\N	21cc65ea20475e1fa66dde0b53b8f15d	15	в работе
+103	Задача 103	0b36150ce56b2eca7f1c5e2acec58971	135762.00	2026-04-12	2030-04-18	\N	304f93262f25b3b74fed66e16886b2b7	54	не распределена
+104	Задача 104	25f49fd22293cfa2b23c3efddc674bf5	91634.00	2026-04-10	2027-07-18	\N	5c2772512227e4e4322fd3aa31052f43	50	отклонена
+105	Задача 105	335c01454b71359d2ca9d5affb03fdb5	150288.00	2026-04-13	2032-01-28	\N	dc637c5dba2519ed3b6c6572c165d875	62	не распределена
+106	Задача 106	8d691593aa9bff63510092659009d91c	939634.00	2026-04-12	2034-11-27	\N	5e5dd1e7fed01b1498cfe8712bc82af5	38	отклонена
+107	Задача 107	83a98f266b8afdf32b5f564e60db7262	707572.00	2026-04-14	2031-12-07	\N	a8e82dbf817fb28cd3131bc493dccee2	29	не распределена
+108	Задача 108	84d172064b4954d7d8cdd2dbe144c828	879628.00	2026-04-10	2028-06-29	\N	12afff9cdb53d8dd2853a58efc246138	77	в работе
+109	Задача 109	4c8c50fc92ef66087e148e86bfe86b7a	872696.00	2026-04-13	2028-04-06	\N	03acf8dbaf506372d10f41fe5ececb6e	99	не распределена
+110	Задача 110	21d11f655eb04cbd0013e89ad6e721fd	701544.00	2026-04-12	2033-06-12	\N	45ac332231ec995ab2ba90537d1bb3a6	81	не распределена
+111	Задача 111	2eed045f68393ca549512fca577e646b	170402.00	2026-04-10	2028-07-19	\N	811a27cbd19c4450bc3e2dd22e4b160b	34	не распределена
+112	Задача 112	ba5966ff3b12c330a8cc9bb09fdb5b3a	767996.00	2026-04-13	2028-10-06	\N	99a90dba9af6fb5092c22ee63f91e165	94	отклонена
+113	Задача 113	f58171663f5b9003674ae75155879952	159359.00	2026-04-12	2037-09-04	\N	\N	18	приостановлена
+114	Задача 114	047414f5cfac64ef01affc06e8d54508	753827.00	2026-04-14	2037-04-14	\N	2a389beb92fb4bfe785ba551c08741e1	73	не распределена
+115	Задача 115	0415e342f126f210a65e6d6328a2d23c	331105.00	2026-04-10	2030-10-09	\N	e5580d5d02f1b5357aa0e089df8371ad	8	приостановлена
+116	Задача 116	54891b7930015311157a70bb87fa21d3	470867.00	2026-04-14	2032-12-08	\N	\N	70	отклонена
+117	Задача 117	f397e7225071c18c77d1bf001ee7b2b5	952663.00	2026-04-14	2035-09-07	\N	843aa797c3c4d17665542c5a53bb9551	88	приостановлена
+118	Задача 118	a9d45a8e2fda714ed2d0ce61760b0ea5	168482.00	2026-04-11	2036-05-23	\N	7b735206c9c8d7e9058f1132d855abab	30	приостановлена
+119	Задача 119	c0bb74d802bd746483d5dbe4db2ee32b	16615.00	2026-04-10	2036-01-13	\N	9275c0d584f37bb6adc72759b011bab2	27	не распределена
+120	Задача 120	6cf19fb8cb524042fb08d624c2f844e2	862292.00	2026-04-13	2035-05-13	\N	\N	2	не распределена
+121	Задача 121	d5317e8ddc9de34c90983aa6b20eead4	305560.00	2026-04-12	2035-03-13	\N	\N	78	приостановлена
+122	Задача 122	44daed79e4bc9c0cc02c4d6fef51e072	823254.00	2026-04-12	2034-09-09	\N	420355f483eb7fce9dc44c381024f4cd	6	не распределена
+123	Задача 123	b32360c09a7d4a7cb32a805d329f0d22	791631.00	2026-04-10	2029-03-22	\N	8b680dd348e6af93d27f15d2c7c85944	56	приостановлена
+124	Задача 124	c43a3b51ef2b2e42aa02d9a641b83a84	2559.00	2026-04-12	2030-04-01	\N	7bd3cc0242557f4b67f7d0da7ffb4959	26	в работе
+125	Задача 125	a65b211c642661977ed4ebea89a6d071	858613.00	2026-04-12	2032-12-17	\N	c598dd0ac770c77452b5bd1a16f5a0dc	22	приостановлена
+126	Задача 126	3f48c8a6ae3f6061a21c0170a2d0f008	617310.00	2026-04-14	2027-08-01	\N	011c71392291ed15dfe62efaed52cef9	53	приостановлена
+127	Задача 127	e08dfba4ba683f2b3a3eb2b9b30a03af	253850.00	2026-04-12	2035-05-30	\N	862ce0c0a10499079238b8d2f393c022	93	отклонена
+128	Задача 128	f8b39bd340828084eb48870aa0927237	458884.00	2026-04-14	2037-06-06	\N	\N	68	приостановлена
+129	Задача 129	9e4814f66d4bf98f7d2b03c7e1bc4b73	632841.00	2026-04-12	2037-03-06	\N	\N	99	в работе
+130	Задача 130	8b3494d2fca744cb9b375bb02fd1dde8	52489.00	2026-04-13	2030-02-13	\N	76d9e9159ea4ae16944128a77a81f342	7	приостановлена
+131	Задача 131	9f4d8418fb4462f787b051a533530292	399969.00	2026-04-10	2037-04-25	\N	\N	36	приостановлена
+132	Задача 132	1dacaf229cd91ba795332277bf25b91b	386751.00	2026-04-13	2035-08-04	\N	405c48927241d94a27ec5d3783435a3c	66	отклонена
+133	Задача 133	fa2d571e06764d8d709ae40a32823a4b	287046.00	2026-04-14	2037-04-08	\N	db925e0f23ab6215faa82a4dc729d660	76	в работе
+134	Задача 134	48911bdc395fecb5b3c86191b02a989c	34801.00	2026-04-12	2033-05-28	\N	be185c706f58d14d3e4f43f3acb7b463	73	не распределена
+135	Задача 135	672ec69737989c80ab8c8fa81a905a01	234036.00	2026-04-11	2033-07-16	\N	\N	95	отклонена
+136	Задача 136	6ed8330f398109989a3ff48012389158	130124.00	2026-04-10	2032-11-01	\N	9fee76bb378ea518762e311264066015	24	отклонена
+137	Задача 137	6300ffc6348570702529990efe378205	623020.00	2026-04-13	2034-03-21	\N	993839da0dc90b650636c3f92cc6f5a8	83	не распределена
+138	Задача 138	b31df71628c20521b1931ed72db167d1	111027.00	2026-04-11	2028-12-22	\N	\N	6	не распределена
+139	Задача 139	9b7d5b6cec9c39f69882e98e4c880b11	967355.00	2026-04-13	2027-09-23	\N	0e2e96e688c105de8ef97eabd0188d68	59	в работе
+140	Задача 140	8a37f5bef46ddedbfaa1e9a793bd06ad	331394.00	2026-04-14	2034-12-26	\N	986e453fe1a788124ee3323f5bf1e2c7	54	не распределена
+141	Задача 141	c43212dfaac6b957d2b377fc30c56557	238485.00	2026-04-14	2037-07-13	\N	\N	58	в работе
+142	Задача 142	99a7ff6f7df96a63c0498b435771c872	853454.00	2026-04-10	2029-09-14	\N	\N	93	не распределена
+143	Задача 143	d33670825b5d93b47c1ee31eb79bd816	319981.00	2026-04-10	2033-10-10	\N	4edcfd127769560092a04a952a3e8a61	46	не распределена
+144	Задача 144	b53af39cee3ddfad82b248e3b6ac2812	890675.00	2026-04-13	2028-04-11	\N	\N	47	не распределена
+145	Задача 145	2a5b7af3adca185479c2349d59291a5c	968528.00	2026-04-14	2033-07-03	\N	5d87dd5ce6bbf2cb7deb8b1eb955996d	30	приостановлена
+146	Задача 146	9cab26b1f2eae528cb968c477e216303	568069.00	2026-04-10	2026-11-18	\N	\N	52	отклонена
+147	Задача 147	9e77d75b3d609196449f8de95f5f7d94	12814.00	2026-04-11	2030-10-28	\N	\N	33	не распределена
+148	Задача 148	3f2f8159821cfd52c0a627d9e28d4980	882203.00	2026-04-12	2037-07-09	\N	019306afcbc6a1ec896e126803fda89b	20	не распределена
+149	Задача 149	ecec3e58de5f936cf524804a3a2d8ecc	757201.00	2026-04-11	2032-06-06	\N	1ecebc77c6964e79a3cb7a1ea454b0b1	39	приостановлена
+150	Задача 150	ddcdff5ff18990bcd72e4e98c8c819e7	954329.00	2026-04-10	2030-03-01	\N	f211d487f056761f4e195191c29c25a6	52	отклонена
+\.
+
+
+--
+-- TOC entry 3156 (class 0 OID 16458)
+-- Dependencies: 205
+-- Data for Name: work_compl_cert; Type: TABLE DATA; Schema: project_management_sheme; Owner: postgres
+--
+
+COPY project_management_sheme.work_compl_cert (cert_id, cert_stat, cert_notes, place_date, accept_date, order_id) FROM stdin;
+1	отклонен	8744863fff8987c13ddb79ed8d9c6e64	2026-03-03	\N	1
+2	выставлен	11103ed80d0e4da4c0a6835df23d622d	2025-12-19	\N	2
+3	выставлен	6fee9cb4a15790298381de3cc85d59c5	2026-03-29	\N	3
+4	выставлен	8a5e79e4986dd4b9d967ac4ac84c50da	2025-09-20	\N	4
+5	выставлен	6263b3c9caf930010631b224379287e8	2025-07-30	\N	5
+6	отклонен	3cc40e8a7950621115039429b41c91b7	2025-07-20	\N	6
+7	отклонен	057bd19a0e78cafc3952c75e5b85135f	2025-05-11	\N	7
+8	выставлен	6b9b036df01e21a9b86de97efca5cbae	2026-04-18	\N	8
+9	отклонен	6bcccca75156fdd4daa4857f7c84b152	2025-07-07	\N	9
+10	выставлен	deeb6e858984ecabe2e0a32769ec5500	2026-02-22	\N	10
+11	выставлен	b6d1b2d918a3bceefeef16ad237087bc	2025-05-09	\N	11
+12	отклонен	2d92e8b641f2ade96359e0f4cd248990	2025-11-27	\N	12
+13	выставлен	f79bdcdfa7e55b78567a463a81134d84	2026-01-05	\N	13
+14	отклонен	065787d0175954ba57b42a78044bd3cb	2026-03-19	\N	14
+15	отклонен	69b087d63318e20e47a0212bffb53c47	2025-07-07	\N	15
+16	отклонен	e2410ced517fc02d99917f1ae2e5f257	2026-01-04	\N	16
+17	выставлен	8fa1fe4c3eca3dad2759ec16f57e91d8	2025-06-15	\N	17
+18	отклонен	5a9bf91de60e77683e2a3cf0beab8e2e	2026-01-30	\N	18
+19	выставлен	74f6b9da80ce0d33f21c2d15c487f2a8	2026-03-19	\N	19
+20	выставлен	e06cdd1756e95847fd479d09ba9bec1b	2025-12-28	\N	20
+21	выставлен	681912c3fa1215ff83d42943a9057540	2025-06-28	\N	21
+22	отклонен	021d7f41bce41be03b001cbb91a8bb36	2025-06-19	\N	22
+23	отклонен	dc13f882f342d2b575765107fa0ea76e	2025-07-17	\N	23
+24	выставлен	e2957f26d53b5e5b2902febf4ade211a	2025-06-22	\N	24
+25	выставлен	802f4f6c1b8ae6b2370e944d5706b5de	2026-03-19	\N	25
+26	выставлен	cf12bd5c2a21f53da580571f1cc8ee11	2025-08-14	\N	26
+27	выставлен	b39f36fe41575cf4a8adb3ab00669c8d	2025-08-18	\N	27
+28	отклонен	09c9610346e51851f24537909758c87b	2026-04-01	\N	28
+29	отклонен	5e3970a5b4b0efa5ff2bc96df510603f	2026-02-20	\N	29
+30	отклонен	e2a457f78bf1b0b17ebd107e79cd8d68	2025-07-04	\N	30
+31	отклонен	740ddd8827b0abd60e39e53170b89c5b	2025-12-09	\N	31
+32	отклонен	61aadf42445276f512ca002b99f5d962	2026-04-17	\N	32
+33	отклонен	c1a1ce21421439d1c51b2245174f8b70	2026-02-16	\N	33
+34	выставлен	106a9562efbd7a3659ca872a866849ba	2026-01-28	\N	34
+35	выставлен	dc2218cb23d0a867276593487c66f5ff	2025-07-31	\N	35
+36	отклонен	4e3938b5d583654feaadd4e3a898558e	2026-03-22	\N	36
+37	отклонен	0b81c7b8c3e672be27c1b1aa1a7ac7de	2026-04-15	\N	37
+38	отклонен	3e19a69a9ac19f77f13dbd72f001f5f1	2025-07-20	\N	38
+39	выставлен	cadbe8a41e0f06d73313ebda888aa933	2026-02-13	\N	39
+40	отклонен	c39c6b7db4f445c68ac60969cb1682f8	2025-06-03	\N	40
+41	выставлен	8a5e130f756757f642aa305b191af0e4	2025-07-01	\N	41
+42	отклонен	0cb065a0aa117f4fd743c5ebba8a7b4f	2025-09-09	\N	42
+43	отклонен	266d0c416285fa23ee50600560578421	2025-12-27	\N	43
+44	отклонен	da2ba95cc80209d3ba3e1c7c05922ccd	2026-03-27	\N	44
+45	выставлен	9f776a268eff93f318f5788de4166f8c	2025-09-07	\N	45
+46	выставлен	b48c89d18bcd6c91f151d3a2958506eb	2025-12-09	\N	46
+47	отклонен	f424f597357204125f2e9ffb84e2b236	2025-08-16	\N	47
+48	выставлен	0b9c0eb5b9cebaeed5e4dfc898c3a089	2025-06-13	\N	48
+49	отклонен	33dbfafdfc5d0de31d798dbc5eb598ce	2026-02-08	\N	49
+50	выставлен	4f809f18f1fe902e6b5be7eef93674e4	2025-12-05	\N	50
+51	выставлен	23a3a39e3d7b0cdc4c20762c6d378c72	2025-06-12	\N	51
+52	выставлен	0a7961758853f70810354b1fafd750c5	2026-04-10	\N	52
+53	выставлен	d8fb246467c8d2595fe347f6892fab06	2025-07-23	\N	53
+54	выставлен	25d2f40081510f2c3f94feab7b4372ba	2026-01-18	\N	54
+55	отклонен	5c9a4324e3103a7bf3051d36eebd3683	2025-08-12	\N	55
+56	выставлен	9e1569dd35ab5dd2eafaccf421b90d56	2025-12-06	\N	56
+57	отклонен	feecbf541236f80d546635a29f3271ea	2026-02-11	\N	57
+58	отклонен	58d0ff56ccc6bf306bc17bb2ba39fe9c	2026-01-12	\N	58
+59	отклонен	b9b8a69b9e54558c4cada4f0e5e8d753	2025-08-10	\N	59
+60	отклонен	246c13be93f63424adb9744813a91293	2026-01-14	\N	60
+61	выставлен	2ffd075dd832e1f78b15bcf2bb1265ee	2025-09-22	\N	61
+62	выставлен	159be634aa6ea86e78148f1bcc28724b	2025-12-11	\N	62
+63	отклонен	53982c2dc1b0609a6058df2a2e533ce5	2025-11-24	\N	63
+64	отклонен	cff62b55394a13a37d78f2819031a50e	2025-11-08	\N	64
+65	отклонен	ca3a1bb06d55e527cc6e428c8fe923c3	2025-08-24	\N	65
+66	отклонен	2ab5a99f001c78f9bf1209e1bd4067af	2025-10-30	\N	66
+67	выставлен	c26a3102051b3a5018c2b9d63fb5e0d6	2025-06-20	\N	67
+68	выставлен	7b11f6003ea2c7b09679657a2a80b673	2026-01-01	\N	68
+69	отклонен	800b61d034318384ee36937024e08893	2025-11-28	\N	69
+70	отклонен	e3395b5877a3f145e2b38f10eb77705d	2025-11-30	\N	70
+71	отклонен	00b90ff9c7205479a9cddade426c2645	2026-04-26	\N	71
+72	отклонен	360c036a3490ab7611e273b076a1d58f	2025-10-13	\N	72
+73	отклонен	9a9125e7692800fc5ddabe84032e5cb4	2026-01-24	\N	73
+74	отклонен	5e1d27b95a4a60f8fd6df7395c0ee463	2025-07-17	\N	74
+75	выставлен	e526822324834193ca3952e5f76a8a58	2025-09-22	\N	75
+76	отклонен	ab7d85db7af29c64745be6349c41ffae	2025-06-11	\N	76
+77	выставлен	066dd922ac09de572d3ca1c8d019ed48	2026-03-26	\N	77
+78	выставлен	8008b31da34a586b3ac828d527bc9eff	2025-07-04	\N	78
+79	выставлен	ab39e217f95c4cfd6abcc987bfff891c	2025-10-19	\N	79
+80	отклонен	62a93ad80c827d4e2ba8d5314e8f1169	2025-06-16	\N	80
+81	отклонен	b8f29bc9b708ec1bda52298f2ea1b89f	2025-11-04	\N	81
+82	отклонен	580576183a749022dabb4bfeaff404e3	2026-01-14	\N	82
+83	отклонен	13f410c82b0c12c300166e528cfa7677	2025-07-24	\N	83
+84	выставлен	a071a8240599729190ef9bb3840a24cd	2025-12-01	\N	84
+85	выставлен	2b74dcbfe0481050401621d05211e27e	2025-11-26	\N	85
+86	отклонен	f5a76a993b134b6a7c06ca1d1bf07820	2025-09-02	\N	86
+87	отклонен	3b9a6840e26fef9087eda57c1627d0b9	2025-08-28	\N	87
+88	отклонен	8dc5daf10b76e12060d23025bc0272bd	2025-07-02	\N	88
+89	выставлен	d94836b7e4d51d57c7a83a450c2cebf5	2025-10-13	\N	89
+90	выставлен	f8e37cddf8379c86d8020e3717b996c2	2025-06-17	\N	90
+91	выставлен	98635a82b4aef3152d43e7e93b8766ba	2025-11-25	\N	91
+92	выставлен	02c7a89e263ab4bda86a733ce8c0c8a1	2026-03-20	\N	92
+93	отклонен	b3f980dc6b71a7b23f2febc9f870bfe5	2026-02-23	\N	93
+94	отклонен	d2cb8b7af044377a0c4cfc9e7e981a0b	2026-03-26	\N	94
+95	выставлен	ec8d5dd623a0b0983e39fc838c349c89	2025-11-21	\N	95
+96	выставлен	a4a10fb41c3b6ddea404e32cd75b383e	2025-07-17	\N	96
+97	выставлен	ed232cea9aff4335b607c2537371df2b	2025-05-23	\N	97
+98	выставлен	e5f24cda09857a14d643b8585fcd8128	2025-12-01	\N	98
+99	выставлен	37171f6ffb51406b235e31c853be119e	2026-01-19	\N	99
+100	выставлен	78622665875d4eb9d8dda9ab9ec64f5a	2025-10-22	\N	100
+\.
+
+
+--
+-- TOC entry 3183 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: check_check_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.check_check_id_seq', 100, true);
+
+
+--
+-- TOC entry 3184 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: client_client_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.client_client_id_seq', 50, true);
+
+
+--
+-- TOC entry 3185 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: control_graph_graph_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.control_graph_graph_id_seq', 150, true);
+
+
+--
+-- TOC entry 3186 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: division_division_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.division_division_id_seq', 20, true);
+
+
+--
+-- TOC entry 3187 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: employee_in_division_employee_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.employee_in_division_employee_id_seq', 50, true);
+
+
+--
+-- TOC entry 3188 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: employee_in_project_proj_work_act_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.employee_in_project_proj_work_act_id_seq', 122, true);
+
+
+--
+-- TOC entry 3189 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: employee_in_task_employee_task_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.employee_in_task_employee_task_id_seq', 200, true);
+
+
+--
+-- TOC entry 3190 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: order_order_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.order_order_id_seq', 100, true);
+
+
+--
+-- TOC entry 3191 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: project_manager_manager_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.project_manager_manager_id_seq', 120, true);
+
+
+--
+-- TOC entry 3192 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: project_paym_trans_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.project_paym_trans_id_seq', 200, true);
+
+
+--
+-- TOC entry 3193 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: task_task_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.task_task_id_seq', 150, true);
+
+
+--
+-- TOC entry 3194 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: work_compl_cert_cert_id_seq; Type: SEQUENCE SET; Schema: project_management_sheme; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_management_sheme.work_compl_cert_cert_id_seq', 100, true);
+
+
+--
+-- TOC entry 2951 (class 2606 OID 16662)
+-- Name: work_compl_cert accept_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.work_compl_cert
+    ADD CONSTRAINT accept_date_check CHECK ((accept_date <= place_date)) NOT VALID;
+
+
+--
+-- TOC entry 2964 (class 2606 OID 16654)
+-- Name: employee_in_project act_status_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_project
+    ADD CONSTRAINT act_status_check CHECK ((((act_status)::text = 'выполнен'::text) OR ((act_status)::text = 'в работе'::text) OR ((act_status)::text = 'приостановлен'::text) OR ((act_status)::text = 'принят'::text) OR ((act_status)::text = 'отклонен'::text) OR ((act_status)::text = 'заключен'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2952 (class 2606 OID 16661)
+-- Name: work_compl_cert cert_stat_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.work_compl_cert
+    ADD CONSTRAINT cert_stat_check CHECK ((((cert_stat)::text = 'выставлен'::text) OR ((cert_stat)::text = 'принят'::text) OR ((cert_stat)::text = 'отклонен'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2945 (class 2606 OID 16629)
+-- Name: order check_oder_status; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."order"
+    ADD CONSTRAINT check_oder_status CHECK ((((oredr_status)::text = 'выполнен'::text) OR ((oredr_status)::text = 'в работе'::text) OR ((oredr_status)::text = 'приостановлен'::text) OR ((oredr_status)::text = 'принят'::text) OR ((oredr_status)::text = 'отклонен'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2986 (class 2606 OID 16453)
+-- Name: check check_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme."check"
+    ADD CONSTRAINT check_pkey PRIMARY KEY (check_id);
+
+
+--
+-- TOC entry 2948 (class 2606 OID 16667)
+-- Name: check check_status; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."check"
+    ADD CONSTRAINT check_status CHECK ((((check_status)::text = 'отклонен'::text) OR ((check_status)::text = 'выставлен'::text) OR ((check_status)::text = 'оплачен'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2949 (class 2606 OID 17534)
+-- Name: check check_sum; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."check"
+    ADD CONSTRAINT check_sum CHECK (((check_sum < ('1000000000000'::bigint)::numeric) AND (check_sum > (0)::numeric))) NOT VALID;
+
+
+--
+-- TOC entry 2950 (class 2606 OID 17535)
+-- Name: check check_type; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."check"
+    ADD CONSTRAINT check_type CHECK ((((check_type)::text = 'предоплата'::text) OR ((check_type)::text = 'остаток'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2941 (class 2606 OID 16851)
+-- Name: client client_address_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.client
+    ADD CONSTRAINT client_address_check CHECK (((client_adress)::text ~ '^[а-яА-Яa-zA-Z0-9 \-/,.]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2982 (class 2606 OID 16437)
+-- Name: client client_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.client
+    ADD CONSTRAINT client_pkey PRIMARY KEY (client_id);
+
+
+--
+-- TOC entry 2974 (class 2606 OID 16673)
+-- Name: control_graph compl_due_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.control_graph
+    ADD CONSTRAINT compl_due_date_check CHECK (((compl_due_date > 0) AND (compl_due_date < 100))) NOT VALID;
+
+
+--
+-- TOC entry 2975 (class 2606 OID 16672)
+-- Name: control_graph complet_status_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.control_graph
+    ADD CONSTRAINT complet_status_check CHECK ((((complet_status)::text = 'выполнен'::text) OR ((complet_status)::text = 'в работе'::text) OR ((complet_status)::text = 'приостановлен'::text) OR ((complet_status)::text = 'принят'::text) OR ((complet_status)::text = 'отклонен'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2969 (class 2606 OID 16644)
+-- Name: task complete_day_exp_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.task
+    ADD CONSTRAINT complete_day_exp_check CHECK (((start_day < complete_day_exp) AND (complete_day_exp < (start_day + '15 years'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2970 (class 2606 OID 16645)
+-- Name: task complete_day_real_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.task
+    ADD CONSTRAINT complete_day_real_check CHECK (((start_day < complete_day_real) AND (complete_day_real < (start_day + '15 years'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 3004 (class 2606 OID 16604)
+-- Name: control_graph control_graph_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.control_graph
+    ADD CONSTRAINT control_graph_pkey PRIMARY KEY (graph_id);
+
+
+--
+-- TOC entry 2971 (class 2606 OID 17550)
+-- Name: task cost_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.task
+    ADD CONSTRAINT cost_check CHECK (((task_cost > (0)::numeric) AND (task_cost < (1000000)::numeric))) NOT VALID;
+
+
+--
+-- TOC entry 2953 (class 2606 OID 17290)
+-- Name: division division_phone_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.division
+    ADD CONSTRAINT division_phone_check CHECK (((division_phone)::text ~ '^\+7 \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2990 (class 2606 OID 16470)
+-- Name: division division_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.division
+    ADD CONSTRAINT division_pkey PRIMARY KEY (division_id);
+
+
+--
+-- TOC entry 2994 (class 2606 OID 16491)
+-- Name: employee_in_division employee_in_division_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_division
+    ADD CONSTRAINT employee_in_division_pkey PRIMARY KEY (employee_id);
+
+
+--
+-- TOC entry 2998 (class 2606 OID 16517)
+-- Name: employee_in_project employee_in_project_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_project
+    ADD CONSTRAINT employee_in_project_pkey PRIMARY KEY (proj_work_act_id);
+
+
+--
+-- TOC entry 3006 (class 2606 OID 16615)
+-- Name: employee_in_task employee_in_task_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_task
+    ADD CONSTRAINT employee_in_task_pkey PRIMARY KEY (employee_task_id);
+
+
+--
+-- TOC entry 2954 (class 2606 OID 17489)
+-- Name: employee employee_name_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee
+    ADD CONSTRAINT employee_name_check CHECK (((employee_name)::text ~ '^[ёа-яА-Яa-zA-Z0-9 -]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2955 (class 2606 OID 17486)
+-- Name: employee employee_passport_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee
+    ADD CONSTRAINT employee_passport_check CHECK (((employee_passport)::text ~ '^[0-9]{4}\ [0-9]{6}$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2992 (class 2606 OID 16478)
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (employee_passport);
+
+
+--
+-- TOC entry 2965 (class 2606 OID 16655)
+-- Name: employee_in_project end_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_project
+    ADD CONSTRAINT end_date_check CHECK (((start_date < end_date) AND (end_date < (start_date + '15 years'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2946 (class 2606 OID 16650)
+-- Name: order end_exp_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."order"
+    ADD CONSTRAINT end_exp_date_check CHECK (((project_start < project_end_exp) AND (project_end_exp < (project_start + '15 years'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2962 (class 2606 OID 16676)
+-- Name: project_manager hire_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.project_manager
+    ADD CONSTRAINT hire_date_check CHECK (((hire_date >= CURRENT_DATE) AND (hire_date < (CURRENT_DATE + '14 days'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2963 (class 2606 OID 16677)
+-- Name: project_manager layoff_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.project_manager
+    ADD CONSTRAINT layoff_date_check CHECK (((hire_date < layoff_date) AND (layoff_date < (hire_date + '15 years'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2984 (class 2606 OID 16445)
+-- Name: order order_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme."order"
+    ADD CONSTRAINT order_pkey PRIMARY KEY (order_id);
+
+
+--
+-- TOC entry 2956 (class 2606 OID 17487)
+-- Name: employee pass_code_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee
+    ADD CONSTRAINT pass_code_check CHECK (((pass_code)::text ~ '^[0-9]{3}\-[0-9]{3}$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2957 (class 2606 OID 16684)
+-- Name: employee pass_start_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee
+    ADD CONSTRAINT pass_start_date_check CHECK ((('1960-01-01'::date <= pass_start_date) AND (pass_start_date <= CURRENT_DATE))) NOT VALID;
+
+
+--
+-- TOC entry 2958 (class 2606 OID 17488)
+-- Name: employee pass_who_gave_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee
+    ADD CONSTRAINT pass_who_gave_check CHECK (((pass_who_gave)::text ~ '^[а-яА-Яa-zA-Z0-9 -.,]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2966 (class 2606 OID 16686)
+-- Name: project_paym pay_date_type_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.project_paym
+    ADD CONSTRAINT pay_date_type_check CHECK ((((pay_date_type)::text = 'оплачено'::text) OR ((pay_date_type)::text = 'не оплачено'::text) OR ((pay_date_type)::text = 'отклонено'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2967 (class 2606 OID 16687)
+-- Name: project_paym pay_status_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.project_paym
+    ADD CONSTRAINT pay_status_check CHECK ((((pay_status)::text = 'разовая'::text) OR ((pay_status)::text = 'ежемесячная'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2968 (class 2606 OID 17576)
+-- Name: project_paym pay_sum_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.project_paym
+    ADD CONSTRAINT pay_sum_check CHECK (((pay_sum > (0)::numeric) AND (pay_sum < '1000000000000'::numeric))) NOT VALID;
+
+
+--
+-- TOC entry 2980 (class 2606 OID 16424)
+-- Name: position position_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme."position"
+    ADD CONSTRAINT position_pkey PRIMARY KEY (job_name);
+
+
+--
+-- TOC entry 2996 (class 2606 OID 16504)
+-- Name: project_manager project_manager_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.project_manager
+    ADD CONSTRAINT project_manager_pkey PRIMARY KEY (manager_id);
+
+
+--
+-- TOC entry 3000 (class 2606 OID 16531)
+-- Name: project_paym project_paym_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.project_paym
+    ADD CONSTRAINT project_paym_pkey PRIMARY KEY (trans_id);
+
+
+--
+-- TOC entry 2939 (class 2606 OID 16682)
+-- Name: position rate_num_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."position"
+    ADD CONSTRAINT rate_num_check CHECK (((rate_num = (1)::numeric) OR (rate_num = 0.5) OR (rate_num = 0.25) OR (rate_num = 0.75))) NOT VALID;
+
+
+--
+-- TOC entry 2942 (class 2606 OID 16689)
+-- Name: client repre_email_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.client
+    ADD CONSTRAINT repre_email_check CHECK (((repre_email)::text ~~ '%@%.%'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2943 (class 2606 OID 16854)
+-- Name: client repre_name_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.client
+    ADD CONSTRAINT repre_name_check CHECK (((repre_name)::text ~ '^[а-яА-Яa-zA-Z -]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2944 (class 2606 OID 16889)
+-- Name: client repre_phone_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.client
+    ADD CONSTRAINT repre_phone_check CHECK (((repre_phone)::text ~ '^\+[0-9]{1} \([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2976 (class 2606 OID 16696)
+-- Name: control_graph resp_employee_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.control_graph
+    ADD CONSTRAINT resp_employee_check CHECK (((resp_employee)::text ~ '^[а-яА-Яa-zA-Z0-9 -]+$'::text)) NOT VALID;
+
+
+--
+-- TOC entry 2940 (class 2606 OID 17450)
+-- Name: position salary_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."position"
+    ADD CONSTRAINT salary_check CHECK ((((0)::numeric < salary) AND (salary < (1000000)::numeric))) NOT VALID;
+
+
+--
+-- TOC entry 2947 (class 2606 OID 16632)
+-- Name: order start_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme."order"
+    ADD CONSTRAINT start_date_check CHECK (((project_start >= CURRENT_DATE) AND (project_start < (CURRENT_DATE + '2 years'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2972 (class 2606 OID 16639)
+-- Name: task start_day_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.task
+    ADD CONSTRAINT start_day_check CHECK (((start_day >= CURRENT_DATE) AND (start_day < (CURRENT_DATE + '2 years'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2973 (class 2606 OID 16701)
+-- Name: task status_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.task
+    ADD CONSTRAINT status_check CHECK (((status)::text = ANY ((ARRAY['не распределена'::character varying, 'в работе'::character varying, 'отклонена'::character varying, 'приостановлена'::character varying, 'завершена'::character varying])::text[]))) NOT VALID;
+
+
+--
+-- TOC entry 2977 (class 2606 OID 16681)
+-- Name: employee_in_task task_compl_status; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_task
+    ADD CONSTRAINT task_compl_status CHECK ((((task_compl_status)::text = 'отклонен'::text) OR ((task_compl_status)::text = 'выполнен'::text) OR ((task_compl_status)::text = 'в работе'::text) OR ((task_compl_status)::text = 'принят'::text) OR ((task_compl_status)::text = 'приостановлен'::text))) NOT VALID;
+
+
+--
+-- TOC entry 2978 (class 2606 OID 17571)
+-- Name: employee_in_task task_payment_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_task
+    ADD CONSTRAINT task_payment_check CHECK (((task_payment > (0)::numeric) AND (task_payment < (1000000)::numeric))) NOT VALID;
+
+
+--
+-- TOC entry 3002 (class 2606 OID 16539)
+-- Name: task task_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.task
+    ADD CONSTRAINT task_pkey PRIMARY KEY (task_id);
+
+
+--
+-- TOC entry 2988 (class 2606 OID 16465)
+-- Name: work_compl_cert work_compl_cert_pkey; Type: CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.work_compl_cert
+    ADD CONSTRAINT work_compl_cert_pkey PRIMARY KEY (cert_id);
+
+
+--
+-- TOC entry 2959 (class 2606 OID 16647)
+-- Name: employee_in_division work_end_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_division
+    ADD CONSTRAINT work_end_date_check CHECK (((work_end_date <= work_end_date) AND (work_end_date < (work_start_date + '15 years'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2960 (class 2606 OID 16648)
+-- Name: employee_in_division work_start_date_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_division
+    ADD CONSTRAINT work_start_date_check CHECK (((work_start_date >= CURRENT_DATE) AND (work_start_date < (CURRENT_DATE + '14 days'::interval)))) NOT VALID;
+
+
+--
+-- TOC entry 2961 (class 2606 OID 16649)
+-- Name: employee_in_division work_type_check; Type: CHECK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE project_management_sheme.employee_in_division
+    ADD CONSTRAINT work_type_check CHECK ((((work_type)::text = 'основная'::text) OR ((work_type)::text = 'внутреннее совместительство'::text) OR ((work_type)::text = 'внешнее совместительство'::text) OR ((work_type)::text = 'ГПХ'::text))) NOT VALID;
+
+
+--
+-- TOC entry 3007 (class 2606 OID 16580)
+-- Name: order client_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme."order"
+    ADD CONSTRAINT client_id FOREIGN KEY (client_id) REFERENCES project_management_sheme.client(client_id) NOT VALID;
+
+
+--
+-- TOC entry 3011 (class 2606 OID 16555)
+-- Name: employee_in_division division_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_division
+    ADD CONSTRAINT division_id FOREIGN KEY (division_id) REFERENCES project_management_sheme.division(division_id) NOT VALID;
+
+
+--
+-- TOC entry 3015 (class 2606 OID 16565)
+-- Name: employee_in_project employee_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_project
+    ADD CONSTRAINT employee_id FOREIGN KEY (employee_id) REFERENCES project_management_sheme.employee_in_division(employee_id) NOT VALID;
+
+
+--
+-- TOC entry 3014 (class 2606 OID 16590)
+-- Name: project_manager employee_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.project_manager
+    ADD CONSTRAINT employee_id FOREIGN KEY (employee_id) REFERENCES project_management_sheme.employee_in_division(employee_id) NOT VALID;
+
+
+--
+-- TOC entry 3012 (class 2606 OID 16560)
+-- Name: employee_in_division employee_passport; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_division
+    ADD CONSTRAINT employee_passport FOREIGN KEY (employee_passport) REFERENCES project_management_sheme.employee(employee_passport) NOT VALID;
+
+
+--
+-- TOC entry 3010 (class 2606 OID 16550)
+-- Name: employee_in_division job_name; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_division
+    ADD CONSTRAINT job_name FOREIGN KEY (job_name) REFERENCES project_management_sheme."position"(job_name) NOT VALID;
+
+
+--
+-- TOC entry 3008 (class 2606 OID 16545)
+-- Name: check order_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme."check"
+    ADD CONSTRAINT order_id FOREIGN KEY (order_id) REFERENCES project_management_sheme."order"(order_id) NOT VALID;
+
+
+--
+-- TOC entry 3016 (class 2606 OID 16570)
+-- Name: employee_in_project order_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_project
+    ADD CONSTRAINT order_id FOREIGN KEY (order_id) REFERENCES project_management_sheme."order"(order_id) NOT VALID;
+
+
+--
+-- TOC entry 3013 (class 2606 OID 16585)
+-- Name: project_manager order_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.project_manager
+    ADD CONSTRAINT order_id FOREIGN KEY (order_id) REFERENCES project_management_sheme."order"(order_id) NOT VALID;
+
+
+--
+-- TOC entry 3018 (class 2606 OID 16540)
+-- Name: task order_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.task
+    ADD CONSTRAINT order_id FOREIGN KEY (order_id) REFERENCES project_management_sheme."order"(order_id) NOT VALID;
+
+
+--
+-- TOC entry 3009 (class 2606 OID 16702)
+-- Name: work_compl_cert order_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.work_compl_cert
+    ADD CONSTRAINT order_id FOREIGN KEY (order_id) REFERENCES project_management_sheme."order"(order_id) NOT VALID;
+
+
+--
+-- TOC entry 3020 (class 2606 OID 16616)
+-- Name: employee_in_task proj_work_act_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_task
+    ADD CONSTRAINT proj_work_act_id FOREIGN KEY (proj_work_act_id) REFERENCES project_management_sheme.employee_in_project(proj_work_act_id);
+
+
+--
+-- TOC entry 3017 (class 2606 OID 16575)
+-- Name: project_paym proj_work_act_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.project_paym
+    ADD CONSTRAINT proj_work_act_id FOREIGN KEY (proj_work_act_id) REFERENCES project_management_sheme.employee_in_project(proj_work_act_id) NOT VALID;
+
+
+--
+-- TOC entry 3019 (class 2606 OID 16605)
+-- Name: control_graph task_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.control_graph
+    ADD CONSTRAINT task_id FOREIGN KEY (task_id) REFERENCES project_management_sheme.task(task_id);
+
+
+--
+-- TOC entry 3021 (class 2606 OID 16621)
+-- Name: employee_in_task task_id; Type: FK CONSTRAINT; Schema: project_management_sheme; Owner: postgres
+--
+
+ALTER TABLE ONLY project_management_sheme.employee_in_task
+    ADD CONSTRAINT task_id FOREIGN KEY (task_id) REFERENCES project_management_sheme.task(task_id);
+
+
+-- Completed on 2026-04-10 16:09:29
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict 85MIEUWSvhFJfwlEX25mSJrT1jNF1YxgT4OGLGqWabhc8bs6xSUFwY5wxCZNK43
+
