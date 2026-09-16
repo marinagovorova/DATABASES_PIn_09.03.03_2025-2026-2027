@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<StructuredType class="oracle.dbtools.crest.model.design.datatypes.StructuredType" name="XMLTYPE" directorySegmentName="seg_0" id="F72C39E0-D1CA-8821-2AD7-A1E95A37D3D1">
+<createdBy>polinamitrofanova</createdBy>
+<createdTime>2025-11-07 12:56:11 UTC</createdTime>
+<ownerDesignName>laba</ownerDesignName>
+<visible>false</visible>
+<predefined>true</predefined>
+<final>false</final>
+<instantiable>true</instantiable>
+</StructuredType>
