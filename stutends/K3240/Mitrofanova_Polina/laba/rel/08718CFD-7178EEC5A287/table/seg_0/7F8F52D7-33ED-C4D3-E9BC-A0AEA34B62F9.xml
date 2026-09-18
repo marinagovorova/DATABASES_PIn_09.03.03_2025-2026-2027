@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7F8F52D7-33ED-C4D3-E9BC-A0AEA34B62F9" name="Author">
+<createdBy>polinamitrofanova</createdBy>
+<createdTime>2025-11-07 12:56:37 UTC</createdTime>
+<ownerDesignName>laba</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="author_id" id="169B1E2B-DF66-3083-3B58-CC3B0376064A">
+<createdBy>polinamitrofanova</createdBy>
+<createdTime>2025-11-07 12:58:00 UTC</createdTime>
+<ownerDesignName>laba</ownerDesignName>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="first_name" id="448CB205-CAB4-39B9-E875-3F7486BE7EE3">
+<createdBy>polinamitrofanova</createdBy>
+<createdTime>2025-11-07 12:58:45 UTC</createdTime>
+<ownerDesignName>laba</ownerDesignName>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="last_name" id="98D14D32-A569-B975-7C4E-A9E8FB8113FA">
+<createdBy>polinamitrofanova</createdBy>
+<createdTime>2025-11-07 12:58:45 UTC</createdTime>
+<ownerDesignName>laba</ownerDesignName>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pseudonym" id="DE55C431-DC1B-85BA-238D-22AEEC7D4BCB">
+<createdBy>polinamitrofanova</createdBy>
+<createdTime>2025-11-07 12:58:45 UTC</createdTime>
+<ownerDesignName>laba</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="middle_name" id="08CC9B21-98E6-7DB6-970C-987F64191A92">
+<createdBy>polinamitrofanova</createdBy>
+<createdTime>2025-11-07 12:58:45 UTC</createdTime>
+<ownerDesignName>laba</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="09B5FFCD-C6B9-4400-2ABE-20F2E376FF98" name="Author_PK">
+<createdBy>polinamitrofanova</createdBy>
+<createdTime>2025-11-07 12:58:00 UTC</createdTime>
+<ownerDesignName>laba</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="169B1E2B-DF66-3083-3B58-CC3B0376064A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
