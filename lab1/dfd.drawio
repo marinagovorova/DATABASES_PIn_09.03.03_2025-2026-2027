@@ -1,0 +1,373 @@
+<mxfile host="app.diagrams.net" pages="3">
+  <diagram name="A-0" id="A-0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1900" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A-0_1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;labelBackgroundColor=none;labelBorderColor=none;strokeWidth=1;strokeColor=default;" value="&lt;b&gt;A-0. Контекстная диаграмма АИС MPHelper&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="1800" x="50" y="5" as="geometry" />
+        </mxCell>
+        <mxCell id="A-0_2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;labelBorderColor=none;strokeWidth=1;strokeColor=default;" value="E1 | Селлер" vertex="1">
+          <mxGeometry height="620" width="240" x="50" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="A-0_3" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;labelBorderColor=none;strokeWidth=1;strokeColor=default;" value="A0 | Вести учёт и рассчитывать юнит-экономику селлера" vertex="1">
+          <mxGeometry height="620" width="360" x="820" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="A-0_4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;labelBorderColor=none;strokeWidth=1;strokeColor=default;" value="E3 | API маркетплейсов" vertex="1">
+          <mxGeometry height="110" width="280" x="1550" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="A-0_5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;labelBorderColor=none;strokeWidth=1;strokeColor=default;" value="E2 | Платёжный сервис" vertex="1">
+          <mxGeometry height="90" width="300" x="850" y="915" as="geometry" />
+        </mxCell>
+        <mxCell id="A-0_6" edge="1" parent="1" source="A-0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.089;exitDx=0;exitDy=0;entryX=0.000;entryY=0.089;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_3" value="Логин, пароль, выбор тарифа">
+          <mxGeometry relative="1" x="0.0189" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_7" edge="1" parent="1" source="A-0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.181;exitDx=0;exitDy=0;entryX=1.000;entryY=0.181;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_2" value="Статус входа">
+          <mxGeometry relative="1" x="-0.0189" y="-12" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_8" edge="1" parent="1" source="A-0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.273;exitDx=0;exitDy=0;entryX=0.000;entryY=0.273;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_3" value="API-ключи, настройки синхронизации">
+          <mxGeometry relative="1" x="0.0189" y="19" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_9" edge="1" parent="1" source="A-0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.365;exitDx=0;exitDy=0;entryX=1.000;entryY=0.365;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_2" value="Статус подключения">
+          <mxGeometry relative="1" x="-0.0189" y="-16" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_10" edge="1" parent="1" source="A-0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.456;exitDx=0;exitDy=0;entryX=0.000;entryY=0.456;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_3" value="Закупочные цены, поставки, расходы">
+          <mxGeometry relative="1" x="0.0189" y="13" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_11" edge="1" parent="1" source="A-0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.548;exitDx=0;exitDy=0;entryX=0.000;entryY=0.548;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_3" value="Параметры расчёта (период, SKU, порог маржи)">
+          <mxGeometry relative="1" x="0.0189" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_12" edge="1" parent="1" source="A-0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.640;exitDx=0;exitDy=0;entryX=1.000;entryY=0.640;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_2" value="Отчёт юнит-экономики">
+          <mxGeometry relative="1" x="-0.0189" y="-7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_13" edge="1" parent="1" source="A-0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.732;exitDx=0;exitDy=0;entryX=1.000;entryY=0.732;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_2" value="Уведомления (ошибки данных, убыточные SKU)">
+          <mxGeometry relative="1" x="-0.0189" y="-14" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_14" edge="1" parent="1" source="A-0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.824;exitDx=0;exitDy=0;entryX=0.000;entryY=0.824;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_3" value="Запрос отчёта">
+          <mxGeometry relative="1" x="0.0189" y="11" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_15" edge="1" parent="1" source="A-0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.916;exitDx=0;exitDy=0;entryX=1.000;entryY=0.916;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_2" value="Аналитический отчёт">
+          <mxGeometry relative="1" x="-0.0189" y="-18" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_16" edge="1" parent="1" source="A-0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.460;exitDx=0;exitDy=0;entryX=0.000;entryY=0.273;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_4" value="Запросы к API">
+          <mxGeometry relative="1" x="-0.027" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_17" edge="1" parent="1" source="A-0_4" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.727;exitDx=0;exitDy=0;entryX=1.000;entryY=0.540;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_3" value="Заказы, продажи, возвраты,&lt;br&gt;финотчёты, остатки, статистика рекламы">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A-0_18" edge="1" parent="1" source="A-0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.333;exitY=1.000;exitDx=0;exitDy=0;entryX=0.300;entryY=0.000;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_5" value="Счёт на оплату">
+          <mxGeometry relative="1" x="-0.2398" y="-80" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A-0_19" edge="1" parent="1" source="A-0_5" style="html=1;endArrow=block;endFill=1;strokeWidth=1;fontSize=20;fontColor=#000000;labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.700;exitY=0.000;exitDx=0;exitDy=0;entryX=0.667;entryY=1.000;entryDx=0;entryDy=0;labelBorderColor=none;strokeColor=default;" target="A-0_3" value="Подтверждение оплаты">
+          <mxGeometry relative="1" x="0.2405" y="-110" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="A0" id="A0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="2280" pageHeight="1380" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A0_1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;A0. Детализация АИС MPHelper&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="2180" x="50" y="5" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="E1 | Селлер" vertex="1">
+          <mxGeometry height="1240" width="180" x="50" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_3" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A1 | Авторизовать селлера&lt;br&gt;и оформить подписку" vertex="1">
+          <mxGeometry height="90" width="300" x="640" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_4" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A2 | Подключить магазины" vertex="1">
+          <mxGeometry height="90" width="300" x="640" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_5" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A3 | Синхронизировать данные&lt;br&gt;с маркетплейсами" vertex="1">
+          <mxGeometry height="90" width="280" x="1580" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_6" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A4 | Учесть товары&lt;br&gt;и себестоимость" vertex="1">
+          <mxGeometry height="90" width="300" x="640" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_7" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A5 | Рассчитать&lt;br&gt;юнит-экономику" vertex="1">
+          <mxGeometry height="130" width="300" x="640" y="885" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_8" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A6 | Сформировать&lt;br&gt;аналитический отчёт" vertex="1">
+          <mxGeometry height="90" width="300" x="640" y="1175" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="E2 | Платёжный сервис" vertex="1">
+          <mxGeometry height="70" width="280" x="1160" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="E3 | API маркетплейсов" vertex="1">
+          <mxGeometry height="100" width="230" x="1995" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_11" parent="1" style="shape=partialRectangle;right=0;whiteSpace=wrap;html=1;strokeWidth=2;align=left;spacingLeft=8;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;D1 |&amp;nbsp;&lt;/b&gt;&lt;b&gt;Аккаунты и магазины&lt;/b&gt;" vertex="1">
+          <mxGeometry height="62" width="300" x="1150" y="284" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_12" parent="1" style="shape=partialRectangle;right=0;whiteSpace=wrap;html=1;strokeWidth=2;align=left;spacingLeft=8;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;D2 | Товары и себестоимость&lt;/b&gt;" vertex="1">
+          <mxGeometry height="62" width="300" x="1150" y="659" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_13" parent="1" style="shape=partialRectangle;right=0;whiteSpace=wrap;html=1;strokeWidth=2;align=left;spacingLeft=8;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;D3 | Продажи и начисления МП&lt;/b&gt;" vertex="1">
+          <mxGeometry height="62" width="300" x="1150" y="869" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_14" parent="1" style="shape=partialRectangle;right=0;whiteSpace=wrap;html=1;strokeWidth=2;align=left;spacingLeft=8;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;D4 | Реклама и аналитика&lt;/b&gt;" vertex="1">
+          <mxGeometry height="62" width="300" x="1150" y="1079" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_15" edge="1" parent="1" source="A0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.074;exitDx=0;exitDy=0;entryX=0.000;entryY=0.300;entryDx=0;entryDy=0;strokeColor=default;" target="A0_3" value="Логин, пароль, выбор тарифа">
+          <mxGeometry relative="1" x="0.0244" y="12" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_16" edge="1" parent="1" source="A0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.700;exitDx=0;exitDy=0;entryX=1.000;entryY=0.103;entryDx=0;entryDy=0;strokeColor=default;" target="A0_2" value="Статус входа">
+          <mxGeometry relative="1" x="-0.0244" y="-8" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_17" edge="1" parent="1" source="A0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.276;exitDx=0;exitDy=0;entryX=0.000;entryY=0.300;entryDx=0;entryDy=0;strokeColor=default;" target="A0_4" value="API-ключи, настройки синхронизации">
+          <mxGeometry relative="1" x="0.0244" y="12" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_18" edge="1" parent="1" source="A0_4" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.700;exitDx=0;exitDy=0;entryX=1.000;entryY=0.305;entryDx=0;entryDy=0;strokeColor=default;" target="A0_2" value="Статус подключения">
+          <mxGeometry relative="1" x="-0.0244" y="-8" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_19" edge="1" parent="1" source="A0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.492;exitDx=0;exitDy=0;entryX=0.000;entryY=0.500;entryDx=0;entryDy=0;strokeColor=default;" target="A0_6" value="Закупочные цены, поставки, расходы">
+          <mxGeometry relative="1" x="0.0244" y="20" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_20" edge="1" parent="1" source="A0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.668;exitDx=0;exitDy=0;entryX=0.000;entryY=0.177;entryDx=0;entryDy=0;strokeColor=default;" target="A0_7" value="Параметры расчёта (период, SKU, порог маржи)">
+          <mxGeometry relative="1" x="0.1221" y="28" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_21" edge="1" parent="1" source="A0_7" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.500;exitDx=0;exitDy=0;entryX=1.000;entryY=0.702;entryDx=0;entryDy=0;strokeColor=default;" target="A0_2" value="Отчёт юнит-экономики">
+          <mxGeometry relative="1" x="-0.0244" y="-10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_22" edge="1" parent="1" source="A0_7" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.823;exitDx=0;exitDy=0;entryX=1.000;entryY=0.735;entryDx=0;entryDy=0;strokeColor=default;" target="A0_2" value="Уведомления (ошибки данных, убыточные SKU)">
+          <mxGeometry relative="1" x="-0.1709" y="28" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_23" edge="1" parent="1" source="A0_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.905;exitDx=0;exitDy=0;entryX=0.000;entryY=0.300;entryDx=0;entryDy=0;strokeColor=default;" target="A0_8" value="Запрос отчёта">
+          <mxGeometry relative="1" x="0.0244" y="12" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_24" edge="1" parent="1" source="A0_8" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.700;exitDx=0;exitDy=0;entryX=1.000;entryY=0.934;entryDx=0;entryDy=0;strokeColor=default;" target="A0_2" value="Аналитический отчёт">
+          <mxGeometry relative="1" x="-0.0244" y="-8" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_25" edge="1" parent="1" source="A0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.111;exitDx=0;exitDy=0;entryX=0.000;entryY=0.286;entryDx=0;entryDy=0;strokeColor=default;" target="A0_9" value="Счёт на оплату">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_26" edge="1" parent="1" source="A0_9" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.714;exitDx=0;exitDy=0;entryX=1.000;entryY=0.333;entryDx=0;entryDy=0;strokeColor=default;" target="A0_3" value="Подтверждение оплаты">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_27" edge="1" parent="1" source="A0_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.611;exitDx=0;exitDy=0;entryX=0.000;entryY=0.145;entryDx=0;entryDy=0;strokeColor=default;" target="A0_11" value="Учётная запись, подписка">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_28" edge="1" parent="1" source="A0_11" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.419;exitDx=0;exitDy=0;entryX=1.000;entryY=0.833;entryDx=0;entryDy=0;strokeColor=default;" target="A0_3" value="Роли и права">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_29" edge="1" parent="1" source="A0_4" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.167;exitDx=0;exitDy=0;entryX=0.000;entryY=0.661;entryDx=0;entryDy=0;strokeColor=default;" target="A0_11" value="Данные магазина">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_30" edge="1" parent="1" source="A0_11" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.903;exitDx=0;exitDy=0;entryX=1.000;entryY=0.389;entryDx=0;entryDy=0;strokeColor=default;" target="A0_4" value="Состояние интеграции">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_31" edge="1" parent="1" source="A0_11" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.258;exitDx=0;exitDy=0;entryX=0.000;entryY=0.222;entryDx=0;entryDy=0;strokeColor=default;" target="A0_5" value="API-ключи, расписание">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_32" edge="1" parent="1" source="A0_5" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.444;exitDx=0;exitDy=0;entryX=1.000;entryY=0.742;entryDx=0;entryDy=0;strokeColor=default;" target="A0_11" value="Состояние синхронизации">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_33" edge="1" parent="1" source="A0_5" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.278;exitDx=0;exitDy=0;entryX=0.000;entryY=0.300;entryDx=0;entryDy=0;strokeColor=default;" target="A0_10" value="Запросы к API">
+          <mxGeometry relative="1" x="0.0371" y="10" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_34" edge="1" parent="1" source="A0_10" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.700;exitDx=0;exitDy=0;entryX=1.000;entryY=0.722;entryDx=0;entryDy=0;strokeColor=default;" target="A0_5" value="Заказы, продажи,&amp;nbsp;&lt;div&gt;возвраты,&lt;br&gt;финотчёты, остатки, ст&lt;/div&gt;&lt;div&gt;атистика рекламы&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.0371" y="50" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_35" edge="1" parent="1" source="A0_5" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;rounded=1;exitX=0.179;exitY=1.000;exitDx=0;exitDy=0;entryX=1.000;entryY=0.500;entryDx=0;entryDy=0;strokeColor=default;" target="A0_12" value="Карточки товаров, остатки">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1630" y="690" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_36" edge="1" parent="1" source="A0_5" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;rounded=1;exitX=0.321;exitY=1.000;exitDx=0;exitDy=0;entryX=1.000;entryY=0.500;entryDx=0;entryDy=0;strokeColor=default;" target="A0_13" value="Продажи, возвраты,&lt;br&gt;начисления МП">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1670" y="900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_37" edge="1" parent="1" source="A0_5" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;rounded=1;exitX=0.464;exitY=1.000;exitDx=0;exitDy=0;entryX=1.000;entryY=0.500;entryDx=0;entryDy=0;strokeColor=default;" target="A0_14" value="Статистика рекламы">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1710" y="1110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_38" edge="1" parent="1" source="A0_12" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.210;exitDx=0;exitDy=0;entryX=1.000;entryY=0.300;entryDx=0;entryDy=0;strokeColor=default;" target="A0_6" value="Карточки товаров">
+          <mxGeometry relative="1" x="0.0476" y="-12" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_39" edge="1" parent="1" source="A0_6" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.700;exitDx=0;exitDy=0;entryX=0.000;entryY=0.790;entryDx=0;entryDy=0;strokeColor=default;" target="A0_12" value="Себестоимость SKU">
+          <mxGeometry relative="1" x="-0.0476" y="8" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A0_40" edge="1" parent="1" source="A0_12" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.952;exitDx=0;exitDy=0;entryX=1.000;entryY=0.115;entryDx=0;entryDy=0;strokeColor=default;" target="A0_7" value="Себестоимость SKU">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_41" edge="1" parent="1" source="A0_13" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.500;exitDx=0;exitDy=0;entryX=1.000;entryY=0.385;entryDx=0;entryDy=0;strokeColor=default;" target="A0_7" value="Продажи, возвраты,&lt;br&gt;начисления МП">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_42" edge="1" parent="1" source="A0_14" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.097;exitDx=0;exitDy=0;entryX=1.000;entryY=0.577;entryDx=0;entryDy=0;strokeColor=default;" target="A0_7" value="Статистика рекламы">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_43" edge="1" parent="1" source="A0_7" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.923;exitDx=0;exitDy=0;entryX=0.000;entryY=0.742;entryDx=0;entryDy=0;strokeColor=default;" target="A0_14" value="Результаты расчёта">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A0_44" edge="1" parent="1" source="A0_14" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.855;exitDx=0;exitDy=0;entryX=1.000;entryY=0.500;entryDx=0;entryDy=0;strokeColor=default;" target="A0_8" value="Результаты расчёта">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="A5 (1.5)" id="A5 (1.5)">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1760" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="A5 (1.5)_1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;Детализация процесса A5 «Рассчитать юнит-экономику»&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="1660" x="50" y="5" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="E1 | Селлер" vertex="1">
+          <mxGeometry height="1120" width="180" x="50" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_3" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A5.1 | Принять параметры расчёта" vertex="1">
+          <mxGeometry height="86" width="320" x="840" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_4" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A5.2 | Рассчитать себестоимость&lt;br&gt;единицы SKU" vertex="1">
+          <mxGeometry height="86" width="320" x="840" y="307" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_5" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A5.3 | Распределить&lt;br&gt;начисления МП по SKU" vertex="1">
+          <mxGeometry height="86" width="320" x="840" y="527" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_6" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A5.4 | Учесть рекламные&lt;br&gt;расходы на ед." vertex="1">
+          <mxGeometry height="86" width="320" x="840" y="747" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_7" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A5.5 | Рассчитать маржу,&lt;br&gt;ROI и прибыль" vertex="1">
+          <mxGeometry height="86" width="320" x="840" y="967" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_8" parent="1" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;fontStyle=1;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="A5.6 | Сформировать&lt;br&gt;уведомления" vertex="1">
+          <mxGeometry height="86" width="280" x="420" y="527" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_9" parent="1" style="shape=partialRectangle;right=0;whiteSpace=wrap;html=1;strokeWidth=2;align=left;spacingLeft=8;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;D2 | Товары и себестоимость&lt;/b&gt;" vertex="1">
+          <mxGeometry height="62" width="300" x="1350" y="319" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_10" parent="1" style="shape=partialRectangle;right=0;whiteSpace=wrap;html=1;strokeWidth=2;align=left;spacingLeft=8;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;D3 | Продажи и начисления МП&lt;/b&gt;" vertex="1">
+          <mxGeometry height="62" width="300" x="1350" y="539" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_11" parent="1" style="shape=partialRectangle;right=0;whiteSpace=wrap;html=1;strokeWidth=2;align=left;spacingLeft=8;fontSize=20;labelBackgroundColor=none;strokeColor=default;" value="&lt;b&gt;D4 |&lt;/b&gt;&amp;nbsp;&lt;b&gt;Реклама и аналитика&lt;/b&gt;" vertex="1">
+          <mxGeometry height="62" width="300" x="1350" y="869" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_12" edge="1" parent="1" source="A5 (1.5)_2" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.062;exitDx=0;exitDy=0;entryX=0.000;entryY=0.500;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_3" value="Параметры расчёта (период, SKU, порог маржи)">
+          <mxGeometry relative="1" x="-0.0164" y="10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5 (1.5)_13" edge="1" parent="1" source="A5 (1.5)_8" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.500;exitDx=0;exitDy=0;entryX=1.000;entryY=0.455;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_2" value="Уведомления&amp;nbsp;&lt;div&gt;(ошибки данных,&amp;nbsp;&lt;/div&gt;&lt;div&gt;убыточные SKU)&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.0517" y="-40" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5 (1.5)_14" edge="1" parent="1" source="A5 (1.5)_7" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.733;exitDx=0;exitDy=0;entryX=1.000;entryY=0.866;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_2" value="Отчёт юнит-экономики">
+          <mxGeometry relative="1" x="0.0164" y="-10" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5 (1.5)_15" edge="1" parent="1" source="A5 (1.5)_3" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_4" value="Проверенный список SKU, порог маржи">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_16" edge="1" parent="1" source="A5 (1.5)_4" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_5" value="Расчёт по SKU: + себестоимость ед.">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_17" edge="1" parent="1" source="A5 (1.5)_5" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_6" value="Расчёт по SKU: + начисления МП на ед.">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_18" edge="1" parent="1" source="A5 (1.5)_6" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.500;exitY=1.000;exitDx=0;exitDy=0;entryX=0.500;entryY=0.000;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_7" value="Расчёт по SKU: + реклама на ед.">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_19" edge="1" parent="1" source="A5 (1.5)_9" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.500;exitDx=0;exitDy=0;entryX=1.000;entryY=0.500;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_4" value="Себестоимость SKU">
+          <mxGeometry relative="1" x="0.0526" y="-10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5 (1.5)_20" edge="1" parent="1" source="A5 (1.5)_10" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.500;exitDx=0;exitDy=0;entryX=1.000;entryY=0.500;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_5" value="Продажи, возвраты,&lt;br&gt;начисления МП">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_21" edge="1" parent="1" source="A5 (1.5)_11" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.258;exitDx=0;exitDy=0;entryX=1.000;entryY=0.616;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_6" value="Статистика рекламы">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_22" edge="1" parent="1" source="A5 (1.5)_7" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=1.000;exitY=0.384;exitDx=0;exitDy=0;entryX=0.000;entryY=0.742;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_11" value="Результаты расчёта">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_23" edge="1" parent="1" source="A5 (1.5)_4" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;rounded=1;exitX=0.000;exitY=0.616;exitDx=0;exitDy=0;entryX=0.357;entryY=0.000;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_8" value="Нет себестоимости по SKU">
+          <mxGeometry relative="1" x="-0.1376" y="-10" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="520" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A5 (1.5)_24" edge="1" parent="1" source="A5 (1.5)_5" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=none;rounded=0;exitX=0.000;exitY=0.674;exitDx=0;exitDy=0;entryX=1.000;entryY=0.674;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_8" value="Продажи&amp;nbsp;&lt;div&gt;без финотчёта&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A5 (1.5)_25" edge="1" parent="1" source="A5 (1.5)_7" style="html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=20;fontColor=light-dark(#000000,#000000);labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;rounded=1;exitX=0.000;exitY=0.267;exitDx=0;exitDy=0;entryX=0.643;entryY=1.000;entryDx=0;entryDy=0;strokeColor=default;" target="A5 (1.5)_8" value="Убыточные SKU">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="990" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
