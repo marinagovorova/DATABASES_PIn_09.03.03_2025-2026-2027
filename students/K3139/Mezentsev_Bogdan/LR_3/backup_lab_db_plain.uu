@@ -1,0 +1,1093 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict tEq7SWLiO3nnLcxxiSVWMUFk4fLuNKAeQ2ZJZ7fj8y8oaXDaMpW1CWX3FihvkA1
+
+-- Dumped from database version 14.19 (Homebrew)
+-- Dumped by pg_dump version 18.2
+
+-- Started on 2026-03-30 14:07:37 MSK
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 6 (class 2615 OID 24819)
+-- Name: phone_provider; Type: SCHEMA; Schema: -; Owner: 6ogdanmezentsev
+--
+
+CREATE SCHEMA phone_provider;
+
+
+ALTER SCHEMA phone_provider OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: 6ogdanmezentsev
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+ALTER SCHEMA public OWNER TO "6ogdanmezentsev";
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 213 (class 1259 OID 24863)
+-- Name: abonent; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.abonent (
+    abonent_id integer NOT NULL,
+    first_name character varying(50) NOT NULL,
+    last_name character varying(50) NOT NULL,
+    middle_name character varying(50),
+    phone character varying(15) NOT NULL,
+    address_id integer,
+    birth_date date NOT NULL,
+    balance numeric(10,2) DEFAULT 0,
+    CONSTRAINT abonent_birth_date_check CHECK ((birth_date <= (CURRENT_DATE - '18 years'::interval))),
+    CONSTRAINT abonent_first_name_check CHECK ((length((first_name)::text) >= 2)),
+    CONSTRAINT abonent_last_name_check CHECK ((length((last_name)::text) >= 2)),
+    CONSTRAINT abonent_middle_name_check CHECK ((length((middle_name)::text) >= 2))
+);
+
+
+ALTER TABLE phone_provider.abonent OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 212 (class 1259 OID 24862)
+-- Name: abonent_abonent_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.abonent_abonent_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.abonent_abonent_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3811 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: abonent_abonent_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.abonent_abonent_id_seq OWNED BY phone_provider.abonent.abonent_id;
+
+
+--
+-- TOC entry 211 (class 1259 OID 24828)
+-- Name: address; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.address (
+    address_id integer NOT NULL,
+    city character varying(30) NOT NULL,
+    street character varying(50) NOT NULL,
+    house character varying(10) NOT NULL
+);
+
+
+ALTER TABLE phone_provider.address OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 210 (class 1259 OID 24827)
+-- Name: address_address_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.address_address_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.address_address_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3812 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: address_address_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.address_address_id_seq OWNED BY phone_provider.address.address_id;
+
+
+--
+-- TOC entry 229 (class 1259 OID 24985)
+-- Name: call; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.call (
+    call_id integer NOT NULL,
+    abonent_id integer,
+    zone_id integer,
+    call_time timestamp without time zone NOT NULL,
+    duration integer,
+    total_cost numeric(10,2),
+    CONSTRAINT call_duration_check CHECK ((duration >= 0)),
+    CONSTRAINT call_total_cost_check CHECK ((total_cost >= (0)::numeric))
+);
+
+
+ALTER TABLE phone_provider.call OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 228 (class 1259 OID 24984)
+-- Name: call_call_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.call_call_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.call_call_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3813 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: call_call_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.call_call_id_seq OWNED BY phone_provider.call.call_id;
+
+
+--
+-- TOC entry 223 (class 1259 OID 24935)
+-- Name: call_zone; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.call_zone (
+    zone_id integer NOT NULL,
+    country character varying(50),
+    region character varying(50),
+    price_per_minute numeric(10,2),
+    CONSTRAINT call_zone_price_per_minute_check CHECK ((price_per_minute >= (0)::numeric))
+);
+
+
+ALTER TABLE phone_provider.call_zone OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 222 (class 1259 OID 24934)
+-- Name: call_zone_zone_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.call_zone_zone_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.call_zone_zone_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3814 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: call_zone_zone_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.call_zone_zone_id_seq OWNED BY phone_provider.call_zone.zone_id;
+
+
+--
+-- TOC entry 231 (class 1259 OID 25004)
+-- Name: payment; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.payment (
+    payment_id integer NOT NULL,
+    abonent_id integer,
+    amount numeric(10,2),
+    status character varying(20),
+    payment_method character varying(20),
+    planned_date date,
+    actual_date date,
+    CONSTRAINT payment_amount_check CHECK ((amount >= (0)::numeric)),
+    CONSTRAINT payment_check CHECK (((actual_date IS NULL) OR (actual_date >= planned_date))),
+    CONSTRAINT payment_status_check CHECK (((status)::text = ANY ((ARRAY['pending'::character varying, 'paid'::character varying, 'failed'::character varying])::text[])))
+);
+
+
+ALTER TABLE phone_provider.payment OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 230 (class 1259 OID 25003)
+-- Name: payment_payment_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.payment_payment_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.payment_payment_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3815 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: payment_payment_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.payment_payment_id_seq OWNED BY phone_provider.payment.payment_id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 24911)
+-- Name: service; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.service (
+    service_id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    description character varying(300),
+    status character varying(20),
+    CONSTRAINT service_status_check CHECK (((status)::text = ANY ((ARRAY['active'::character varying, 'inactive'::character varying])::text[])))
+);
+
+
+ALTER TABLE phone_provider.service OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 227 (class 1259 OID 24967)
+-- Name: service_connection; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.service_connection (
+    id integer NOT NULL,
+    abonent_id integer,
+    service_id integer,
+    start_date date NOT NULL,
+    end_date date,
+    CONSTRAINT service_connection_check CHECK (((end_date IS NULL) OR (end_date >= start_date)))
+);
+
+
+ALTER TABLE phone_provider.service_connection OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 226 (class 1259 OID 24966)
+-- Name: service_connection_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.service_connection_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.service_connection_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3816 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: service_connection_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.service_connection_id_seq OWNED BY phone_provider.service_connection.id;
+
+
+--
+-- TOC entry 221 (class 1259 OID 24921)
+-- Name: service_price_history; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.service_price_history (
+    id integer NOT NULL,
+    service_id integer,
+    price numeric(10,2),
+    start_date date NOT NULL,
+    end_date date,
+    CONSTRAINT service_price_history_check CHECK (((end_date IS NULL) OR (end_date >= start_date))),
+    CONSTRAINT service_price_history_price_check CHECK ((price >= (0)::numeric))
+);
+
+
+ALTER TABLE phone_provider.service_price_history OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 220 (class 1259 OID 24920)
+-- Name: service_price_history_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.service_price_history_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.service_price_history_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3817 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: service_price_history_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.service_price_history_id_seq OWNED BY phone_provider.service_price_history.id;
+
+
+--
+-- TOC entry 218 (class 1259 OID 24910)
+-- Name: service_service_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.service_service_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.service_service_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3818 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: service_service_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.service_service_id_seq OWNED BY phone_provider.service.service_id;
+
+
+--
+-- TOC entry 215 (class 1259 OID 24884)
+-- Name: tariff; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.tariff (
+    tariff_id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    status character varying(20) NOT NULL,
+    minutes integer,
+    gb integer,
+    sms integer,
+    CONSTRAINT tariff_gb_check CHECK ((gb >= 0)),
+    CONSTRAINT tariff_minutes_check CHECK ((minutes >= 0)),
+    CONSTRAINT tariff_sms_check CHECK ((sms >= 0)),
+    CONSTRAINT tariff_status_check CHECK (((status)::text = ANY ((ARRAY['active'::character varying, 'inactive'::character varying])::text[])))
+);
+
+
+ALTER TABLE phone_provider.tariff OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 225 (class 1259 OID 24943)
+-- Name: tariff_connection; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.tariff_connection (
+    id integer NOT NULL,
+    abonent_id integer,
+    tariff_id integer,
+    remaining_minutes integer DEFAULT 0,
+    remaining_gb integer DEFAULT 0,
+    remaining_sms integer DEFAULT 0,
+    start_date date NOT NULL,
+    end_date date,
+    CONSTRAINT tariff_connection_check CHECK (((end_date IS NULL) OR (end_date >= start_date))),
+    CONSTRAINT tariff_connection_remaining_gb_check CHECK ((remaining_gb >= 0)),
+    CONSTRAINT tariff_connection_remaining_minutes_check CHECK ((remaining_minutes >= 0)),
+    CONSTRAINT tariff_connection_remaining_sms_check CHECK ((remaining_sms >= 0))
+);
+
+
+ALTER TABLE phone_provider.tariff_connection OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 224 (class 1259 OID 24942)
+-- Name: tariff_connection_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.tariff_connection_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.tariff_connection_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3819 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: tariff_connection_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.tariff_connection_id_seq OWNED BY phone_provider.tariff_connection.id;
+
+
+--
+-- TOC entry 217 (class 1259 OID 24897)
+-- Name: tariff_price_history; Type: TABLE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE TABLE phone_provider.tariff_price_history (
+    id integer NOT NULL,
+    tariff_id integer,
+    price numeric(10,2),
+    start_date date NOT NULL,
+    end_date date,
+    CONSTRAINT tariff_price_history_check CHECK (((end_date IS NULL) OR (end_date >= start_date))),
+    CONSTRAINT tariff_price_history_price_check CHECK ((price >= (0)::numeric))
+);
+
+
+ALTER TABLE phone_provider.tariff_price_history OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 216 (class 1259 OID 24896)
+-- Name: tariff_price_history_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.tariff_price_history_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.tariff_price_history_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3820 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: tariff_price_history_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.tariff_price_history_id_seq OWNED BY phone_provider.tariff_price_history.id;
+
+
+--
+-- TOC entry 214 (class 1259 OID 24883)
+-- Name: tariff_tariff_id_seq; Type: SEQUENCE; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+CREATE SEQUENCE phone_provider.tariff_tariff_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE phone_provider.tariff_tariff_id_seq OWNER TO "6ogdanmezentsev";
+
+--
+-- TOC entry 3821 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: tariff_tariff_id_seq; Type: SEQUENCE OWNED BY; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER SEQUENCE phone_provider.tariff_tariff_id_seq OWNED BY phone_provider.tariff.tariff_id;
+
+
+--
+-- TOC entry 3568 (class 2604 OID 24866)
+-- Name: abonent abonent_id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.abonent ALTER COLUMN abonent_id SET DEFAULT nextval('phone_provider.abonent_abonent_id_seq'::regclass);
+
+
+--
+-- TOC entry 3567 (class 2604 OID 24831)
+-- Name: address address_id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.address ALTER COLUMN address_id SET DEFAULT nextval('phone_provider.address_address_id_seq'::regclass);
+
+
+--
+-- TOC entry 3580 (class 2604 OID 24988)
+-- Name: call call_id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.call ALTER COLUMN call_id SET DEFAULT nextval('phone_provider.call_call_id_seq'::regclass);
+
+
+--
+-- TOC entry 3574 (class 2604 OID 24938)
+-- Name: call_zone zone_id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.call_zone ALTER COLUMN zone_id SET DEFAULT nextval('phone_provider.call_zone_zone_id_seq'::regclass);
+
+
+--
+-- TOC entry 3581 (class 2604 OID 25007)
+-- Name: payment payment_id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.payment ALTER COLUMN payment_id SET DEFAULT nextval('phone_provider.payment_payment_id_seq'::regclass);
+
+
+--
+-- TOC entry 3572 (class 2604 OID 24914)
+-- Name: service service_id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service ALTER COLUMN service_id SET DEFAULT nextval('phone_provider.service_service_id_seq'::regclass);
+
+
+--
+-- TOC entry 3579 (class 2604 OID 24970)
+-- Name: service_connection id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service_connection ALTER COLUMN id SET DEFAULT nextval('phone_provider.service_connection_id_seq'::regclass);
+
+
+--
+-- TOC entry 3573 (class 2604 OID 24924)
+-- Name: service_price_history id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service_price_history ALTER COLUMN id SET DEFAULT nextval('phone_provider.service_price_history_id_seq'::regclass);
+
+
+--
+-- TOC entry 3570 (class 2604 OID 24887)
+-- Name: tariff tariff_id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff ALTER COLUMN tariff_id SET DEFAULT nextval('phone_provider.tariff_tariff_id_seq'::regclass);
+
+
+--
+-- TOC entry 3575 (class 2604 OID 24946)
+-- Name: tariff_connection id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff_connection ALTER COLUMN id SET DEFAULT nextval('phone_provider.tariff_connection_id_seq'::regclass);
+
+
+--
+-- TOC entry 3571 (class 2604 OID 24900)
+-- Name: tariff_price_history id; Type: DEFAULT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff_price_history ALTER COLUMN id SET DEFAULT nextval('phone_provider.tariff_price_history_id_seq'::regclass);
+
+
+--
+-- TOC entry 3786 (class 0 OID 24863)
+-- Dependencies: 213
+-- Data for Name: abonent; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.abonent (abonent_id, first_name, last_name, middle_name, phone, address_id, birth_date, balance) FROM stdin;
+1	Иван	Иванов	Иванович	9000000001	1	1995-05-10	500.00
+2	Петр	Петров	Петрович	9000000002	2	1990-07-20	150.00
+3	Анна	Сидорова	Алексеевна	9000000003	3	1998-03-15	-50.00
+\.
+
+
+--
+-- TOC entry 3784 (class 0 OID 24828)
+-- Dependencies: 211
+-- Data for Name: address; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.address (address_id, city, street, house) FROM stdin;
+1	Москва	Ленина	10
+2	Санкт-Петербург	Невский проспект	25
+3	Казань	Баумана	5
+\.
+
+
+--
+-- TOC entry 3802 (class 0 OID 24985)
+-- Dependencies: 229
+-- Data for Name: call; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.call (call_id, abonent_id, zone_id, call_time, duration, total_cost) FROM stdin;
+1	1	1	2026-03-01 10:00:00	10	25.00
+2	1	2	2026-03-02 12:00:00	5	15.00
+3	2	3	2026-03-03 18:30:00	3	30.00
+\.
+
+
+--
+-- TOC entry 3796 (class 0 OID 24935)
+-- Dependencies: 223
+-- Data for Name: call_zone; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.call_zone (zone_id, country, region, price_per_minute) FROM stdin;
+1	Россия	Москва	2.50
+2	Россия	Регионы	3.00
+3	Германия	Европа	10.00
+\.
+
+
+--
+-- TOC entry 3804 (class 0 OID 25004)
+-- Dependencies: 231
+-- Data for Name: payment; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.payment (payment_id, abonent_id, amount, status, payment_method, planned_date, actual_date) FROM stdin;
+1	1	500.00	paid	card	2026-03-01	2026-03-01
+2	2	300.00	pending	cash	2026-03-05	\N
+3	3	200.00	failed	card	2026-03-10	2026-03-12
+\.
+
+
+--
+-- TOC entry 3792 (class 0 OID 24911)
+-- Dependencies: 219
+-- Data for Name: service; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.service (service_id, name, description, status) FROM stdin;
+1	Роуминг	Звонки за границей	active
+2	Антиопределитель	Скрытие номера	active
+3	Голосовая почта	Сообщения	inactive
+\.
+
+
+--
+-- TOC entry 3800 (class 0 OID 24967)
+-- Dependencies: 227
+-- Data for Name: service_connection; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.service_connection (id, abonent_id, service_id, start_date, end_date) FROM stdin;
+1	1	1	2025-01-10	\N
+2	1	2	2025-01-15	\N
+3	2	1	2025-02-10	\N
+\.
+
+
+--
+-- TOC entry 3794 (class 0 OID 24921)
+-- Dependencies: 221
+-- Data for Name: service_price_history; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.service_price_history (id, service_id, price, start_date, end_date) FROM stdin;
+1	1	50.00	2024-01-01	\N
+2	2	30.00	2024-01-01	\N
+3	3	20.00	2023-01-01	2024-01-01
+\.
+
+
+--
+-- TOC entry 3788 (class 0 OID 24884)
+-- Dependencies: 215
+-- Data for Name: tariff; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.tariff (tariff_id, name, status, minutes, gb, sms) FROM stdin;
+1	Базовый	active	300	10	100
+2	Премиум	active	1000	50	500
+3	Архивный	inactive	100	5	50
+\.
+
+
+--
+-- TOC entry 3798 (class 0 OID 24943)
+-- Dependencies: 225
+-- Data for Name: tariff_connection; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.tariff_connection (id, abonent_id, tariff_id, remaining_minutes, remaining_gb, remaining_sms, start_date, end_date) FROM stdin;
+1	1	1	200	5	80	2025-01-01	\N
+2	2	2	900	40	450	2025-02-01	\N
+3	3	1	100	2	50	2025-03-01	\N
+\.
+
+
+--
+-- TOC entry 3790 (class 0 OID 24897)
+-- Dependencies: 217
+-- Data for Name: tariff_price_history; Type: TABLE DATA; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+COPY phone_provider.tariff_price_history (id, tariff_id, price, start_date, end_date) FROM stdin;
+1	1	300.00	2024-01-01	\N
+2	2	800.00	2024-01-01	\N
+3	3	150.00	2023-01-01	2024-01-01
+\.
+
+
+--
+-- TOC entry 3822 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: abonent_abonent_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.abonent_abonent_id_seq', 3, true);
+
+
+--
+-- TOC entry 3823 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: address_address_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.address_address_id_seq', 3, true);
+
+
+--
+-- TOC entry 3824 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: call_call_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.call_call_id_seq', 3, true);
+
+
+--
+-- TOC entry 3825 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: call_zone_zone_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.call_zone_zone_id_seq', 3, true);
+
+
+--
+-- TOC entry 3826 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: payment_payment_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.payment_payment_id_seq', 3, true);
+
+
+--
+-- TOC entry 3827 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: service_connection_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.service_connection_id_seq', 3, true);
+
+
+--
+-- TOC entry 3828 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: service_price_history_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.service_price_history_id_seq', 3, true);
+
+
+--
+-- TOC entry 3829 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: service_service_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.service_service_id_seq', 3, true);
+
+
+--
+-- TOC entry 3830 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: tariff_connection_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.tariff_connection_id_seq', 3, true);
+
+
+--
+-- TOC entry 3831 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: tariff_price_history_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.tariff_price_history_id_seq', 3, true);
+
+
+--
+-- TOC entry 3832 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: tariff_tariff_id_seq; Type: SEQUENCE SET; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+SELECT pg_catalog.setval('phone_provider.tariff_tariff_id_seq', 3, true);
+
+
+--
+-- TOC entry 3609 (class 2606 OID 24875)
+-- Name: abonent abonent_phone_key; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.abonent
+    ADD CONSTRAINT abonent_phone_key UNIQUE (phone);
+
+
+--
+-- TOC entry 3611 (class 2606 OID 24873)
+-- Name: abonent abonent_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.abonent
+    ADD CONSTRAINT abonent_pkey PRIMARY KEY (abonent_id);
+
+
+--
+-- TOC entry 3607 (class 2606 OID 24833)
+-- Name: address address_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.address
+    ADD CONSTRAINT address_pkey PRIMARY KEY (address_id);
+
+
+--
+-- TOC entry 3631 (class 2606 OID 24992)
+-- Name: call call_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.call
+    ADD CONSTRAINT call_pkey PRIMARY KEY (call_id);
+
+
+--
+-- TOC entry 3625 (class 2606 OID 24941)
+-- Name: call_zone call_zone_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.call_zone
+    ADD CONSTRAINT call_zone_pkey PRIMARY KEY (zone_id);
+
+
+--
+-- TOC entry 3633 (class 2606 OID 25012)
+-- Name: payment payment_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.payment
+    ADD CONSTRAINT payment_pkey PRIMARY KEY (payment_id);
+
+
+--
+-- TOC entry 3629 (class 2606 OID 24973)
+-- Name: service_connection service_connection_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service_connection
+    ADD CONSTRAINT service_connection_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3619 (class 2606 OID 24919)
+-- Name: service service_name_key; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service
+    ADD CONSTRAINT service_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 3621 (class 2606 OID 24917)
+-- Name: service service_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service
+    ADD CONSTRAINT service_pkey PRIMARY KEY (service_id);
+
+
+--
+-- TOC entry 3623 (class 2606 OID 24928)
+-- Name: service_price_history service_price_history_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service_price_history
+    ADD CONSTRAINT service_price_history_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3627 (class 2606 OID 24955)
+-- Name: tariff_connection tariff_connection_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff_connection
+    ADD CONSTRAINT tariff_connection_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3613 (class 2606 OID 24895)
+-- Name: tariff tariff_name_key; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff
+    ADD CONSTRAINT tariff_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 3615 (class 2606 OID 24893)
+-- Name: tariff tariff_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff
+    ADD CONSTRAINT tariff_pkey PRIMARY KEY (tariff_id);
+
+
+--
+-- TOC entry 3617 (class 2606 OID 24904)
+-- Name: tariff_price_history tariff_price_history_pkey; Type: CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff_price_history
+    ADD CONSTRAINT tariff_price_history_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3634 (class 2606 OID 24876)
+-- Name: abonent abonent_address_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.abonent
+    ADD CONSTRAINT abonent_address_id_fkey FOREIGN KEY (address_id) REFERENCES phone_provider.address(address_id);
+
+
+--
+-- TOC entry 3641 (class 2606 OID 24993)
+-- Name: call call_abonent_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.call
+    ADD CONSTRAINT call_abonent_id_fkey FOREIGN KEY (abonent_id) REFERENCES phone_provider.abonent(abonent_id);
+
+
+--
+-- TOC entry 3642 (class 2606 OID 24998)
+-- Name: call call_zone_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.call
+    ADD CONSTRAINT call_zone_id_fkey FOREIGN KEY (zone_id) REFERENCES phone_provider.call_zone(zone_id);
+
+
+--
+-- TOC entry 3643 (class 2606 OID 25013)
+-- Name: payment payment_abonent_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.payment
+    ADD CONSTRAINT payment_abonent_id_fkey FOREIGN KEY (abonent_id) REFERENCES phone_provider.abonent(abonent_id);
+
+
+--
+-- TOC entry 3639 (class 2606 OID 24974)
+-- Name: service_connection service_connection_abonent_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service_connection
+    ADD CONSTRAINT service_connection_abonent_id_fkey FOREIGN KEY (abonent_id) REFERENCES phone_provider.abonent(abonent_id);
+
+
+--
+-- TOC entry 3640 (class 2606 OID 24979)
+-- Name: service_connection service_connection_service_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service_connection
+    ADD CONSTRAINT service_connection_service_id_fkey FOREIGN KEY (service_id) REFERENCES phone_provider.service(service_id);
+
+
+--
+-- TOC entry 3636 (class 2606 OID 24929)
+-- Name: service_price_history service_price_history_service_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.service_price_history
+    ADD CONSTRAINT service_price_history_service_id_fkey FOREIGN KEY (service_id) REFERENCES phone_provider.service(service_id);
+
+
+--
+-- TOC entry 3637 (class 2606 OID 24956)
+-- Name: tariff_connection tariff_connection_abonent_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff_connection
+    ADD CONSTRAINT tariff_connection_abonent_id_fkey FOREIGN KEY (abonent_id) REFERENCES phone_provider.abonent(abonent_id);
+
+
+--
+-- TOC entry 3638 (class 2606 OID 24961)
+-- Name: tariff_connection tariff_connection_tariff_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff_connection
+    ADD CONSTRAINT tariff_connection_tariff_id_fkey FOREIGN KEY (tariff_id) REFERENCES phone_provider.tariff(tariff_id);
+
+
+--
+-- TOC entry 3635 (class 2606 OID 24905)
+-- Name: tariff_price_history tariff_price_history_tariff_id_fkey; Type: FK CONSTRAINT; Schema: phone_provider; Owner: 6ogdanmezentsev
+--
+
+ALTER TABLE ONLY phone_provider.tariff_price_history
+    ADD CONSTRAINT tariff_price_history_tariff_id_fkey FOREIGN KEY (tariff_id) REFERENCES phone_provider.tariff(tariff_id);
+
+
+--
+-- TOC entry 3810 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: 6ogdanmezentsev
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2026-03-30 14:07:37 MSK
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict tEq7SWLiO3nnLcxxiSVWMUFk4fLuNKAeQ2ZJZ7fj8y8oaXDaMpW1CWX3FihvkA1
+
