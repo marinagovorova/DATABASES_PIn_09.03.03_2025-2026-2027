@@ -1,0 +1,208 @@
+---------------------------------------------------
+1
+------------------------------------------------
+SELECT 
+e.employee_id,
+pd.full_name,
+e.phone,
+e.rating,
+COUNT(o.order_id) AS "Количество поездок на ул. Тверская"
+FROM "Taxi".employee e
+JOIN "Taxi".passport_data pd ON e.employee_id = pd.employee_id
+JOIN "Taxi".employment_contract ec ON pd.series_number = ec.passport_series_number
+JOIN "Taxi"."position" pos ON ec.position_id = pos.position_id
+JOIN "Taxi".work_shedule ws ON ec.contract_id = ws.contract_id
+JOIN "Taxi"."order" o ON ws.schedule_id = o.schedule_id
+JOIN "Taxi".destination_address da ON o.order_id = da.order_id
+WHERE pos.name = 'водитель' AND da.street = 'ул. Тверская'
+GROUP BY e.employee_id, pd.full_name, e.phone, e.rating;
+-------------------------------------------------------------------
+2
+--------------------------------------------------------------------
+SELECT 
+c.car_id,
+c.license_plate,
+c.mileage,
+c.last_maintenance_date,
+m.brand,
+m.name
+FROM "Taxi".car c
+JOIN "Taxi".model m ON c.model_id = m.model_id
+WHERE c.mileage > 250000
+AND EXTRACT(YEAR FROM c.last_maintenance_date) < EXTRACT(YEAR FROM CURRENT_DATE);
+-----------------------------------------------------------------------------------
+3
+-----------------------------------------------------------------------------------
+SELECT 
+p.passenger_id,
+p.full_name,
+p.phone,
+p.rating,
+COUNT(o.order_id) AS "Количество поездок"
+FROM "Taxi".passenger p
+LEFT JOIN "Taxi"."order" o ON p.passenger_id = o.passenger_id
+GROUP BY p.passenger_id; 
+---------------------------------------------------------------------------------------
+4
+--------------------------------------------------------------------------------------
+SELECT 
+p.passenger_id,
+p.full_name,
+p.phone,
+p.rating,
+COUNT(o.order_id) AS "Количество поездок"
+FROM "Taxi".passenger p
+JOIN "Taxi"."order" o ON p.passenger_id = o.passenger_id
+GROUP BY p.passenger_id
+HAVING COUNT(o.order_id) = (SELECT MAX(order_count)
+FROM (SELECT COUNT(order_id) AS order_count
+FROM "Taxi"."order"
+GROUP BY passenger_id));
+-----------------------------------------------------------------------------------------
+5
+-----------------------------------------------------------------------------------------
+SELECT
+e.employee_id,
+pd.full_name,
+e.phone,
+e.rating,
+c.license_plate,
+c.price
+FROM "Taxi".employee e
+JOIN "Taxi".passport_data pd ON e.employee_id = pd.employee_id
+JOIN "Taxi".employment_contract ec ON pd.series_number = ec.passport_series_number
+JOIN "Taxi"."position" pos ON ec.position_id = pos.position_id
+JOIN "Taxi".work_shedule ws ON ec.contract_id = ws.contract_id
+JOIN "Taxi".car c ON ws.car_id = c.car_id
+WHERE pos.name = 'водитель' AND c.price = (SELECT MAX(price) FROM "Taxi".car);
+---------------------------------------------------------------------------------------
+6
+---------------------------------------------------------------------------------------
+SELECT 
+p.passenger_id,
+p.full_name,
+p.phone,
+p.rating
+FROM "Taxi".passenger p
+WHERE (SELECT COUNT(DISTINCT ec.contract_id)
+FROM "Taxi"."order" o
+JOIN "Taxi".work_shedule ws ON o.schedule_id = ws.schedule_id
+JOIN "Taxi".employment_contract ec ON ws.contract_id = ec.contract_id
+JOIN "Taxi"."position" p1 ON ec.position_id = p1.position_id 
+WHERE o.passenger_id = p.passenger_id and p1.name = 'водитель') = 1;
+------------------------------------------------------------------------------------------
+7
+--------------------------------------------------------------------------------------------
+SELECT 
+c.car_id,
+c.license_plate,
+m.brand,
+c.mileage,
+(SELECT ROUND(AVG(c2.mileage), 0)
+FROM "Taxi".car c2
+JOIN "Taxi".model m2 ON c2.model_id = m2.model_id
+WHERE m2.brand = m.brand) AS "Средний пробег по марке" 
+FROM "Taxi".car c
+JOIN "Taxi".model m ON c.model_id = m.model_id
+WHERE c.mileage > (
+SELECT AVG(c2.mileage)
+FROM "Taxi".car c2
+JOIN "Taxi".model m2 ON c2.model_id = m2.model_id
+WHERE m2.brand = m.brand);
+--------------------------------------------------------------------------
+3.1
+-------------------------------------------------------------------------
+CREATE OR REPLACE VIEW "Taxi".free_drivers_view AS
+SELECT 
+e.employee_id AS "ID сотрудника",
+pd.full_name AS "ФИО водителя",
+e.phone AS "Телефон",
+e.rating AS "Рейтинг",
+CASE 
+WHEN ws.schedule_id IS NULL THEN 'Не в смене'
+WHEN ws.status = 'не начат' THEN 'Смена не начата'
+WHEN ws.status = 'закончен' THEN 'Смена закончена'
+ELSE 'В смене, но без активных заказов'
+END AS "Статус"
+FROM "Taxi".employee e
+JOIN "Taxi".passport_data pd ON e.employee_id = pd.employee_id
+JOIN "Taxi".employment_contract ec ON pd.series_number = ec.passport_series_number
+JOIN "Taxi"."position" pos ON ec.position_id = pos.position_id
+JOIN "Taxi".work_shedule ws ON ec.contract_id = ws.contract_id 
+AND ws.date_from <= CURRENT_DATE 
+AND (ws.date_to IS NULL OR ws.date_to >= CURRENT_DATE)
+JOIN "Taxi"."order" o ON ws.schedule_id = o.schedule_id 
+AND o.date = CURRENT_DATE 
+AND o.status_id != (SELECT status_id FROM "Taxi".order_status WHERE name = 'закончен')
+WHERE pos.name = 'водитель'
+GROUP BY e.employee_id, pd.full_name, e.phone, e.rating, ws.schedule_id, ws.status
+HAVING COUNT(o.order_id) = 0 OR ws.schedule_id IS NULL;
+-------------------------------------------------------------------------------
+3.2
+-------------------------------------------------------------------------------
+CREATE OR REPLACE VIEW "Taxi".driver_salary_yesterday_view AS
+SELECT 
+e.employee_id,
+pd.full_name,
+e.phone,
+e.rating,
+ROUND(COALESCE(SUM(o.cost), 0) * pos.order_percent / 100, 2) AS "Зарплата за вчера (руб.)"
+FROM "Taxi".employee e
+JOIN "Taxi".passport_data pd ON e.employee_id = pd.employee_id
+JOIN "Taxi".employment_contract ec ON pd.series_number = ec.passport_series_number
+JOIN "Taxi"."position" pos ON ec.position_id = pos.position_id
+JOIN "Taxi".work_shedule ws ON ec.contract_id = ws.contract_id
+LEFT JOIN "Taxi"."order" o ON ws.schedule_id = o.schedule_id 
+AND o.date = CURRENT_DATE - INTERVAL '1 day'
+WHERE pos.name = 'водитель'
+GROUP BY e.employee_id, pd.full_name, e.phone, pos.order_percent
+ORDER BY "Зарплата за вчера (руб.)" DESC;
+---------------------------------------------------------------------
+2
+--------------------------------------------------------------------
+INSERT
+------------------------------------------------------------------
+INSERT INTO "Taxi".bank_card (card_number, passenger_id, bank, cvv, year_to, month_to)
+VALUES (99887766,
+(SELECT passenger_id FROM "Taxi".passenger WHERE full_name = 'Иванов Иван Иванович'),
+'Т-Банк', 777, 28, 12);
+------------------------------------------------------------------------
+UPDATE
+--------------------------------------------------------------------------
+---------------------------------------------
+DELETE
+----------------------------------------------
+DELETE FROM "Taxi".review
+WHERE order_id IN (SELECT order_id
+FROM "Taxi"."order"
+WHERE status_id = (SELECT status_id FROM "Taxi".order_status WHERE name = 'не закончен'));
+-------------------------------------------------------------------
+3
+---------------------------------------
+SELECT p.full_name, COUNT(o.order_id) 
+FROM "Taxi".passenger p
+JOIN "Taxi"."order" o ON p.passenger_id = o.passenger_id
+GROUP BY p.passenger_id, p.full_name;
+------------------------------------------------------------
+4
+-----------------------------------------------------
+Простой
+----------------------------------------------------
+EXPLAIN ANALYZE
+SELECT * FROM "Taxi"."order" 
+WHERE date BETWEEN '2024-10-01' AND '2024-10-05';
+-> "Planning Time: 0.095 ms" -> "Execution Time: 0.036 ms"
+
+CREATE INDEX idx_order_date ON "Taxi"."order" (date);
+-> "Planning Time: 3.017 ms" -> "Execution Time: 0.035 ms"
+--------------------------------
+Составной
+--------------------------------------
+EXPLAIN ANALYZE
+SELECT * FROM "Taxi"."order" 
+WHERE status_id = 3 
+AND date BETWEEN '2024-10-01' AND '2024-10-05';
+-> "Planning Time: 0.117 ms" -> "Execution Time: 0.048 ms"
+
+CREATE INDEX idx_order_status_date ON "Taxi"."order" (status_id, date);
+-> "Planning Time: 0.132 ms" -> "Execution Time: 0.043 ms"
