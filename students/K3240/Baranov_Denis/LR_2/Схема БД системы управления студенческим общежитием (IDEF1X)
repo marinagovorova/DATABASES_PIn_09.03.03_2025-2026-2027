@@ -1,0 +1,892 @@
+<mxfile host="app.diagrams.net" agent="diagrams.net" compressed="false">
+  <diagram id="overview-complete-20261021" name="Схема">
+    <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="4500" pageHeight="4100" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-1" childMax="1" childMin="0" edge="1" foreignKey="ID персоны (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-193" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.4931115;entryX=0.0000000;entryY=0.5159522;" target="idef-KXl-i3QXbyM42VDdRmki-194" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-1-limit" connectable="0" parent="idef-KXl-i3QXbyM42VDdRmki-1" style="text;html=0;whiteSpace=wrap;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;" value="Z" vertex="1">
+          <mxGeometry height="30" relative="1" width="28" x="0.9711774" y="20" as="geometry">
+            <mxPoint x="-14" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-5" childMax="1" childMin="0" edge="1" foreignKey="ID персоны (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-193" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.2343234;exitY=1.0000000;entryX=0.6147240;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-195" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-5-limit" connectable="0" parent="idef-KXl-i3QXbyM42VDdRmki-5" style="text;html=0;whiteSpace=wrap;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;" value="Z" vertex="1">
+          <mxGeometry height="30" relative="1" width="28" x="0.9316142" y="20" as="geometry">
+            <mxPoint x="-14" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-9" childMax="M" childMin="0" edge="1" foreignKey="ID вуза (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-198" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.5000000;entryX=1.0000000;entryY=0.5000000;" target="idef-KXl-i3QXbyM42VDdRmki-199" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-13" childMax="M" childMin="0" edge="1" foreignKey="ID подразделения (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-199" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.5000000;entryX=1.0000000;entryY=0.5000000;" target="idef-KXl-i3QXbyM42VDdRmki-200" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-17" childMax="M" childMin="0" edge="1" foreignKey="ID этажа (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-203" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.1985653;exitY=0.0000000;entryX=0.8014347;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-204" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-21" childMax="M" childMin="0" edge="1" foreignKey="ID этажа (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-203" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5206245;exitY=0.0000000;entryX=0.4663221;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-205" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-26" childMax="M" childMin="0" edge="1" foreignKey="ID блока (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-204" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.7907386;exitY=0.0000000;entryX=0.0694444;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-205" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-31" childMax="M" childMin="0" edge="1" foreignKey="ID сотрудника (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-194" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5095785;exitY=1.0000000;entryX=0.4935796;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-206" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-34" childMax="M" childMin="0" edge="1" foreignKey="ID этажа (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-203" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.8120407;exitY=0.0000000;entryX=0.0000000;entryY=0.9224806;" target="idef-KXl-i3QXbyM42VDdRmki-206" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-37" childMax="M" childMin="0" edge="1" foreignKey="ID блока (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-204" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.4846271;entryX=0.0000000;entryY=0.5094144;" target="idef-KXl-i3QXbyM42VDdRmki-206" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-40" childMax="M" childMin="0" edge="1" foreignKey="ID помещения (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-205" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.8945933;exitY=1.0000000;entryX=0.1054067;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-206" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-43" childMax="M" childMin="0" edge="1" foreignKey="ID основания (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-207" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5000000;exitY=0.0000000;entryX=0.5000000;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-209" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-47" childMax="M" childMin="0" edge="1" foreignKey="ID обучающегося (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-201" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.4945913;entryX=0.0000000;entryY=0.5061475;" target="idef-KXl-i3QXbyM42VDdRmki-209" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-51" childMax="M" childMin="0" edge="1" foreignKey="ID помещения (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-205" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.4902690;entryX=0.0000000;entryY=0.5160056;" target="idef-KXl-i3QXbyM42VDdRmki-208" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-54" childMax="M" childMin="0" edge="1" foreignKey="ID обучающегося (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-201" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.4988964;exitY=0.0000000;entryX=0.5013689;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-211" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-58" childMax="M" childMin="0" edge="1" foreignKey="ID посетителя (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-193" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5112681;exitY=1.0000000;entryX=0.4905611;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-211" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-62" childMax="M" childMin="0" edge="1" foreignKey="ID помещения (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-205" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.3840021;entryX=1.0000000;entryY=0.5803101;" target="idef-KXl-i3QXbyM42VDdRmki-212" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-65" childMax="M" childMin="0" edge="1" foreignKey="ID пропуска (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-217" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5000000;exitY=1.0000000;entryX=0.5000000;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-212" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-68" childMax="M" childMin="0" edge="1" foreignKey="ID разрешения (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-211" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.4855565;entryX=0.0000000;entryY=0.5099999;" target="idef-KXl-i3QXbyM42VDdRmki-212" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-71" childMax="M" childMin="0" edge="1" foreignKey="ID вида (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-213" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.6390659;exitY=1.0000000;entryX=0.3699314;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-214" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-75" childMax="M" childMin="0" edge="1" foreignKey="ID экземпляра (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-214" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.3302721;exitY=1.0000000;entryX=0.8557786;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-215" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-78" childMax="M" childMin="0" edge="1" foreignKey="ID помещения (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-205" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.6280276;entryX=1.0000000;entryY=0.3815200;" target="idef-KXl-i3QXbyM42VDdRmki-215" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-81" childMax="M" childMin="0" edge="1" foreignKey="ID персоны (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-193" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.6100157;exitY=1.0000000;entryX=0.4004177;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-215" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-84" childMax="M" childMin="0" edge="1" foreignKey="ID блока (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-204" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.4906933;entryX=1.0000000;entryY=0.5052744;" target="idef-KXl-i3QXbyM42VDdRmki-215" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-87" childMax="M" childMin="0" edge="1" foreignKey="ID этажа (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-203" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.3054736;entryX=1.0000000;entryY=0.6102446;" target="idef-KXl-i3QXbyM42VDdRmki-215" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-90" childMax="M" childMin="0" edge="1" foreignKey="ID изменения (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-223" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0625000;exitY=1.0000000;entryX=0.8410692;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-216" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-93" childMax="M" childMin="0" edge="1" foreignKey="ID вида (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-213" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.9375000;exitY=1.0000000;entryX=0.0000000;entryY=0.1092896;" target="idef-KXl-i3QXbyM42VDdRmki-216" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-96" childMax="M" childMin="0" edge="1" foreignKey="ID экземпляра (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-214" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.4934127;exitY=0.0000000;entryX=0.5090638;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-216" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-99" childMax="1" childMin="0" edge="1" foreignKey="ID экземпляра (FK)" parent="1" parentOptional="0" relationshipKind="identifying" source="idef-KXl-i3QXbyM42VDdRmki-214" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=0;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.2541150;exitY=0.0000000;entryX=0.9305556;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-217" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-99-limit" connectable="0" parent="idef-KXl-i3QXbyM42VDdRmki-99" style="text;html=0;whiteSpace=wrap;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;" value="Z" vertex="1">
+          <mxGeometry height="30" relative="1" width="28" x="0.8635035" y="20" as="geometry">
+            <mxPoint x="-14" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-103" childMax="M" childMin="0" edge="1" foreignKey="ID владельца (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-193" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.8328965;exitY=1.0000000;entryX=0.2481660;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-217" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-107" childMax="M" childMin="0" edge="1" foreignKey="ID сотрудника (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-194" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.4262452;exitY=1.0000000;entryX=0.6014822;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-218" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-111" childMax="M" childMin="0" edge="1" foreignKey="ID обхода (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-218" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.8907104;entryX=1.0000000;entryY=0.1979062;" target="idef-KXl-i3QXbyM42VDdRmki-219" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-114" childMax="M" childMin="0" edge="1" foreignKey="ID экземпляра (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-214" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.4516649;entryX=0.0000000;entryY=0.5227158;" target="idef-KXl-i3QXbyM42VDdRmki-219" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-117" childMax="M" childMin="0" edge="1" foreignKey="ID обхода (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-218" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5113976;exitY=1.0000000;entryX=0.4792601;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-220" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-120" childMax="M" childMin="0" edge="1" foreignKey="ID помещения (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-205" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5000000;exitY=0.0000000;entryX=0.5000000;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-220" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-123" childMax="M" childMin="0" edge="1" foreignKey="ID категории (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-224" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.2250885;exitY=1.0000000;entryX=1.0000000;entryY=0.1073116;" target="idef-KXl-i3QXbyM42VDdRmki-221" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-127" childMax="M" childMin="0" edge="1" foreignKey="ID автора (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-193" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.7279635;entryX=0.0000000;entryY=0.2720365;" target="idef-KXl-i3QXbyM42VDdRmki-221" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-131" childMax="M" childMin="0" edge="1" foreignKey="ID экземпляра (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-214" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.7082215;exitY=0.0000000;entryX=0.0694444;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-221" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-136" childMax="M" childMin="0" edge="1" foreignKey="ID проверки помещения (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-220" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.0600601;entryX=0.9305556;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-221" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-139" childMax="M" childMin="0" edge="1" foreignKey="ID проверки имущества (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-219" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5000000;exitY=0.0000000;entryX=0.5000000;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-221" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-142" childMax="M" childMin="0" edge="1" foreignKey="ID обращения (FK)" parent="1" parentOptional="0" relationshipKind="identifying" source="idef-KXl-i3QXbyM42VDdRmki-221" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=0;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0694444;exitY=0.0000000;entryX=0.7098787;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-222" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-145" childMax="M" childMin="0" edge="1" foreignKey="ID персоны (FK)" parent="1" parentOptional="0" relationshipKind="identifying" source="idef-KXl-i3QXbyM42VDdRmki-193" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=0;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.5789722;entryX=0.0000000;entryY=0.3171169;" target="idef-KXl-i3QXbyM42VDdRmki-222" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-148" childMax="M" childMin="1" edge="1" foreignKey="ID обращения (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-221" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5045392;exitY=0.0000000;entryX=0.4962463;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-223" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-148-limit" connectable="0" parent="idef-KXl-i3QXbyM42VDdRmki-148" style="text;html=0;whiteSpace=wrap;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;" value="P" vertex="1">
+          <mxGeometry height="30" relative="1" width="28" x="0.7683218" y="17" as="geometry">
+            <mxPoint x="-14" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-151" childMax="M" childMin="0" edge="1" foreignKey="ID исполнителя (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-194" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.8134151;entryX=1.0000000;entryY=0.3363400;" target="idef-KXl-i3QXbyM42VDdRmki-223" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-156" childMax="M" childMin="0" edge="1" foreignKey="ID сотрудника (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-194" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.4921920;entryX=0.0000000;entryY=0.5056747;" target="idef-KXl-i3QXbyM42VDdRmki-197" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-159" childMax="M" childMin="0" edge="1" foreignKey="ID должности (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-Ehf0edhItwulHlHy93tI-9" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.4905852;entryX=1.0000000;entryY=0.5068425;" target="idef-KXl-i3QXbyM42VDdRmki-197" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-162" childMax="M" childMin="0" edge="1" foreignKey="ID программы (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-200" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5055766;exitY=0.0000000;entryX=0.4922508;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-225" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-166" childMax="M" childMin="0" edge="1" foreignKey="ID студента (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-195" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5651519;exitY=1.0000000;entryX=0.3981083;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-201" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-170" childMax="M" childMin="0" edge="1" foreignKey="ID исполнителя (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-194" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.6273946;exitY=1.0000000;entryX=0.3007663;entryY=0.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-210" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-175" childMax="M" childMin="0" edge="1" foreignKey="ID проживания (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-209" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.5009936;exitY=0.0000000;entryX=0.4991483;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-208" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-178" childMax="M" childMin="0" edge="1" foreignKey="ID общежития (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-202" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;arcSize=14;startFill=0;startSize=11;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="idef-KXl-i3QXbyM42VDdRmki-203" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3027.59" y="3064.81" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-182" childMax="M" childMin="0" edge="1" foreignKey="ID размещения (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-208" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.4954049;exitY=0.0000000;entryX=0.5060933;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-210" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-185" childMax="M" childMin="0" edge="1" foreignKey="ID экземпляра устройства (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-214" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0.0000000;exitY=0.7056755;entryX=1.0000000;entryY=0.4265935;" target="idef-KXl-i3QXbyM42VDdRmki-212" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-188" childMax="M" childMin="0" edge="1" foreignKey="ID помещения (FK)" parent="1" parentOptional="1" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-205" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=0;exitY=0.08469055;entryX=0.7555361;entryY=1.0000000;" target="idef-KXl-i3QXbyM42VDdRmki-221" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-226" childMax="M" childMin="0" edge="1" foreignKey="ID учебной группы (FK)" parent="1" parentOptional="0" relationshipKind="non-identifying" source="idef-KXl-i3QXbyM42VDdRmki-225" style="edgeStyle=none;orthogonalLoop=1;jettySize=auto;rounded=1;curved=0;html=0;strokeColor=#171717;strokeWidth=2;startArrow=none;endArrow=oval;dashed=1;dashPattern=8 5;endFill=1;endSize=20;exitPerimeter=0;entryPerimeter=0;arcSize=14;startFill=0;startSize=11;exitX=1.0000000;exitY=0.5000000;entryX=0.0000000;entryY=0.5000000;" target="idef-KXl-i3QXbyM42VDdRmki-201" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Персона" vertex="1">
+          <mxGeometry height="367" width="304" x="629" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID персоны" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Фамилия" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Имя" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Отчество" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата рождения" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Телефон" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-6" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Email" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-7" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Вид документа личности" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-8" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Серия документа" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-193-attr-9" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-193" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Номер документа" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="327" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-194" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Сотрудник" vertex="1">
+          <mxGeometry height="157" width="288" x="3284" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-194-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-194" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID сотрудника" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-194-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-194" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Табельный номер" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-194-attr-2" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-194" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID персоны (FK)" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-195" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Студент" vertex="1">
+          <mxGeometry height="157" width="344" x="57" y="1286" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-195-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-195" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID студента" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-195-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-195" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Номер студенческого билета" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-195-attr-2" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-195" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID персоны (FK)" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-197" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Занимаемая должность" vertex="1">
+          <mxGeometry height="217" width="320" x="3684" y="103" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-197-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-197" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID назначения" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-197-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-197" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Начало назначения" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-197-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-197" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Окончание назначения" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-197-attr-3" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-197" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID сотрудника (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-197-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-197" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID должности (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-198" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Вуз" vertex="1">
+          <mxGeometry height="187" width="288" x="1149" y="3828" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-198-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-198" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID вуза" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-198-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-198" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Краткое название" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-198-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-198" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Полное название" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-198-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-198" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Юридический адрес" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-199" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Подразделение вуза" vertex="1">
+          <mxGeometry height="217" width="288" x="661" y="3813" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-199-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-199" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID подразделения" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-199-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-199" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Краткое название" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-199-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-199" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Код подразделения" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-199-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-199" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Полное название" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-199-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-199" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID вуза (FK)" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-200" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Образовательная программа" vertex="1">
+          <mxGeometry height="187" width="384" x="111" y="3828" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-200-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-200" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID программы" vertex="1">
+          <mxGeometry height="30" width="356" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-200-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-200" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Код программы" vertex="1">
+          <mxGeometry height="30" width="356" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-200-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-200" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Название" vertex="1">
+          <mxGeometry height="30" width="356" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-200-attr-3" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-200" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID подразделения (FK)" vertex="1">
+          <mxGeometry height="30" width="356" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-201" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Обучающийся студент" vertex="1">
+          <mxGeometry height="247" width="304" x="667" y="3332" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-201-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-201" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обучающегося" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-201-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-201" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="В группе с" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-201-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-201" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="В группе по" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-201-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-201" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Статус обучения" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-201-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-201" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID студента (FK)" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-201-attr-5" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-201" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID учебной группы (FK)" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-202" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Общежитие" vertex="1">
+          <mxGeometry height="187" width="288" x="2888" y="3162.5" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-202-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-202" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID общежития" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-202-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-202" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Номер общежития" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-202-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-202" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Адрес общежития" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-202-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-202" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-203" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Этаж" vertex="1">
+          <mxGeometry height="187" width="288" x="2888" y="2871" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-203-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-203" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID этажа" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-203-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-203" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Номер этажа" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-203-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-203" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-203-attr-3" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-203" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID общежития (FK)" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-204" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Блок" vertex="1">
+          <mxGeometry height="187" width="288" x="2488" y="2507" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-204-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-204" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID блока" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-204-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-204" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Обозначение блока" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-204-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-204" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-204-attr-3" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-204" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID этажа (FK)" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Помещение" vertex="1">
+          <mxGeometry height="307" width="288" x="2948" y="2023.5" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-205" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID помещения" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-205" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Номер помещения" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-205" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Назначение" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-205" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Вместимость" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-205" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-205" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Площадь" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205-attr-6" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-205" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID этажа (FK)" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-205-attr-7" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-205" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID блока (FK)" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Назначение ответственного" vertex="1">
+          <mxGeometry height="307" width="368" x="3278" y="2433" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-206" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID назначения" vertex="1">
+          <mxGeometry height="30" width="340" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-206" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Вид работ" vertex="1">
+          <mxGeometry height="30" width="340" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-206" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Начало ответственности" vertex="1">
+          <mxGeometry height="30" width="340" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-206" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Окончание ответственности" vertex="1">
+          <mxGeometry height="30" width="340" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-206" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID сотрудника (FK)" vertex="1">
+          <mxGeometry height="30" width="340" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206-attr-5" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-206" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID этажа (FK)" vertex="1">
+          <mxGeometry height="30" width="340" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206-attr-6" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-206" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID блока (FK)" vertex="1">
+          <mxGeometry height="30" width="340" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-206-attr-7" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-206" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID помещения (FK)" vertex="1">
+          <mxGeometry height="30" width="340" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-207" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Основание заселения" vertex="1">
+          <mxGeometry height="187" width="296" x="3743" y="3771" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-207-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-207" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID основания" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-207-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-207" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Вид документа" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-207-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-207" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Номер документа" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-207-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-207" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата документа" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-208" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Размещение в комнате" vertex="1">
+          <mxGeometry height="217" width="424" x="3683" y="2044" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-208-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-208" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID размещения" vertex="1">
+          <mxGeometry height="30" width="396" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-208-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-208" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Фактическое начало размещения" vertex="1">
+          <mxGeometry height="30" width="396" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-208-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-208" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Фактическое окончание размещения" vertex="1">
+          <mxGeometry height="30" width="396" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-208-attr-3" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-208" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID помещения (FK)" vertex="1">
+          <mxGeometry height="30" width="396" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-208-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-208" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID проживания (FK)" vertex="1">
+          <mxGeometry height="30" width="396" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-209" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Период проживания" vertex="1">
+          <mxGeometry height="217" width="328" x="3727" y="3323" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-209-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-209" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID проживания" vertex="1">
+          <mxGeometry height="30" width="300" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-209-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-209" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Проживание разрешено с" vertex="1">
+          <mxGeometry height="30" width="300" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-209-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-209" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Проживание разрешено до" vertex="1">
+          <mxGeometry height="30" width="300" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-209-attr-3" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-209" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID основания (FK)" vertex="1">
+          <mxGeometry height="30" width="300" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-209-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-209" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обучающегося (FK)" vertex="1">
+          <mxGeometry height="30" width="300" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-210" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Действие при выселении" vertex="1">
+          <mxGeometry height="247" width="336" x="3708" y="903" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-210-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-210" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID действия" vertex="1">
+          <mxGeometry height="30" width="308" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-210-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-210" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Общее выселение" vertex="1">
+          <mxGeometry height="30" width="308" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-210-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-210" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Название действия" vertex="1">
+          <mxGeometry height="30" width="308" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-210-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-210" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время выполнения" vertex="1">
+          <mxGeometry height="30" width="308" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-210-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-210" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID исполнителя (FK)" vertex="1">
+          <mxGeometry height="30" width="308" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-210-attr-5" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-210" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID размещения (FK)" vertex="1">
+          <mxGeometry height="30" width="308" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Разрешение на посещение" vertex="1">
+          <mxGeometry height="307" width="352" x="638" y="1666" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-211" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID разрешения" vertex="1">
+          <mxGeometry height="30" width="324" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-211" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Начало разрешенных часов" vertex="1">
+          <mxGeometry height="30" width="324" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-211" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Конец разрешенных часов" vertex="1">
+          <mxGeometry height="30" width="324" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-211" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Начало действия" vertex="1">
+          <mxGeometry height="30" width="324" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-211" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Окончание действия" vertex="1">
+          <mxGeometry height="30" width="324" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-211" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Допустимая длительность" vertex="1">
+          <mxGeometry height="30" width="324" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211-attr-6" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-211" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обучающегося (FK)" vertex="1">
+          <mxGeometry height="30" width="324" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-211-attr-7" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-211" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID посетителя (FK)" vertex="1">
+          <mxGeometry height="30" width="324" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Попытка прохода" vertex="1">
+          <mxGeometry height="457" width="376" x="1167" y="1577" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID попытки" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Направление" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Результат проверки" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Причина отказа" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Предъявленный идентификатор" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время попытки" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-6" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Выполнено без связи" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-7" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние синхронизации" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-8" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Описание конфликта" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-9" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID помещения (FK)" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="327" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-10" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID пропуска (FK)" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="357" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-11" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID разрешения (FK)" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="387" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-212-attr-12" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-212" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID экземпляра устройства (FK)" vertex="1">
+          <mxGeometry height="30" width="348" x="14" y="417" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-213" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Вид имущества или материала" vertex="1">
+          <mxGeometry height="187" width="408" x="1184" y="674" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-213-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-213" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID вида" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-213-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-213" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Название" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-213-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-213" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Категория" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-213-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-213" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Единица измерения" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-214" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Экземпляр имущества" vertex="1">
+          <mxGeometry height="157" width="304" x="1761" y="1621" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-214-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-214" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID экземпляра" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-214-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-214" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Учетный номер" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-214-attr-2" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-214" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID вида (FK)" vertex="1">
+          <mxGeometry height="30" width="276" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Размещение и выдача имущества" vertex="1">
+          <mxGeometry height="397" width="440" x="1041" y="2388" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID размещения имущества" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Начало периода" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Окончание периода" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Статус учета" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние при передаче" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Имущество возвращено" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-6" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID экземпляра (FK)" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-7" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID помещения (FK)" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-8" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID персоны (FK)" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-9" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID блока (FK)" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="327" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-215-attr-10" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-215" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID этажа (FK)" vertex="1">
+          <mxGeometry height="30" width="412" x="14" y="357" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-216" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Использование ресурса" vertex="1">
+          <mxGeometry height="217" width="320" x="1734" y="925" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-216-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-216" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID использования" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-216-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-216" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Количество" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-216-attr-2" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-216" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID изменения (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-216-attr-3" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-216" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID вида (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-216-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-216" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID экземпляра (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-217" entityKind="dependent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=1;absoluteArcSize=1;arcSize=16;" value="Пропуск" vertex="1">
+          <mxGeometry height="277" width="312" x="1199" y="1037" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-217-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-217" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID экземпляра (FK)" vertex="1">
+          <mxGeometry height="30" width="284" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-217-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-217" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Идентификатор пропуска" vertex="1">
+          <mxGeometry height="30" width="284" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-217-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-217" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Вид пропуска" vertex="1">
+          <mxGeometry height="30" width="284" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-217-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-217" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Действует с" vertex="1">
+          <mxGeometry height="30" width="284" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-217-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-217" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Действует до" vertex="1">
+          <mxGeometry height="30" width="284" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-217-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-217" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Статус доступа" vertex="1">
+          <mxGeometry height="30" width="284" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-217-attr-6" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-217" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID владельца (FK)" vertex="1">
+          <mxGeometry height="30" width="284" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-218" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Обход" vertex="1">
+          <mxGeometry height="217" width="296" x="2928" y="1208" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-218-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-218" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обхода" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-218-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-218" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Вид обхода" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-218-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-218" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время начала" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-218-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-218" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время окончания" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-218-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-218" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID сотрудника (FK)" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Проверка имущества" vertex="1">
+          <mxGeometry height="337" width="320" x="2313" y="1506" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID проверки" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние экземпляра" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Наличие при проверке" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время проверки" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Выполнено без связи" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние синхронизации" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-attr-6" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Описание конфликта" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-attr-7" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обхода (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-219-attr-8" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-219" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID экземпляра (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Проверка помещения" vertex="1">
+          <mxGeometry height="397" width="320" x="2932" y="1564" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID проверки" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние помещения" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Санитарное состояние" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Соблюдение правил" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Неисправности" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время проверки" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-6" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Выполнено без связи" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-7" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние синхронизации" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-8" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Описание конфликта" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-9" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обхода (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="327" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-220-attr-10" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-220" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID помещения (FK)" vertex="1">
+          <mxGeometry height="30" width="292" x="14" y="357" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Обращение" vertex="1">
+          <mxGeometry height="367" width="344" x="2301" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обращения" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время регистрации" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время события" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Текст обращения" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-4" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID категории (FK)" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-5" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID автора (FK)" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-6" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID экземпляра (FK)" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-7" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID проверки помещения (FK)" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-8" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID проверки имущества (FK)" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-221-attr-9" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-221" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID помещения (FK)" vertex="1">
+          <mxGeometry height="30" width="316" x="14" y="327" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-222" entityKind="dependent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=109;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=1;absoluteArcSize=1;arcSize=16;" value="Участие в обращении" vertex="1">
+          <mxGeometry height="157" width="296" x="1746" y="363" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-222-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-222" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обращения (FK)" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-222-pk-2" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-222" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID персоны (FK)" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-222-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-222" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Роль участника" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="История обработки обращения" vertex="1">
+          <mxGeometry height="337" width="408" x="2274" y="321" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID изменения" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Статус" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Результат обработки" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Дата и время изменения" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Выполнено без связи" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-attr-5" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Состояние синхронизации" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-attr-6" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Описание конфликта" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-attr-7" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID обращения (FK)" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-223-attr-8" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-223" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID исполнителя (FK)" vertex="1">
+          <mxGeometry height="30" width="380" x="14" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-224" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Категория обращения" vertex="1">
+          <mxGeometry height="157" width="296" x="2806" y="596" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-224-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-224" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID категории" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-224-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-224" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Название" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-224-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-224" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Тип обращения" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-225" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Учебная группа" vertex="1">
+          <mxGeometry height="247" width="288" x="169" y="3332" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-225-pk-1" connectable="0" keyKind="PK" parent="idef-KXl-i3QXbyM42VDdRmki-225" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID учебной группы" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-225-attr-1" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-225" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Курс" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-225-attr-2" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-225" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Номер учебной группы" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="117" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-225-attr-3" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-225" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Год набора группы" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-225-attr-4" connectable="0" keyKind="attribute" parent="idef-KXl-i3QXbyM42VDdRmki-225" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Статус группы" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="177" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-KXl-i3QXbyM42VDdRmki-225-attr-5" connectable="0" keyKind="FK" parent="idef-KXl-i3QXbyM42VDdRmki-225" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID программы (FK)" vertex="1">
+          <mxGeometry height="30" width="260" x="14" y="207" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-Ehf0edhItwulHlHy93tI-9" entityKind="independent" notation="IDEF1X" parent="1" style="shape=swimlane;horizontal=1;startSize=79;collapsible=0;container=0;swimlaneLine=1;swimlaneFillColor=#ffffff;whiteSpace=wrap;html=0;strokeColor=#171717;strokeWidth=1.8;fillColor=#ffffff;align=center;verticalAlign=top;spacingTop=10;fontStyle=1;fontSize=24;minWidth=220;minHeight=140;fontFamily=Arial;fontColor=#171717;rounded=0;" value="Должность" vertex="1">
+          <mxGeometry height="157" width="296" x="4116" y="133" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-Ehf0edhItwulHlHy93tI-9-pk-1" connectable="0" keyKind="PK" parent="idef-Ehf0edhItwulHlHy93tI-9" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="ID должности" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-Ehf0edhItwulHlHy93tI-9-attr-1" connectable="0" keyKind="attribute" parent="idef-Ehf0edhItwulHlHy93tI-9" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Название" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="87" as="geometry" />
+        </mxCell>
+        <mxCell id="idef-Ehf0edhItwulHlHy93tI-9-attr-2" connectable="0" keyKind="attribute" parent="idef-Ehf0edhItwulHlHy93tI-9" style="text;html=0;whiteSpace=nowrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=Arial;fontColor=#171717;fontSize=22;part=1;" value="Описание обязанностей" vertex="1">
+          <mxGeometry height="30" width="268" x="14" y="117" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
