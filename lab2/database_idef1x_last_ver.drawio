@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="ChatGPT">
   <diagram id="hedgie-db-idef1x" name="LifePilot — IDEF1X (перекомпоновано)">
-    <mxGraphModel dx="7175" dy="7817" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3508" pageHeight="4861" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="2392" dy="5846" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3508" pageHeight="4861" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -74,7 +74,12 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="104" edge="1" parent="1" source="3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#111111;strokeWidth=1.25;dashed=1;dashPattern=6 4;startArrow=none;endArrow=none;" target="10" value="Объединяет">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="3539.3" />
+              <mxPoint x="570" y="1075.2" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="105" edge="1" parent="1" source="7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#111111;strokeWidth=1.25;startArrow=none;endArrow=none;" target="12" value="Оставляет">
           <mxGeometry relative="1" as="geometry" />
