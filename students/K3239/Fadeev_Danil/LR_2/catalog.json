@@ -1,0 +1,3749 @@
+{
+  "title": "Документооборот студенческого совета",
+  "entities": [
+    {
+      "id": "party",
+      "name": "Сторона",
+      "module": "S00",
+      "attributes": [
+        {
+          "name": "party_id",
+          "pk": true
+        },
+        {
+          "name": "род стороны",
+          "nullable": false
+        },
+        {
+          "name": "имя",
+          "nullable": true
+        },
+        {
+          "name": "студенческий идентификатор",
+          "nullable": true
+        },
+        {
+          "name": "название",
+          "nullable": true
+        },
+        {
+          "name": "вид",
+          "nullable": true
+        }
+      ],
+      "ak": "студенческий идентификатор при наличии"
+    },
+    {
+      "id": "object",
+      "name": "Объект учёта",
+      "module": "S00",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true
+        },
+        {
+          "name": "тип",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "convocation",
+      "name": "Созыв",
+      "module": "S01",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер",
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "nullable": false
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        }
+      ],
+      "ak": "номер"
+    },
+    {
+      "id": "membership",
+      "name": "Членство",
+      "module": "S01",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "nullable": false
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "convocation_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": "convocation_id+person_id+начало"
+    },
+    {
+      "id": "position",
+      "name": "Должность",
+      "module": "S01",
+      "attributes": [
+        {
+          "name": "position_id",
+          "pk": true
+        },
+        {
+          "name": "название",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appointment",
+      "name": "Назначение на должность",
+      "module": "S01",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "nullable": false
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "membership_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "position_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": "membership_id+position_id+начало"
+    },
+    {
+      "id": "direction",
+      "name": "Направление",
+      "module": "S01",
+      "attributes": [
+        {
+          "name": "direction_id",
+          "pk": true
+        },
+        {
+          "name": "название",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "body",
+      "name": "Рабочий орган",
+      "module": "S01",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "тип",
+          "nullable": false
+        },
+        {
+          "name": "создан",
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "nullable": false
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "org_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "project_id",
+          "fk": true,
+          "nullable": true
+        },
+        {
+          "name": "direction_id",
+          "fk": true,
+          "nullable": true
+        }
+      ],
+      "ak": "org_id"
+    },
+    {
+      "id": "body_member",
+      "name": "Состав органа",
+      "module": "S01",
+      "attributes": [
+        {
+          "name": "body_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "membership_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "функция",
+          "pk": true
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "body_head",
+      "name": "Руководство органом",
+      "module": "S01",
+      "attributes": [
+        {
+          "name": "body_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "person_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "document",
+      "name": "Документ",
+      "module": "S02",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "тип",
+          "nullable": false
+        },
+        {
+          "name": "номер",
+          "nullable": false
+        },
+        {
+          "name": "краткое содержание",
+          "nullable": false
+        },
+        {
+          "name": "направление",
+          "nullable": false
+        },
+        {
+          "name": "зарегистрирован",
+          "nullable": true
+        },
+        {
+          "name": "подготовлен",
+          "nullable": true
+        },
+        {
+          "name": "sender_id",
+          "fk": true,
+          "nullable": true
+        },
+        {
+          "name": "author_id",
+          "fk": true,
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "document_state",
+      "name": "Состояние документа",
+      "module": "S02",
+      "attributes": [
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер события",
+          "pk": true
+        },
+        {
+          "name": "момент",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "document_issue",
+      "name": "Документ по вопросу",
+      "module": "S02",
+      "attributes": [
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "issue_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "document_project",
+      "name": "Документ проекта",
+      "module": "S02",
+      "attributes": [
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "project_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "outgoing_recipient",
+      "name": "Адресат исходящего",
+      "module": "S02",
+      "attributes": [
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "recipient_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "incoming_assignment",
+      "name": "Назначение по входящему",
+      "module": "S02",
+      "attributes": [
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "роль",
+          "pk": true
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "internal_version",
+      "name": "Версия внутреннего документа",
+      "module": "S02",
+      "attributes": [
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер версии",
+          "pk": true
+        },
+        {
+          "name": "дата",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        },
+        {
+          "name": "содержание",
+          "nullable": false
+        },
+        {
+          "name": "author_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "meeting",
+      "name": "Заседание",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "тип",
+          "nullable": false
+        },
+        {
+          "name": "convocation_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "chair_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "secretary_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "meeting_schedule",
+      "name": "Редакция расписания заседания",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "meeting_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер редакции",
+          "pk": true
+        },
+        {
+          "name": "момент записи",
+          "nullable": false
+        },
+        {
+          "name": "плановые дата-время",
+          "nullable": false
+        },
+        {
+          "name": "фактические дата-время",
+          "nullable": true
+        },
+        {
+          "name": "место",
+          "nullable": true
+        },
+        {
+          "name": "формат",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        },
+        {
+          "name": "причина",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "meeting_member",
+      "name": "Состав заседания",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "meeting_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "роль",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "issue",
+      "name": "Вопрос",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "тема",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "agenda_item",
+      "name": "Пункт повестки",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер пункта",
+          "nullable": false
+        },
+        {
+          "name": "плановое время",
+          "nullable": false
+        },
+        {
+          "name": "результат",
+          "nullable": true
+        },
+        {
+          "name": "meeting_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "issue_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "initiator_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "speaker_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": "meeting_id+номер пункта"
+    },
+    {
+      "id": "agenda_document",
+      "name": "Документ пункта повестки",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "agenda_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "protocol",
+      "name": "Протокол",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер",
+          "nullable": false
+        },
+        {
+          "name": "дата",
+          "nullable": false
+        },
+        {
+          "name": "meeting_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "secretary_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "protocol_version",
+      "name": "Версия протокола",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "protocol_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер версии",
+          "pk": true
+        },
+        {
+          "name": "дата",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        },
+        {
+          "name": "снимок протокола",
+          "nullable": false
+        },
+        {
+          "name": "author_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "protocol_attendee",
+      "name": "Присутствующий по протоколу",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "protocol_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер версии",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "protocol_item",
+      "name": "Пункт по протоколу",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "protocol_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер версии",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "agenda_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "protocol_decision",
+      "name": "Решение по протоколу",
+      "module": "S03",
+      "attributes": [
+        {
+          "name": "protocol_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер версии",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "decision_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "decision",
+      "name": "Решение",
+      "module": "S04",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "дата",
+          "nullable": false
+        },
+        {
+          "name": "содержание",
+          "nullable": false
+        },
+        {
+          "name": "действует с",
+          "nullable": false
+        },
+        {
+          "name": "действует до",
+          "nullable": true
+        },
+        {
+          "name": "agenda_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "decision_owner",
+      "name": "Ответственный за решение",
+      "module": "S04",
+      "attributes": [
+        {
+          "name": "decision_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "decision_state",
+      "name": "Исполнение решения",
+      "module": "S04",
+      "attributes": [
+        {
+          "name": "decision_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер события",
+          "pk": true
+        },
+        {
+          "name": "момент",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "voting",
+      "name": "Голосование",
+      "module": "S04",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "дата-время",
+          "nullable": false
+        },
+        {
+          "name": "режим",
+          "nullable": false
+        },
+        {
+          "name": "итог",
+          "nullable": true
+        },
+        {
+          "name": "agenda_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "vote_option",
+      "name": "Вариант выбора",
+      "module": "S04",
+      "attributes": [
+        {
+          "name": "voting_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер варианта",
+          "pk": true
+        },
+        {
+          "name": "наименование",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "vote_right",
+      "name": "Право голоса",
+      "module": "S04",
+      "attributes": [
+        {
+          "name": "voting_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "open_vote",
+      "name": "Открытый голос",
+      "module": "S04",
+      "attributes": [
+        {
+          "name": "voting_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер варианта",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "secret_vote",
+      "name": "Тайный бюллетень",
+      "module": "S04",
+      "attributes": [
+        {
+          "name": "voting_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер бюллетеня",
+          "pk": true
+        },
+        {
+          "name": "номер варианта",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "assignment",
+      "name": "Поручение",
+      "module": "S05",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "содержание",
+          "nullable": false
+        },
+        {
+          "name": "поставлено",
+          "nullable": false
+        },
+        {
+          "name": "приоритет",
+          "nullable": false
+        },
+        {
+          "name": "результат",
+          "nullable": true
+        },
+        {
+          "name": "decision_id",
+          "fk": true,
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "assignment_event",
+      "name": "Событие поручения",
+      "module": "S05",
+      "attributes": [
+        {
+          "name": "assignment_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "вид события",
+          "pk": true
+        },
+        {
+          "name": "номер события",
+          "pk": true
+        },
+        {
+          "name": "момент",
+          "nullable": false
+        },
+        {
+          "name": "срок",
+          "nullable": true
+        },
+        {
+          "name": "статус",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "assignment_assignee",
+      "name": "Назначение по поручению",
+      "module": "S05",
+      "attributes": [
+        {
+          "name": "assignment_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "роль",
+          "pk": true
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appeal",
+      "name": "Студенческое обращение",
+      "module": "S06",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "дата",
+          "nullable": false
+        },
+        {
+          "name": "категория",
+          "nullable": false
+        },
+        {
+          "name": "приоритет",
+          "nullable": false
+        },
+        {
+          "name": "содержание",
+          "nullable": false
+        },
+        {
+          "name": "applicant_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appeal_state",
+      "name": "Статус обращения",
+      "module": "S06",
+      "attributes": [
+        {
+          "name": "appeal_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер события",
+          "pk": true
+        },
+        {
+          "name": "момент",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appeal_owner",
+      "name": "Ответственный за обращение",
+      "module": "S06",
+      "attributes": [
+        {
+          "name": "appeal_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "person_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appeal_document",
+      "name": "Документ обращения",
+      "module": "S06",
+      "attributes": [
+        {
+          "name": "appeal_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appeal_assignment",
+      "name": "Поручение по обращению",
+      "module": "S06",
+      "attributes": [
+        {
+          "name": "appeal_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "assignment_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appeal_issue",
+      "name": "Вопрос обращения",
+      "module": "S06",
+      "attributes": [
+        {
+          "name": "appeal_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "issue_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appeal_meeting",
+      "name": "Направление обращения на заседание",
+      "module": "S06",
+      "attributes": [
+        {
+          "name": "appeal_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "meeting_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "appeal_agenda",
+      "name": "Рассмотрение обращения по пункту",
+      "module": "S06",
+      "attributes": [
+        {
+          "name": "appeal_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "agenda_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "project",
+      "name": "Проект",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "project_version",
+      "name": "Редакция проекта",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "project_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "название",
+          "nullable": false
+        },
+        {
+          "name": "цель",
+          "nullable": false
+        },
+        {
+          "name": "плановое начало",
+          "nullable": false
+        },
+        {
+          "name": "плановый конец",
+          "nullable": true
+        },
+        {
+          "name": "head_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "project_state",
+      "name": "Статус проекта",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "project_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер события",
+          "pk": true
+        },
+        {
+          "name": "момент",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "project_member",
+      "name": "Участник проекта",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "project_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "project_body",
+      "name": "Ответственный орган проекта",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "project_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "body_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "project_direction",
+      "name": "Ответственное направление проекта",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "project_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "direction_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "project_assignment",
+      "name": "Поручение проекта",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "project_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "assignment_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "event",
+      "name": "Мероприятие",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "название",
+          "nullable": false
+        },
+        {
+          "name": "дата-время",
+          "nullable": false
+        },
+        {
+          "name": "место",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        },
+        {
+          "name": "project_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "event_organizer",
+      "name": "Организатор мероприятия",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "event_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "organizer_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "event_owner",
+      "name": "Ответственный за мероприятие",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "event_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "person_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "event_document",
+      "name": "Документ мероприятия",
+      "module": "S07",
+      "attributes": [
+        {
+          "name": "event_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "document_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "initiative",
+      "name": "Инициатива",
+      "module": "S08",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "название",
+          "nullable": false
+        },
+        {
+          "name": "описание",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "approval",
+      "name": "Маршрут согласования",
+      "module": "S08",
+      "attributes": [
+        {
+          "name": "approval_id",
+          "pk": true
+        },
+        {
+          "name": "создан",
+          "nullable": false
+        },
+        {
+          "name": "object_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "approval_step",
+      "name": "Этап согласования",
+      "module": "S08",
+      "attributes": [
+        {
+          "name": "approval_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер этапа",
+          "pk": true
+        },
+        {
+          "name": "название",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "approval_attempt",
+      "name": "Попытка согласования",
+      "module": "S08",
+      "attributes": [
+        {
+          "name": "approval_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер этапа",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер попытки",
+          "pk": true
+        },
+        {
+          "name": "отправлено",
+          "nullable": false
+        },
+        {
+          "name": "срок",
+          "nullable": false
+        },
+        {
+          "name": "результат",
+          "nullable": true
+        },
+        {
+          "name": "комментарий",
+          "nullable": true
+        },
+        {
+          "name": "ответ получен",
+          "nullable": true
+        },
+        {
+          "name": "approver_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "act",
+      "name": "Локальный акт",
+      "module": "S09",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер",
+          "nullable": false
+        },
+        {
+          "name": "название",
+          "nullable": false
+        },
+        {
+          "name": "принят",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "act_version",
+      "name": "Редакция акта",
+      "module": "S09",
+      "attributes": [
+        {
+          "name": "act_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер редакции",
+          "pk": true
+        },
+        {
+          "name": "действует с",
+          "nullable": true
+        },
+        {
+          "name": "действует до",
+          "nullable": true
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        },
+        {
+          "name": "текст",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "task",
+      "name": "Неформальная задача",
+      "module": "S09",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "содержание",
+          "nullable": false
+        },
+        {
+          "name": "срок",
+          "nullable": false
+        },
+        {
+          "name": "приоритет",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        },
+        {
+          "name": "context_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "task_assignee",
+      "name": "Назначение задачи",
+      "module": "S09",
+      "attributes": [
+        {
+          "name": "task_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "person_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "asset_kind",
+      "name": "Тип имущества",
+      "module": "S10",
+      "attributes": [
+        {
+          "name": "kind_id",
+          "pk": true
+        },
+        {
+          "name": "название",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "asset",
+      "name": "Экземпляр имущества",
+      "module": "S10",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "инвентарный номер",
+          "nullable": true
+        },
+        {
+          "name": "состояние",
+          "nullable": false
+        },
+        {
+          "name": "место",
+          "nullable": false
+        },
+        {
+          "name": "kind_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": "инвентарный номер при наличии"
+    },
+    {
+      "id": "asset_transfer",
+      "name": "Передача имущества",
+      "module": "S10",
+      "attributes": [
+        {
+          "name": "asset_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "custodian_id",
+          "fk": true,
+          "nullable": true
+        },
+        {
+          "name": "project_id",
+          "fk": true,
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "resource_kind",
+      "name": "Тип ресурса",
+      "module": "S11",
+      "attributes": [
+        {
+          "name": "kind_id",
+          "pk": true
+        },
+        {
+          "name": "название",
+          "nullable": false
+        },
+        {
+          "name": "единица",
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "request",
+      "name": "Ресурсная заявка",
+      "module": "S11",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "подана",
+          "nullable": false
+        },
+        {
+          "name": "дата потребности",
+          "nullable": false
+        },
+        {
+          "name": "срок рассмотрения",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        },
+        {
+          "name": "результат",
+          "nullable": true
+        },
+        {
+          "name": "initiator_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "project_id",
+          "fk": true,
+          "nullable": true
+        },
+        {
+          "name": "event_id",
+          "fk": true,
+          "nullable": true
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "request_line",
+      "name": "Позиция ресурсной заявки",
+      "module": "S11",
+      "attributes": [
+        {
+          "name": "request_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер позиции",
+          "pk": true
+        },
+        {
+          "name": "количество",
+          "nullable": false
+        },
+        {
+          "name": "kind_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "notification",
+      "name": "Уведомление",
+      "module": "S12",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "тип",
+          "nullable": false
+        },
+        {
+          "name": "создано",
+          "nullable": false
+        },
+        {
+          "name": "recipient_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "delivery",
+      "name": "Доставка уведомления",
+      "module": "S12",
+      "attributes": [
+        {
+          "name": "notification_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер доставки",
+          "pk": true
+        },
+        {
+          "name": "канал",
+          "nullable": false
+        },
+        {
+          "name": "момент",
+          "nullable": false
+        },
+        {
+          "name": "результат",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "attachment",
+      "name": "Вложение",
+      "module": "S13",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "наименование",
+          "nullable": false
+        },
+        {
+          "name": "owner_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "attachment_version",
+      "name": "Версия вложения",
+      "module": "S13",
+      "attributes": [
+        {
+          "name": "attachment_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер версии",
+          "pk": true
+        },
+        {
+          "name": "дата",
+          "nullable": false
+        },
+        {
+          "name": "тип",
+          "nullable": false
+        },
+        {
+          "name": "ссылка",
+          "nullable": false
+        },
+        {
+          "name": "author_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "archive",
+      "name": "Архивное дело",
+      "module": "S14",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "шифр",
+          "nullable": false
+        },
+        {
+          "name": "дата помещения",
+          "nullable": false
+        },
+        {
+          "name": "срок хранения",
+          "nullable": false
+        },
+        {
+          "name": "статус",
+          "nullable": false
+        },
+        {
+          "name": "бумажное место",
+          "nullable": true
+        },
+        {
+          "name": "convocation_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": "шифр при единой нумерации"
+    },
+    {
+      "id": "archive_item",
+      "name": "Включение в дело",
+      "module": "S14",
+      "attributes": [
+        {
+          "name": "archive_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "item_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "дата включения",
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "audit",
+      "name": "Запись аудита",
+      "module": "S15",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "номер ревизии",
+          "pk": true
+        },
+        {
+          "name": "момент",
+          "nullable": false
+        },
+        {
+          "name": "вид",
+          "nullable": false
+        },
+        {
+          "name": "прежний снимок",
+          "nullable": true
+        },
+        {
+          "name": "новый снимок",
+          "nullable": true
+        },
+        {
+          "name": "actor_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "device",
+      "name": "Мобильное устройство",
+      "module": "S15",
+      "attributes": [
+        {
+          "name": "object_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "серийный номер",
+          "nullable": false
+        }
+      ],
+      "ak": "серийный номер при принятой схеме идентификации"
+    },
+    {
+      "id": "device_assignment",
+      "name": "Назначение устройства",
+      "module": "S15",
+      "attributes": [
+        {
+          "name": "device_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "начало",
+          "pk": true
+        },
+        {
+          "name": "конец",
+          "nullable": true
+        },
+        {
+          "name": "person_id",
+          "fk": true,
+          "nullable": false
+        }
+      ],
+      "ak": ""
+    },
+    {
+      "id": "sync_operation",
+      "name": "Офлайн-операция",
+      "module": "S15",
+      "attributes": [
+        {
+          "name": "device_id",
+          "pk": true,
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "клиентский ID",
+          "pk": true
+        },
+        {
+          "name": "локальное время",
+          "nullable": false
+        },
+        {
+          "name": "время приёма",
+          "nullable": true
+        },
+        {
+          "name": "вид",
+          "nullable": false
+        },
+        {
+          "name": "запрошенное изменение",
+          "nullable": false
+        },
+        {
+          "name": "результат",
+          "nullable": true
+        },
+        {
+          "name": "время обнаружения",
+          "nullable": true
+        },
+        {
+          "name": "статус конфликта",
+          "nullable": true
+        },
+        {
+          "name": "решение",
+          "nullable": true
+        },
+        {
+          "name": "выдано с",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "object_id",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "базовая ревизия",
+          "fk": true,
+          "nullable": false
+        },
+        {
+          "name": "применённая ревизия",
+          "fk": true,
+          "nullable": true
+        },
+        {
+          "name": "серверная ревизия",
+          "fk": true,
+          "nullable": true
+        }
+      ],
+      "ak": "object_id+применённая ревизия при наличии"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "convocation:object_id",
+      "parent": "object",
+      "child": "convocation",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "membership:object_id",
+      "parent": "object",
+      "child": "membership",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "membership:convocation_id",
+      "parent": "convocation",
+      "child": "membership",
+      "name": "входит в",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "membership:person_id",
+      "parent": "party",
+      "child": "membership",
+      "name": "вступает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "appointment:object_id",
+      "parent": "object",
+      "child": "appointment",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "appointment:membership_id",
+      "parent": "membership",
+      "child": "appointment",
+      "name": "получает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "appointment:position_id",
+      "parent": "position",
+      "child": "appointment",
+      "name": "занимает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "body:object_id",
+      "parent": "object",
+      "child": "body",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "body:org_id",
+      "parent": "party",
+      "child": "body",
+      "name": "является организационной стороной",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": false
+    },
+    {
+      "id": "body:project_id?",
+      "parent": "project",
+      "child": "body",
+      "name": "работает при",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "body:direction_id?",
+      "parent": "direction",
+      "child": "body",
+      "name": "относится к",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "body_member:body_id",
+      "parent": "body",
+      "child": "body_member",
+      "name": "формирует",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "body_member:membership_id",
+      "parent": "membership",
+      "child": "body_member",
+      "name": "участвует",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "body_head:body_id",
+      "parent": "body",
+      "child": "body_head",
+      "name": "возглавляется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "body_head:person_id",
+      "parent": "party",
+      "child": "body_head",
+      "name": "руководит",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "document:object_id",
+      "parent": "object",
+      "child": "document",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "document:sender_id?",
+      "parent": "party",
+      "child": "document",
+      "name": "отправляет",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "document:author_id?",
+      "parent": "party",
+      "child": "document",
+      "name": "готовит",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "document_state:document_id",
+      "parent": "document",
+      "child": "document_state",
+      "name": "имеет состояние",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "document_issue:document_id",
+      "parent": "document",
+      "child": "document_issue",
+      "name": "касается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "document_issue:issue_id",
+      "parent": "issue",
+      "child": "document_issue",
+      "name": "освещается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "document_project:document_id",
+      "parent": "document",
+      "child": "document_project",
+      "name": "относится к",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "document_project:project_id",
+      "parent": "project",
+      "child": "document_project",
+      "name": "содержит",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "outgoing_recipient:document_id",
+      "parent": "document",
+      "child": "outgoing_recipient",
+      "name": "адресуется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "outgoing_recipient:recipient_id",
+      "parent": "party",
+      "child": "outgoing_recipient",
+      "name": "получает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "incoming_assignment:document_id",
+      "parent": "document",
+      "child": "incoming_assignment",
+      "name": "имеет назначение",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "incoming_assignment:person_id",
+      "parent": "party",
+      "child": "incoming_assignment",
+      "name": "назначается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "internal_version:document_id",
+      "parent": "document",
+      "child": "internal_version",
+      "name": "имеет версию",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "internal_version:author_id",
+      "parent": "party",
+      "child": "internal_version",
+      "name": "создаёт",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "meeting:object_id",
+      "parent": "object",
+      "child": "meeting",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "meeting:convocation_id",
+      "parent": "convocation",
+      "child": "meeting",
+      "name": "проводит",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "meeting:chair_id",
+      "parent": "party",
+      "child": "meeting",
+      "name": "председательствует",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "meeting:secretary_id",
+      "parent": "party",
+      "child": "meeting",
+      "name": "секретарь",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "meeting_schedule:meeting_id",
+      "parent": "meeting",
+      "child": "meeting_schedule",
+      "name": "имеет расписание",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "meeting_member:meeting_id",
+      "parent": "meeting",
+      "child": "meeting_member",
+      "name": "включает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "meeting_member:person_id",
+      "parent": "party",
+      "child": "meeting_member",
+      "name": "входит",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "issue:object_id",
+      "parent": "object",
+      "child": "issue",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "agenda_item:object_id",
+      "parent": "object",
+      "child": "agenda_item",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "agenda_item:meeting_id",
+      "parent": "meeting",
+      "child": "agenda_item",
+      "name": "включает пункт",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "agenda_item:issue_id",
+      "parent": "issue",
+      "child": "agenda_item",
+      "name": "выносится",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "agenda_item:initiator_id",
+      "parent": "party",
+      "child": "agenda_item",
+      "name": "инициирует",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "agenda_item:speaker_id",
+      "parent": "party",
+      "child": "agenda_item",
+      "name": "докладывает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "agenda_document:agenda_id",
+      "parent": "agenda_item",
+      "child": "agenda_document",
+      "name": "рассматривается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "agenda_document:document_id",
+      "parent": "document",
+      "child": "agenda_document",
+      "name": "прилагается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "protocol:object_id",
+      "parent": "object",
+      "child": "protocol",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "protocol:meeting_id",
+      "parent": "meeting",
+      "child": "protocol",
+      "name": "оформляется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "protocol:secretary_id",
+      "parent": "party",
+      "child": "protocol",
+      "name": "оформляет",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "protocol_version:protocol_id",
+      "parent": "protocol",
+      "child": "protocol_version",
+      "name": "версируется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "protocol_version:author_id",
+      "parent": "party",
+      "child": "protocol_version",
+      "name": "редактирует",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "protocol_attendee:protocol_id+номер версии",
+      "parent": "protocol_version",
+      "child": "protocol_attendee",
+      "name": "фиксирует присутствие",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "protocol_attendee:person_id",
+      "parent": "party",
+      "child": "protocol_attendee",
+      "name": "присутствовал",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "protocol_item:protocol_id+номер версии",
+      "parent": "protocol_version",
+      "child": "protocol_item",
+      "name": "фиксирует пункт",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "protocol_item:agenda_id",
+      "parent": "agenda_item",
+      "child": "protocol_item",
+      "name": "отмечен рассмотренным",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "protocol_decision:protocol_id+номер версии",
+      "parent": "protocol_version",
+      "child": "protocol_decision",
+      "name": "фиксирует решение",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "protocol_decision:decision_id",
+      "parent": "decision",
+      "child": "protocol_decision",
+      "name": "запротоколировано",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "decision:object_id",
+      "parent": "object",
+      "child": "decision",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "decision:agenda_id",
+      "parent": "agenda_item",
+      "child": "decision",
+      "name": "принимается по",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "decision_owner:decision_id",
+      "parent": "decision",
+      "child": "decision_owner",
+      "name": "поручено",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "decision_owner:person_id",
+      "parent": "party",
+      "child": "decision_owner",
+      "name": "отвечает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "decision_state:decision_id",
+      "parent": "decision",
+      "child": "decision_state",
+      "name": "исполняется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "voting:object_id",
+      "parent": "object",
+      "child": "voting",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "voting:agenda_id",
+      "parent": "agenda_item",
+      "child": "voting",
+      "name": "голосуется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "vote_option:voting_id",
+      "parent": "voting",
+      "child": "vote_option",
+      "name": "предлагает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "vote_right:voting_id",
+      "parent": "voting",
+      "child": "vote_right",
+      "name": "допускает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "vote_right:person_id",
+      "parent": "party",
+      "child": "vote_right",
+      "name": "имеет право",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "open_vote:voting_id+person_id",
+      "parent": "vote_right",
+      "child": "open_vote",
+      "name": "реализует право",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "open_vote:voting_id+номер варианта",
+      "parent": "vote_option",
+      "child": "open_vote",
+      "name": "выбирает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "secret_vote:voting_id+номер варианта",
+      "parent": "vote_option",
+      "child": "secret_vote",
+      "name": "выбирает анонимно",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "assignment:object_id",
+      "parent": "object",
+      "child": "assignment",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "assignment:decision_id?",
+      "parent": "decision",
+      "child": "assignment",
+      "name": "порождается решением",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "assignment_event:assignment_id",
+      "parent": "assignment",
+      "child": "assignment_event",
+      "name": "имеет событие",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "assignment_assignee:assignment_id",
+      "parent": "assignment",
+      "child": "assignment_assignee",
+      "name": "назначается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "assignment_assignee:person_id",
+      "parent": "party",
+      "child": "assignment_assignee",
+      "name": "исполняет",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal:object_id",
+      "parent": "object",
+      "child": "appeal",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "appeal:applicant_id",
+      "parent": "party",
+      "child": "appeal",
+      "name": "подаёт",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "appeal_state:appeal_id",
+      "parent": "appeal",
+      "child": "appeal_state",
+      "name": "получает статус",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_owner:appeal_id",
+      "parent": "appeal",
+      "child": "appeal_owner",
+      "name": "передано",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_owner:person_id",
+      "parent": "party",
+      "child": "appeal_owner",
+      "name": "отвечает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "appeal_document:appeal_id",
+      "parent": "appeal",
+      "child": "appeal_document",
+      "name": "оформляется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_document:document_id",
+      "parent": "document",
+      "child": "appeal_document",
+      "name": "составляется по",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_assignment:appeal_id",
+      "parent": "appeal",
+      "child": "appeal_assignment",
+      "name": "обрабатывается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_assignment:assignment_id",
+      "parent": "assignment",
+      "child": "appeal_assignment",
+      "name": "исполняется по",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_issue:appeal_id",
+      "parent": "appeal",
+      "child": "appeal_issue",
+      "name": "рассматривает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_issue:issue_id",
+      "parent": "issue",
+      "child": "appeal_issue",
+      "name": "относится к",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_meeting:appeal_id",
+      "parent": "appeal",
+      "child": "appeal_meeting",
+      "name": "направляется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_meeting:meeting_id",
+      "parent": "meeting",
+      "child": "appeal_meeting",
+      "name": "получает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_agenda:appeal_id",
+      "parent": "appeal",
+      "child": "appeal_agenda",
+      "name": "рассматривается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "appeal_agenda:agenda_id",
+      "parent": "agenda_item",
+      "child": "appeal_agenda",
+      "name": "обсуждается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project:object_id",
+      "parent": "object",
+      "child": "project",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "project_version:project_id",
+      "parent": "project",
+      "child": "project_version",
+      "name": "имеет редакцию",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_version:head_id",
+      "parent": "party",
+      "child": "project_version",
+      "name": "руководит",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "project_state:project_id",
+      "parent": "project",
+      "child": "project_state",
+      "name": "получает статус",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_member:project_id",
+      "parent": "project",
+      "child": "project_member",
+      "name": "объединяет",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_member:person_id",
+      "parent": "party",
+      "child": "project_member",
+      "name": "участвует",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_body:project_id",
+      "parent": "project",
+      "child": "project_body",
+      "name": "имеет ответственный орган",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_body:body_id",
+      "parent": "body",
+      "child": "project_body",
+      "name": "отвечает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_direction:project_id",
+      "parent": "project",
+      "child": "project_direction",
+      "name": "имеет направление",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_direction:direction_id",
+      "parent": "direction",
+      "child": "project_direction",
+      "name": "отвечает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_assignment:project_id",
+      "parent": "project",
+      "child": "project_assignment",
+      "name": "реализуется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "project_assignment:assignment_id",
+      "parent": "assignment",
+      "child": "project_assignment",
+      "name": "исполняется по",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "event:object_id",
+      "parent": "object",
+      "child": "event",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "event:project_id",
+      "parent": "project",
+      "child": "event",
+      "name": "проводится в рамках",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "event_organizer:event_id",
+      "parent": "event",
+      "child": "event_organizer",
+      "name": "организуется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "event_organizer:organizer_id",
+      "parent": "party",
+      "child": "event_organizer",
+      "name": "организует",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "event_owner:event_id",
+      "parent": "event",
+      "child": "event_owner",
+      "name": "поручено",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "event_owner:person_id",
+      "parent": "party",
+      "child": "event_owner",
+      "name": "отвечает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "event_document:event_id",
+      "parent": "event",
+      "child": "event_document",
+      "name": "документируется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "event_document:document_id",
+      "parent": "document",
+      "child": "event_document",
+      "name": "оформляет",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "initiative:object_id",
+      "parent": "object",
+      "child": "initiative",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "approval:object_id",
+      "parent": "object",
+      "child": "approval",
+      "name": "подлежит согласованию",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "approval_step:approval_id",
+      "parent": "approval",
+      "child": "approval_step",
+      "name": "содержит этап",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "approval_attempt:approval_id+номер этапа",
+      "parent": "approval_step",
+      "child": "approval_attempt",
+      "name": "повторяет этап",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "approval_attempt:approver_id",
+      "parent": "party",
+      "child": "approval_attempt",
+      "name": "согласует",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "act:object_id",
+      "parent": "object",
+      "child": "act",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "act_version:act_id",
+      "parent": "act",
+      "child": "act_version",
+      "name": "издаётся в редакции",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "task:object_id",
+      "parent": "object",
+      "child": "task",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "task:context_id",
+      "parent": "object",
+      "child": "task",
+      "name": "относится к",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "task_assignee:task_id",
+      "parent": "task",
+      "child": "task_assignee",
+      "name": "назначается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "task_assignee:person_id",
+      "parent": "party",
+      "child": "task_assignee",
+      "name": "исполняет",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "asset:object_id",
+      "parent": "object",
+      "child": "asset",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "asset:kind_id",
+      "parent": "asset_kind",
+      "child": "asset",
+      "name": "относится к типу",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "asset_transfer:asset_id",
+      "parent": "asset",
+      "child": "asset_transfer",
+      "name": "передаётся",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "asset_transfer:custodian_id?",
+      "parent": "party",
+      "child": "asset_transfer",
+      "name": "принимает",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "asset_transfer:project_id?",
+      "parent": "project",
+      "child": "asset_transfer",
+      "name": "получает для проекта",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "request:object_id",
+      "parent": "object",
+      "child": "request",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "request:initiator_id",
+      "parent": "party",
+      "child": "request",
+      "name": "подаёт",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "request:project_id?",
+      "parent": "project",
+      "child": "request",
+      "name": "запрашивает для проекта",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "request:event_id?",
+      "parent": "event",
+      "child": "request",
+      "name": "запрашивает для мероприятия",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "request_line:request_id",
+      "parent": "request",
+      "child": "request_line",
+      "name": "содержит",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "request_line:kind_id",
+      "parent": "resource_kind",
+      "child": "request_line",
+      "name": "запрашивается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "notification:object_id",
+      "parent": "object",
+      "child": "notification",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "notification:recipient_id",
+      "parent": "party",
+      "child": "notification",
+      "name": "уведомляется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "delivery:notification_id",
+      "parent": "notification",
+      "child": "delivery",
+      "name": "отправляется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "attachment:object_id",
+      "parent": "object",
+      "child": "attachment",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "attachment:owner_id",
+      "parent": "object",
+      "child": "attachment",
+      "name": "включает вложение",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "attachment_version:attachment_id",
+      "parent": "attachment",
+      "child": "attachment_version",
+      "name": "версируется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "attachment_version:author_id",
+      "parent": "party",
+      "child": "attachment_version",
+      "name": "добавляет",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "archive:object_id",
+      "parent": "object",
+      "child": "archive",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "archive:convocation_id",
+      "parent": "convocation",
+      "child": "archive",
+      "name": "относится к",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "archive_item:archive_id",
+      "parent": "archive",
+      "child": "archive_item",
+      "name": "содержит",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "archive_item:item_id",
+      "parent": "object",
+      "child": "archive_item",
+      "name": "помещается в дело",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "audit:object_id",
+      "parent": "object",
+      "child": "audit",
+      "name": "изменяется",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "audit:actor_id",
+      "parent": "party",
+      "child": "audit",
+      "name": "меняет",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "device:object_id",
+      "parent": "object",
+      "child": "device",
+      "name": "учитывается",
+      "parent_card": "1",
+      "child_card": "0..1",
+      "identifying": true
+    },
+    {
+      "id": "device_assignment:device_id",
+      "parent": "device",
+      "child": "device_assignment",
+      "name": "назначается",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": true
+    },
+    {
+      "id": "device_assignment:person_id",
+      "parent": "party",
+      "child": "device_assignment",
+      "name": "получает",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "sync_operation:device_id+выдано с",
+      "parent": "device_assignment",
+      "child": "sync_operation",
+      "name": "выполнено при назначении",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "sync_operation:object_id",
+      "parent": "object",
+      "child": "sync_operation",
+      "name": "изменяет",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "sync_operation:object_id+базовая ревизия",
+      "parent": "audit",
+      "child": "sync_operation",
+      "name": "основана на ревизии",
+      "parent_card": "1",
+      "child_card": "0..N",
+      "identifying": false
+    },
+    {
+      "id": "sync_operation:object_id+применённая ревизия?",
+      "parent": "audit",
+      "child": "sync_operation",
+      "name": "порождает изменение",
+      "parent_card": "0..1",
+      "child_card": "0..1",
+      "identifying": false
+    },
+    {
+      "id": "sync_operation:object_id+серверная ревизия?",
+      "parent": "audit",
+      "child": "sync_operation",
+      "name": "обнаружена серверная ревизия",
+      "parent_card": "0..1",
+      "child_card": "0..N",
+      "identifying": false
+    }
+  ],
+  "metadata": {
+    "categories": [
+      {
+        "parent": "object",
+        "children": [
+          "convocation",
+          "membership",
+          "appointment",
+          "body",
+          "document",
+          "meeting",
+          "issue",
+          "agenda_item",
+          "protocol",
+          "decision",
+          "voting",
+          "assignment",
+          "appeal",
+          "project",
+          "event",
+          "initiative",
+          "act",
+          "task",
+          "asset",
+          "request",
+          "notification",
+          "attachment",
+          "archive",
+          "device"
+        ],
+        "disjoint": true,
+        "total": true
+      }
+    ],
+    "rules": {
+      "C-TYPE": "Объект учёта принадлежит ровно одному из 24 перечисленных подтипов. Сторона и документ хранятся без подтиповых таблиц; их род и направление контролируются правилами C-PARTY и C-DOC.",
+      "C-ROLES": "Только лицо допускается в ролях: membership.person_id, body_head.person_id, document.author_id, incoming_assignment.person_id, internal_version.author_id, meeting.chair_id, meeting.secretary_id, meeting_member.person_id, agenda_item.initiator_id, agenda_item.speaker_id, protocol.secretary_id, protocol_version.author_id, protocol_attendee.person_id, decision_owner.person_id, vote_right.person_id, assignment_assignee.person_id, appeal.applicant_id, appeal_owner.person_id, project_version.head_id, project_member.person_id, event_owner.person_id, task_assignee.person_id, asset_transfer.custodian_id, request.initiator_id, attachment_version.author_id, audit.actor_id, device_assignment.person_id. Только организация или подразделение допускается в ролях: body.org_id. Студенческое обращение подаёт студент (лицо со студенческим идентификатором); отправитель входящего — студент или допустимая организация. approval.object_id: document/event/initiative; approval_attempt.approver_id: лицо или подразделение; task.context_id: project/document/event; attachment.owner_id: document/appeal; archive_item.item_id: document/project. Ограничения роли сохраняются при изменении рода стороны и удалении студенческого идентификатора.",
+      "C-INTERVAL": "Интервалы [начало, конец) непустые, у одного назначения и соответствующей роли не пересекаются; интервалы вложены в периоды родительских участников. Все person_id указывают на сторону рода «лицо», включая руководителя органа, который не обязан быть членом совета.",
+      "C-PROVENANCE": "appeal_agenda допустима только при appeal_issue с issue_id пункта; направление на заседание фиксируется отдельно.",
+      "C-SNAPSHOT": "Снимок протокола обязателен и неизменяем; содержит прежние формулировки, реквизиты, состав, пункты и решения.",
+      "C-WAIT": "Последняя отправленная попытка этапа вытесняет предыдущие; текущий незакрытый этап связывается через маршрут с документом, мероприятием или инициативой. История попыток сохраняется.",
+      "C-CHAIN": "Предыдущая версия вложения вычисляется по непосредственно меньшему номеру того же вложения; номера последовательны.",
+      "C-COMMAND": "Запрошенное изменение неизменяемо; проверка базовой ревизии, применение, аудит и фиксация результата атомарны, повтор по ключу операции возвращает сохранённый результат.",
+      "C-BASE": "Составной FK связывает базовую, применённую и обнаруженную серверную ревизии с тем же объектом. Непустая применённая ревизия уникальна для объекта.",
+      "C-PART": "После регистрации документ связан с вопросом или проектом; после отправки исходящего есть адресат; поданная заявка содержит позицию и относится к проекту XOR мероприятию. Адресаты и отправки допустимы только для исходящего документа, назначения и обработка — только для входящего, версии — только для внутреннего. appeal_document относится только к внутреннему документу.",
+      "C-VOTE": "Открытый голос ссылается на право конкретного лица и вариант своего голосования. Номер тайного бюллетеня уникален в пределах голосования, определяемого через выбранный вариант; тайный бюллетень не связан с лицом. Число бюллетеней не превышает число прав.",
+      "C-HISTORY": "Редакции и интервалы проекта хранят предметную историю; аудит сохраняет полные снимки изменяемых реквизитов и связей. Срок и статус поручения определяются последними событиями соответствующего вида с сохранением прежних независимых номеров. После первого события document_state направление документа не меняется: история обработки входящего не превращается в историю отправки исходящего.",
+      "C-INCOMING-ASSIGN": "Назначения допустимы только для входящего документа. Роль — ответственный или исполнитель; интервалы [начало, конец) непустые. Для документа в каждый момент не более одного ответственного; для пары документ–лицо интервалы исполнителя не пересекаются. Одно лицо может одновременно выполнять обе роли. Полная проверка непересечения делает частичный UNIQUE (document_id, начало) для ответственного ненужным.",
+      "C-CONFLICT": "Конфликт у операции отсутствует, когда время обнаружения, серверная ревизия, статус и решение все NULL. При конфликте время обнаружения, серверная ревизия и статус обязательны, решение необязательно; статус открыт или разрешён. После разрешения сохраняются исходные время и ревизия. Составной FK (object_id, серверная ревизия) указывает на аудит того же объекта; при обнаружении ревизия должна быть актуальной серверной. Проверка актуальности и повтор операции атомарны.",
+      "C-PARTY": "Род стороны принимает значение «лицо» или «организация»; организация включает подразделение, которое различается полем «вид». У лица обязательно имя, студенческий идентификатор необязателен и при наличии уникален; название и вид организации отсутствуют. У организации обязательны название и вид; имя и студенческий идентификатор отсутствуют.",
+      "C-DOC": "Направление документа: входящий, исходящий или внутренний; предметный тип документа не является направлением. Для входящего обязательны дата регистрации и отправитель, а дата подготовки и автор отсутствуют; для исходящего обязательны дата подготовки и автор, а дата регистрации и отправитель отсутствуют; у внутреннего отсутствуют все четыре реквизита. После появления первого события document_state либо любого факта, специфичного для направления, направление документа неизменно; смена без таких фактов допустима только с согласованным изменением условных реквизитов.",
+      "C-DOCUMENT-STATE": "События состояния относятся только к входящим или исходящим документам и сохраняют их прежнюю историю обработки или отправки соответственно; для внутренних документов таких событий нет. Статус должен быть допустим для направления; полный перечень значений статуса в исходных данных не задан и остаётся открытым.",
+      "C-ASSIGNMENT-EVENT": "Вид события поручения — «срок» или «статус». Для вида «срок» заполнен срок и отсутствует статус; для вида «статус» заполнен статус и отсутствует срок. Момент обязателен. Номер события уникален внутри пары поручение–вид, поэтому прежние независимые номера двух потоков и события с одинаковым моментом сохраняются."
+    }
+  }
+}
