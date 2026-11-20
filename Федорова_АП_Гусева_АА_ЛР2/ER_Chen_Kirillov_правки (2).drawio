@@ -1,0 +1,2240 @@
+<mxfile host="app.diagrams.net" agent="Claude" pages="3">
+  <diagram id="chen" name="ER-диаграмма (нотация Чена–Кириллова)">
+    <mxGraphModel dx="1515" dy="941" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="chen-2" parent="1" style="text;html=0;fontSize=28;fontStyle=1;align=left;verticalAlign=middle;whiteSpace=wrap;" value="ER-диаграмма нотация Чена–Кириллова" vertex="1">
+          <mxGeometry height="50" width="618" x="60" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-3" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Учебный год" vertex="1">
+          <mxGeometry height="60" width="190" x="2805" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-4" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Уровень образования" vertex="1">
+          <mxGeometry height="60" width="190" x="1005" y="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-5" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Учебный период" vertex="1">
+          <mxGeometry height="60" width="190" x="2205" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-6" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Параллель" vertex="1">
+          <mxGeometry height="60" width="190" x="1005" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-7" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Класс" vertex="1">
+          <mxGeometry height="60" width="190" x="2805" y="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-8" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Учащийся" vertex="1">
+          <mxGeometry height="60" width="190" x="3405" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-9" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="ФГОС" vertex="1">
+          <mxGeometry height="60" width="190" x="405" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-10" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Планируемый результат" vertex="1">
+          <mxGeometry height="60" width="190" x="1005" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-11" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Образовательная программа" vertex="1">
+          <mxGeometry height="60" width="190" x="405" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="XMhZkoTwceejfW_9TUBR-8" edge="1" parent="1" source="chen-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="chen-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-12" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Дисциплина" vertex="1">
+          <mxGeometry height="60" width="190" x="1605" y="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-13" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Рабочая программа" vertex="1">
+          <mxGeometry height="60" width="190" x="1605" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-14" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Сотрудник" vertex="1">
+          <mxGeometry height="60" width="190" x="3405" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-16" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Кабинет" vertex="1">
+          <mxGeometry height="60" width="190" x="4605" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-17" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Статус посещаемости" vertex="1">
+          <mxGeometry height="60" width="190" x="4005" y="2390" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-18" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Шкала оценивания" vertex="1">
+          <mxGeometry height="60" width="190" x="3405" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-19" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Значение шкалы" vertex="1">
+          <mxGeometry height="60" width="190" x="4005" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-20" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Занятие" vertex="1">
+          <mxGeometry height="60" width="190" x="3405" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-21" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Контрольное мероприятие" vertex="1">
+          <mxGeometry height="60" width="190" x="2805" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-22" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Проект" vertex="1">
+          <mxGeometry height="60" width="190" x="4005" y="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-23" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Мобильное устройство" vertex="1">
+          <mxGeometry height="60" width="190" x="4605" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="XMhZkoTwceejfW_9TUBR-7" edge="1" parent="1" source="chen-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;labelPadding=0 4;" target="chen-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-24" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Редакция ФГОС" vertex="1">
+          <mxGeometry height="60" width="190" x="405" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-25" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Версия программы" vertex="1">
+          <mxGeometry height="60" width="190" x="1005" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-26" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Учебный план" vertex="1">
+          <mxGeometry height="60" width="190" x="1005" y="2390" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-27" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Строка плана" vertex="1">
+          <mxGeometry height="60" width="190" x="405" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-28" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Версия РП" vertex="1">
+          <mxGeometry height="60" width="190" x="1605" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-29" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Тема РП" vertex="1">
+          <mxGeometry height="60" width="190" x="2205" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-30" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Особое условие" vertex="1">
+          <mxGeometry height="60" width="190" x="1605" y="2390" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-31" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Назначение на должность" vertex="1">
+          <mxGeometry height="60" width="190" x="2805" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-32" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Нагрузка педагога" vertex="1">
+          <mxGeometry height="60" width="190" x="2805" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-33" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Изменение занятия" vertex="1">
+          <mxGeometry height="60" width="190" x="4005" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-34" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Итоговый результат" vertex="1">
+          <mxGeometry height="60" width="190" x="2205" y="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-35" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Этап проекта" vertex="1">
+          <mxGeometry height="60" width="190" x="4605" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-36" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Сеанс устройства" vertex="1">
+          <mxGeometry height="60" width="190" x="4605" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-37" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Офлайн операция" vertex="1">
+          <mxGeometry height="60" width="190" x="4005" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-38" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Зачисление" vertex="1">
+          <mxGeometry height="96" width="170" x="3415" y="2372" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-40" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Посещаемость" vertex="1">
+          <mxGeometry height="96" width="170" x="4015" y="1992" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-41" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Результат выполнения" vertex="1">
+          <mxGeometry height="96" width="170" x="3415" y="1612" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-42" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Строка ИУП" vertex="1">
+          <mxGeometry height="96" width="170" x="1615" y="1992" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-43" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Часы по периодам" vertex="1">
+          <mxGeometry height="96" width="170" x="415" y="1612" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-44" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Достижение результата" vertex="1">
+          <mxGeometry height="96" width="170" x="1615" y="472" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-45" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Проверка результата" vertex="1">
+          <mxGeometry height="96" width="170" x="1015" y="472" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-46" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Преподавание" vertex="1">
+          <mxGeometry height="96" width="170" x="2215" y="852" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-47" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Участие в проекте" vertex="1">
+          <mxGeometry height="96" width="170" x="4615" y="1612" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-48" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Тематика проекта" vertex="1">
+          <mxGeometry height="96" width="170" x="2215" y="1992" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-49" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код года" vertex="1">
+          <mxGeometry height="38" width="124" x="2838" y="2101" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-50" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-49" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-51" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="3006" y="2051" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-52" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-51" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-53" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="2670" y="1991" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-54" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-53" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-55" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="3078" y="2145" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-56" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-55" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-57" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код уровня" vertex="1">
+          <mxGeometry height="38" width="124" x="1038" y="1721" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-58" edge="1" parent="1" source="chen-4" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-57" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-59" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="1158" y="1561" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-60" edge="1" parent="1" source="chen-4" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-59" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-61" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="нормативный срок лет" vertex="1">
+          <mxGeometry height="38" width="124" x="1206" y="1611" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-62" edge="1" parent="1" source="chen-4" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-61" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-63" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код периода" vertex="1">
+          <mxGeometry height="38" width="124" x="2238" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-64" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-63" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-65" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер" vertex="1">
+          <mxGeometry height="38" width="124" x="2118" y="1341" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-66" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-65" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-67" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид" vertex="1">
+          <mxGeometry height="38" width="124" x="2406" y="1291" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-68" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-67" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-69" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="2070" y="1231" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-70" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-69" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-71" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="2238" y="1137" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-72" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-71" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-73" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="2118" y="1385" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-74" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-73" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-75" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код параллели" vertex="1">
+          <mxGeometry height="38" width="124" x="1038" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-76" edge="1" parent="1" source="chen-6" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-75" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-77" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер параллели" vertex="1">
+          <mxGeometry height="38" width="124" x="1158" y="1341" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-78" edge="1" parent="1" source="chen-6" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-77" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-79" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код класса" vertex="1">
+          <mxGeometry height="38" width="124" x="3006" y="1611" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-80" edge="1" parent="1" source="chen-7" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-79" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-81" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="буква" vertex="1">
+          <mxGeometry height="38" width="124" x="3006" y="1671" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-82" edge="1" parent="1" source="chen-7" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-81" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-83" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код учащегося" vertex="1">
+          <mxGeometry height="38" width="124" x="3558" y="2101" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-84" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-83" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-85" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="фамилия" vertex="1">
+          <mxGeometry height="38" width="124" x="3606" y="2051" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-86" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-85" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-87" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="имя" vertex="1">
+          <mxGeometry height="38" width="124" x="3558" y="1897" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-88" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-87" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-89" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="отчество" vertex="1">
+          <mxGeometry height="38" width="124" x="3558" y="2145" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-90" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-89" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-91" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата рождения" vertex="1">
+          <mxGeometry height="38" width="124" x="3798" y="2145" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-92" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-91" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-93" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="пол" vertex="1">
+          <mxGeometry height="38" width="124" x="3558" y="1853" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-94" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-93" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-95" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер личного дела" vertex="1">
+          <mxGeometry height="38" width="124" x="3558" y="2189" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-96" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-95" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-97" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код фгос" vertex="1">
+          <mxGeometry height="38" width="124" x="438" y="421" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-98" edge="1" parent="1" source="chen-9" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-97" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-99" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="558" y="581" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-100" edge="1" parent="1" source="chen-9" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-99" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-101" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="поколение" vertex="1">
+          <mxGeometry height="38" width="124" x="318" y="581" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-102" edge="1" parent="1" source="chen-9" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-101" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-103" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала действия" vertex="1">
+          <mxGeometry height="38" width="124" x="606" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-104" edge="1" parent="1" source="chen-9" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-103" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-105" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания действия" vertex="1">
+          <mxGeometry height="38" width="124" x="606" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-106" edge="1" parent="1" source="chen-9" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-105" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-107" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код результата" vertex="1">
+          <mxGeometry height="38" width="124" x="1038" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-108" edge="1" parent="1" source="chen-10" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-107" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-109" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид результата" vertex="1">
+          <mxGeometry height="38" width="124" x="918" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-110" edge="1" parent="1" source="chen-10" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-109" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-111" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="код по стандарту" vertex="1">
+          <mxGeometry height="38" width="124" x="1206" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-112" edge="1" parent="1" source="chen-10" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-111" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-113" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="формулировка" vertex="1">
+          <mxGeometry height="38" width="124" x="1206" y="911" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-114" edge="1" parent="1" source="chen-10" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-113" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-115" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код программы" vertex="1">
+          <mxGeometry height="38" width="124" x="438" y="1941" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-116" edge="1" parent="1" source="chen-11" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-115" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-117" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="438" y="2101" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-118" edge="1" parent="1" source="chen-11" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-117" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-119" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="описание" vertex="1">
+          <mxGeometry height="38" width="124" x="606" y="1991" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-120" edge="1" parent="1" source="chen-11" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-119" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-121" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код дисциплины" vertex="1">
+          <mxGeometry height="38" width="124" x="1518" y="1721" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-122" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-121" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-123" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="1806" y="1671" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-124" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-123" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-125" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид" vertex="1">
+          <mxGeometry height="38" width="124" x="1470" y="1671" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-126" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-125" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-127" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="требуемое назначение кабинета" vertex="1">
+          <mxGeometry height="38" width="124" x="1878" y="1721" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-128" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-127" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-129" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="требуемая квалификация" vertex="1">
+          <mxGeometry height="38" width="124" x="1518" y="1765" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-130" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-129" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-131" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код рп" vertex="1">
+          <mxGeometry height="38" width="124" x="1758" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-132" edge="1" parent="1" source="chen-13" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-131" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-133" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="1518" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-134" edge="1" parent="1" source="chen-13" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-133" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-135" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код сотрудника" vertex="1">
+          <mxGeometry height="38" width="124" x="3198" y="1137" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-136" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-135" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-137" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="фамилия" vertex="1">
+          <mxGeometry height="38" width="124" x="3558" y="1429" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-138" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-137" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-139" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="имя" vertex="1">
+          <mxGeometry height="38" width="124" x="3918" y="1429" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-140" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-139" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-141" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="отчество" vertex="1">
+          <mxGeometry height="38" width="124" x="3558" y="1473" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-142" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-141" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-143" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата рождения" vertex="1">
+          <mxGeometry height="38" width="124" x="3918" y="1473" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-144" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-143" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-145" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата приёма" vertex="1">
+          <mxGeometry height="38" width="124" x="3198" y="1517" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-146" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-145" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-147" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата увольнения" vertex="1">
+          <mxGeometry height="38" width="124" x="3738" y="1231" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-148" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-147" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-149" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="квалификационная категория" vertex="1">
+          <mxGeometry height="38" width="124" x="3858" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-150" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-149" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-154" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#888888;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2394.9999999999995" y="2403.035714" as="sourcePoint" />
+            <mxPoint x="2414.3939162723736" y="2399.5462888830016" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-155" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код кабинета" vertex="1">
+          <mxGeometry height="38" width="124" x="4638" y="421" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-156" edge="1" parent="1" source="chen-16" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-155" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-157" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер" vertex="1">
+          <mxGeometry height="38" width="124" x="4638" y="581" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-158" edge="1" parent="1" source="chen-16" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-157" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-159" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="назначение" vertex="1">
+          <mxGeometry height="38" width="124" x="4806" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-160" edge="1" parent="1" source="chen-16" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-159" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-161" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вместимость" vertex="1">
+          <mxGeometry height="38" width="124" x="4806" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-162" edge="1" parent="1" source="chen-16" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-161" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-163" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="оснащение" vertex="1">
+          <mxGeometry height="38" width="124" x="4470" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-164" edge="1" parent="1" source="chen-16" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-163" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-165" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код статуса" vertex="1">
+          <mxGeometry height="38" width="124" x="4038" y="2481" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-166" edge="1" parent="1" source="chen-17" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-165" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-167" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="4158" y="2321" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-168" edge="1" parent="1" source="chen-17" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-167" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-169" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="считается пропуском" vertex="1">
+          <mxGeometry height="38" width="124" x="3918" y="2321" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-170" edge="1" parent="1" source="chen-17" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-169" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-171" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код шкалы" vertex="1">
+          <mxGeometry height="38" width="124" x="3438" y="421" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-172" edge="1" parent="1" source="chen-18" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-171" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-173" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="3606" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-174" edge="1" parent="1" source="chen-18" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-173" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-175" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="тип" vertex="1">
+          <mxGeometry height="38" width="124" x="3606" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-176" edge="1" parent="1" source="chen-18" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-175" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-177" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="минимальный балл" vertex="1">
+          <mxGeometry height="38" width="124" x="3270" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-178" edge="1" parent="1" source="chen-18" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-177" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-179" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="максимальный балл" vertex="1">
+          <mxGeometry height="38" width="124" x="3270" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-180" edge="1" parent="1" source="chen-18" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-179" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-181" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код значения" vertex="1">
+          <mxGeometry height="38" width="124" x="4158" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-182" edge="1" parent="1" source="chen-19" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-181" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-183" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="обозначение" vertex="1">
+          <mxGeometry height="38" width="124" x="4158" y="1341" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-184" edge="1" parent="1" source="chen-19" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-183" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-185" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="числовой эквивалент" vertex="1">
+          <mxGeometry height="38" width="124" x="4206" y="1231" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-186" edge="1" parent="1" source="chen-19" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-185" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-187" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="порядок" vertex="1">
+          <mxGeometry height="38" width="124" x="4206" y="1291" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-188" edge="1" parent="1" source="chen-19" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-187" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-189" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код занятия" vertex="1">
+          <mxGeometry height="38" width="124" x="3438" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-190" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-189" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-191" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата" vertex="1">
+          <mxGeometry height="38" width="124" x="3438" y="757" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-192" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-191" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-193" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер урока" vertex="1">
+          <mxGeometry height="38" width="124" x="3198" y="757" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-194" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-193" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-195" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="время начала" vertex="1">
+          <mxGeometry height="38" width="124" x="3438" y="713" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-196" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-195" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-197" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="время окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="3438" y="669" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-198" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-197" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-199" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="статус" vertex="1">
+          <mxGeometry height="38" width="124" x="3438" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-200" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-199" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-201" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="проведено часов" vertex="1">
+          <mxGeometry height="38" width="124" x="3678" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-202" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-201" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-203" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="тема занятия" vertex="1">
+          <mxGeometry height="38" width="124" x="3078" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-204" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-203" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-205" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="изученный материал" vertex="1">
+          <mxGeometry height="38" width="124" x="3018" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-206" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-205" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-207" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код мероприятия" vertex="1">
+          <mxGeometry height="38" width="124" x="2838" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-208" edge="1" parent="1" source="chen-21" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-207" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-209" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="2718" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-210" edge="1" parent="1" source="chen-21" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-209" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-211" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид контроля" vertex="1">
+          <mxGeometry height="38" width="124" x="3006" y="911" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-212" edge="1" parent="1" source="chen-21" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-211" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-213" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата проведения" vertex="1">
+          <mxGeometry height="38" width="124" x="2670" y="911" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-214" edge="1" parent="1" source="chen-21" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-213" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-215" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код проекта" vertex="1">
+          <mxGeometry height="38" width="124" x="4038" y="1721" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-216" edge="1" parent="1" source="chen-22" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-215" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-217" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="тема" vertex="1">
+          <mxGeometry height="38" width="124" x="4158" y="1561" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-218" edge="1" parent="1" source="chen-22" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-217" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-219" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="4206" y="1611" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-220" edge="1" parent="1" source="chen-22" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-219" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-221" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="4206" y="1671" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-222" edge="1" parent="1" source="chen-22" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-221" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-223" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата защиты" vertex="1">
+          <mxGeometry height="38" width="124" x="4038" y="1765" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-224" edge="1" parent="1" source="chen-22" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-223" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-225" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код устройства" vertex="1">
+          <mxGeometry height="38" width="124" x="4638" y="1341" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-226" edge="1" parent="1" source="chen-23" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-225" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-227" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="инвентарный номер" vertex="1">
+          <mxGeometry height="38" width="124" x="4758" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-228" edge="1" parent="1" source="chen-23" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-227" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-229" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="модель" vertex="1">
+          <mxGeometry height="38" width="124" x="4518" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-230" edge="1" parent="1" source="chen-23" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-229" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-231" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код редакции" vertex="1">
+          <mxGeometry height="38" width="124" x="558" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-232" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-231" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-233" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер редакции" vertex="1">
+          <mxGeometry height="38" width="124" x="318" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-234" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-233" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-235" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="реквизиты документа" vertex="1">
+          <mxGeometry height="38" width="124" x="318" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-236" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-235" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-237" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала действия" vertex="1">
+          <mxGeometry height="38" width="124" x="270" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-238" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-237" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-239" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания действия" vertex="1">
+          <mxGeometry height="38" width="124" x="270" y="911" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-240" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-239" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-241" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="требования к структуре" vertex="1">
+          <mxGeometry height="38" width="124" x="678" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-242" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-241" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-243" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="описание изменений" vertex="1">
+          <mxGeometry height="38" width="124" x="318" y="757" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-244" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-243" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-245" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код версии программы" vertex="1">
+          <mxGeometry height="38" width="124" x="1158" y="2101" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-246" edge="1" parent="1" source="chen-25" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-245" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-247" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер версии" vertex="1">
+          <mxGeometry height="38" width="124" x="918" y="1941" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-248" edge="1" parent="1" source="chen-25" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-247" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-249" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала действия" vertex="1">
+          <mxGeometry height="38" width="124" x="1206" y="2051" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-250" edge="1" parent="1" source="chen-25" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-249" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-251" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания действия" vertex="1">
+          <mxGeometry height="38" width="124" x="798" y="2101" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-252" edge="1" parent="1" source="chen-25" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-251" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-253" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="реквизиты утверждения" vertex="1">
+          <mxGeometry height="38" width="124" x="1158" y="2145" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-254" edge="1" parent="1" source="chen-25" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-253" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-255" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код плана" vertex="1">
+          <mxGeometry height="38" width="124" x="1038" y="2481" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-256" edge="1" parent="1" source="chen-26" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-255" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-257" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="1158" y="2321" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-258" edge="1" parent="1" source="chen-26" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-257" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-259" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата утверждения" vertex="1">
+          <mxGeometry height="38" width="124" x="918" y="2321" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-260" edge="1" parent="1" source="chen-26" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-259" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-261" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код строки плана" vertex="1">
+          <mxGeometry height="38" width="124" x="438" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-262" edge="1" parent="1" source="chen-27" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-261" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-263" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="обязательная часть" vertex="1">
+          <mxGeometry height="38" width="124" x="318" y="1341" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-264" edge="1" parent="1" source="chen-27" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-263" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-265" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код версии рп" vertex="1">
+          <mxGeometry height="38" width="124" x="1638" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-266" edge="1" parent="1" source="chen-28" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-265" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-267" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер версии" vertex="1">
+          <mxGeometry height="38" width="124" x="1758" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-268" edge="1" parent="1" source="chen-28" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-267" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-269" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала действия" vertex="1">
+          <mxGeometry height="38" width="124" x="1806" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-270" edge="1" parent="1" source="chen-28" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-269" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-271" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания действия" vertex="1">
+          <mxGeometry height="38" width="124" x="1806" y="911" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-272" edge="1" parent="1" source="chen-28" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-271" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-273" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="реквизиты утверждения" vertex="1">
+          <mxGeometry height="38" width="124" x="1470" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-274" edge="1" parent="1" source="chen-28" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-273" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-275" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="описание изменений" vertex="1">
+          <mxGeometry height="38" width="124" x="1878" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-276" edge="1" parent="1" source="chen-28" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-275" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-277" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код темы" vertex="1">
+          <mxGeometry height="38" width="124" x="2238" y="421" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-278" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-277" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-279" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="раздел" vertex="1">
+          <mxGeometry height="38" width="124" x="2238" y="581" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-280" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-279" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-281" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="порядковый номер" vertex="1">
+          <mxGeometry height="38" width="124" x="2406" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-282" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-281" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-283" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="2070" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-284" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-283" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-285" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="часов" vertex="1">
+          <mxGeometry height="38" width="124" x="2070" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-286" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-285" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-287" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="плановая дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="2478" y="421" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-288" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-287" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-289" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="плановая дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="1998" y="421" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-290" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-289" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-291" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид деятельности" vertex="1">
+          <mxGeometry height="38" width="124" x="1998" y="581" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-292" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-291" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-293" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="форма контроля" vertex="1">
+          <mxGeometry height="38" width="124" x="2238" y="377" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-294" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-293" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-295" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код условия" vertex="1">
+          <mxGeometry height="38" width="124" x="1638" y="2481" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-296" edge="1" parent="1" source="chen-30" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-295" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-297" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид условия" vertex="1">
+          <mxGeometry height="38" width="124" x="1758" y="2321" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-298" edge="1" parent="1" source="chen-30" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-297" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-299" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="1806" y="2431" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-300" edge="1" parent="1" source="chen-30" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-299" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-301" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="1470" y="2371" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-302" edge="1" parent="1" source="chen-30" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-301" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-303" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="основание" vertex="1">
+          <mxGeometry height="38" width="124" x="1470" y="2431" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-304" edge="1" parent="1" source="chen-30" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-303" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-305" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код назначения" vertex="1">
+          <mxGeometry height="38" width="124" x="2838" y="421" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-306" edge="1" parent="1" source="chen-31" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-305" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-307" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="должность" vertex="1">
+          <mxGeometry height="38" width="124" x="2718" y="581" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-308" edge="1" parent="1" source="chen-31" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-307" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-309" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="ставка" vertex="1">
+          <mxGeometry height="38" width="124" x="3006" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-310" edge="1" parent="1" source="chen-31" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-309" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-311" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="допустимая нагрузка часов" vertex="1">
+          <mxGeometry height="38" width="124" x="3006" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-312" edge="1" parent="1" source="chen-31" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-311" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-313" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="2670" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-314" edge="1" parent="1" source="chen-31" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-313" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-315" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="2670" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-316" edge="1" parent="1" source="chen-31" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-315" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-317" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код нагрузки" vertex="1">
+          <mxGeometry height="38" width="124" x="2958" y="1341" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-318" edge="1" parent="1" source="chen-32" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-317" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-319" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="часов в неделю" vertex="1">
+          <mxGeometry height="38" width="124" x="2718" y="1181" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-320" edge="1" parent="1" source="chen-32" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-319" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-321" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="3006" y="1231" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-322" edge="1" parent="1" source="chen-32" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-321" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-323" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="3006" y="1291" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-324" edge="1" parent="1" source="chen-32" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-323" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-325" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код изменения" vertex="1">
+          <mxGeometry height="38" width="124" x="4038" y="421" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-326" edge="1" parent="1" source="chen-33" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-325" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-327" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид изменения" vertex="1">
+          <mxGeometry height="38" width="124" x="4158" y="581" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-328" edge="1" parent="1" source="chen-33" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-327" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-329" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата изменения" vertex="1">
+          <mxGeometry height="38" width="124" x="4206" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-330" edge="1" parent="1" source="chen-33" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-329" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-331" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="основание" vertex="1">
+          <mxGeometry height="38" width="124" x="4206" y="531" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-332" edge="1" parent="1" source="chen-33" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-331" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-333" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="прежняя дата" vertex="1">
+          <mxGeometry height="38" width="124" x="3870" y="471" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-334" edge="1" parent="1" source="chen-33" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-333" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-335" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код итога" vertex="1">
+          <mxGeometry height="38" width="124" x="2238" y="1721" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-336" edge="1" parent="1" source="chen-34" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-335" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-337" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид итога" vertex="1">
+          <mxGeometry height="38" width="124" x="2118" y="1561" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-338" edge="1" parent="1" source="chen-34" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-337" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-339" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер версии" vertex="1">
+          <mxGeometry height="38" width="124" x="2070" y="1611" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-340" edge="1" parent="1" source="chen-34" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-339" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-341" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата формирования" vertex="1">
+          <mxGeometry height="38" width="124" x="2070" y="1671" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-342" edge="1" parent="1" source="chen-34" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-341" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-343" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата утверждения" vertex="1">
+          <mxGeometry height="38" width="124" x="1998" y="1765" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-344" edge="1" parent="1" source="chen-34" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-343" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-345" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="основание изменения" vertex="1">
+          <mxGeometry height="38" width="124" x="1878" y="1517" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-346" edge="1" parent="1" source="chen-34" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-345" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-347" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код этапа" vertex="1">
+          <mxGeometry height="38" width="124" x="4638" y="1941" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-348" edge="1" parent="1" source="chen-35" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-347" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-349" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="порядковый номер" vertex="1">
+          <mxGeometry height="38" width="124" x="4638" y="2101" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-350" edge="1" parent="1" source="chen-35" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-349" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-351" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="название" vertex="1">
+          <mxGeometry height="38" width="124" x="4806" y="1991" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-352" edge="1" parent="1" source="chen-35" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-351" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-353" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="срок выполнения" vertex="1">
+          <mxGeometry height="38" width="124" x="4806" y="2051" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-354" edge="1" parent="1" source="chen-35" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-353" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-355" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата завершения" vertex="1">
+          <mxGeometry height="38" width="124" x="4470" y="1991" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-356" edge="1" parent="1" source="chen-35" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-355" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-357" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код сеанса" vertex="1">
+          <mxGeometry height="38" width="124" x="4638" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-358" edge="1" parent="1" source="chen-36" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-357" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-359" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="4758" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-360" edge="1" parent="1" source="chen-36" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-359" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-361" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="4806" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-362" edge="1" parent="1" source="chen-36" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-361" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-363" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код операции" vertex="1">
+          <mxGeometry height="38" width="124" x="4038" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-364" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-363" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-365" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид операции" vertex="1">
+          <mxGeometry height="38" width="124" x="4158" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-366" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-365" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-367" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="целевая таблица" vertex="1">
+          <mxGeometry height="38" width="124" x="4206" y="851" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-368" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-367" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-369" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="идентификатор записи" vertex="1">
+          <mxGeometry height="38" width="124" x="4206" y="911" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-370" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-369" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-371" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="содержимое" vertex="1">
+          <mxGeometry height="38" width="124" x="4278" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-372" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-371" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-373" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="время на устройстве" vertex="1">
+          <mxGeometry height="38" width="124" x="4038" y="757" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-374" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-373" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-375" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="статус синхронизации" vertex="1">
+          <mxGeometry height="38" width="124" x="4038" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-376" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-375" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-377" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="время синхронизации" vertex="1">
+          <mxGeometry height="38" width="124" x="4278" y="757" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-378" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-377" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-379" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="время обнаружения конфликта" vertex="1">
+          <mxGeometry height="38" width="124" x="4398" y="1005" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-380" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-379" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-381" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="способ разрешения" vertex="1">
+          <mxGeometry height="38" width="124" x="4518" y="757" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-382" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-381" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-383" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="время разрешения" vertex="1">
+          <mxGeometry height="38" width="124" x="4158" y="713" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-384" edge="1" parent="1" source="chen-37" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-383" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-385" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4" value="дата начала" vertex="1">
+          <mxGeometry height="38" width="124" x="3438" y="2481" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-386" edge="1" parent="1" source="chen-38" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-385" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-387" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="3558" y="2321" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-388" edge="1" parent="1" source="chen-38" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-387" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-389" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид начала" vertex="1">
+          <mxGeometry height="38" width="124" x="3606" y="2371" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-390" edge="1" parent="1" source="chen-38" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-389" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-391" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="вид окончания" vertex="1">
+          <mxGeometry height="38" width="124" x="3606" y="2431" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-392" edge="1" parent="1" source="chen-38" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-391" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-393" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер приказа" vertex="1">
+          <mxGeometry height="38" width="124" x="3270" y="2371" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-394" edge="1" parent="1" source="chen-38" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-393" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-399" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="номер попытки" vertex="1">
+          <mxGeometry height="38" width="124" x="3318" y="1721" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-400" edge="1" parent="1" source="chen-41" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-399" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-401" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="баллы" vertex="1">
+          <mxGeometry height="38" width="124" x="3606" y="1611" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-402" edge="1" parent="1" source="chen-41" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-401" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-403" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="дата выставления" vertex="1">
+          <mxGeometry height="38" width="124" x="3606" y="1671" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-404" edge="1" parent="1" source="chen-41" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-403" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-405" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="часов" vertex="1">
+          <mxGeometry height="38" width="124" x="1758" y="1941" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-406" edge="1" parent="1" source="chen-42" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-405" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-407" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="форма освоения" vertex="1">
+          <mxGeometry height="38" width="124" x="1758" y="2101" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-408" edge="1" parent="1" source="chen-42" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-407" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-409" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="часов" vertex="1">
+          <mxGeometry height="38" width="124" x="438" y="1721" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-410" edge="1" parent="1" source="chen-43" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-409" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-411" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="роль" vertex="1">
+          <mxGeometry height="38" width="124" x="4638" y="1561" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-412" edge="1" parent="1" source="chen-47" style="endArrow=none;html=1;strokeColor=#888888;" target="chen-411" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-413" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-414" connectable="0" parent="chen-413" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-415" connectable="0" parent="chen-413" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-416" edge="1" parent="1" source="chen-4" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-417" connectable="0" parent="chen-416" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-418" connectable="0" parent="chen-416" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-419" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-420" connectable="0" parent="chen-419" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-421" connectable="0" parent="chen-419" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-422" edge="1" parent="1" source="chen-6" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-423" connectable="0" parent="chen-422" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-424" connectable="0" parent="chen-422" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-425" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-426" connectable="0" parent="chen-425" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-427" connectable="0" parent="chen-425" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-428" edge="1" parent="1" source="chen-25" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-429" connectable="0" parent="chen-428" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-430" connectable="0" parent="chen-428" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-431" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-30" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-432" connectable="0" parent="chen-431" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-433" connectable="0" parent="chen-431" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-434" edge="1" parent="1" source="chen-26" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-30" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-435" connectable="0" parent="chen-434" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-436" connectable="0" parent="chen-434" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-437" edge="1" parent="1" source="chen-4" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-438" connectable="0" parent="chen-437" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.934" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-439" connectable="0" parent="chen-437" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.934" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-440" edge="1" parent="1" source="chen-9" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-24" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-441" connectable="0" parent="chen-440" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-442" connectable="0" parent="chen-440" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-443" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-444" connectable="0" parent="chen-443" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-445" connectable="0" parent="chen-443" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-446" edge="1" parent="1" source="chen-4" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-447" connectable="0" parent="chen-446" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-448" connectable="0" parent="chen-446" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-449" edge="1" parent="1" source="chen-11" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-25" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-450" connectable="0" parent="chen-449" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-451" connectable="0" parent="chen-449" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-452" edge="1" parent="1" source="chen-24" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-25" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-453" connectable="0" parent="chen-452" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.934" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-454" connectable="0" parent="chen-452" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.934" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-455" edge="1" parent="1" source="chen-25" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-26" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-456" connectable="0" parent="chen-455" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-457" connectable="0" parent="chen-455" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-458" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-26" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-459" connectable="0" parent="chen-458" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-460" connectable="0" parent="chen-458" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-461" edge="1" parent="1" source="chen-26" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-27" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-462" connectable="0" parent="chen-461" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.934" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-463" connectable="0" parent="chen-461" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.934" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-464" edge="1" parent="1" source="chen-6" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-27" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-465" connectable="0" parent="chen-464" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-466" connectable="0" parent="chen-464" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-467" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-27" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-468" connectable="0" parent="chen-467" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-469" connectable="0" parent="chen-467" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-470" edge="1" parent="1" source="chen-28" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-27" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-471" connectable="0" parent="chen-470" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-472" connectable="0" parent="chen-470" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-473" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-474" connectable="0" parent="chen-473" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-475" connectable="0" parent="chen-473" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-476" edge="1" parent="1" source="chen-25" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-477" connectable="0" parent="chen-476" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-478" connectable="0" parent="chen-476" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-479" edge="1" parent="1" source="chen-6" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-480" connectable="0" parent="chen-479" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-481" connectable="0" parent="chen-479" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-482" edge="1" parent="1" source="chen-13" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-28" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-483" connectable="0" parent="chen-482" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-484" connectable="0" parent="chen-482" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-485" edge="1" parent="1" source="chen-28" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-29" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-486" connectable="0" parent="chen-485" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-487" connectable="0" parent="chen-485" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-488" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-31" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-489" connectable="0" parent="chen-488" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-490" connectable="0" parent="chen-488" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-500" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-32" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-501" connectable="0" parent="chen-500" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-502" connectable="0" parent="chen-500" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-503" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-32" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-504" connectable="0" parent="chen-503" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-505" connectable="0" parent="chen-503" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-506" edge="1" parent="1" source="chen-7" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-32" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-507" connectable="0" parent="chen-506" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-508" connectable="0" parent="chen-506" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-512" edge="1" parent="1" source="chen-32" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-513" connectable="0" parent="chen-512" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-514" connectable="0" parent="chen-512" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-515" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-516" connectable="0" parent="chen-515" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-517" connectable="0" parent="chen-515" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-518" edge="1" parent="1" source="chen-16" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-519" connectable="0" parent="chen-518" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-520" connectable="0" parent="chen-518" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-521" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-522" connectable="0" parent="chen-521" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-523" connectable="0" parent="chen-521" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-524" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-20" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-525" connectable="0" parent="chen-524" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-526" connectable="0" parent="chen-524" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-527" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-33" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-528" connectable="0" parent="chen-527" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-529" connectable="0" parent="chen-527" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-530" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;curved=1;" target="chen-33" value="автор изменения">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3753" y="863" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-531" connectable="0" parent="chen-530" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.911" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-532" connectable="0" parent="chen-530" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.911" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-533" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;curved=1;" target="chen-33" value="заменяющий преподаватель">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3847" y="937" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-534" connectable="0" parent="chen-533" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.911" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-535" connectable="0" parent="chen-533" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.911" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-536" edge="1" parent="1" source="chen-16" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-33" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-537" connectable="0" parent="chen-536" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-538" connectable="0" parent="chen-536" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-539" edge="1" parent="1" source="chen-32" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-21" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-540" connectable="0" parent="chen-539" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-541" connectable="0" parent="chen-539" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-542" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-21" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-543" connectable="0" parent="chen-542" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-544" connectable="0" parent="chen-542" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-545" edge="1" parent="1" source="chen-18" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-21" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-546" connectable="0" parent="chen-545" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-547" connectable="0" parent="chen-545" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-548" edge="1" parent="1" source="chen-18" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-19" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-549" connectable="0" parent="chen-548" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-550" connectable="0" parent="chen-548" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-551" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-552" connectable="0" parent="chen-551" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-553" connectable="0" parent="chen-551" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-554" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-555" connectable="0" parent="chen-554" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-556" connectable="0" parent="chen-554" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-557" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-558" connectable="0" parent="chen-557" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-559" connectable="0" parent="chen-557" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-560" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-561" connectable="0" parent="chen-560" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-562" connectable="0" parent="chen-560" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-563" edge="1" parent="1" source="chen-19" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-564" connectable="0" parent="chen-563" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-565" connectable="0" parent="chen-563" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.951" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-566" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-567" connectable="0" parent="chen-566" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-568" connectable="0" parent="chen-566" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-569" edge="1" parent="1" source="chen-3" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-22" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-570" connectable="0" parent="chen-569" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-571" connectable="0" parent="chen-569" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-572" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-22" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-573" connectable="0" parent="chen-572" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-574" connectable="0" parent="chen-572" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-575" edge="1" parent="1" source="chen-19" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-22" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-576" connectable="0" parent="chen-575" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-577" connectable="0" parent="chen-575" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-578" edge="1" parent="1" source="chen-22" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-35" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-579" connectable="0" parent="chen-578" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-580" connectable="0" parent="chen-578" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-581" edge="1" parent="1" source="chen-23" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-36" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-582" connectable="0" parent="chen-581" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-583" connectable="0" parent="chen-581" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-584" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-36" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-585" connectable="0" parent="chen-584" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-586" connectable="0" parent="chen-584" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.925" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-587" edge="1" parent="1" source="chen-36" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-37" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-588" connectable="0" parent="chen-587" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-589" connectable="0" parent="chen-587" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.805" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-590" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;curved=1;" target="chen-37" value="внёс конкурирующее изменение">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3768" y="1039" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-591" connectable="0" parent="chen-590" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-592" connectable="0" parent="chen-590" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-593" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;curved=1;" target="chen-37" value="разрешил конфликт">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3832" y="1141" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-594" connectable="0" parent="chen-593" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-595" connectable="0" parent="chen-593" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.866" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-596" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-38" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-597" connectable="0" parent="chen-596" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.735" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-598" edge="1" parent="1" source="chen-7" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-38" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-599" connectable="0" parent="chen-598" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="-0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-604" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-40" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-605" connectable="0" parent="chen-604" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.81" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-606" edge="1" parent="1" source="chen-20" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-40" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-607" connectable="0" parent="chen-606" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.934" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-608" edge="1" parent="1" source="chen-17" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-40" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-609" connectable="0" parent="chen-608" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.735" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-610" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-41" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-611" connectable="0" parent="chen-610" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.735" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-612" edge="1" parent="1" source="chen-21" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-41" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-613" connectable="0" parent="chen-612" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-614" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-41" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-615" connectable="0" parent="chen-614" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.735" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-616" edge="1" parent="1" source="chen-19" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-41" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-617" connectable="0" parent="chen-616" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,1" vertex="1">
+          <mxGeometry relative="1" x="-0.868" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-618" edge="1" parent="1" source="chen-30" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-42" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-619" connectable="0" parent="chen-618" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.735" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-620" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-42" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-621" connectable="0" parent="chen-620" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.735" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-622" edge="1" parent="1" source="chen-27" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-43" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-623" connectable="0" parent="chen-622" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.735" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-624" edge="1" parent="1" source="chen-5" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-43" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-625" connectable="0" parent="chen-624" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="-0.952" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-626" edge="1" parent="1" source="chen-29" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-44" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-627" connectable="0" parent="chen-626" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.81" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-628" edge="1" parent="1" source="chen-10" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-44" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-629" connectable="0" parent="chen-628" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.868" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-630" edge="1" parent="1" source="chen-21" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-45" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-631" connectable="0" parent="chen-630" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.952" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-632" edge="1" parent="1" source="chen-10" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-45" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-633" connectable="0" parent="chen-632" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.735" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-634" edge="1" parent="1" source="chen-14" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-46" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-635" connectable="0" parent="chen-634" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.927" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-636" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-46" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-637" connectable="0" parent="chen-636" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="-0.91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-638" edge="1" parent="1" source="chen-8" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-47" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-639" connectable="0" parent="chen-638" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,N" vertex="1">
+          <mxGeometry relative="1" x="-0.927" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-640" edge="1" parent="1" source="chen-22" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-47" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-641" connectable="0" parent="chen-640" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.81" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-642" edge="1" parent="1" source="chen-22" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-48" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-643" connectable="0" parent="chen-642" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.952" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-644" edge="1" parent="1" source="chen-12" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-48" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-645" connectable="0" parent="chen-644" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="-0.868" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-647" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Сущность" vertex="1">
+          <mxGeometry height="56" width="190" x="60" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-648" parent="1" style="text;html=0;fontSize=12;align=left;verticalAlign=middle;whiteSpace=wrap;" value=" объект предметной области" vertex="1">
+          <mxGeometry height="56" width="170" x="270" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-649" parent="1" style="shape=trapezoid;perimeter=trapezoidPerimeter;size=0.12;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;" value="Хранилище данных" vertex="1">
+          <mxGeometry height="56" width="190" x="60" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-650" parent="1" style="text;html=0;fontSize=12;align=left;verticalAlign=middle;whiteSpace=wrap;" value="реестр, журнал, документ," vertex="1">
+          <mxGeometry height="56" width="150" x="270" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-651" parent="1" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=0;align=center;fontSize=10;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="связь" vertex="1">
+          <mxGeometry height="76" width="170" x="820" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-652" parent="1" style="text;html=0;fontSize=12;align=left;verticalAlign=middle;whiteSpace=wrap;" value="Связь многие-ко-многим" vertex="1">
+          <mxGeometry height="76" width="520" x="1010" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-653" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;" value="атрибут" vertex="1">
+          <mxGeometry height="40" width="124" x="843" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-655" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fontStyle=4;fillColor=#ffffff;strokeColor=#666666;" value="ключ" vertex="1">
+          <mxGeometry height="40" width="124" x="1700" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-656" parent="1" style="text;html=0;fontSize=12;align=left;verticalAlign=middle;whiteSpace=wrap;" value="Ключевой атрибут" vertex="1">
+          <mxGeometry height="56" width="140" x="1850" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-657" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="A" vertex="1">
+          <mxGeometry height="34" width="70" x="1700" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-658" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=center;fontStyle=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="B" vertex="1">
+          <mxGeometry height="34" width="70" x="2050" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-659" edge="1" parent="1" source="chen-657" style="endArrow=none;html=1;strokeColor=#333333;strokeWidth=1.2;" target="chen-658" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-660" connectable="0" parent="chen-659" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="1,1" vertex="1">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-661" connectable="0" parent="chen-659" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=#ffffff;" value="0,N" vertex="1">
+          <mxGeometry relative="1" x="0.75" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="chen-662" parent="1" style="text;html=0;fontSize=12;align=left;verticalAlign=middle;whiteSpace=wrap;" value="Подпись у сущности — (мин,макс): сколько её записей связано с одной записью другой сущности." vertex="1">
+          <mxGeometry height="70" width="568" x="2150" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="chen-663" parent="1" style="text;html=0;fontSize=12;align=left;verticalAlign=middle;whiteSpace=wrap;" value="0,1 — ноль или одна;  1,1 — ровно одна;  0,N — ноль или много;  1,N — одна или много." vertex="1">
+          <mxGeometry height="40" width="1000" x="2150" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="XMhZkoTwceejfW_9TUBR-4" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код учащегося" vertex="1">
+          <mxGeometry height="38" width="124" x="3281" y="2450" as="geometry" />
+        </mxCell>
+        <mxCell id="XMhZkoTwceejfW_9TUBR-5" parent="1" style="ellipse;whiteSpace=wrap;html=0;fontSize=10;fillColor=#ffffff;strokeColor=#666666;fontStyle=4;" value="код группы" vertex="1">
+          <mxGeometry height="38" width="124" x="3281" y="2510" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="UiDZUmYBKIWzYIdDV91L" name="Страница-2">
+    <mxGraphModel dx="1030" dy="640" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="mhHfV42b78bIIeWSCATZ" name="Страница-3">
+    <mxGraphModel dx="1030" dy="640" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
