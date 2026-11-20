@@ -1,0 +1,888 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="idef1x" name="ИЛМ IDEF1X">
+    <mxGraphModel dx="8697" dy="1825" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="5094" pageHeight="6412" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Платёж" vertex="1">
+          <mxGeometry height="104" width="194" x="540" y="232" as="geometry" />
+        </mxCell>
+        <mxCell id="k2" connectable="0" parent="e1" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_платежа: INTEGER" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" connectable="0" parent="e1" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Номер_ЛС: VARCHAR(20) (FK)&lt;br&gt;Дата_платежа: DATE&lt;br&gt;Сумма: DECIMAL(12,2)&lt;br&gt;Способ_оплаты: VARCHAR(30)" vertex="1">
+          <mxGeometry height="80" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Начисление" vertex="1">
+          <mxGeometry height="168" width="227" x="1364" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="k5" connectable="0" parent="e4" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_начисления: INTEGER" vertex="1">
+          <mxGeometry height="22" width="227" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" connectable="0" parent="e4" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_услуги: INTEGER (FK)&lt;br&gt;Дата_начала_тарифа: DATE (FK)&lt;br&gt;Номер_ЛС: VARCHAR(20) (FK)&lt;br&gt;Расчётный_период: DATE&lt;br&gt;Объём: DECIMAL(12,2)&lt;br&gt;Сумма: DECIMAL(12,2)&lt;br&gt;Основание_расчёта: VARCHAR(500)&lt;br&gt;Вид_начисления: VARCHAR(30)" vertex="1">
+          <mxGeometry height="144" width="227" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Услуга" vertex="1">
+          <mxGeometry height="88" width="200" x="2567" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="k8" connectable="0" parent="e7" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_услуги: INTEGER" vertex="1">
+          <mxGeometry height="22" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" connectable="0" parent="e7" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Наименование: VARCHAR(100)&lt;br&gt;Ед_измерения: VARCHAR(30)&lt;br&gt;Способ_расчёта: VARCHAR(30)" vertex="1">
+          <mxGeometry height="64" width="200" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Тариф" vertex="1">
+          <mxGeometry height="104" width="220" x="1962" y="232" as="geometry" />
+        </mxCell>
+        <mxCell id="k11" connectable="0" parent="e10" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_услуги: INTEGER (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="38" width="220" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" connectable="0" parent="e10" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE&lt;br&gt;Цена_за_единицу: DECIMAL(12,2)&lt;br&gt;Норматив: DECIMAL(12,2)" vertex="1">
+          <mxGeometry height="64" width="220" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Лицевой_счёт" vertex="1">
+          <mxGeometry height="104" width="240" x="1357" y="722" as="geometry" />
+        </mxCell>
+        <mxCell id="k14" connectable="0" parent="e13" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Номер_ЛС: VARCHAR(20)" vertex="1">
+          <mxGeometry height="22" width="240" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" connectable="0" parent="e13" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_дома: INTEGER (FK)&lt;br&gt;Номер_помещения: VARCHAR(10) (FK)&lt;br&gt;Дата_открытия: DATE&lt;br&gt;Дата_закрытия: DATE" vertex="1">
+          <mxGeometry height="80" width="240" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Состояние_ЛС" vertex="1">
+          <mxGeometry height="88" width="194" x="1975" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="k17" connectable="0" parent="e16" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Номер_ЛС: VARCHAR(20) (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="38" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" connectable="0" parent="e16" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE&lt;br&gt;Состояние: VARCHAR(30)" vertex="1">
+          <mxGeometry height="48" width="194" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Погашение" vertex="1">
+          <mxGeometry height="72" width="220" x="947" y="248" as="geometry" />
+        </mxCell>
+        <mxCell id="k20" connectable="0" parent="e19" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_платежа: INTEGER (FK)&lt;br&gt;Код_начисления: INTEGER (FK)" vertex="1">
+          <mxGeometry height="38" width="220" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n21" connectable="0" parent="e19" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Сумма_погашения: DECIMAL(12,2)" vertex="1">
+          <mxGeometry height="32" width="220" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e22" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Плательщик_ЛС" vertex="1">
+          <mxGeometry height="88" width="194" x="750" y="1080" as="geometry" />
+        </mxCell>
+        <mxCell id="k23" connectable="0" parent="e22" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_лица: INTEGER (FK)&lt;br&gt;Номер_ЛС: VARCHAR(20) (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="54" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n24" connectable="0" parent="e22" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE" vertex="1">
+          <mxGeometry height="32" width="194" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Прибор_учёта" vertex="1">
+          <mxGeometry height="184" width="207" x="2563" y="717" as="geometry" />
+        </mxCell>
+        <mxCell id="k26" connectable="0" parent="e25" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_прибора: INTEGER" vertex="1">
+          <mxGeometry height="22" width="207" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n27" connectable="0" parent="e25" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_услуги: INTEGER (FK)&lt;br&gt;Код_дома: INTEGER (FK)&lt;br&gt;Заводской_номер: VARCHAR(30)&lt;br&gt;Вид_прибора: VARCHAR(30)&lt;br&gt;Дата_установки: DATE&lt;br&gt;Дата_ввода: DATE&lt;br&gt;Дата_демонтажа: DATE&lt;br&gt;Дата_след_поверки: DATE&lt;br&gt;Состояние: VARCHAR(30)" vertex="1">
+          <mxGeometry height="160" width="207" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e28" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Показание" vertex="1">
+          <mxGeometry height="104" width="207" x="3193" y="757" as="geometry" />
+        </mxCell>
+        <mxCell id="k29" connectable="0" parent="e28" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_прибора: INTEGER (FK)&lt;br&gt;Дата: DATE" vertex="1">
+          <mxGeometry height="38" width="207" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n30" connectable="0" parent="e28" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Значение: DECIMAL(12,3)&lt;br&gt;Источник: VARCHAR(30)&lt;br&gt;Статус_проверки: VARCHAR(30)" vertex="1">
+          <mxGeometry height="64" width="207" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e31" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Привязка_прибора" vertex="1">
+          <mxGeometry height="104" width="240" x="1952" y="1037" as="geometry" />
+        </mxCell>
+        <mxCell id="k32" connectable="0" parent="e31" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_прибора: INTEGER (FK)&lt;br&gt;Код_дома: INTEGER (FK)&lt;br&gt;Номер_помещения: VARCHAR(10) (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="70" width="240" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n33" connectable="0" parent="e31" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE" vertex="1">
+          <mxGeometry height="32" width="240" y="72" as="geometry" />
+        </mxCell>
+        <mxCell id="e34" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Лицо" vertex="1">
+          <mxGeometry height="72" width="170" x="552" y="2278" as="geometry" />
+        </mxCell>
+        <mxCell id="k35" connectable="0" parent="e34" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_лица: INTEGER" vertex="1">
+          <mxGeometry height="22" width="170" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n36" connectable="0" parent="e34" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="ФИО: VARCHAR(150)&lt;br&gt;Дата_рождения: DATE" vertex="1">
+          <mxGeometry height="48" width="170" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e37" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Паспорт" vertex="1">
+          <mxGeometry height="120" width="194" x="120" y="1764" as="geometry" />
+        </mxCell>
+        <mxCell id="k38" connectable="0" parent="e37" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_лица: INTEGER (FK)" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n39" connectable="0" parent="e37" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Серия: CHAR(4)&lt;br&gt;Номер: CHAR(6)&lt;br&gt;Дата_выдачи: DATE&lt;br&gt;Кем_выдан: VARCHAR(100)&lt;br&gt;Код_подразделения: CHAR(7)" vertex="1">
+          <mxGeometry height="96" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e40" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Контакт" vertex="1">
+          <mxGeometry height="104" width="180" x="897" y="2227" as="geometry" />
+        </mxCell>
+        <mxCell id="k41" connectable="0" parent="e40" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_лица: INTEGER (FK)&lt;br&gt;Номер_контакта: SMALLINT" vertex="1">
+          <mxGeometry height="38" width="180" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n42" connectable="0" parent="e40" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Канал: VARCHAR(30)&lt;br&gt;Значение: VARCHAR(100)&lt;br&gt;Основной: BOOLEAN" vertex="1">
+          <mxGeometry height="64" width="180" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e43" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Владение" vertex="1">
+          <mxGeometry height="136" width="240" x="797" y="1616" as="geometry" />
+        </mxCell>
+        <mxCell id="k44" connectable="0" parent="e43" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_лица: INTEGER (FK)&lt;br&gt;Код_дома: INTEGER (FK)&lt;br&gt;Номер_помещения: VARCHAR(10) (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="70" width="240" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n45" connectable="0" parent="e43" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE&lt;br&gt;Доля: DECIMAL(12,2)&lt;br&gt;Документ: VARCHAR(500)" vertex="1">
+          <mxGeometry height="64" width="240" y="72" as="geometry" />
+        </mxCell>
+        <mxCell id="e46" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Проживание" vertex="1">
+          <mxGeometry height="120" width="240" x="972" y="1869" as="geometry" />
+        </mxCell>
+        <mxCell id="k47" connectable="0" parent="e46" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_лица: INTEGER (FK)&lt;br&gt;Код_дома: INTEGER (FK)&lt;br&gt;Номер_помещения: VARCHAR(10) (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="70" width="240" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n48" connectable="0" parent="e46" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE&lt;br&gt;Тип_проживания: VARCHAR(30)" vertex="1">
+          <mxGeometry height="48" width="240" y="72" as="geometry" />
+        </mxCell>
+        <mxCell id="e49" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Уведомление" vertex="1">
+          <mxGeometry height="104" width="220" x="1577" y="2402" as="geometry" />
+        </mxCell>
+        <mxCell id="k50" connectable="0" parent="e49" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_уведомления: INTEGER" vertex="1">
+          <mxGeometry height="22" width="220" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n51" connectable="0" parent="e49" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Тип: VARCHAR(30)&lt;br&gt;Текст: VARCHAR(500)&lt;br&gt;Дата_создания: DATE&lt;br&gt;Уровень_адресации: VARCHAR(30)" vertex="1">
+          <mxGeometry height="80" width="220" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e52" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Доставка" vertex="1">
+          <mxGeometry height="120" width="213" x="1230" y="2359" as="geometry" />
+        </mxCell>
+        <mxCell id="k53" connectable="0" parent="e52" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_уведомления: INTEGER (FK)&lt;br&gt;Код_лица: INTEGER (FK)&lt;br&gt;Номер_контакта: SMALLINT (FK)" vertex="1">
+          <mxGeometry height="54" width="213" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n54" connectable="0" parent="e52" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Время_отправки: TIMESTAMP&lt;br&gt;Статус_доставки: VARCHAR(30)&lt;br&gt;Причина_ошибки: VARCHAR(255)" vertex="1">
+          <mxGeometry height="64" width="213" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e55" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Адресация" vertex="1">
+          <mxGeometry height="88" width="213" x="1860" y="2165" as="geometry" />
+        </mxCell>
+        <mxCell id="k56" connectable="0" parent="e55" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_уведомления: INTEGER (FK)&lt;br&gt;Код_дома: INTEGER (FK)&lt;br&gt;Код_места: INTEGER (FK)" vertex="1">
+          <mxGeometry height="54" width="213" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n57" connectable="0" parent="e55" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="" vertex="1">
+          <mxGeometry height="32" width="213" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e58" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Дом" vertex="1">
+          <mxGeometry height="120" width="207" x="2563" y="1344" as="geometry" />
+        </mxCell>
+        <mxCell id="k59" connectable="0" parent="e58" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_дома: INTEGER" vertex="1">
+          <mxGeometry height="22" width="207" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n60" connectable="0" parent="e58" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Адрес: VARCHAR(200)&lt;br&gt;Этажность: SMALLINT&lt;br&gt;Дата_ввода: DATE&lt;br&gt;Общая_площадь: DECIMAL(12,2)&lt;br&gt;Состояние: VARCHAR(30)" vertex="1">
+          <mxGeometry height="96" width="207" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e61" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Подъезд" vertex="1">
+          <mxGeometry height="88" width="180" x="1982" y="1675" as="geometry" />
+        </mxCell>
+        <mxCell id="k62" connectable="0" parent="e61" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_дома: INTEGER (FK)&lt;br&gt;Номер_подъезда: SMALLINT" vertex="1">
+          <mxGeometry height="38" width="180" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n63" connectable="0" parent="e61" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Кол-во_этажей: SMALLINT&lt;br&gt;Наличие_лифта: BOOLEAN" vertex="1">
+          <mxGeometry height="48" width="180" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e64" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Помещение" vertex="1">
+          <mxGeometry height="136" width="213" x="1370" y="1336" as="geometry" />
+        </mxCell>
+        <mxCell id="k65" connectable="0" parent="e64" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_дома: INTEGER (FK)&lt;br&gt;Номер_помещения: VARCHAR(10)" vertex="1">
+          <mxGeometry height="38" width="213" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n66" connectable="0" parent="e64" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Номер_подъезда: SMALLINT (FK)&lt;br&gt;Этаж: SMALLINT&lt;br&gt;Площадь: DECIMAL(12,2)&lt;br&gt;Дата_начала_учёта: DATE&lt;br&gt;Дата_окончания_учёта: DATE" vertex="1">
+          <mxGeometry height="96" width="213" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e67" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Назначение_помещения" vertex="1">
+          <mxGeometry height="120" width="240" x="1307" y="1924" as="geometry" />
+        </mxCell>
+        <mxCell id="k68" connectable="0" parent="e67" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_дома: INTEGER (FK)&lt;br&gt;Номер_помещения: VARCHAR(10) (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="54" width="240" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n69" connectable="0" parent="e67" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE&lt;br&gt;Тип_помещения: VARCHAR(30)&lt;br&gt;Назначение: VARCHAR(100)" vertex="1">
+          <mxGeometry height="64" width="240" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e70" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Место" vertex="1">
+          <mxGeometry height="104" width="240" x="2162" y="2017" as="geometry" />
+        </mxCell>
+        <mxCell id="k71" connectable="0" parent="e70" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_дома: INTEGER (FK)&lt;br&gt;Код_места: INTEGER" vertex="1">
+          <mxGeometry height="38" width="240" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n72" connectable="0" parent="e70" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Номер_подъезда: SMALLINT (FK)&lt;br&gt;Номер_помещения: VARCHAR(10) (FK)&lt;br&gt;Описание: VARCHAR(500)" vertex="1">
+          <mxGeometry height="64" width="240" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e73" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Инженерная_система" vertex="1">
+          <mxGeometry height="88" width="180" x="3207" y="1360" as="geometry" />
+        </mxCell>
+        <mxCell id="k74" connectable="0" parent="e73" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_дома: INTEGER (FK)&lt;br&gt;Вид_системы: VARCHAR(30)" vertex="1">
+          <mxGeometry height="38" width="180" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n75" connectable="0" parent="e73" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_ввода: DATE&lt;br&gt;Описание: VARCHAR(500)" vertex="1">
+          <mxGeometry height="48" width="180" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e76" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Оборудование" vertex="1">
+          <mxGeometry height="120" width="213" x="3190" y="1974" as="geometry" />
+        </mxCell>
+        <mxCell id="k77" connectable="0" parent="e76" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Инв_номер: VARCHAR(20)" vertex="1">
+          <mxGeometry height="22" width="213" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n78" connectable="0" parent="e76" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_дома: INTEGER (FK)&lt;br&gt;Вид_системы: VARCHAR(30) (FK)&lt;br&gt;Наименование: VARCHAR(100)&lt;br&gt;Модель: VARCHAR(100)&lt;br&gt;Дата_ввода: DATE" vertex="1">
+          <mxGeometry height="96" width="213" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e79" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Состояние_оборудования" vertex="1">
+          <mxGeometry height="88" width="200" x="3447" y="2375" as="geometry" />
+        </mxCell>
+        <mxCell id="k80" connectable="0" parent="e79" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Инв_номер: VARCHAR(20) (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="38" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n81" connectable="0" parent="e79" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Состояние: VARCHAR(30)&lt;br&gt;Примечание: VARCHAR(500)" vertex="1">
+          <mxGeometry height="48" width="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e82" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Заявка" vertex="1">
+          <mxGeometry height="200" width="200" x="1727" y="2809" as="geometry" />
+        </mxCell>
+        <mxCell id="k83" connectable="0" parent="e82" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Номер_заявки: INTEGER" vertex="1">
+          <mxGeometry height="22" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n84" connectable="0" parent="e82" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_лица: INTEGER (FK)&lt;br&gt;Код_дома: INTEGER (FK)&lt;br&gt;Код_места: INTEGER (FK)&lt;br&gt;Код_категории: INTEGER (FK)&lt;br&gt;Код_проблемы: INTEGER (FK)&lt;br&gt;Код_аварии: INTEGER (FK)&lt;br&gt;Дата_время_рег: TIMESTAMP&lt;br&gt;Описание: VARCHAR(500)&lt;br&gt;Приоритет: SMALLINT&lt;br&gt;Срок_исполнения: TIMESTAMP" vertex="1">
+          <mxGeometry height="176" width="200" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e85" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Категория_заявки" vertex="1">
+          <mxGeometry height="72" width="227" x="1154" y="3258" as="geometry" />
+        </mxCell>
+        <mxCell id="k86" connectable="0" parent="e85" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_категории: INTEGER" vertex="1">
+          <mxGeometry height="22" width="227" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n87" connectable="0" parent="e85" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Наименование: VARCHAR(100)&lt;br&gt;Норматив_срока_ч: DECIMAL(12,2)" vertex="1">
+          <mxGeometry height="48" width="227" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e88" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Статус_заявки" vertex="1">
+          <mxGeometry height="120" width="200" x="607" y="4354" as="geometry" />
+        </mxCell>
+        <mxCell id="k89" connectable="0" parent="e88" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Номер_заявки: INTEGER (FK)&lt;br&gt;Дата_время: TIMESTAMP" vertex="1">
+          <mxGeometry height="38" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n90" connectable="0" parent="e88" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_службы: INTEGER (FK)&lt;br&gt;Таб_номер: VARCHAR(10) (FK)&lt;br&gt;Статус: VARCHAR(30)&lt;br&gt;Комментарий: VARCHAR(500)" vertex="1">
+          <mxGeometry height="80" width="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e91" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Проблема" vertex="1">
+          <mxGeometry height="88" width="170" x="1042" y="2830" as="geometry" />
+        </mxCell>
+        <mxCell id="k92" connectable="0" parent="e91" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_проблемы: INTEGER" vertex="1">
+          <mxGeometry height="22" width="170" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n93" connectable="0" parent="e91" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Описание: VARCHAR(500)&lt;br&gt;Дата_выявления: DATE&lt;br&gt;Масштаб: VARCHAR(100)" vertex="1">
+          <mxGeometry height="64" width="170" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e94" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Авария" vertex="1">
+          <mxGeometry height="184" width="227" x="2624" y="2082" as="geometry" />
+        </mxCell>
+        <mxCell id="k95" connectable="0" parent="e94" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_аварии: INTEGER" vertex="1">
+          <mxGeometry height="22" width="227" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n96" connectable="0" parent="e94" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_дома: INTEGER (FK)&lt;br&gt;Код_места: INTEGER (FK)&lt;br&gt;Код_типа: INTEGER (FK)&lt;br&gt;Инв_номер: VARCHAR(20) (FK)&lt;br&gt;Время_обнаружения: TIMESTAMP&lt;br&gt;Критичность: VARCHAR(30)&lt;br&gt;Источник_сообщения: VARCHAR(30)&lt;br&gt;Описание: VARCHAR(500)&lt;br&gt;Результат: VARCHAR(500)" vertex="1">
+          <mxGeometry height="160" width="227" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e97" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Тип_аварии" vertex="1">
+          <mxGeometry height="56" width="194" x="2885" y="1691" as="geometry" />
+        </mxCell>
+        <mxCell id="k98" connectable="0" parent="e97" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_типа: INTEGER" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n99" connectable="0" parent="e97" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Наименование: VARCHAR(100)" vertex="1">
+          <mxGeometry height="32" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e100" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Наряд" vertex="1">
+          <mxGeometry height="264" width="233" x="2550" y="3232" as="geometry" />
+        </mxCell>
+        <mxCell id="k101" connectable="0" parent="e100" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Номер_наряда: INTEGER" vertex="1">
+          <mxGeometry height="22" width="233" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n102" connectable="0" parent="e100" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Номер_заявки: INTEGER (FK)&lt;br&gt;Код_аварии: INTEGER (FK)&lt;br&gt;Код_работы: INTEGER (FK)&lt;br&gt;Код_бригады: INTEGER (FK)&lt;br&gt;ИНН: CHAR(12) (FK)&lt;br&gt;Номер_договора: VARCHAR(20) (FK)&lt;br&gt;Код_вида: INTEGER (FK)&lt;br&gt;Таб_номер: VARCHAR(10) (FK)&lt;br&gt;Дата_выдачи: DATE&lt;br&gt;Плановый_срок: TIMESTAMP&lt;br&gt;Дата_начала: DATE&lt;br&gt;Дата_завершения: DATE&lt;br&gt;Статус: VARCHAR(30)&lt;br&gt;Результат: VARCHAR(500)" vertex="1">
+          <mxGeometry height="240" width="233" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e103" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Вид_работ" vertex="1">
+          <mxGeometry height="72" width="194" x="3220" y="4758" as="geometry" />
+        </mxCell>
+        <mxCell id="k104" connectable="0" parent="e103" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_вида: INTEGER" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n105" connectable="0" parent="e103" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_допуска: INTEGER (FK)&lt;br&gt;Наименование: VARCHAR(100)" vertex="1">
+          <mxGeometry height="48" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e106" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Вид_допуска" vertex="1">
+          <mxGeometry height="56" width="194" x="3340" y="5086" as="geometry" />
+        </mxCell>
+        <mxCell id="k107" connectable="0" parent="e106" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_допуска: INTEGER" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n108" connectable="0" parent="e106" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Наименование: VARCHAR(100)" vertex="1">
+          <mxGeometry height="32" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e109" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Плановая_работа" vertex="1">
+          <mxGeometry height="136" width="213" x="4730" y="5396" as="geometry" />
+        </mxCell>
+        <mxCell id="k110" connectable="0" parent="e109" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_работы: INTEGER" vertex="1">
+          <mxGeometry height="22" width="213" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n111" connectable="0" parent="e109" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_дома: INTEGER (FK)&lt;br&gt;Вид_системы: VARCHAR(30) (FK)&lt;br&gt;Код_вида: INTEGER (FK)&lt;br&gt;Таб_номер: VARCHAR(10) (FK)&lt;br&gt;Периодичность_дн: SMALLINT&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="112" width="213" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e112" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Проверка_качества" vertex="1">
+          <mxGeometry height="136" width="213" x="2690" y="3906" as="geometry" />
+        </mxCell>
+        <mxCell id="k113" connectable="0" parent="e112" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Номер_наряда: INTEGER (FK)&lt;br&gt;Номер_проверки: SMALLINT" vertex="1">
+          <mxGeometry height="38" width="213" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n114" connectable="0" parent="e112" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Таб_номер: VARCHAR(10) (FK)&lt;br&gt;Дата: DATE&lt;br&gt;Тип_проверяющего: VARCHAR(30)&lt;br&gt;Результат: VARCHAR(500)&lt;br&gt;Комментарий: VARCHAR(500)" vertex="1">
+          <mxGeometry height="96" width="213" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e115" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Обслуживание" vertex="1">
+          <mxGeometry height="88" width="200" x="2882" y="2900" as="geometry" />
+        </mxCell>
+        <mxCell id="k116" connectable="0" parent="e115" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Номер_наряда: INTEGER (FK)&lt;br&gt;Инв_номер: VARCHAR(20) (FK)" vertex="1">
+          <mxGeometry height="38" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n117" connectable="0" parent="e115" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Вид_операции: VARCHAR(30)&lt;br&gt;Описание: VARCHAR(500)" vertex="1">
+          <mxGeometry height="48" width="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e118" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Сотрудник" vertex="1">
+          <mxGeometry height="88" width="180" x="2577" y="5420" as="geometry" />
+        </mxCell>
+        <mxCell id="k119" connectable="0" parent="e118" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Таб_номер: VARCHAR(10)" vertex="1">
+          <mxGeometry height="22" width="180" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n120" connectable="0" parent="e118" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Код_лица: INTEGER (FK)&lt;br&gt;Код_службы: INTEGER (FK)&lt;br&gt;Дата_приёма: DATE" vertex="1">
+          <mxGeometry height="64" width="180" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e121" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Должность" vertex="1">
+          <mxGeometry height="56" width="194" x="2570" y="6206" as="geometry" />
+        </mxCell>
+        <mxCell id="k122" connectable="0" parent="e121" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_должности: INTEGER" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n123" connectable="0" parent="e121" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Наименование: VARCHAR(100)" vertex="1">
+          <mxGeometry height="32" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e124" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Служба" vertex="1">
+          <mxGeometry height="72" width="194" x="1170" y="5183" as="geometry" />
+        </mxCell>
+        <mxCell id="k125" connectable="0" parent="e124" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_службы: INTEGER" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n126" connectable="0" parent="e124" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Наименование: VARCHAR(100)&lt;br&gt;Телефон: VARCHAR(20)" vertex="1">
+          <mxGeometry height="48" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e127" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Бригада" vertex="1">
+          <mxGeometry height="72" width="180" x="2297" y="4238" as="geometry" />
+        </mxCell>
+        <mxCell id="k128" connectable="0" parent="e127" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_бригады: INTEGER" vertex="1">
+          <mxGeometry height="22" width="180" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n129" connectable="0" parent="e127" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Название: VARCHAR(100)&lt;br&gt;Тип_бригады: VARCHAR(30)" vertex="1">
+          <mxGeometry height="48" width="180" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e130" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Терминал" vertex="1">
+          <mxGeometry height="72" width="170" x="1462" y="4518" as="geometry" />
+        </mxCell>
+        <mxCell id="k131" connectable="0" parent="e130" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_терминала: INTEGER" vertex="1">
+          <mxGeometry height="22" width="170" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n132" connectable="0" parent="e130" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Тип: VARCHAR(30)&lt;br&gt;Состояние: VARCHAR(30)" vertex="1">
+          <mxGeometry height="48" width="170" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e133" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Назначение_должности" vertex="1">
+          <mxGeometry height="104" width="200" x="2567" y="5797" as="geometry" />
+        </mxCell>
+        <mxCell id="k134" connectable="0" parent="e133" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Таб_номер: VARCHAR(10) (FK)&lt;br&gt;Код_должности: INTEGER (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="54" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n135" connectable="0" parent="e133" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE&lt;br&gt;Ставка: DECIMAL(12,2)" vertex="1">
+          <mxGeometry height="48" width="200" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e136" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Состав_бригады" vertex="1">
+          <mxGeometry height="104" width="200" x="2427" y="4817" as="geometry" />
+        </mxCell>
+        <mxCell id="k137" connectable="0" parent="e136" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Таб_номер: VARCHAR(10) (FK)&lt;br&gt;Код_бригады: INTEGER (FK)&lt;br&gt;Дата_включения: DATE" vertex="1">
+          <mxGeometry height="54" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n138" connectable="0" parent="e136" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_исключения: DATE&lt;br&gt;Роль: VARCHAR(30)" vertex="1">
+          <mxGeometry height="48" width="200" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e139" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Допуск" vertex="1">
+          <mxGeometry height="104" width="200" x="2917" y="5237" as="geometry" />
+        </mxCell>
+        <mxCell id="k140" connectable="0" parent="e139" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Таб_номер: VARCHAR(10) (FK)&lt;br&gt;Код_допуска: INTEGER (FK)" vertex="1">
+          <mxGeometry height="38" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n141" connectable="0" parent="e139" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Номер_удостов.: VARCHAR(20)&lt;br&gt;Дата_выдачи: DATE&lt;br&gt;Действует_до: VARCHAR(30)" vertex="1">
+          <mxGeometry height="64" width="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e142" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Закрепление_бригады" vertex="1">
+          <mxGeometry height="88" width="200" x="1902" y="4685" as="geometry" />
+        </mxCell>
+        <mxCell id="k143" connectable="0" parent="e142" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_терминала: INTEGER (FK)&lt;br&gt;Код_бригады: INTEGER (FK)&lt;br&gt;Дата_начала: DATE" vertex="1">
+          <mxGeometry height="54" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n144" connectable="0" parent="e142" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_окончания: DATE" vertex="1">
+          <mxGeometry height="32" width="200" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e145" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Закрепление" vertex="1">
+          <mxGeometry height="88" width="200" x="2007" y="4965" as="geometry" />
+        </mxCell>
+        <mxCell id="k146" connectable="0" parent="e145" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_терминала: INTEGER (FK)&lt;br&gt;Таб_номер: VARCHAR(10) (FK)&lt;br&gt;Дата_выдачи: DATE" vertex="1">
+          <mxGeometry height="54" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n147" connectable="0" parent="e145" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_возврата: DATE" vertex="1">
+          <mxGeometry height="32" width="200" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e148" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Операция" vertex="1">
+          <mxGeometry height="152" width="220" x="1612" y="3638" as="geometry" />
+        </mxCell>
+        <mxCell id="k149" connectable="0" parent="e148" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_терминала: INTEGER (FK)&lt;br&gt;Номер_наряда: INTEGER (FK)&lt;br&gt;Время_на_терминале: TIMESTAMP" vertex="1">
+          <mxGeometry height="54" width="220" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n150" connectable="0" parent="e148" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Тип_операции: VARCHAR(30)&lt;br&gt;Содержание: VARCHAR(500)&lt;br&gt;Время_синхронизации: TIMESTAMP&lt;br&gt;Автономно: BOOLEAN&lt;br&gt;Конфликт: BOOLEAN" vertex="1">
+          <mxGeometry height="96" width="220" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e151" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Материал" vertex="1">
+          <mxGeometry height="88" width="194" x="1835" y="3880" as="geometry" />
+        </mxCell>
+        <mxCell id="k152" connectable="0" parent="e151" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_материала: INTEGER" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n153" connectable="0" parent="e151" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Наименование: VARCHAR(100)&lt;br&gt;Тип: VARCHAR(30)&lt;br&gt;Ед_измерения: VARCHAR(30)" vertex="1">
+          <mxGeometry height="64" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e154" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Поступление" vertex="1">
+          <mxGeometry height="88" width="207" x="1828" y="4335" as="geometry" />
+        </mxCell>
+        <mxCell id="k155" connectable="0" parent="e154" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_материала: INTEGER (FK)&lt;br&gt;Номер_документа: VARCHAR(20)" vertex="1">
+          <mxGeometry height="38" width="207" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n156" connectable="0" parent="e154" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата: DATE&lt;br&gt;Количество: DECIMAL(12,2)" vertex="1">
+          <mxGeometry height="48" width="207" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e157" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Выдача" vertex="1">
+          <mxGeometry height="88" width="200" x="2059" y="4055" as="geometry" />
+        </mxCell>
+        <mxCell id="k158" connectable="0" parent="e157" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Код_материала: INTEGER (FK)&lt;br&gt;Код_бригады: INTEGER (FK)&lt;br&gt;Дата: DATE" vertex="1">
+          <mxGeometry height="54" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n159" connectable="0" parent="e157" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Количество: DECIMAL(12,2)" vertex="1">
+          <mxGeometry height="32" width="200" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e160" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Расход" vertex="1">
+          <mxGeometry height="72" width="200" x="2199" y="3608" as="geometry" />
+        </mxCell>
+        <mxCell id="k161" connectable="0" parent="e160" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="Номер_наряда: INTEGER (FK)&lt;br&gt;Код_материала: INTEGER (FK)" vertex="1">
+          <mxGeometry height="38" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n162" connectable="0" parent="e160" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Количество: DECIMAL(12,2)" vertex="1">
+          <mxGeometry height="32" width="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e163" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Подрядчик" vertex="1">
+          <mxGeometry height="72" width="194" x="3870" y="4878" as="geometry" />
+        </mxCell>
+        <mxCell id="k164" connectable="0" parent="e163" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="ИНН: CHAR(12)" vertex="1">
+          <mxGeometry height="22" width="194" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n165" connectable="0" parent="e163" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Наименование: VARCHAR(100)&lt;br&gt;Телефон: VARCHAR(20)" vertex="1">
+          <mxGeometry height="48" width="194" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="e166" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Договор_подряда" vertex="1">
+          <mxGeometry height="120" width="200" x="3840" y="4678" as="geometry" />
+        </mxCell>
+        <mxCell id="k167" connectable="0" parent="e166" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="ИНН: CHAR(12) (FK)&lt;br&gt;Номер_договора: VARCHAR(20)" vertex="1">
+          <mxGeometry height="38" width="200" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n168" connectable="0" parent="e166" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="Дата_начала: DATE&lt;br&gt;Дата_окончания: DATE&lt;br&gt;Предмет: VARCHAR(500)&lt;br&gt;Ответственный: VARCHAR(100)" vertex="1">
+          <mxGeometry height="80" width="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e169" parent="1" style="rounded=1;arcSize=12;absoluteArcSize=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;verticalLabelPosition=top;verticalAlign=bottom;labelPosition=center;align=left;fontSize=12;fontStyle=1;spacingLeft=0;" value="Работы_договора" vertex="1">
+          <mxGeometry height="88" width="233" x="3500" y="4710" as="geometry" />
+        </mxCell>
+        <mxCell id="k170" connectable="0" parent="e169" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=0;fontSize=11;whiteSpace=nowrap;connectable=0;fillColor=none;strokeColor=none;" value="ИНН: CHAR(12) (FK)&lt;br&gt;Номер_договора: VARCHAR(20) (FK)&lt;br&gt;Код_вида: INTEGER (FK)" vertex="1">
+          <mxGeometry height="54" width="233" y="2" as="geometry" />
+        </mxCell>
+        <mxCell id="n171" connectable="0" parent="e169" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=2;fontSize=11;whiteSpace=nowrap;fillColor=none;strokeColor=#000000;connectable=0;" value="" vertex="1">
+          <mxGeometry height="32" width="233" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="r172" edge="1" parent="1" source="e7" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e10" value="тарифицируется">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l173" connectable="0" parent="r172" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.886" as="geometry">
+            <mxPoint y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r174" edge="1" parent="1" source="e10" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e4" value="применяется в">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r175" edge="1" parent="1" source="e13" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e4" value="получает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r176" edge="1" parent="1" source="e13" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e1" value="оплачивается">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r177" edge="1" parent="1" source="e13" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e16" value="имеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l178" connectable="0" parent="r177" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.884" as="geometry">
+            <mxPoint y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r179" edge="1" parent="1" source="e64" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e13" value="учитывается на">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r180" edge="1" parent="1" source="e7" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e25" value="измеряется">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r181" edge="1" parent="1" source="e58" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e25" value="оснащён">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r182" edge="1" parent="1" source="e25" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e28" value="передаёт">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r183" edge="1" parent="1" source="e34" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e37" value="имеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l184" connectable="0" parent="r183" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="Z" vertex="1">
+          <mxGeometry relative="1" x="0.915" as="geometry">
+            <mxPoint x="9" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r185" edge="1" parent="1" source="e34" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e40" value="имеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r186" edge="1" parent="1" source="e34" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;entryPerimeter=0;" target="e118" value="работает как">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-98" y="2314" />
+              <mxPoint x="-98" y="5482" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l187" connectable="0" parent="r186" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="Z" vertex="1">
+          <mxGeometry relative="1" x="0.993" as="geometry">
+            <mxPoint y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r188" edge="1" parent="1" source="e58" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e61" value="имеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l189" connectable="0" parent="r188" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.905" as="geometry">
+            <mxPoint x="-6" y="-11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r190" edge="1" parent="1" source="e58" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e64" value="включает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l191" connectable="0" parent="r190" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.955" as="geometry">
+            <mxPoint y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r192" edge="1" parent="1" source="e61" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e64" value="ведёт в">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l193" connectable="0" parent="r192" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.904" as="geometry">
+            <mxPoint x="6" y="-11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r194" edge="1" parent="1" source="e64" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e67" value="имеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l195" connectable="0" parent="r194" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.903" as="geometry">
+            <mxPoint x="-12" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r196" edge="1" parent="1" source="e58" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e70" value="содержит">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l197" connectable="0" parent="r196" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.931" as="geometry">
+            <mxPoint x="-10" y="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r198" edge="1" parent="1" source="e61" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e70" value="уточняет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r199" edge="1" parent="1" source="e64" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e70" value="уточняет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r200" edge="1" parent="1" source="e58" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e73" value="оборудован">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r201" edge="1" parent="1" source="e73" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e76" value="включает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r202" edge="1" parent="1" source="e76" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e79" value="имеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l203" connectable="0" parent="r202" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.869" as="geometry">
+            <mxPoint x="-6" y="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r204" edge="1" parent="1" source="e58" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;entryX=0.81;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="e109" value="обслуживается по">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="3017" y="1089" />
+              <mxPoint x="4907" y="1089" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r205" edge="1" parent="1" source="e73" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="e109" value="обслуживается по">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r206" edge="1" parent="1" source="e103" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;entryX=0.06;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="e109" value="определяет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r207" edge="1" parent="1" source="e118" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="e109" value="отвечает за">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r208" edge="1" parent="1" source="e124" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;entryX=0;entryY=0.45;entryDx=0;entryDy=0;entryPerimeter=0;" target="e118" value="включает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l209" connectable="0" parent="r208" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.964" as="geometry">
+            <mxPoint x="-2" y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r210" edge="1" parent="1" source="e124" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e88" value="ведёт">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r211" edge="1" parent="1" source="e34" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e82" value="подаёт">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r212" edge="1" parent="1" source="e70" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e82" value="указано в">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r213" edge="1" parent="1" source="e85" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e82" value="классифицирует">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r214" edge="1" parent="1" source="e91" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e82" value="объединяет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l215" connectable="0" parent="r214" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.915" as="geometry">
+            <mxPoint x="-1" y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r216" edge="1" parent="1" source="e94" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e82" value="порождает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r217" edge="1" parent="1" source="e82" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e88" value="проходит">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l218" connectable="0" parent="r217" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.974" as="geometry">
+            <mxPoint x="-10" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r219" edge="1" parent="1" source="e118" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0;exitY=0.15;exitDx=0;exitDy=0;exitPerimeter=0;" target="e88" value="фиксирует">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r220" edge="1" parent="1" source="e70" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e94" value="затронуто">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r221" edge="1" parent="1" source="e97" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e94" value="классифицирует">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r222" edge="1" parent="1" source="e76" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e94" value="вызывает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r223" edge="1" parent="1" source="e82" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e100" value="исполняется по">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r224" edge="1" parent="1" source="e94" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e100" value="устраняется по">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l225" connectable="0" parent="r224" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.955" as="geometry">
+            <mxPoint x="-12" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r226" edge="1" parent="1" source="e109" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.27;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.85;entryDx=0;entryDy=0;entryPerimeter=0;" target="e100" value="выполняется по">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r227" edge="1" parent="1" source="e127" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;entryX=0.3;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="e100" value="исполняет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r228" edge="1" parent="1" source="e166" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;entryX=0.97;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="e100" value="исполняет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r229" edge="1" parent="1" source="e103" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;entryX=0.86;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="e100" value="определяет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r230" edge="1" parent="1" source="e118" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="e100" value="выдаёт">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r231" edge="1" parent="1" source="e100" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.62;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" target="e112" value="проверяется">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r232" edge="1" parent="1" source="e118" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.7;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="e112" value="проводит">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r233" edge="1" parent="1" source="e106" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=diamondThin;startFill=0;startSize=16;dashed=1;dashPattern=6 4;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e103" value="требуется для">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r234" edge="1" parent="1" source="e163" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e166" value="заключает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l235" connectable="0" parent="r234" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.512" as="geometry">
+            <mxPoint x="11" y="-4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r236" edge="1" parent="1" source="e151" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e154" value="поступает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r237" edge="1" parent="1" source="e1" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e19" value="погашает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r238" edge="1" parent="1" source="e4" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e19" value="погашается">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r239" edge="1" parent="1" source="e34" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e22" value="оплачивает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r240" edge="1" parent="1" source="e13" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e22" value="имеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l241" connectable="0" parent="r240" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.916" as="geometry">
+            <mxPoint x="-6" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r242" edge="1" parent="1" source="e25" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e31" value="привязан">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r243" edge="1" parent="1" source="e64" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e31" value="учитывается">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r244" edge="1" parent="1" source="e34" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e43" value="владеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r245" edge="1" parent="1" source="e64" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e43" value="принадлежит">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r246" edge="1" parent="1" source="e34" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e46" value="проживает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r247" edge="1" parent="1" source="e64" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e46" value="заселено">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r248" edge="1" parent="1" source="e49" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e52" value="доставляется">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l249" connectable="0" parent="r248" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.672" as="geometry">
+            <mxPoint x="1" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r250" edge="1" parent="1" source="e40" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e52" value="получает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r251" edge="1" parent="1" source="e49" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e55" value="адресуется">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r252" edge="1" parent="1" source="e70" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e55" value="получает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r253" edge="1" parent="1" source="e100" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e115" value="обслуживает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r254" edge="1" parent="1" source="e76" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e115" value="обслуживается">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r255" edge="1" parent="1" source="e118" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" target="e133" value="назначается">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l256" connectable="0" parent="r255" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.848" as="geometry">
+            <mxPoint x="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r257" edge="1" parent="1" source="e121" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e133" value="замещается">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r258" edge="1" parent="1" source="e118" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.3;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="e136" value="входит">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r259" edge="1" parent="1" source="e127" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e136" value="состоит">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l260" connectable="0" parent="r259" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.916" as="geometry">
+            <mxPoint x="-12" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r261" edge="1" parent="1" source="e118" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.94;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="e139" value="имеет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r262" edge="1" parent="1" source="e106" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e139" value="выдаётся">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r263" edge="1" parent="1" source="e130" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e142" value="закреплён">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r264" edge="1" parent="1" source="e127" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e142" value="использует">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r265" edge="1" parent="1" source="e130" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e145" value="выдан">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r266" edge="1" parent="1" source="e118" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.06;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="e145" value="использует">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r267" edge="1" parent="1" source="e130" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e148" value="выполняет">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r268" edge="1" parent="1" source="e100" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0;exitY=0.8;exitDx=0;exitDy=0;exitPerimeter=0;" target="e148" value="отражается">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r269" edge="1" parent="1" source="e151" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e157" value="выдаётся">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r270" edge="1" parent="1" source="e127" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e157" value="получает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r271" edge="1" parent="1" source="e100" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;exitX=0.1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" target="e160" value="расходует">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r272" edge="1" parent="1" source="e151" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e160" value="расходуется">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r273" edge="1" parent="1" source="e166" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e169" value="предусматривает">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l274" connectable="0" parent="r273" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;labelBackgroundColor=none;" value="P" vertex="1">
+          <mxGeometry relative="1" x="0.307" as="geometry">
+            <mxPoint x="-30" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r275" edge="1" parent="1" source="e103" style="html=1;rounded=0;strokeWidth=1.2;endArrow=oval;endFill=1;endSize=8;startArrow=none;startFill=0;startSize=16;fontSize=10;labelBackgroundColor=#ffffff;fontColor=#333333;" target="e169" value="выполняется по">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=24;fontStyle=1;align=left;verticalAlign=middle;" value="Инфологическая модель БД «Управление объектами ЖКХ» (нотация IDEF1X)" vertex="1">
+          <mxGeometry height="40" width="1300" x="40" y="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
